@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Esta seccion coloca el icono del menu, para 
+    que sea desplegado cuando se le da click -->
+
+    <ion-buttons slot="start">
+      <!-- <ion-button (click)="toggleMenu()">
+          <ion-icon slot="icon-only" name="menu">
+          </ion-icon>
+        </ion-button> -->
+      <!-- Con esta forma no se necesita el click, ya que \
+        solo toca indicarle el boton de menu, que menu es el que va 
+        a disparar y listo -->
+
+      <ion-menu-button
+        color="primary"
+        menu="primerMenu"
+      ></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>masterPage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-menu></app-menu>
+  <app-header></app-header>
+  <app-tab></app-tab>
+  
+  <div id="principal"></div>
+
+  <ion-button
+    expand="full"
+    size="default"
+    routerLink="/notification"
+  >Notificaciones</ion-button>
+
+  <ion-button
+    expand="full"
+    size="default"
+    routerLink="/messages"
+  >Mensajes</ion-button>
+
+  <ion-button
+    expand="full"
+    size="default"
+    routerLink="/event"
+  >Eventos</ion-button>
+
+  <ion-button
+    expand="full"
+    size="default"
+    routerLink="/home"
+  >Inicio</ion-button>
+
+  <ion-button
+    expand="full"
+    size="default"
+    routerLink="/network"
+  >red</ion-button>
+
+  <ion-button
+    expand="full"
+    size="default"
+    routerLink="/profile"
+  >perfil</ion-button>
+
+  <ion-button
+    expand="full"
+    size="default"
+    routerLink="/sponsor"
+  >Patrocinadores</ion-button>
+
+  <ion-button
+    expand="full"
+    size="default"
+    routerLink="/interests"
+  >Intereses</ion-button>
+</ion-content>

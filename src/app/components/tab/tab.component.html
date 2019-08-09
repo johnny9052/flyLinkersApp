@@ -1,0 +1,28 @@
+<ion-tabs>
+  <ion-tab-bar
+    slot="bottom"
+    color="primary"
+  >
+    <!-- Para refrescar la pagina presionada por el tab no se 
+  utiliza el routerLink, se hace a traves del ion-tab-button en 
+su propiedad tab -->
+
+    <ion-tab-button tab="account">
+      <ion-icon name="person">
+        <ion-label>Account</ion-label>
+      </ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="contact">
+      <ion-icon name="call">
+        <ion-label>Contact</ion-label>
+      </ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings">
+      <ion-icon name="settings">
+        <ion-label>Settings</ion-label>
+      </ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
