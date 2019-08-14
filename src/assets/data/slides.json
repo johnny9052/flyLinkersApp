@@ -1,0 +1,32 @@
+[
+    {
+      "img": "/assets/slides/backgroundIndex.jpg",
+      "titulo": "FlyLinkers (La mejor red de contactos de aviación)",
+      "desc": "Es la plataforma interactiva donde la comunidad de la aviación tendrá la oportunidad de intercambiar opiniones, participar en webinars y además tendrá acceso a las últimas noticias, eventos, seminarios e información relevante del sector.",
+      "link" : ""
+    },
+    {
+      "img": "/assets/slides/galeriaFama.png",
+      "titulo": "Galería de la fama",
+      "desc": "Los Miembros de FlyLinkers podrán proponer y elegir mediante votación publica a fin de cada año a un grupo de miembros destacados por su acción creativa o de contribución significativa al progreso de la aviación en ese año.  Las bases para el proceso de selección serán publicadas en la plataforma de...",
+      "link" : "/fame-gallery"
+    },
+    {
+      "img": "/assets/slides/sociosFundadores.png",
+      "titulo": "Socios fundadores",
+      "desc": "Los socios fundadores serán los primeros 100 miembros destacados que se unan a FlyLinkers. El principal beneficio de un miembro fundador será el reconocimiento en la plataforma en su condición de miembro de honor de la comunidad adicional recibirán por mail un Certificado de Honor distintivo de su categoría.",
+      "link" : "/founding-partners"
+    },
+    {
+      "img": "/assets/slides/misionVision.png",
+      "titulo": "Misión y Visión",
+      "desc": "MISIÓN -  es una plataforma virtual interactiva que genera una red especializada para ejecutivos y profesionales de la comunidad aeronáutica de todo el mundo. VISIÓN -  será la plataforma líder dentro de la comunidad aeronáutica que brindará a sus usuarios la mejor conexión entre ellos y poder acceder a información relevante de la aviación.....",
+      "link" : "/mission-vision"
+    },
+    {
+      "img": "/assets/slides/user-6.svg",
+      "titulo": "Primeros 100 inscritos",
+      "desc": "FlyLinkers quiere agradecer a las 100 primeras personas que confiaron en nosotros. Por ese motivo publicamos aquí el listado de ellos. ¡Gracias Amigos! Esperamos que esta nueva red social sea para ustedes una potente herramienta de comunicación y trabajo y los ayude a crear las redes que necesitan. Atentamente, El Equipo de FlyLinkers",
+      "link" : "/first100"
+    }
+  ]

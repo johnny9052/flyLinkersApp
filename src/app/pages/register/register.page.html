@@ -1,9 +1,81 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header-login
+  titulo="Registro"
+  botonRegreso="true"
+></app-header-login>
 
-<ion-content>
+<ion-content padding="padding">
+  <!-- Con el position floating da el efecto de materalized, en 
+          donde se selecciona la caja de texto, y sube el texto como el placeholder -->
 
+  <ion-list>
+    <!-- <ion-list-header>
+      <ion-label>
+        Ingresa la siguiente información para registrarte
+      </ion-label>
+    </ion-list-header> -->
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+
+      <ion-input
+        name="email"
+        type="email"
+        required="required"
+        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+
+      <ion-input
+        type="Password"
+        name="password"
+        required="required"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar contraseña</ion-label>
+
+      <ion-input
+        type="Password"
+        name="password"
+        required="required"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+
+      <ion-input
+        type="text"
+        name="nombre"
+        required="required"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+
+      <ion-input
+        type="text"
+        name="apellido"
+        required="required"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label text-wrap="text-wrap" class="ion-text-justify">
+        Al dar click en Crear Cuenta, aceptas los Términos de Uso y las Políticas de Privacidad y Cookies
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button
+    expand="full"
+    color="flylinkers"
+  >Crear cuenta</ion-button>
 </ion-content>
+
+<app-footer></app-footer>

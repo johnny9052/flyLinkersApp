@@ -1,37 +1,64 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>logIn</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header-login
+  titulo="FlyLinkers"
+  botonIngreso="true"
+></app-header-login>
 
-<ion-content>
-  <ion-button
-    expand="full"
-    size="default"
-    routerLink="/fame-gallery"
-  >Galeria de la fama</ion-button>
+<ion-content fullscreen="fullscreen">
+  <!-- <ion-card
+    mode="ios"
+  > -->
+  <!-- La diferencia entre el ION IMG con una etiqueta HTML IMG, es que 
+        el ION la carga solo cuando es necesario, es dicir cuando se va a 
+        visualizar, mientras que con la etiqueta IMG la carga desde el principio -->
+  <!-- <img src="/assets/shapes.svg"> -->
+  <!-- <img src="/assets/shapes.svg">
 
-  <ion-button
-    expand="full"
-    size="default"
-    routerLink="/founding-partners"
-  >Socios fundadores</ion-button>
+    <ion-card-header>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
 
-  <ion-button
-    expand="full"
-    size="default"
-    routerLink="/mission-vision"
-  >Mision - Vision</ion-button>
+      <ion-card-title>Card Title</ion-card-title>
+    </ion-card-header>
 
-  <ion-button
-    expand="full"
-    size="default"
-    routerLink="/first100"
-  >Primeros 100</ion-button>
+    <ion-card-content>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad, delectus vel, dolores sed aperiam alias exercitationem voluptatibus autem eveniet nostrum hic, saepe maiores quis tempora quod facere laboriosam at perferendis?
+    </ion-card-content>
+  </ion-card> -->
 
-  <ion-button
-    expand="full"
-    size="default"
-    routerLink="/master-page"
-  >Master Page</ion-button>
+  <ion-slides pager="false">
+    <ion-slide *ngFor="let slide of slides | async">
+      <ion-card mode="ios">
+        <img [src]="slide.img">
+
+        <ion-card-header>
+          <!-- <ion-card-subtitle>Destination</ion-card-subtitle> -->
+
+          <ion-card-title>{{slide.titulo}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>{{slide.desc}}</ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- <ion-slides
+    pager="false"
+    class="slide-full"
+  >
+    <ion-slide *ngFor="let slide of slides | async">
+      <ion-card mode="md">
+        <img
+          [src]="slide.img"
+          class="slide-image"
+        >
+
+        <ion-card-header>
+          <ion-card-title>{{slide.titulo}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content class="ion-text-justify">{{slide.desc}}</ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides> -->
 </ion-content>
+
+<app-footer-login></app-footer-login>
