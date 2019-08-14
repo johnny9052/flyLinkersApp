@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
    MenuComponent,
    TabComponent,
    HeaderLoginComponent,
-   FooterLoginComponent, 
+   FooterLoginComponent,
    FooterComponent
   ],
   exports: [
