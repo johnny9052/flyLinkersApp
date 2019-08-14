@@ -17,13 +17,14 @@
 
   <!-- El fixed agrega unos espacios y margenes a los lados del GRID o 
   tabla -->
+  
 
-  <ion-grid fixed="fixed">
+  <ion-grid fixed>
     <!-- <ion-row>
         <ion-col *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1]; let i = index">Hola {{ i + 1 }}</ion-col>
       </ion-row> -->
 
-    <ion-row class="ion-justify-content-center">
+    <ion-row class="ion-text-center">
       <!-- Se definen los tamanios, en teoria el xs en este caso sobraria, 
         debido a que si no reconoce ningun tipo de pantalla, cogeria el size 
         definido por defecto que seria 12 -->
@@ -34,17 +35,16 @@
         size-md="4"
         size-sm="6"
         size-xs="12"
-        *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];" 
+        *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];"
       >
-
-      <div class="bordeado">
-          <ion-avatar>
-              <img src="/assets/stan-lee.jpg">
-            </ion-avatar>
-      </div>
-      
-
-
+        <div class="bordeado">
+          <ion-avatar class="image-center top-margin-20">
+            <img src="/assets/stan-lee.jpg">
+          </ion-avatar>
+          <h3>Oscar Lozano</h3>
+          <p class="flylinkersColor">Especialista en auditoria</p>
+          <p>Colombia</p>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

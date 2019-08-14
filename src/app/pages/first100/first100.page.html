@@ -1,9 +1,59 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>first100</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header-login
+  titulo="Primeros 100 inscritos"
+  botonRegreso="true"
+></app-header-login>
 
 <ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label
+        text-wrap="text-wrap"
+        class="ion-text-justify"
+      >
+      FlyLinkers quiere agradecer a las 100 primeras personas que confiaron en nosotros. Por ese motivo publicamos aquí el listado de ellos.
 
+      ¡Gracias Amigos! Esperamos que esta nueva red social sea para ustedes una potente herramienta de comunicación y trabajo y los ayude a crear las redes que necesitan.
+
+      Atentamente, 
+
+      El Equipo de FlyLinkers
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- El fixed agrega unos espacios y margenes a los lados del GRID o 
+  tabla -->
+  
+
+  <ion-grid fixed>
+    <!-- <ion-row>
+        <ion-col *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1]; let i = index">Hola {{ i + 1 }}</ion-col>
+      </ion-row> -->
+
+    <ion-row class="ion-text-center">
+      <!-- Se definen los tamanios, en teoria el xs en este caso sobraria, 
+        debido a que si no reconoce ningun tipo de pantalla, cogeria el size 
+        definido por defecto que seria 12 -->
+
+      <ion-col
+        size="12"
+        size-lg="3"
+        size-md="4"
+        size-sm="6"
+        size-xs="12"
+        *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];"
+      >
+        <div class="bordeado">
+          <ion-avatar class="image-center top-margin-20">
+            <img src="/assets/stan-lee.jpg">
+          </ion-avatar>
+          <h3>Oscar Lozano</h3>
+          <p class="flylinkersColor">Especialista en auditoria</p>
+          <p>Colombia</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<app-footer></app-footer>
