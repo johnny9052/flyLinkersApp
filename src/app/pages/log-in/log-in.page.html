@@ -26,7 +26,7 @@
 
   <ion-slides pager="false">
     <ion-slide *ngFor="let slide of slides | async">
-      <ion-card mode="ios">
+      <ion-card mode="ios"  [routerLink]="slide.link">
         <img [src]="slide.img">
 
         <ion-card-header>
@@ -35,7 +35,7 @@
           <ion-card-title>{{slide.titulo}}</ion-card-title>
         </ion-card-header>
 
-        <ion-card-content>{{slide.desc}}</ion-card-content>
+        <ion-card-content class="ion-text-justify">{{slide.desc}}</ion-card-content>
       </ion-card>
     </ion-slide>
   </ion-slides>

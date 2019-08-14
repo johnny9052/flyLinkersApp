@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'sponsor', loadChildren: './pages/sponsor/sponsor.module#SponsorPageModule' },
   { path: 'interests', loadChildren: './pages/interests/interests.module#InterestsPageModule' },
+  { path: 'identify', loadChildren: './pages/identify/identify.module#IdentifyPageModule' },
 ];
 
 @NgModule({

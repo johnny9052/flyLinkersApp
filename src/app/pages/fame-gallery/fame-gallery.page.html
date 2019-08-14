@@ -1,9 +1,53 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>fameGallery</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header-login
+  titulo="Galería de la fama"
+  botonRegreso="true"
+></app-header-login>
 
 <ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label
+        text-wrap="text-wrap"
+        class="ion-text-justify"
+      >
+        Los Miembros de FlyLinkers podrán proponer y elegir mediante votación publica a fin de cada año a un grupo de miembros destacados por su acción creativa o de contribución significativa al progreso de la aviación en ese año.  Las bases para el proceso de selección serán publicadas en la plataforma de FlyLinkers a más tardar en julio de cada año
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
+  <!-- El fixed agrega unos espacios y margenes a los lados del GRID o 
+  tabla -->
+
+  <ion-grid fixed="fixed">
+    <!-- <ion-row>
+        <ion-col *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1]; let i = index">Hola {{ i + 1 }}</ion-col>
+      </ion-row> -->
+
+    <ion-row class="ion-justify-content-center">
+      <!-- Se definen los tamanios, en teoria el xs en este caso sobraria, 
+        debido a que si no reconoce ningun tipo de pantalla, cogeria el size 
+        definido por defecto que seria 12 -->
+
+      <ion-col
+        size="12"
+        size-lg="3"
+        size-md="4"
+        size-sm="6"
+        size-xs="12"
+        *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];" 
+      >
+
+      <div class="bordeado">
+          <ion-avatar>
+              <img src="/assets/stan-lee.jpg">
+            </ion-avatar>
+      </div>
+      
+
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<app-footer></app-footer>
