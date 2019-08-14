@@ -1,28 +1,62 @@
-<ion-tabs>
-  <ion-tab-bar
-    slot="bottom"
-    color="primary"
-  >
-    <!-- Para refrescar la pagina presionada por el tab no se 
+ <!-- Para refrescar la pagina presionada por el tab no se 
   utiliza el routerLink, se hace a traves del ion-tab-button en 
 su propiedad tab -->
+ <!-- <ion-tabs>
+  <ion-tab-bar
+    slot="bottom"
+    color="flylinkers"
+  >
 
-    <ion-tab-button tab="account">
-      <ion-icon name="person">
-        <ion-label>Account</ion-label>
-      </ion-icon>
+ <ion-tab-button tab="account">
+      <ion-icon name="home"></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button tab="contact">
-      <ion-icon name="call">
-        <ion-label>Contact</ion-label>
-      </ion-icon>
+      <ion-icon name="people"></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button tab="settings">
-      <ion-icon name="settings">
-        <ion-label>Settings</ion-label>
-      </ion-icon>
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings">
+      <ion-icon name="notifications"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings">
+      <ion-icon name="chatbubbles"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
-</ion-tabs>
+</ion-tabs>  -->
+
+<ion-footer >
+  <ion-toolbar color="flylinkers">
+    <ion-grid fixed>
+      <ion-row class="ion-text-center">
+        <ion-col size="1"></ion-col>
+
+        <ion-col size="2">
+          <ion-icon size="large" name="home"  routerLink="/master-page"></ion-icon>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-icon size="large" name="people"  routerLink="/network"></ion-icon>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-icon size="large" name="add-circle"></ion-icon>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-icon size="large" name="notifications"  routerLink="/notification"></ion-icon>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-icon size="large" name="chatbubbles"  routerLink="/messages"></ion-icon>
+        </ion-col>
+
+        <ion-col size="1"></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

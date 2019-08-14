@@ -5,20 +5,54 @@
   side="start"
   menuId="primerMenu"
   contentId="principal"
+  swipeGesture="false"
 >
   <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Menu principal</ion-title>
+    <ion-toolbar color="flylinkers">
+      <ion-chip
+        color="flylinkers"
+      >
+        <ion-avatar>
+          <img src="/assets/stan-lee.jpg">
+        </ion-avatar>
+
+        <ion-label color="flylinkersBlanco">Stan Lee</ion-label>
+      </ion-chip>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <ion-list>
       <ion-menu-toggle>
+        <ion-item routerLink="/master-page">
+          <ion-icon
+            name="home"
+            slot="start"
+            color="flylinkers"
+          ></ion-icon>
+
+          <ion-label>Inicio</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item routerLink="/profile">
+          <ion-icon
+            name="person"
+            slot="start"
+            color="flylinkers"
+          ></ion-icon>
+
+          <ion-label>Perfil</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
         <ion-item routerLink="/notification">
           <ion-icon
-            name="card"
+            name="notifications"
             slot="start"
+            color="flylinkers"
           ></ion-icon>
 
           <ion-label>Notificaciones</ion-label>
@@ -28,8 +62,9 @@
       <ion-menu-toggle>
         <ion-item routerLink="/messages">
           <ion-icon
-            name="card"
+            name="chatbubbles"
             slot="start"
+            color="flylinkers"
           ></ion-icon>
 
           <ion-label>Mensajes</ion-label>
@@ -39,8 +74,9 @@
       <ion-menu-toggle>
         <ion-item routerLink="/interests">
           <ion-icon
-            name="card"
+            name="flag"
             slot="start"
+            color="flylinkers"
           ></ion-icon>
 
           <ion-label>Intereses</ion-label>
@@ -50,8 +86,9 @@
       <ion-menu-toggle>
         <ion-item routerLink="/event">
           <ion-icon
-            name="card"
+            name="locate"
             slot="start"
+            color="flylinkers"
           ></ion-icon>
 
           <ion-label>Eventos</ion-label>
@@ -59,21 +96,11 @@
       </ion-menu-toggle>
 
       <ion-menu-toggle>
-        <ion-item routerLink="/home">
-          <ion-icon
-            name="card"
-            slot="start"
-          ></ion-icon>
-
-          <ion-label>Inicio</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-
-      <ion-menu-toggle>
         <ion-item routerLink="/network">
           <ion-icon
-            name="card"
+            name="people"
             slot="start"
+            color="flylinkers"
           ></ion-icon>
 
           <ion-label>Red</ion-label>
@@ -81,21 +108,11 @@
       </ion-menu-toggle>
 
       <ion-menu-toggle>
-        <ion-item routerLink="/profile">
-          <ion-icon
-            name="card"
-            slot="start"
-          ></ion-icon>
-
-          <ion-label>Perfil</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-
-      <ion-menu-toggle>
         <ion-item routerLink="/sponsor">
           <ion-icon
-            name="card"
+            name="flag"
             slot="start"
+            color="flylinkers"
           ></ion-icon>
 
           <ion-label>Patrocinador</ion-label>
