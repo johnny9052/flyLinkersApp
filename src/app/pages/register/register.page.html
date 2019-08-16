@@ -7,91 +7,97 @@
   <!-- Con el position floating da el efecto de materalized, en 
           donde se selecciona la caja de texto, y sube el texto como el placeholder -->
 
-  <ion-list>
-    <!-- <ion-list-header>
-      <ion-label>
-        Ingresa la siguiente información para registrarte
-      </ion-label>
-    </ion-list-header> -->
+  <form
+    #formulario="ngForm"
+    (ngSubmit)="registerUser()"
+  >
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
 
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
+        <ion-input
+          name="email"
+          type="email"
+          required="required"
+          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+          [(ngModel)]="nuevoUsuario.email"
+        ></ion-input>
+      </ion-item>
 
-      <ion-input
-        name="email"
-        type="email"
-        required="required"
-        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-      ></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
+        <ion-input
+          type="Password"
+          name="password"
+          required="required"
+          [(ngModel)]="nuevoUsuario.password"
+        ></ion-input>
+      </ion-item>
 
-      <ion-input
-        type="Password"
-        name="password"
-        required="required"
-      ></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirmar contraseña</ion-label>
 
-    <ion-item>
-      <ion-label position="floating">Confirmar contraseña</ion-label>
+        <ion-input
+          type="Password"
+          name="password"
+          required="required"
+          [(ngModel)]="confirmPassword"
+        ></ion-input>
+      </ion-item>
 
-      <ion-input
-        type="Password"
-        name="password"
-        required="required"
-      ></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
 
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
+        <ion-input
+          type="text"
+          name="nombre"
+          required="required"
+          [(ngModel)]="nuevoUsuario.nombre"
+        ></ion-input>
+      </ion-item>
 
-      <ion-input
-        type="text"
-        name="nombre"
-        required="required"
-      ></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Apellido</ion-label>
 
-    <ion-item>
-      <ion-label position="floating">Apellido</ion-label>
+        <ion-input
+          type="text"
+          name="apellido"
+          required="required"
+          [(ngModel)]="nuevoUsuario.apellido"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
 
-      <ion-input
-        type="text"
-        name="apellido"
-        required="required"
-      ></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <!-- El fixed agrega unos espacios y margenes a los lados del GRID o 
+    <!-- El fixed agrega unos espacios y margenes a los lados del GRID o 
   tabla -->
 
-  <ion-grid fixed="fixed">
-    <ion-row>
-      <ion-col size="12">
-        <div class="ion-text-center">
-          <ion-label
-            text-wrap="text-wrap"
-            class="ion-text-justify"
-          >
-            Al dar click en Crear Cuenta, aceptas los Términos de Uso y las Políticas de Privacidad y Cookies
-          </ion-label>
-        </div>
-      </ion-col>
-    </ion-row>
+    <ion-grid fixed="fixed">
+      <ion-row>
+        <ion-col size="12">
+          <div class="ion-text-center">
+            <ion-label
+              text-wrap="text-wrap"
+              class="ion-text-justify"
+            >
+              Al dar click en Crear Cuenta, aceptas los Términos de Uso y las Políticas de Privacidad y Cookies
+            </ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col size="12">
-        <ion-button
-          expand="full"
-          color="flylinkers"
-        >Crear cuenta</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-button
+            expand="full"
+            color="flylinkers"
+            type="submit"
+            [disabled]="formulario.invalid"
+          >Crear cuenta</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
 
 <app-footer></app-footer>
