@@ -22,7 +22,7 @@ export class RegisterPage implements OnInit {
   };
 
 
-  url = 'https://flylinkers.com/es/register/';
+  url = 'http://localhost:8000/es/registerApp/';
 
   constructor(public helperService: HelperService, private securityService: SecurityService, private http: HttpClient) { }
 
