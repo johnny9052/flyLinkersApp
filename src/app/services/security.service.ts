@@ -25,7 +25,7 @@ export class SecurityService {
   sendDataPost( postData, url: string ) {
 
     this.url = url;
-
+    console.log(this.data);
     this.http.post(this.url, this.data)
     .subscribe(data => {
       console.log('Respuesta exitosa ', data);
