@@ -11,8 +11,8 @@ export class SecurityService {
 
   data = {
     email: 'johnny@ionic.com',
-    password1: '12345',
-    password2: '12345',
+    password1: 'p4ssw0rd1on1c',
+    password2: 'p4ssw0rd1on1c',
     first_name: 'Johnny Alexander',
     last_name: 'Salazar Cardona'
   };
