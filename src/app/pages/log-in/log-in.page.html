@@ -3,62 +3,109 @@
   botonIngreso="true"
 ></app-header-login>
 
-<ion-content fullscreen="fullscreen">
-  <!-- <ion-card
-    mode="ios"
-  > -->
-  <!-- La diferencia entre el ION IMG con una etiqueta HTML IMG, es que 
-        el ION la carga solo cuando es necesario, es dicir cuando se va a 
-        visualizar, mientras que con la etiqueta IMG la carga desde el principio -->
-  <!-- <img src="/assets/shapes.svg"> -->
-  <!-- <img src="/assets/shapes.svg">
+<ion-content
+  fullscreen="fullscreen"
+  scroll-y="false"
+>
+  <ion-slides
+    #slides
+    pager="false"
+    class="slidePaginaPrincipal"
+  >
+    <ion-slide class="ionSlidePaginaPrincipal">
+      <ion-grid fixed="fixed">
+        <ion-row>
+          <ion-col size="12">
+            <ion-text color="flylinkersBlanco">
+              <h1>FlyLinkers</h1>
+            </ion-text>
+          </ion-col>
+        </ion-row>
 
-    <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+        <ion-row>
+          <ion-col size="12">
+            <ion-text color="flylinkersBlanco">
+              <h4>
+                La mejor red de contactos de aviación
+              </h4>
+            </ion-text>
+          </ion-col>
+        </ion-row>
 
-      <ion-card-title>Card Title</ion-card-title>
-    </ion-card-header>
+        <ion-row>
+          <ion-col size="12">
+            <ion-text color="flylinkersBlanco">
+              <h6>
+                Es la plataforma interactiva donde la comunidad de la aviación tendrá la oportunidad de intercambiar opiniones, participar en webinars y además tendrá acceso a las últimas noticias, eventos, seminarios e información relevante del sector.
+              </h6>
+            </ion-text>
+          </ion-col>
+        </ion-row>
 
-    <ion-card-content>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad, delectus vel, dolores sed aperiam alias exercitationem voluptatibus autem eveniet nostrum hic, saepe maiores quis tempora quod facere laboriosam at perferendis?
-    </ion-card-content>
-  </ion-card> -->
-
-  <ion-slides pager="false">
-    <ion-slide *ngFor="let slide of slides | async">
-      <ion-card mode="ios"  [routerLink]="slide.link">
-        <img [src]="slide.img">
-
-        <ion-card-header>
-          <!-- <ion-card-subtitle>Destination</ion-card-subtitle> -->
-
-          <ion-card-title>{{slide.titulo}}</ion-card-title>
-        </ion-card-header>
-
-        <ion-card-content class="ion-text-justify">{{slide.desc}}</ion-card-content>
-      </ion-card>
+        <ion-row>
+          <ion-col size="12">
+            <ion-text>
+              <ion-button
+                expand=""
+                color="flylinkers" 
+                routerLink="/register"
+              >Únete gratis ahora</ion-button>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-slide>
   </ion-slides>
 
-  <!-- <ion-slides
-    pager="false"
-    class="slide-full"
+  <ion-toolbar
+    color="flylinkers"
+    class="ionToolBarPaginaPrincipal"
   >
-    <ion-slide *ngFor="let slide of slides | async">
-      <ion-card mode="md">
-        <img
-          [src]="slide.img"
-          class="slide-image"
-        >
+    <ion-grid fixed="fixed">
+      <ion-row class="ion-text-center">
+        <ion-col size="3">          
+          <ion-icon
+            size="large"
+            name="images"
+            routerLink="/fame-gallery"
+          ></ion-icon>
+          <br>
+          Galeria
+        </ion-col>
 
-        <ion-card-header>
-          <ion-card-title>{{slide.titulo}}</ion-card-title>
-        </ion-card-header>
+        <ion-col size="3">             
+          <ion-icon
+            size="large"
+            name="people"
+            routerLink="/founding-partners"
+          ></ion-icon>
+          <br>
+          Socios  
+        </ion-col>
 
-        <ion-card-content class="ion-text-justify">{{slide.desc}}</ion-card-content>
-      </ion-card>
-    </ion-slide>
-  </ion-slides> -->
+        <ion-col size="3">            
+          <ion-icon
+            size="large"
+            name="book"
+            routerLink="/mission-vision"
+          ></ion-icon>
+          <br>
+          Nosotros
+        </ion-col>
+
+        <ion-col size="3">             
+            <ion-icon
+              size="large"
+              name="body"
+              routerLink="/first100"
+            ></ion-icon>
+            <br>
+            Primeros  
+          </ion-col>
+          
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
 </ion-content>
 
-<app-footer-login></app-footer-login>
+<!-- <app-footer-login></app-footer-login> -->

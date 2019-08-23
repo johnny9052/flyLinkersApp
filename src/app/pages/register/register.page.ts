@@ -12,17 +12,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class RegisterPage implements OnInit {
 
-  confirmPassword: string;
-
   nuevoUsuario = {
     email: '',
-    password: '',
-    nombre: '',
-    apellido: ''
+    password1: '',
+    password2: '',
+    first_name: '',
+    last_name: ''
   };
 
 
-  url = 'http://localhost:8000/es/registerApp/';
+  url = 'http://127.0.0.1:8000/es/registerApp/';
 
   constructor(public helperService: HelperService, private securityService: SecurityService, private http: HttpClient) { }
 
@@ -32,11 +31,9 @@ export class RegisterPage implements OnInit {
 
 
    registerUser() {
-       if (this.nuevoUsuario.password === this.confirmPassword) {
-          console.log(this.nuevoUsuario);
+       if (this.nuevoUsuario.password1 === this.nuevoUsuario.password2) {
           this.securityService.sendDataPost(this.nuevoUsuario, this.url);
        } else {
-         console.log(this.nuevoUsuario);
          this.helperService.presentAlert('Error', 'Las contraseñas no coinciden');
        }
    }
