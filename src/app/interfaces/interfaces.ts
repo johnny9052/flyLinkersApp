@@ -4,3 +4,9 @@ export interface SlidesObj {
     desc: string;
     link: string;
 }
+
+
+export interface RequestTransactionData {
+    mensaje: string;
+    code: string;
+}
