@@ -7,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NetworkPage implements OnInit {
 
+  hiddenContact = true;
+  hiddenRequests = true;
+  hiddenPossibleContact = true;
+  hiddenRequestsReceived = true;
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  showHideContacts() {
+    this.hiddenContact = !this.hiddenContact;
+  }
+
+  showHideRequest() {
+    this.hiddenRequests = !this.hiddenRequests;
+  }
+
+  showHidePossibleContacts() {
+    this.hiddenPossibleContact = !this.hiddenPossibleContact;
+  }
+
+  showHideRequestReceived() {
+    this.hiddenRequestsReceived = !this.hiddenRequestsReceived;
+  }
+
 
 }

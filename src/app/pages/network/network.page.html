@@ -1,10 +1,222 @@
-
 <app-header search="true"></app-header>
 
-<ion-content>
-  
-</ion-content>
+<ion-content style="width: 100%; margin: 0px !important;">
+  <!-- SOLICITUDES DE CONEXION RECIBIDAS -->
 
+  <ion-card style="width: 100%; margin: 0px !important; border-radius: 0px;">
+    <ion-item
+      color="flylinkers"
+      (click)="showHideRequest()"
+    >
+      <!-- Ya existen unos colores basicos para los iconos los cuales 
+              son: light para blanco, medium para gris, dark para negro -->
+      <!-- <ion-icon
+        color="light"
+        name="people"
+        slot="start"
+      ></ion-icon> -->
+
+      <ion-label>Solicitudes recibidas(4)</ion-label>
+
+      <ion-button
+        color="light"
+        fill="outline"
+        slot="end"
+      >Ver todas</ion-button>
+    </ion-item>
+
+    <ion-card-content
+      [hidden]="hiddenRequests"
+      style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+    >
+      <ion-item *ngFor="let i of [1,1]">
+        <ion-avatar slot="start">
+          <img src="/assets/stan-lee.jpg">
+        </ion-avatar>
+
+        <ion-label>
+          <h3>Johnny Alexander Salazar</h3>
+
+          <p>alexander9052@gmail.com</p>
+        </ion-label>
+
+        <ion-icon
+          name="close-circle"
+          slot="end"
+        ></ion-icon>
+
+        <ion-icon
+          name="checkmark-circle"
+          slot="end"
+        ></ion-icon>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- SOLICITUDES DE CONEXION ENVIADAS -->
+
+  <ion-card style="width: 100%; margin: 0px !important; border-radius: 0px;">
+    <ion-item
+      color="flylinkers"
+      (click)="showHideRequestReceived()"
+    >
+      <ion-label>Solicitudes enviadas(1)</ion-label>
+
+      <ion-button
+        color="light"
+        fill="outline"
+        slot="end"
+      >Ver todas</ion-button>
+    </ion-item>
+
+    <ion-card-content
+      [hidden]="hiddenRequestsReceived"
+      style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+    >
+      <ion-item *ngFor="let i of [1,1]">
+        <ion-avatar slot="start">
+          <img src="/assets/stan-lee.jpg">
+        </ion-avatar>
+
+        <ion-label>
+          <h3>Johnny Alexander Salazar</h3>
+
+          <p>alexander9052@gmail.com</p>
+        </ion-label>
+
+        <ion-icon
+          name="close-circle"
+          slot="end"
+        ></ion-icon>
+
+        <ion-icon
+          name="checkmark-circle"
+          slot="end"
+        ></ion-icon>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- LISTA DE CONEXIONES -->
+
+  <ion-card style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;">
+    <ion-item
+      color="flylinkers"
+      (click)="showHideContacts()"
+    >
+      <ion-label>Tus conexiones (35)</ion-label>
+
+      <ion-button
+        color="light"
+        fill="outline"
+        slot="end"
+      >Ver todas</ion-button>
+    </ion-item>
+
+    <ion-card-content
+      [hidden]="hiddenContact"
+      style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+    >
+      <ion-grid>
+        <ion-row>
+          <ion-col
+            size="6"
+            *ngFor="let c of [1,1,1,1];"
+          >
+            <ion-card
+              mode="ios"
+              style="width: 100%; margin: 0px !important; border-radius: 10px; padding: 0px !important;"
+              class="ion-text-center"
+            >
+              <ion-card-header color="flylinkers"></ion-card-header>
+
+              <ion-card-content>
+                <ion-avatar
+                  slot="start"
+                  class="image-center top-margin-10"
+                >
+                  <img src="/assets/stan-lee.jpg">
+                </ion-avatar>
+
+                <ion-card-title>
+                  <h2>Johnny Alexander Salazar</h2>
+                </ion-card-title>
+
+                <ion-card-subtitle>
+                  Master en Ingenieria Computacional
+                </ion-card-subtitle>
+
+                <ion-button
+                  color="flylinkers"
+                  fill="outline"
+                  size="small"
+                >Ver perfil</ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- LISTADO DE POSIBLES NUEVOS CONTACTOS -->
+
+  <ion-card style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;">
+    <ion-item color="flylinkers">
+      <ion-icon
+        color="light"
+        name="people"
+        slot="start"
+      ></ion-icon>
+
+      <ion-label>
+        Conecta con la gente de la red
+      </ion-label>
+    </ion-item>
+
+    <ion-card-content style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;">
+      <ion-grid>
+        <ion-row>
+          <ion-col
+            size="6"
+            *ngFor="let c of [1,1,1,1];"
+          >
+            <ion-card
+              mode="ios"
+              style="width: 100%; margin: 0px !important; border-radius: 10px; padding: 0px !important;"
+              class="ion-text-center"
+            >
+              <ion-card-header color="flylinkers"></ion-card-header>
+
+              <ion-card-content>
+                <ion-avatar
+                  slot="start"
+                  class="image-center top-margin-10"
+                >
+                  <img src="/assets/stan-lee.jpg">
+                </ion-avatar>
+
+                <ion-card-title>
+                  <h2>Johnny Alexander Salazar</h2>
+                </ion-card-title>
+
+                <ion-card-subtitle>
+                  Master en Ingenieria Computacional
+                </ion-card-subtitle>
+
+                <ion-button
+                  color="flylinkers"
+                  fill="outline"
+                  size="small"
+                >Conectar</ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
 
 <app-tab
   homeColor="flylinkersBlanco"
