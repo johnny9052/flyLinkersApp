@@ -8,15 +8,8 @@
       color="flylinkers"
       (click)="showHideRequest()"
     >
-      <!-- Ya existen unos colores basicos para los iconos los cuales 
-              son: light para blanco, medium para gris, dark para negro -->
-      <!-- <ion-icon
-        color="light"
-        name="people"
-        slot="start"
-      ></ion-icon> -->
 
-      <ion-label>Solicitudes recibidas(4)</ion-label>
+      <ion-label>Solicitudes recibidas ({{totalSolicitudesRecibidas}})</ion-label>
 
       <ion-button
         color="light"
@@ -29,15 +22,15 @@
       [hidden]="hiddenRequests"
       style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
     >
-      <ion-item *ngFor="let i of [1,1]">
+      <ion-item *ngFor="let solicitud of solicitudesRecibidas">
         <ion-avatar slot="start">
-          <img src="/assets/stan-lee.jpg">
+          <img src="https://flylinkers.com/media/{{solicitud.image_perfil}}">
         </ion-avatar>
 
         <ion-label>
-          <h3>Johnny Alexander Salazar</h3>
+          <h3>{{solicitud.fistName}}  {{solicitud.lastName}}</h3>
 
-          <p>alexander9052@gmail.com</p>
+          <p>{{solicitud.profession}}</p>
         </ion-label>
 
         <ion-icon
@@ -60,7 +53,7 @@
       color="flylinkers"
       (click)="showHideRequestReceived()"
     >
-      <ion-label>Solicitudes enviadas(1)</ion-label>
+      <ion-label>Solicitudes enviadas ({{totalSolicitudesEnviadas}})</ion-label>
 
       <ion-button
         color="light"
@@ -73,15 +66,15 @@
       [hidden]="hiddenRequestsReceived"
       style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
     >
-      <ion-item *ngFor="let i of [1,1]">
+      <ion-item *ngFor="let solicitud of solicitudesEnviadas">
         <ion-avatar slot="start">
-          <img src="/assets/stan-lee.jpg">
+          <img src="https://flylinkers.com/media/{{solicitud.image_perfil}}">
         </ion-avatar>
 
         <ion-label>
-          <h3>Johnny Alexander Salazar</h3>
+          <h3>{{solicitud.fistName}} {{solicitud.lastName}}</h3>
 
-          <p>alexander9052@gmail.com</p>
+          <p>{{solicitud.profession}}</p>
         </ion-label>
 
         <ion-icon
@@ -104,7 +97,7 @@
       color="flylinkers"
       (click)="showHideContacts()"
     >
-      <ion-label>Tus conexiones (35)</ion-label>
+      <ion-label>Tus conexiones ({{totalContactos}})</ion-label>
 
       <ion-button
         color="light"
@@ -121,7 +114,7 @@
         <ion-row>
           <ion-col
             size="6"
-            *ngFor="let c of [1,1,1,1];"
+            *ngFor="let contacto of contactos;"
           >
             <ion-card
               mode="ios"
@@ -135,15 +128,15 @@
                   slot="start"
                   class="image-center top-margin-10"
                 >
-                  <img src="/assets/stan-lee.jpg">
+                <img src="https://flylinkers.com/media/{{contacto.image_perfil}}">
                 </ion-avatar>
 
                 <ion-card-title>
-                  <h2>Johnny Alexander Salazar</h2>
+                  <h2>{{contacto.fistName}} {{contacto.lastName}}</h2>
                 </ion-card-title>
 
                 <ion-card-subtitle>
-                  Master en Ingenieria Computacional
+                  {{contacto.profession}}
                 </ion-card-subtitle>
 
                 <ion-button
@@ -179,7 +172,7 @@
         <ion-row>
           <ion-col
             size="6"
-            *ngFor="let c of [1,1,1,1];"
+            *ngFor="let contactos of contactosConectar;"
           >
             <ion-card
               mode="ios"
@@ -193,15 +186,15 @@
                   slot="start"
                   class="image-center top-margin-10"
                 >
-                  <img src="/assets/stan-lee.jpg">
+                <img src="https://flylinkers.com/media/{{contactos.image_perfil}}">
                 </ion-avatar>
 
                 <ion-card-title>
-                  <h2>Johnny Alexander Salazar</h2>
+                  <h2>{{contactos.fistName}} {{contactos.lastName}}</h2>
                 </ion-card-title>
 
                 <ion-card-subtitle>
-                  Master en Ingenieria Computacional
+                  {{contactos.profession}}
                 </ion-card-subtitle>
 
                 <ion-button

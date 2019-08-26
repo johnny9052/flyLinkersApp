@@ -1,0 +1,121 @@
+{
+    "solicitudes_enviadas": [
+        {
+            "pk": 2,
+            "fistName": "Marcela",
+            "lastName": "Garcia",
+            "headline": "Analista desarrollo Softw",
+            "profession": null,
+            "image_perfil": "photos/Foto_Carolina.jpg"
+        },
+        {
+            "pk": 178,
+            "fistName": "David",
+            "lastName": "Angarita",
+            "headline": "Ingeniero de software",
+            "profession": null,
+            "image_perfil": "avatar_2x.png"
+        }
+    ],
+    "contactos_para_conectar": [
+        {
+            "pk": 2,
+            "fistName": "Marcela",
+            "lastName": "Garcia",
+            "headline": "Analista desarrollo Softw",
+            "profession": null,
+            "image_perfil": "photos/Penguins_cftHNeT.jpg"
+        },
+        {
+            "pk": 178,
+            "fistName": "David",
+            "lastName": "Angarita",
+            "headline": "Ingeniero de software",
+            "profession": null,
+            "image_perfil": "avatar_2x.png"
+        },
+        {
+            "pk": 179,
+            "fistName": "Master",
+            "lastName": "Flylinkers",
+            "headline": "Master de flylinkers, encargado de generar contenidos en la red social.",
+            "profession": "Community Manager",
+            "image_perfil": "avatar_2x.png"
+        },
+        {
+            "pk": 224,
+            "fistName": "Johnny Alexander",
+            "lastName": "Salazar Cardona",
+            "headline": "",
+            "profession": "Desarrollador de software",
+            "image_perfil": "avatar_2x.png"
+        }
+    ],
+    "lista_contactos": [
+        {
+            "pk": 1,
+            "fistName": "Sandra Marcela",
+            "lastName": "Garcia Grisales",
+            "headline": "Analista desarrollo Software Manizales.",
+            "profession": "Ingenera sistemas.",
+            "image_perfil": "photos/register.PNG"
+        },
+        {
+            "pk": 36,
+            "fistName": "David",
+            "lastName": "Angarita",
+            "headline": "Ingeniero de la EAM",
+            "profession": "Ingeniero de software",
+            "image_perfil": "photos/Foto_Carolina.jpg"
+        }
+    ],
+    "solicitudes_recibidas": [
+        {
+            "pk": 179,
+            "fistName": "Master",
+            "lastName": "Flylinkers",
+            "headline": "Master de flylinkers, encargado de generar contenidos en la red social.",
+            "profession": "Community Manager",
+            "image_perfil": "photos/Foto_Carolina.jpg"
+        },
+        {
+            "pk": 179,
+            "fistName": "David",
+            "lastName": "Angarita",
+            "headline": "Master de flylinkers, encargado de generar contenidos en la red social.",
+            "profession": "Community Manager",
+            "image_perfil": "photos/perfilDavid.jpg"
+        }
+    ],
+    "cantidad_contactos_para_conectar": [
+        "4"
+    ],
+    "cantidad_solicitudes_enviadas": [
+        "2"
+    ],
+    "cantidad_solicitudes_recibidas": [
+        "2"
+    ],
+    "cantidad_contactos": [
+        "2"
+    ],
+    "notificaciones": [
+        "unread_count",
+        "items"
+    ],
+    "message_notifications": [
+        "unread_count",
+        "items"
+    ],
+    "perfil_usuario": [
+        {
+            "pk": 37,
+            "fistName": "David Alberto",
+            "lastName": "Angarita Garc\u00eda",
+            "headline": "Ingeniero de software, dedicado a dar soporte a flylinkers",
+            "profession": "Ingeniero de Software",
+            "image_perfil": "photos/40323.png"
+        }
+    ],
+    "eventos": []
+}
