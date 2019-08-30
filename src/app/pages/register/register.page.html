@@ -21,6 +21,7 @@
           required="required"
           pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
           [(ngModel)]="nuevoUsuario.email"
+          title="Se necesita tu correo electronico"
         ></ion-input>
       </ion-item>
 
@@ -31,7 +32,8 @@
           type="Password"
           name="password"
           required="required"
-          [(ngModel)]="nuevoUsuario.password"
+          [(ngModel)]="nuevoUsuario.password1" 
+          pattern="[A-Za-z0-9@#$%^&+=]{8,}"
         ></ion-input>
       </ion-item>
 
@@ -42,7 +44,8 @@
           type="Password"
           name="password"
           required="required"
-          [(ngModel)]="confirmPassword"
+          [(ngModel)]="nuevoUsuario.password2"
+          pattern="[A-Za-z0-9@#$%^&+=]{8,}"
         ></ion-input>
       </ion-item>
 
@@ -53,7 +56,7 @@
           type="text"
           name="nombre"
           required="required"
-          [(ngModel)]="nuevoUsuario.nombre"
+          [(ngModel)]="nuevoUsuario.first_name"
         ></ion-input>
       </ion-item>
 
@@ -64,7 +67,7 @@
           type="text"
           name="apellido"
           required="required"
-          [(ngModel)]="nuevoUsuario.apellido"
+          [(ngModel)]="nuevoUsuario.last_name"
         ></ion-input>
       </ion-item>
     </ion-list>
@@ -93,7 +96,7 @@
             color="flylinkers"
             type="submit"
             [disabled]="formulario.invalid"
-          >Crear cuenta</ion-button>
+          >Crear cuenta</ion-button>        
         </ion-col>
       </ion-row>
     </ion-grid>

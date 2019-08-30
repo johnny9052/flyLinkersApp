@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SlidesObj } from '../interfaces/interfaces';
+import { ModelNetworkData, Componente } from '../interfaces/interfaces';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ export class DataService {
   como un servicio*/
   constructor(private http: HttpClient) { }
 
+  getMenuOpts() {
+    return this.http.get<Componente[]>('/assets/data/menu.json');
+  }
 
-  getSlidesList() {
-    /*Con el <Componente[]> se esta indicando que
-    la informacion devuelta por el servicio es de
-    tipo componente*/
-    return this.http.get<SlidesObj[]>('/assets/data/slides.json');
+  getJSONContacts() {
+    return this.http.get<ModelNetworkData>('/assets/data/network.json');
   }
 }

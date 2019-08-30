@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModelUserData, ModelUserLogIn } from '../../interfaces/userInterface';
+import { SecurityService } from '../../services/security.service';
 
 @Component({
   selector: 'app-identify',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IdentifyPage implements OnInit {
 
-  constructor() { }
+  userDataLogIn = {} as ModelUserLogIn;
+
+  constructor(private securityService: SecurityService) { }
 
   ngOnInit() {
+
   }
+
+
+  identify() {
+    this.securityService.logInUser(this.userDataLogIn);
+  }
+
 
 }

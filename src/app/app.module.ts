@@ -12,6 +12,11 @@ import { AppRoutingModule } from './app-routing.module';
 en los imports*/
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
+import { HTTP } from '@ionic-native/http/ngx';
+
+/*Para instalar cordova en el proyecto
+ionic cordova plugin add cordova-plugin-advanced-http
+npm install @ionic-native/http*/
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +31,9 @@ import { ComponentsModule } from './components/components.module';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    /*Como CORDOVA es un complemento externo, toca meterlo no en Imports sino en providers*/
+    HTTP
   ],
   bootstrap: [AppComponent]
 })

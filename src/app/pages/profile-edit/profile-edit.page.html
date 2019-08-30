@@ -1,0 +1,237 @@
+<app-header titulo="Perfil"></app-header>
+
+<ion-content padding="padding">
+    <form #formulario="ngForm">
+        <ion-list>
+            <ion-item>
+                <ion-grid fixed="fixed">
+                    <ion-row class="ion-text-center">
+                        <ion-col size="12">
+                            <div class="bordeado">
+                                <ion-avatar class="image-center top-margin-20">
+                                    <img src="/assets/stan-lee.jpg">
+                                </ion-avatar>
+
+                                <h3>Oscar Lozano</h3>
+
+                                <p class="flylinkersColor">Especialista en auditoria</p>
+
+                                <p>Colombia</p>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Nombres*</ion-label>
+
+                <ion-input
+                    type="text"
+                    name="firstName"
+                    required="required"
+                    [(ngModel)]="userData.firstName"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Apellidos*</ion-label>
+
+                <ion-input
+                    type="text"
+                    name="lastName"
+                    required="required"
+                    [(ngModel)]="userData.lastName"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Genero*</ion-label>
+
+                <ion-select placeholder="Seleccione" [(ngModel)]="userData.gender" name="gender">
+                    <ion-select-option value="Masculino">Masculino</ion-select-option>
+
+                    <ion-select-option value="Femenino">Femenino</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Fecha de nacimiento</ion-label>
+
+                <ion-datetime
+                    placeholder="Seleccione"
+                    display-format="YYYY MMMM DD"
+                    cancelText="Cancelar" 
+                    [(ngModel)]="userData.birthday_date" 
+                    name="birthday_date"
+                ></ion-datetime>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Pais de residencia*</ion-label>
+
+                <ion-input
+                    type="text"
+                    name="residence_country"
+                    required="required"
+                    [(ngModel)]="userData.residence_country"
+                    
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Titular*</ion-label>
+
+                <ion-textarea
+                    name="headline"
+                    required="required"
+                    [(ngModel)]="userData.headline"
+                ></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Profesion*</ion-label>
+
+                <ion-input
+                    type="text"
+                    name="profession"
+                    required="required"
+                    [(ngModel)]="userData.profession"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Educacion</ion-label>
+
+                <ion-input
+                    type="text"
+                    name="education"
+                    [(ngModel)]="userData.education"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Area</ion-label>
+
+                <ion-select
+                    placeholder="Seleccione"
+                    name="area_choices" 
+                    [(ngModel)]="userData.area_choices"
+                >
+                    <ion-select-option value="administrative">Administrativo</ion-select-option>
+
+                    <ion-select-option value="airport ramp agent">
+                        Agente de rampa del aeropuerto
+                    </ion-select-option>
+
+                    <ion-select-option value="aircraft cargo agent">Agente de carga de aviones</ion-select-option>
+
+                    <ion-select-option value="aircraft dispatcher">Despachador de aviones</ion-select-option>
+
+                    <ion-select-option value="aircraft maintenance inspector">
+                        Inspector de mantenimiento de aeronaves
+                    </ion-select-option>
+
+                    <ion-select-option value="aircraft ground handler">
+                        Encargado de aeronaves en tierra
+                    </ion-select-option>
+
+                    <ion-select-option value="baggage handler">Manejador de equipaje</ion-select-option>
+
+                    <ion-select-option value="captain">Capitán</ion-select-option>
+
+                    <ion-select-option value="cargo screener">Cribador de carga</ion-select-option>
+
+                    <ion-select-option value="first officer">Primer oficial</ion-select-option>
+
+                    <ion-select-option value="flight attendant">Auxiliar de vuelo</ion-select-option>
+
+                    <ion-select-option value="loadmaster">Maestro de carga</ion-select-option>
+
+                    <ion-select-option value="senior executive">Alto ejecutivo</ion-select-option>
+
+                    <ion-select-option value="software development">Desarrollo de software</ion-select-option>
+
+                    <ion-select-option value="stewardess">Azafata</ion-select-option>
+
+                    <ion-select-option value="warehouse specialist">Especialista de almacén</ion-select-option>
+
+                    <ion-select-option value="other">Otro...</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Compañia actual</ion-label>
+
+                <ion-input
+                    type="text"
+                    name="current_company"
+                    [(ngModel)]="userData.current_company"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Cargo actual</ion-label>
+
+                <ion-input
+                    type="text"
+                    name="current_position"
+                    [(ngModel)]="userData.current_position"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Telefono</ion-label>
+
+                <ion-input
+                    type="number"
+                    name="phone"
+                    [(ngModel)]="userData.phone"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Celular</ion-label>
+
+                <ion-input
+                    type="number"
+                    name="mobile"
+                    [(ngModel)]="userData.mobile"
+                ></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <ion-grid fixed="fixed">
+            <ion-row>
+                <ion-col size="12">
+                    <ion-button
+                        expand="full"
+                        color="flylinkers"
+                        type="submit"
+                        [disabled]="formulario.invalid"
+                    >Guardar perfil</ion-button>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="12">
+                    <ion-button
+                        expand="full"
+                        color="flylinkersBlanco"
+                    >Cambiar contraseña</ion-button>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="12">
+                    <ion-button
+                        expand="full"
+                        color="flylinkersRojo"
+                    >Desactivar cuenta</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>
+
+<app-tab></app-tab>
