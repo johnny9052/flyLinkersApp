@@ -10,7 +10,7 @@ export class SecurityService {
 
 
   data = {
-    email: 'johnny@ionic.com',
+    email: 'jasalazar@eam.edu.co',
     password1: 'p4ssw0rd1on1c',
     password2: 'p4ssw0rd1on1c',
     first_name: 'Johnny Alexander',
