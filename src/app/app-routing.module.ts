@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'sponsor', loadChildren: './pages/sponsor/sponsor.module#SponsorPageModule' },
   { path: 'interests', loadChildren: './pages/interests/interests.module#InterestsPageModule' },
   { path: 'identify', loadChildren: './pages/identify/identify.module#IdentifyPageModule' },
+  { path: 'profile-edit', loadChildren: './pages/profile-edit/profile-edit.module#ProfileEditPageModule' },
 ];
 
 @NgModule({

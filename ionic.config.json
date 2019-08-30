@@ -1,5 +1,7 @@
 {
   "name": "flyLinkersApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

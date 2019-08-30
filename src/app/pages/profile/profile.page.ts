@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModelUserData } from '../../interfaces/userInterface';
 
 @Component({
   selector: 'app-profile',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+
+  userData = {} as ModelUserData;
 
   constructor() { }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 
 
 @Injectable({
@@ -17,11 +17,12 @@ export class HelperService {
   alertCtrl: Depedencia para los modales
   loadingCtrl: Dependencia para las barras de carga*/
   constructor(public alertCtrl: AlertController,
-              private loadingCtrl: LoadingController) { }
+              private loadingCtrl: LoadingController,
+              private navCtrl: NavController) { }
 
 
  /*Funcion que muestra un modal, con su titulo y descripcion*/
-  async presentAlert(titulo: string, descripcion: string) {
+  async showAlert(titulo: string, descripcion: string) {
 
     const alert = await this.alertCtrl.create({
       header: titulo,
@@ -39,6 +40,34 @@ export class HelperService {
 
     await alert.present();
   }
+
+
+
+    /*Funcion que se encarga de mostrar un modal de registro exitoso y
+  redireccionar al login*/
+  async showAlertRedirect(titulo: string, mensaje: string, redirectURL: string) {
+    const alert = await this.alertCtrl.create({
+      header: titulo,
+      message: mensaje,
+      buttons: [
+        {
+          text: 'Aceptar',
+          cssClass: 'flylinkersColor',
+          handler: (blah) => {
+            /*Cuando se da tap en aceptar redirecciona al login*/
+            this.navCtrl.navigateBack(redirectURL);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+
+
+
 
 
   /*Funcion que muestra una barra de carga con un mensaje*/

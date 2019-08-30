@@ -36,7 +36,7 @@ export class RegisterPage implements OnInit {
        if (this.nuevoUsuario.password1 === this.nuevoUsuario.password2) {
          this.securityService.registerUser(this.nuevoUsuario);
        } else {
-         this.helperService.presentAlert('Error', 'Las contraseñas no coinciden');
+         this.helperService.showAlert('Error', 'Las contraseñas no coinciden');
        }
   }
 
