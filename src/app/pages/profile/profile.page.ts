@@ -7,13 +7,13 @@ import { ModelUserData } from '../../interfaces/userInterface';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  
+
   hiddenSkills = true;
   hiddenExperiences = true;
   hiddenAccomplishments = true;
   hiddenInterests = true;
   hiddenEvents = true;
-  
+
   userData = {} as ModelUserData;
 
   constructor() { }
@@ -21,23 +21,23 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
   }
 
-  showHideSkills(){
+  showHideSkills() {
     this.hiddenSkills = !this.hiddenSkills;
   }
 
-  showHideExperiences(){
+  showHideExperiences() {
     this.hiddenExperiences = !this.hiddenExperiences;
   }
 
-  showHideAccomplishments(){
+  showHideAccomplishments() {
     this.hiddenAccomplishments = !this.hiddenAccomplishments;
   }
 
-  showHideInterests(){
+  showHideInterests() {
     this.hiddenInterests = !this.hiddenInterests;
   }
 
-  showHideEvents(){
+  showHideEvents() {
     this.hiddenEvents = !this.hiddenEvents;
   }
 
