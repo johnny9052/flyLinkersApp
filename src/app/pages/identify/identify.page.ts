@@ -11,6 +11,8 @@ export class IdentifyPage implements OnInit {
 
   userDataLogIn = {} as ModelUserLogIn;
 
+
+
   constructor(private securityService: SecurityService) { }
 
   ngOnInit() {
