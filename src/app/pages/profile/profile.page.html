@@ -3,243 +3,203 @@
 <ion-content padding="padding">
     <form #formulario="ngForm">
         <ion-list>
-            <ion-item>
+            <ion-item class="bordeado">
                 <ion-grid fixed="fixed">
                     <ion-row class="ion-text-center">
                         <ion-col size="12">
-                            <div class="bordeado">
-                                <ion-avatar class="image-center top-margin-20">
-                                    <img src="/assets/stan-lee.jpg">
-                                </ion-avatar>
+                            <ion-avatar class="image-center top-margin-20">
+                                <img src="/assets/stan-lee.jpg">
+                            </ion-avatar>
 
-                                <h3>Oscar Lozano</h3>
+                            <h3>Nombres Apellidos</h3>
 
-                                <p class="flylinkersColor">Especialista en auditoria</p>
+                            <h2>Profesión</h2>
 
-                                <p>Colombia</p>
+                            <p color="flylinkers">Headline</p>
 
-                                <ion-button
-                                    color="flylinkers"
-                                    fill="outline"
-                                    size="small"
-                                >Editar perfil</ion-button>
-                            </div>
+                            <p>   
+                                <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+                                Colombia
+                            </p>
+
+                            <ion-button
+                                color="flylinkers"
+                                fill="outline"
+                                size="small"
+                            >Editar perfil</ion-button>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Nombres*</ion-label>
-
-                <ion-input
-                    type="text"
-                    name="firstName"
-                    required="required"
-                    [(ngModel)]="userData.firstName"
-                ></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Apellidos*</ion-label>
-
-                <ion-input
-                    type="text"
-                    name="lastName"
-                    required="required"
-                    [(ngModel)]="userData.lastName"
-                ></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Genero*</ion-label>
-
-                <ion-select
-                    placeholder="Seleccione"
-                    [(ngModel)]="userData.gender"
-                    name="gender"
+            <br>
+  
+            <ion-card style="width: 100%; margin: 0px !important; border-radius: 2px;" color="flylinkers">
+                <ion-item
+                    color="FlyLinkers-Blanco"
+                    (click)="showHideSkills()"
                 >
-                    <ion-select-option value="Masculino">Masculino</ion-select-option>
+                    <ion-label>Habilidades (cantidad)</ion-label>
+            
+                    <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
-                    <ion-select-option value="Femenino">Femenino</ion-select-option>
-                </ion-select>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Fecha de nacimiento</ion-label>
-
-                <ion-datetime
-                    placeholder="Seleccione"
-                    display-format="YYYY MMMM DD"
-                    cancelText="Cancelar"
-                    [(ngModel)]="userData.birthday_date"
-                    name="birthday_date"
-                ></ion-datetime>
-            </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Pais de residencia*</ion-label>
-
-                <ion-input
-                    type="text"
-                    name="residence_country"
-                    required="required"
-                    [(ngModel)]="userData.residence_country"
-                ></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Titular*</ion-label>
-
-                <ion-textarea
-                    name="headline"
-                    required="required"
-                    [(ngModel)]="userData.headline"
-                ></ion-textarea>
-            </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Profesion*</ion-label>
-
-                <ion-input
-                    type="text"
-                    name="profession"
-                    required="required"
-                    [(ngModel)]="userData.profession"
-                ></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Educacion</ion-label>
-
-                <ion-input
-                    type="text"
-                    name="education"
-                    [(ngModel)]="userData.education"
-                ></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Area</ion-label>
-
-                <ion-select
-                    placeholder="Seleccione"
-                    name="area_choices"
-                    [(ngModel)]="userData.area_choices"
+                </ion-item>
+            
+                <ion-card-content
+                    [hidden]="hiddenSkills"
+                    style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
-                    <ion-select-option value="administrative">Administrativo</ion-select-option>
+                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                        <ion-label>
+                            <h3>Nombre habilidad</h3>
+                        </ion-label>
+                
+                        <ion-icon
+                            name="close-circle"
+                            slot="end"
+                        ></ion-icon>
+                
+                        <ion-icon
+                            name="checkmark-circle"
+                            slot="end"
+                        ></ion-icon>
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
+            <br>
+            <ion-card style="width: 100%; margin: 0px !important; border-radius: 2px;" color="flylinkers">
+                <ion-item
+                    color="FlyLinkers-Blanco"
+                    (click)="showHideExperiences()"
+                >
+                    <ion-label>Experiencias (cantidad)</ion-label>
+            
+                    <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
-                    <ion-select-option value="airport ramp agent">
-                        Agente de rampa del aeropuerto
-                    </ion-select-option>
+                </ion-item>
+            
+                <ion-card-content
+                    [hidden]="hiddenExperiences"
+                    style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+                >
+                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                        <ion-label>
+                            <h3>Nombre experiencia</h3>
+                        </ion-label>
+                
+                        <ion-icon
+                            name="close-circle"
+                            slot="end"
+                        ></ion-icon>
+                
+                        <ion-icon
+                            name="checkmark-circle"
+                            slot="end"
+                        ></ion-icon>
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
+            <br>
+            <ion-card style="width: 100%; margin: 0px !important; border-radius: 2px;" color="flylinkers">
+                <ion-item
+                    color="FlyLinkers-Blanco"
+                    (click)="showHideAccomplishments()"
+                >
+                    <ion-label>Logros (cantidad)</ion-label>
+            
+                    <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
-                    <ion-select-option value="aircraft cargo agent">Agente de carga de aviones</ion-select-option>
+                </ion-item>
+            
+                <ion-card-content
+                    [hidden]="hiddenAccomplishments"
+                    style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+                >
+                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                        <ion-label>
+                            <h3>Nombre logro</h3>
+                        </ion-label>
+                
+                        <ion-icon
+                            name="close-circle"
+                            slot="end"
+                        ></ion-icon>
+                
+                        <ion-icon
+                            name="checkmark-circle"
+                            slot="end"
+                        ></ion-icon>
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
 
-                    <ion-select-option value="aircraft dispatcher">Despachador de aviones</ion-select-option>
+            <br>
+            <ion-card style="width: 100%; margin: 0px !important; border-radius: 2px;" color="flylinkers">
+                <ion-item
+                    color="FlyLinkers-Blanco"
+                    (click)="showHideInterests()"
+                >
+                    <ion-label>Intereses (cantidad)</ion-label>
+            
+                    <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
-                    <ion-select-option value="aircraft maintenance inspector">
-                        Inspector de mantenimiento de aeronaves
-                    </ion-select-option>
+                </ion-item>
+            
+                <ion-card-content
+                    [hidden]="hiddenInterests"
+                    style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+                >
+                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                        <ion-label>
+                            <h3>Nombre interes</h3>
+                        </ion-label>
+                
+                        <ion-icon
+                            name="close-circle"
+                            slot="end"
+                        ></ion-icon>
+                
+                        <ion-icon
+                            name="checkmark-circle"
+                            slot="end"
+                        ></ion-icon>
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
 
-                    <ion-select-option value="aircraft ground handler">
-                        Encargado de aeronaves en tierra
-                    </ion-select-option>
+            <br>
+            <ion-card style="width: 100%; margin: 0px !important; border-radius: 2px;" color="flylinkers">
+                <ion-item
+                    color="FlyLinkers-Blanco"
+                    (click)="showHideEvents()"
+                >
+                    <ion-label>Eventos (cantidad)</ion-label>
+            
+                    <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
 
-                    <ion-select-option value="baggage handler">Manejador de equipaje</ion-select-option>
-
-                    <ion-select-option value="captain">Capitán</ion-select-option>
-
-                    <ion-select-option value="cargo screener">Cribador de carga</ion-select-option>
-
-                    <ion-select-option value="first officer">Primer oficial</ion-select-option>
-
-                    <ion-select-option value="flight attendant">Auxiliar de vuelo</ion-select-option>
-
-                    <ion-select-option value="loadmaster">Maestro de carga</ion-select-option>
-
-                    <ion-select-option value="senior executive">Alto ejecutivo</ion-select-option>
-
-                    <ion-select-option value="software development">Desarrollo de software</ion-select-option>
-
-                    <ion-select-option value="stewardess">Azafata</ion-select-option>
-
-                    <ion-select-option value="warehouse specialist">Especialista de almacén</ion-select-option>
-
-                    <ion-select-option value="other">Otro...</ion-select-option>
-                </ion-select>
-            </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Compañia actual</ion-label>
-
-                <ion-input
-                    type="text"
-                    name="current_company"
-                    [(ngModel)]="userData.current_company"
-                ></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Cargo actual</ion-label>
-
-                <ion-input
-                    type="text"
-                    name="current_position"
-                    [(ngModel)]="userData.current_position"
-                ></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Telefono</ion-label>
-
-                <ion-input
-                    type="number"
-                    name="phone"
-                    [(ngModel)]="userData.phone"
-                ></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label position="floating">Celular</ion-label>
-
-                <ion-input
-                    type="number"
-                    name="mobile"
-                    [(ngModel)]="userData.mobile"
-                ></ion-input>
-            </ion-item>
+                </ion-item>
+            
+                <ion-card-content
+                    [hidden]="hiddenEvents"
+                    style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+                >
+                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                        <ion-label>
+                            <h3>Nombre experiencia</h3>
+                        </ion-label>
+                
+                        <ion-icon
+                            name="close-circle"
+                            slot="end"
+                        ></ion-icon>
+                
+                        <ion-icon
+                            name="checkmark-circle"
+                            slot="end"
+                        ></ion-icon>
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
         </ion-list>
-
-        <ion-grid fixed="fixed">
-            <ion-row>
-                <ion-col size="12">
-                    <ion-button
-                        expand="full"
-                        color="flylinkers"
-                        type="submit"
-                        [disabled]="formulario.invalid"
-                    >Guardar perfil</ion-button>
-                </ion-col>
-            </ion-row>
-
-            <ion-row>
-                <ion-col size="12">
-                    <ion-button
-                        expand="full"
-                        color="flylinkersBlanco"
-                    >Cambiar contraseña</ion-button>
-                </ion-col>
-            </ion-row>
-
-            <ion-row>
-                <ion-col size="12">
-                    <ion-button
-                        expand="full"
-                        color="flylinkersRojo"
-                    >Desactivar cuenta</ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
     </form>
 </ion-content>
 
