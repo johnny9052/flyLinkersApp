@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModelUserData } from '../../interfaces/userInterface';
+import { HelperService } from '../../util/HelperService';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-profile-edit',
@@ -10,9 +12,17 @@ export class ProfileEditPage implements OnInit {
 
   userData = {} as ModelUserData;
 
-  constructor() { }
+  codeUser = '';
+
+  constructor(public helperService: HelperService,
+              private storage: Storage) { }
 
   ngOnInit() {
+
+    this.storage.get('profilePk').then((val) => {
+      this.codeUser = val;
+    });
+
   }
 
 }

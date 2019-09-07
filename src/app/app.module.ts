@@ -12,7 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 en los imports*/
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
-import { HTTP } from '@ionic-native/http/ngx';
+/*Import necesario para el almacenamiento local*/
+import { IonicStorageModule } from '@ionic/storage';
 
 /*Para instalar cordova en el proyecto
 ionic cordova plugin add cordova-plugin-advanced-http
@@ -26,14 +27,15 @@ npm install @ionic-native/http*/
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    ComponentsModule
+    ComponentsModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     /*Como CORDOVA es un complemento externo, toca meterlo no en Imports sino en providers*/
-    HTTP
+    // HTTP
   ],
   bootstrap: [AppComponent]
 })
