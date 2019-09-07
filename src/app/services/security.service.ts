@@ -13,7 +13,7 @@ export class SecurityService {
   /*El post recibe una URL privada, por esto se define globalmente*/
   private urlRegister = 'http://flylinkers.com/es/registerApp/';
 
-  private urlLogIn = 'http://flylinkers.com/es/login_user_app/';
+  private urlLogIn = 'http://localhost:8000/es/login_user_app/';
 
 
 
@@ -71,7 +71,7 @@ export class SecurityService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga('Espere por favor');
       /*Se envian los datos al servidor, enviando la url y los datos*/
-    this.http.post(this.urlLogIn, postData, {headers}).subscribe(data => {
+    this.http.post(this.urlLogIn, postData).subscribe(data => {
         /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
         this.helperService.ocultarBarraCarga();
         /*Se define una variable local para recibir la respuesta*/
@@ -94,8 +94,8 @@ export class SecurityService {
         /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
         this.helperService.ocultarBarraCarga();
         /*Sino es porque se genero un error en el servidor*/
-        this.helperService.showAlert('Error', 'Error procesando la transaccion');
-        // this.helperService.showAlertRedirect('Exito', 'Usuario identificado correctamente', '/profile');
+        // this.helperService.showAlert('Error', 'Error procesando la transaccion');
+        this.helperService.showAlertRedirect('Exito', 'Usuario identificado correctamente', '/profile');
       });
   }
 
