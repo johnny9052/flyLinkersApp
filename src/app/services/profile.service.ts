@@ -24,11 +24,7 @@ export class ProfileService {
 
 
 
-  getIdUserIdentify() {
-    return this.storage.get('age').then((val) => {
-       console.log('Your age is', val);
-    });
-  }
+
 
 
 

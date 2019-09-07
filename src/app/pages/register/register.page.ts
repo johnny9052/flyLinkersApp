@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { HelperService } from '../../util/HelperService';
 import { SecurityService } from '../../services/security.service';
+import { ModelRegister } from '../../interfaces/register';
 
 @Component({
   selector: 'app-register',
@@ -13,13 +14,7 @@ import { SecurityService } from '../../services/security.service';
 export class RegisterPage implements OnInit {
 
   /*Modelo del usuario que se enviara al servidor*/
-  nuevoUsuario = {
-    email: '',
-    password1: '',
-    password2: '',
-    first_name: '',
-    last_name: ''
-  };
+  userNew =  {} as ModelRegister;
 
 
   /*Dependencias utilizadas en el proyecto
@@ -33,8 +28,8 @@ export class RegisterPage implements OnInit {
   }
 
    registerUser() {
-       if (this.nuevoUsuario.password1 === this.nuevoUsuario.password2) {
-         this.securityService.registerUser(this.nuevoUsuario);
+       if (this.userNew.password1 === this.userNew.password2) {
+         this.securityService.registerUser(this.userNew);
        } else {
          this.helperService.showAlert('Error', 'Las contraseñas no coinciden');
        }

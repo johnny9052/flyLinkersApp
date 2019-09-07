@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 
 @Injectable({
@@ -15,10 +16,26 @@ export class HelperService {
 
   /*Dependencias del servicio
   alertCtrl: Depedencia para los modales
-  loadingCtrl: Dependencia para las barras de carga*/
+  loadingCtrl: Dependencia para las barras de carga,
+  Storage: Almacenamiento local*/
   constructor(public alertCtrl: AlertController,
               private loadingCtrl: LoadingController,
-              private navCtrl: NavController) { }
+              private navCtrl: NavController,
+              private storage: Storage) { }
+
+
+
+  saveLocalData(dataName: string, val: string) {
+     this.storage.set(dataName, val);
+  }
+
+
+  getLocalData(dataName: string) {
+    this.storage.get(dataName).then((val) => {
+      console.log(val);
+      return val;
+    });
+  }
 
 
  /*Funcion que muestra un modal, con su titulo y descripcion*/
@@ -32,7 +49,7 @@ export class HelperService {
           text: 'Aceptar',
           cssClass: 'flylinkersColor',
           handler: (blah) => {
-            console.log('Boton OK');
+            // console.log('Boton OK');
           }
         }
       ]
