@@ -11,17 +11,6 @@ import { HelperService } from '../util/HelperService';
 })
 export class SecurityService {
 
-<<<<<<< HEAD
-  /*El post recibe una URL privada, por esto se define globalmente*/
-  private urlRegister = 'http://flylinkers.com/es/registerApp/';
-
-  private urlLogIn = 'http://localhost:8000/es/login_user_app/';
-
-
-
-
-=======
->>>>>>> 36d3c3a620488338698572cc743769f1a427585e
 
   /*Dependencias del servicio
   http: Dependencia para las peticiones al servidor
