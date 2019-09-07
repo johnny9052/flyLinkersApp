@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 
 import { HelperService } from '../../util/HelperService';
-import { SecurityService } from '../../services/security.service';
 import { ModelRegister } from '../../interfaces/register';
+import { SecurityService } from '../../services/security.service';
 
 @Component({
   selector: 'app-register',

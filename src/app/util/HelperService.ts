@@ -30,11 +30,8 @@ export class HelperService {
   }
 
 
-  getLocalData(dataName: string) {
-    this.storage.get(dataName).then((val) => {
-      console.log(val);
-      return val;
-    });
+  async getLocalData(dataName: string) {
+    return await this.storage.get(dataName);
   }
 
 
