@@ -68,11 +68,7 @@ export class SecurityService {
       /*Se muestra una barra de carga*/
       this.helperService.mostrarBarraDeCarga('Espere por favor');
       /*Se envian los datos al servidor, enviando la url y los datos*/
-<<<<<<< HEAD
-    this.http.post(this.urlLogIn, postData).subscribe(data => {
-=======
       this.http.post(urlLogIn, postData, {headers: this.headersPost}).subscribe(data => {
->>>>>>> 36d3c3a620488338698572cc743769f1a427585e
         /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
         this.helperService.ocultarBarraCarga();
         /*Se define una variable local para recibir la respuesta*/
@@ -99,13 +95,8 @@ export class SecurityService {
         /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
         this.helperService.ocultarBarraCarga();
         /*Sino es porque se genero un error en el servidor*/
-<<<<<<< HEAD
-        // this.helperService.showAlert('Error', 'Error procesando la transaccion');
-        this.helperService.showAlertRedirect('Exito', 'Usuario identificado correctamente', '/profile');
-=======
         this.helperService.showAlert('Error', 'Error procesando la transaccion');
         // this.helperService.showAlertRedirect('Exito', 'Usuario identificado correctamente', '/profile-edit');
->>>>>>> 36d3c3a620488338698572cc743769f1a427585e
       });
   }
 
