@@ -104,48 +104,5 @@ export class SecurityService {
 
 
 
-  // logInUserCordova( postData: any) {
-  //   this.helperService.mostrarBarraDeCarga('Espere por favor');
-  //   this.httpCordova.post(this.urlLogIn, postData, {})
-  //     .then(data => {
-  //      let res: any;
-  //      res = data;
-  //      if (res.code === '1') {
-  //        if (res.perfil !== '-1') {
-  //          this.helperService.showAlertRedirect('Exito', 'Usuario identificado correctamente', '/master-page');
-  //        } else {
-  //          this.helperService.showAlertRedirect('Exito', 'Usuario identificado correctamente', '/profile');
-  //        }
-  //      } else {
-  //        this.helperService.showAlert('Error', 'El usuario no existe');
-  //      }
-  //     })
-  //     .catch(error => {
-  //      this.helperService.ocultarBarraCarga();
-  //      this.helperService.showAlert('Error', 'Error procesando la transaccion');
-  //     });
-  //   }
-
-
-  // registerUserCordova( postData: any) {
-  //     this.helperService.mostrarBarraDeCarga('Espere por favor');
-  //     this.httpCordova.post(this.urlLogIn, postData, {})
-  //     .then(data => {
-  //       this.helperService.ocultarBarraCarga();
-  //       let res: any;
-  //       res = data;
-  //       if (res.code === '1') {
-  //         this.helperService.showAlertRedirect('Exito', 'Usuario registrado exitosamente', '/identify');
-  //       } else {
-  //         this.helperService.showAlert('Error', 'El usuario ya se encuentra registrado');
-  //       }
-  //     }, error => {
-  //       this.helperService.ocultarBarraCarga();
-  //       this.helperService.showAlert('Error', 'Error procesando la transaccion');
-  //     });
-  //   }
-
-
-
   }
 

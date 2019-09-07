@@ -1,5 +1,5 @@
 export interface ModelUserData {
-  firstName: string;
+  fistName: string;
   lastName: string;
   gender: string;
   birthday_date: string;
@@ -23,7 +23,7 @@ export interface ModelUserLogIn {
 
 
 export interface Profile {
-  profile: ModelUserData[];
+  userData: ModelUserData[];
   events: Events[];
   skills: Skills[];
   interests: Interests[];

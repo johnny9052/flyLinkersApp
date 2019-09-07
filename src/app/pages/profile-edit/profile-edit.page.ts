@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModelUserData } from '../../interfaces/userInterface';
+import { Profile, ModelUserData } from '../../interfaces/userInterface';
 import { HelperService } from '../../util/HelperService';
-import { Storage } from '@ionic/storage';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -10,19 +10,55 @@ import { Storage } from '@ionic/storage';
 })
 export class ProfileEditPage implements OnInit {
 
+  profile = {} as Profile;
   userData = {} as ModelUserData;
+
+  customPickerOptions;
 
   codeUser = '';
 
   constructor(public helperService: HelperService,
-              private storage: Storage) { }
+              public profileService: ProfileService) { }
 
   ngOnInit() {
+    this.getProfilePk();
 
-    this.storage.get('profilePk').then((val) => {
-      this.codeUser = val;
-    });
-
+    this.customPickerOptions = {
+      buttons: [{
+        text: 'Seleccionar',
+        handler: ( evento ) => {
+          this.userData.birthday_date = evento.year.value + '-' + evento.month.value + '-' + evento.day.value;
+        }
+      }, {
+        text: 'Cancelar',
+        handler: ( evento ) => {
+          console.log('close');
+        }
+      }]
+    };
   }
 
+
+  getProfilePk() {
+    this.helperService.getLocalData('profilePk').then(response => {
+      this.codeUser = response;
+      this.getProfileData(this.codeUser);
+    });
+  }
+
+
+  getProfileData(pkUser) {
+    this.profileService.getProfileData(pkUser).subscribe(data => {
+        let res: any;
+        res = data;
+        console.log(res);
+        this.userData = res.profile[0];
+      }, error => {
+        console.log('oops', error);
+      });
+  }
+
+  saveProfileData() {
+    this.profileService.saveProfileDataService(this.userData);
+  }
 }

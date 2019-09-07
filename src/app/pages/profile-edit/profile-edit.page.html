@@ -1,11 +1,19 @@
 <app-header titulo="Perfil"></app-header>
 
 <ion-content padding="padding">
-    <form #formulario="ngForm">
+    <form #formulario="ngForm" (ngSubmit)="saveProfileData()">
         <ion-list>
             <ion-item>
-                <ion-label (ngModel)]="codeUser"></ion-label>
+                <ion-input
+                    type="text"
+                    name="codeUser"
+                    required="required"
+                    [(ngModel)]="codeUser"
+                ></ion-input>
+
+              
             </ion-item>
+
             <ion-item>
                 <ion-grid fixed="fixed">
                     <ion-row class="ion-text-center">
@@ -33,7 +41,7 @@
                     type="text"
                     name="firstName"
                     required="required"
-                    [(ngModel)]="userData.firstName"
+                    [(ngModel)]="userData.fistName"
                 ></ion-input>
             </ion-item>
 
@@ -51,10 +59,14 @@
             <ion-item>
                 <ion-label>Genero*</ion-label>
 
-                <ion-select placeholder="Seleccione" [(ngModel)]="userData.gender" name="gender">
-                    <ion-select-option value="Masculino">Masculino</ion-select-option>
+                <ion-select
+                    placeholder="Seleccione"
+                    [(ngModel)]="userData.gender"
+                    name="gender"
+                >
+                    <ion-select-option value="Male">Masculino</ion-select-option>
 
-                    <ion-select-option value="Femenino">Femenino</ion-select-option>
+                    <ion-select-option value="Female">Femenino</ion-select-option>
                 </ion-select>
             </ion-item>
 
@@ -64,9 +76,10 @@
                 <ion-datetime
                     placeholder="Seleccione"
                     display-format="YYYY MMMM DD"
-                    cancelText="Cancelar" 
-                    [(ngModel)]="userData.birthday_date" 
-                    name="birthday_date"
+                    cancelText="Cancelar"
+                    [(ngModel)]="userData.birthday_date"
+                    name="birthday_date" 
+                    [pickerOptions]="customPickerOptions"
                 ></ion-datetime>
             </ion-item>
 
@@ -78,7 +91,6 @@
                     name="residence_country"
                     required="required"
                     [(ngModel)]="userData.residence_country"
-                    
                 ></ion-input>
             </ion-item>
 
@@ -118,7 +130,7 @@
 
                 <ion-select
                     placeholder="Seleccione"
-                    name="area_choices" 
+                    name="area_choices"
                     [(ngModel)]="userData.area_choices"
                 >
                     <ion-select-option value="administrative">Administrativo</ion-select-option>
