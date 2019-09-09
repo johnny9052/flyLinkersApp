@@ -13,10 +13,13 @@ export class IdentifyPage implements OnInit {
 
 
 
+
+
   constructor(private securityService: SecurityService) { }
 
   ngOnInit() {
-
+    this.userDataLogIn.username = 'alexander9052@gmail.com';
+    this.userDataLogIn.password = 'Dragon9052';
   }
 
 

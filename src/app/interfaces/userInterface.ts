@@ -79,4 +79,5 @@ export interface Events {
 export interface Skills {
   id: string;
   skill_description: string;
+  pk: string;
 }
