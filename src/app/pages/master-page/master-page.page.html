@@ -1,6 +1,54 @@
 <app-header search="true"></app-header>
 
-<ion-content>
+<ion-content padding fullscreen>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1]; let i=index">
+        <ion-card>
+          <ion-item>
+            <ion-avatar slot="start">
+                <img src="/assets/stan-lee.jpg">
+              </ion-avatar>
+            <ion-label>
+              <h3 slot="start">David Alberto Angarita García</h3>
+              <p>Ingeniero de software</p>
+            </ion-label>
+            <ion-icon slot= "end" name="more" (click)="presentActionSheet()"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h3 slot="start">Cambio de piloto en Avianca</h3>
+            </ion-label>
+          </ion-item>
+          <ion-card-content>
+              La aerolínea atraviesa una coyuntura bastante agitada que terminó con el retiro de Hernán Rincón de la presidencia. ¿En qué va el joint venture con United y Copa y su plan de desarrollo?
+          </ion-card-content>
+          <ion-img src="/assets/shapes.svg"></ion-img>
+          <ion-label>OJO ACA DEBE QUEDAR LO QUE SE CARGA DE LA URL EXTERNA!</ion-label>
+          <ion-label>
+            <h3 slot="start">Fecha de la noticia</h3>
+          </ion-label>
+          <ion-item>
+            <ion-segment>
+              <ion-segment-button>
+                <ion-icon name="heart"></ion-icon>
+                <ion-label>3</ion-label>
+              </ion-segment-button>
+              <ion-segment-button>
+                <ion-icon name="chatbubbles"></ion-icon>
+                <ion-label>2</ion-label>
+              </ion-segment-button>
+              <ion-segment-button>
+                <ion-icon name="share"></ion-icon>
+                <ion-label>4</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <!-- <ion-button
     expand="full"
     size="default"
