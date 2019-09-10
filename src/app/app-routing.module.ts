@@ -20,6 +20,8 @@ const routes: Routes = [
   { path: 'interests', loadChildren: './pages/interests/interests.module#InterestsPageModule' },
   { path: 'identify', loadChildren: './pages/identify/identify.module#IdentifyPageModule' },
   { path: 'profile-edit', loadChildren: './pages/profile-edit/profile-edit.module#ProfileEditPageModule' },
+  { path: 'new-post', loadChildren: './pages/new-post/new-post.module#NewPostPageModule' },
+  { path: 'detail-post', loadChildren: './pages/detail-post/detail-post.module#DetailPostPageModule' },
 ];
 
 @NgModule({
