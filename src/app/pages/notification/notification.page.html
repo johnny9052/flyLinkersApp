@@ -2,7 +2,26 @@
 <app-header titulo="Notificaciones"></app-header>
 
 <ion-content>
-  
+  <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1]; let i=index">
+    <ion-avatar slot="start">
+        <img src="/assets/stan-lee.jpg">
+      </ion-avatar>
+    <ion-label>
+      <h3 slot="start">David Alberto Angarita García</h3>
+      <p>Le ha gustado tu publicación</p>
+      <p>10/09/2019</p>
+    </ion-label>
+    <ion-icon
+      name="close-circle"
+      slot="end"
+    ></ion-icon>
+
+    <ion-icon
+      name="checkmark-circle"
+      slot="end"
+    ></ion-icon>
+    <ion-icon slot= "end" name="more" (click)="presentActionSheet()"></ion-icon>
+  </ion-item>
 </ion-content>
 
 
