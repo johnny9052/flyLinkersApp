@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Profile, ModelUserData, Skills, Experiences, Accomplishments } from '../../interfaces/userInterface';
+import { Profile, ModelUserData, Skills, Experiences, Accomplishments, Interests } from '../../interfaces/userInterface';
 import { HelperService } from '../../util/HelperService';
 import { ProfileService } from '../../services/profile.service';
 import { Observable } from 'rxjs';
@@ -31,6 +31,7 @@ export class ProfileEditPage implements OnInit {
   userSkills: Skills[] = [];
   userExperiences: Experiences[] = [];
   userAccomplishments: Accomplishments[] = [];
+  userInterests: Interests[] = [];
   /****************END OBJETOS************************** */
 
 
@@ -107,7 +108,7 @@ export class ProfileEditPage implements OnInit {
   }
 
 
-  /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se 
+  /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se
   encuentra logueado*/
   getProfileData(pkUser: string) {
     // Se obtiene toda la informacion del usuario que entro al sistema
@@ -118,6 +119,8 @@ export class ProfileEditPage implements OnInit {
         // Se obtiene la informacion basica del perfil
         this.userData = res.profile[0];
         this.userSkills = res.skills;
+        this.userAccomplishments = res.accomplishments;
+        this.userInterests = res.interests;
       }, error => {
         console.log('oops', error);
       });
@@ -285,7 +288,7 @@ export class ProfileEditPage implements OnInit {
 
 
   /******************************************************/
-  /*********FUNCIONES DE GESTION DE LOS SKILLS***********/
+  /*********FUNCIONES DE GESTION DE LA EXPERIENCIA*******/
   /******************************************************/
 
 
@@ -430,7 +433,7 @@ export class ProfileEditPage implements OnInit {
 
 
   /******************************************************/
-  /******END FUNCIONES DE GESTION DE LOS SKILLS**********/
+  /******END FUNCIONES DE GESTION DE LOS EXPERIENCIA*****/
   /******************************************************/
 
 
@@ -497,7 +500,7 @@ export class ProfileEditPage implements OnInit {
         console.log(res);
         // Se obtiene la informacion basica del perfil
 
-        this.userAccomplishments = res.accomplishment;
+        this.userAccomplishments = res.accomplishments;
 
       }, error => {
         console.log('oops', error);
@@ -510,8 +513,8 @@ export class ProfileEditPage implements OnInit {
     console.log(id);
 
     const alert = await this.alertCtrl.create({
-      header: 'Eliminar skill',
-      message: 'Desea eleminar esta skill?',
+      header: 'Eliminar logro',
+      message: 'Desea eleminar este logro?',
       buttons: [
         {
           text: 'Cancelar',
@@ -526,10 +529,10 @@ export class ProfileEditPage implements OnInit {
           cssClass: 'secondary',
           handler: async (blah) => {
             console.log('Boton OK ');
-            const objSkill = {
+            const objAccomplishment = {
               pk: id
-            } as Skills;
-            await this.profileService.deleteSkillService(objSkill);
+            } as Accomplishments;
+            await this.profileService.deleteAccomplishmentService(objAccomplishment);
             this.getListAccomplishmentData();
           }
         }
@@ -548,11 +551,11 @@ export class ProfileEditPage implements OnInit {
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'skill',
-          id: 'txtSkill',
+          name: 'accomplishment',
+          id: 'txtAccomplishment',
           type: 'text',
           value: description,
-          placeholder: 'Ingrese su skill'
+          placeholder: 'Ingrese su logro'
         }
       ],
       buttons: [
@@ -568,12 +571,12 @@ export class ProfileEditPage implements OnInit {
           handler: async ( data ) => {
             console.log('Confirm Ok', data);
 
-            const objSkill = {
-              skill_description: data.skill,
+            const objAccomplishments = {
+              accomplishment_description: data.accomplishment,
               pk: id
-            } as Skills;
+            } as Accomplishments;
 
-            await this.profileService.editSkillService(objSkill);
+            await this.profileService.editAccomplishmentService(objAccomplishments);
             this.getListAccomplishmentData();
           }
         }
@@ -587,4 +590,166 @@ export class ProfileEditPage implements OnInit {
   /******************************************************/
   /******END FUNCIONES DE GESTION DE LOS ACCOMPLISHMENTS*/
   /******************************************************/
+
+
+
+
+  /******************************************************/
+  /*********FUNCIONES DE GESTION DE LOS INTERESES********/
+  /******************************************************/
+
+
+  async createInterests() {
+
+    const input = await this.alertCtrl.create({
+      header: 'Crear',
+      // message: 'Ingrese su nueva skill',
+      inputs: [
+        {
+          name: 'interests',
+          id: 'txtInterests',
+          type: 'text',
+          placeholder: 'Ingrese su interes'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: async ( data ) => {
+            console.log('Confirm Ok', data);
+
+            const newInterest = {
+              interest_description: data.interests,
+              pk: this.codeUser
+            } as Interests;
+
+            await this.profileService.saveInterestsService(newInterest);
+            this.getListInterestsData();
+          }
+        }
+      ]
+    });
+
+    await input.present();
+  }
+
+
+
+
+
+  getListInterestsData() {
+    // Se obtiene toda la informacion del usuario que entro al sistema
+    this.profileService.getListInterestsUser(this.codeUser).subscribe(data => {
+        let res: any;
+        res = data;
+        console.log(res);
+        this.userInterests = res.interests;
+
+      }, error => {
+        console.log('oops', error);
+      });
+
+  }
+
+
+  async deleteInterests(id: string) {
+    console.log(id);
+
+    const alert = await this.alertCtrl.create({
+      header: 'Eliminar interes',
+      message: 'Desea eleminar este interes?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Cancelar');
+          }
+        },
+        {
+          text: 'Aceptar',
+          cssClass: 'secondary',
+          handler: async (blah) => {
+            console.log('Boton OK ');
+            const objInterest = {
+              pk: id
+            } as Interests;
+            await this.profileService.deleteInterestsService(objInterest);
+            this.getListInterestsData();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+
+  async editInterests(id: string, description: string) {
+
+    console.log(id);
+
+    const input = await this.alertCtrl.create({
+      header: 'Editar',
+      // message: 'Ingrese su nueva skill',
+      inputs: [
+        {
+          name: 'interest',
+          id: 'txtInterest',
+          type: 'text',
+          value: description,
+          placeholder: 'Ingrese su interes'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: async ( data ) => {
+            console.log('Confirm Ok', data);
+
+            const objInterest = {
+              interest_description: data.interest,
+              pk: id
+            } as Interests;
+
+            await this.profileService.editInterestsService(objInterest);
+            this.getListInterestsData();
+          }
+        }
+      ]
+    });
+
+    await input.present();
+  }
+
+
+  /******************************************************/
+  /******END FUNCIONES DE GESTION DE LOS SKILLS**********/
+  /******************************************************/
+
+
+
+
 }
+
+
+
+
+
+

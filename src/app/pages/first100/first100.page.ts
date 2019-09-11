@@ -33,7 +33,7 @@ export class First100Page implements OnInit {
   }
 
   getFirst100Data(pkUser) {
-    this.fisrt100Service.getFirst100(pkUser).subscribe(data => {
+    this.fisrt100Service.getFirst100().subscribe(data => {
       console.log(data);
       this.first100 = data.partners;
 

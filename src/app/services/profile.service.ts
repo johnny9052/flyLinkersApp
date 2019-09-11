@@ -89,7 +89,7 @@ export class ProfileService {
 
   /*Funcion que se encarga de registrar un nuevo skill, recibiendo por parametro
   el pk del usuario*/
-  saveSkillService( postData: any) {
+  async saveSkillService( postData: any) {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/network/create_skill_app/';
     /*Se muestra una barra de carga*/
@@ -124,7 +124,7 @@ export class ProfileService {
 
   /*Funcion que se encarga de eliminar un nuevo skill, recibiendo por parametro
   el pk del usuario*/
-  deleteSkillService( postData: any) {
+  async deleteSkillService( postData: any) {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/network/delete_skill_app/';
     /*Se muestra una barra de carga*/
@@ -159,7 +159,7 @@ export class ProfileService {
 
   /*Funcion que se encarga de editar un nuevo skill, recibiendo por parametro
   el id del skill y el nuevo contenido del skill*/
-  editSkillService( postData: any) {
+  async editSkillService( postData: any) {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/network/edit_skill_app/';
     /*Se muestra una barra de carga*/
@@ -178,10 +178,10 @@ export class ProfileService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', 'Skill registrado exitosamente');
+        this.helperService.showAlert('Exito', 'Skill editado exitosamente');
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', 'Error al registrar el skill');
+        this.helperService.showAlert('Error', 'Error al editar el skill');
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -217,7 +217,7 @@ export class ProfileService {
 
   /*Funcion que se encarga de registrar un nuevo skill, recibiendo por parametro
   el pk del usuario*/
-  saveAccomplishmentService( postData: any) {
+  async saveAccomplishmentService( postData: any) {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/network/create_accomplishment_app/';
     /*Se muestra una barra de carga*/
@@ -252,9 +252,10 @@ export class ProfileService {
 
   /*Funcion que se encarga de eliminar un nuevo skill, recibiendo por parametro
   el pk del usuario*/
-  deleteAccomplishmentService( postData: any) {
+  async deleteAccomplishmentService( postData: any) {
+    console.log(postData.pk);
     /*URL del web service*/
-    const url = 'https://flylinkers.com/es/network/delete_skill_app/';
+    const url = 'https://flylinkers.com/es/network/delete_accomplishment_app/';
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga('Espere por favor');
 
@@ -271,10 +272,10 @@ export class ProfileService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', 'Skill eliminado exitosamente');
+        this.helperService.showAlert('Exito', 'Logro eliminado exitosamente');
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', 'Error al eliminar el skill');
+        this.helperService.showAlert('Error', 'Error al eliminar el logro');
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -287,9 +288,9 @@ export class ProfileService {
 
   /*Funcion que se encarga de editar un nuevo skill, recibiendo por parametro
   el id del skill y el nuevo contenido del skill*/
-  editAccomplishmentService( postData: any) {
+  async editAccomplishmentService( postData: any) {
     /*URL del web service*/
-    const url = 'https://flylinkers.com/es/network/edit_skill_app/';
+    const url = 'https://flylinkers.com/es/network/edit_accomplishment_app/';
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga('Espere por favor');
 
@@ -306,10 +307,10 @@ export class ProfileService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', 'Skill registrado exitosamente');
+        this.helperService.showAlert('Exito', 'Logro editado exitosamente');
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', 'Error al registrar el skill');
+        this.helperService.showAlert('Error', 'Error al editar el logro');
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -322,6 +323,134 @@ export class ProfileService {
 
   /******************************************************/
   /******END FUNCIONES DE GESTION DE LOS ACCOMPLISHMENTS*/
+  /******************************************************/
+
+
+
+
+
+
+
+  /******************************************************/
+  /*********FUNCIONES DE GESTION DE LOS INTEREST*********/
+  /******************************************************/
+
+
+  /*Obtiene todas las skills del usuario a traves de su PK*/
+  getListInterestsUser(pkUser: string) {
+    console.log('vamos a traer algo');
+    return this.http.get<Profile>('https://flylinkers.com/es/network/get_interests_user_app?pk=' + pkUser);
+  }
+
+
+  /*Funcion que se encarga de registrar un nuevo skill, recibiendo por parametro
+  el pk del usuario*/
+  async saveInterestsService( postData: any) {
+    /*URL del web service*/
+    const url = 'https://flylinkers.com/es/network/create_interest_app/';
+    /*Se muestra una barra de carga*/
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
+
+    // console.log(postData);
+
+    /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
+    this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Se define una variable local para recibir la respuesta*/
+      let res: any;
+      res = data;
+      /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
+      if (res.code === '1') {
+        /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
+        redireccionara al login*/
+        this.helperService.showAlert('Exito', 'Interes registrado exitosamente');
+      } else {
+        /*Si no retorna uno es porque el usuario ya existe*/
+        this.helperService.showAlert('Error', 'Error al registrar el interes');
+      }
+    }, error => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Sino es porque se genero un error en el servidor*/
+      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+    });
+  }
+
+
+  /*Funcion que se encarga de eliminar un nuevo skill, recibiendo por parametro
+  el pk del usuario*/
+  async deleteInterestsService( postData: any) {
+    console.log(postData.pk);
+    /*URL del web service*/
+    const url = 'https://flylinkers.com/es/network/delete_interest_app/';
+    /*Se muestra una barra de carga*/
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
+
+    // console.log(postData);
+
+    /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
+    this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Se define una variable local para recibir la respuesta*/
+      let res: any;
+      res = data;
+      /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
+      if (res.code === '1') {
+        /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
+        redireccionara al login*/
+        this.helperService.showAlert('Exito', 'Interes eliminado exitosamente');
+      } else {
+        /*Si no retorna uno es porque el usuario ya existe*/
+        this.helperService.showAlert('Error', 'Error al eliminar el interes');
+      }
+    }, error => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Sino es porque se genero un error en el servidor*/
+      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+    });
+  }
+
+
+  /*Funcion que se encarga de editar un nuevo skill, recibiendo por parametro
+  el id del skill y el nuevo contenido del skill*/
+  async editInterestsService( postData: any) {
+    /*URL del web service*/
+    const url = 'https://flylinkers.com/es/network/edit_interest_app/';
+    /*Se muestra una barra de carga*/
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
+
+    // console.log(postData);
+
+    /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
+    this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Se define una variable local para recibir la respuesta*/
+      let res: any;
+      res = data;
+      /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
+      if (res.code === '1') {
+        /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
+        redireccionara al login*/
+        this.helperService.showAlert('Exito', 'Interes editado exitosamente');
+      } else {
+        /*Si no retorna uno es porque el usuario ya existe*/
+        this.helperService.showAlert('Error', 'Error al editar el interes');
+      }
+    }, error => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Sino es porque se genero un error en el servidor*/
+      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+    });
+  }
+
+
+  /******************************************************/
+  /******END FUNCIONES DE GESTION DE LOS INTEREST********/
   /******************************************************/
 
 

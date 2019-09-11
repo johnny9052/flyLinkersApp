@@ -61,13 +61,13 @@ export interface Experiences {
 
 export interface Accomplishments {
   pk: string;
-  id_accomplishment: string;
+  id: string;
   accomplishment_description: string;
 }
 
 export interface Interests {
   pk: string;
-  id_interest: string;
+  id: string;
   interest_description: string;
 }
 
