@@ -41,15 +41,15 @@
         size-md="4"
         size-sm="6"
         size-xs="12"
-        *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];"
+        *ngFor="let partner of first100;"
       >
         <div class="bordeado">
           <ion-avatar class="image-center top-margin-20">
-            <img src="/assets/stan-lee.jpg">
+            <img src="https://flylinkers.com/media/{{(partner.image_perfil !== '' )? partner.image_perfil : 'avatar_2x.png' }}">
           </ion-avatar>
-          <h3>Oscar Lozano</h3>
-          <p class="flylinkersColor">Especialista en auditoria</p>
-          <p>Colombia</p>
+          <h3>{{partner.fistName}}  {{partner.lastName}}</h3>
+          <p class="flylinkersColor">{{partner.profession}}</p>
+          <p>{{partner.residence_country}}</p>
         </div>
       </ion-col>
     </ion-row>
