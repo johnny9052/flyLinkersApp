@@ -235,6 +235,10 @@
             </ion-row> -->
         </ion-grid>
 
+        <!-- ********************************************************************** -->
+        <!-- *************************SECCION DE HABILIDADES*********************** -->
+        <!-- ********************************************************************** -->
+
         <ion-card
             style="width: 100%; margin: 0px !important; border-radius: 2px;"
             color="flylinkers"
@@ -282,13 +286,211 @@
                     <ion-label>
                         <ion-button
                             color="flylinkers"
-                            fill="outline" 
+                            fill="outline"
                             (click)="createSkill()"
                         >Crear skill</ion-button>
                     </ion-label>
                 </ion-item>
             </ion-card-content>
         </ion-card>
+
+        <!-- ********************************************************************** -->
+        <!-- **********************END SECCION DE HABILIDADES********************** -->
+        <!-- ********************************************************************** -->
+        <br>
+        <!-- ******************************************************************** -->
+        <!-- *************************SECCION DE EXPERIENCIAS********************** -->
+        <!-- ********************************************************************** -->
+
+        <ion-card
+            style="width: 100%; margin: 0px !important; border-radius: 2px;"
+            color="flylinkers"
+        >
+            <ion-item
+                color="FlyLinkers-Blanco"
+                (click)="showHideExperiences()"
+            >
+                <ion-label>
+                    Experiencias ({{userExperiences.length}})
+                </ion-label>
+
+                <ion-icon
+                    ios="ios-eye"
+                    md="md-eye"
+                ></ion-icon>
+            </ion-item>
+
+            <ion-card-content
+                [hidden]="hiddenExperiences"
+                style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+            >
+                <ion-item *ngFor="let experiences of userExperiences;">
+                    <ion-label>
+                        <h3>{{experiences.title}}</h3>
+                    </ion-label>
+
+                    <ion-icon
+                        name="trash"
+                        slot="end"
+                        (click)="deleteExperience(experiences.id)"
+                    ></ion-icon>
+
+                    <ion-icon
+                        name="create"
+                        slot="end"
+                        (click)="editExperience(experiences.id, experiences.title)"
+                    ></ion-icon>
+                </ion-item>
+
+                <ion-item
+                    text-center="text-center"
+                    class="ion-text-center"
+                >
+                    <ion-label>
+                        <ion-button
+                            color="flylinkers"
+                            fill="outline"
+                            (click)="createExperience()"
+                        >Agregar experiencia</ion-button>
+                    </ion-label>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+
+        <!-- ********************************************************************** -->
+        <!-- **********************END SECCION DE EXPERIENCIAS********************* -->
+        <!-- ********************************************************************** -->
+        <br>
+        <!-- ********************************************************************** -->
+        <!-- *************************SECCION DE LOGROS**************************** -->
+        <!-- ********************************************************************** -->
+
+        <ion-card
+            style="width: 100%; margin: 0px !important; border-radius: 2px;"
+            color="flylinkers"
+        >
+            <ion-item
+                color="FlyLinkers-Blanco"
+                (click)="showHideAccomplishments()"
+            >
+                <ion-label>
+                    Logros ({{userAccomplishments.length}})
+                </ion-label>
+
+                <ion-icon
+                    ios="ios-eye"
+                    md="md-eye"
+                ></ion-icon>
+            </ion-item>
+
+            <ion-card-content
+                [hidden]="hiddenAccomplishments"
+                style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+            >
+                <ion-item *ngFor="let accomplishments of userAccomplishments;">
+                    <ion-label>
+                        <h3>
+                            {{accomplishments.accomplishment_description}}
+                        </h3>
+                    </ion-label>
+
+                    <ion-icon
+                        name="trash"
+                        slot="end"
+                        (click)="deleteAccomplishment(accomplishments.id_accomplishment)"
+                    ></ion-icon>
+
+                    <ion-icon
+                        name="create"
+                        slot="end"
+                        (click)="editAccomplishment(accomplishments.id_accomplishment, accomplishments.accomplishment_description)"
+                    ></ion-icon>
+                </ion-item>
+
+                <ion-item
+                    text-center="text-center"
+                    class="ion-text-center"
+                >
+                    <ion-label>
+                        <ion-button
+                            color="flylinkers"
+                            fill="outline"
+                            (click)="createAccomplishment()"
+                        >Crear logro</ion-button>
+                    </ion-label>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+
+        <!-- ********************************************************************** -->
+        <!-- **********************END SECCION DE LOGROS*************************** -->
+        <!-- ********************************************************************** -->
+        <br>
+        <!-- ********************************************************************** -->
+        <!-- *************************SECCION DE INTERESES************************* -->
+        <!-- ********************************************************************** -->
+
+        <ion-card
+            style="width: 100%; margin: 0px !important; border-radius: 2px;"
+            color="flylinkers"
+        >
+            <ion-item
+                color="FlyLinkers-Blanco"
+                (click)="showHideInterests()"
+            >
+                <ion-label>
+                    Intereses ({{userAccomplishments.length}})
+                </ion-label>
+
+                <ion-icon
+                    ios="ios-eye"
+                    md="md-eye"
+                ></ion-icon>
+            </ion-item>
+
+            <ion-card-content
+                [hidden]="hiddenInterests"
+                style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+            >
+                <ion-item *ngFor="let accomplishments of userAccomplishments;">
+                    <ion-label>
+                        <h3>
+                            {{accomplishments.accomplishment_description}}
+                        </h3>
+                    </ion-label>
+
+                    <ion-icon
+                        name="trash"
+                        slot="end"
+                        (click)="deleteAccomplishment(accomplishments.id_accomplishment)"
+                    ></ion-icon>
+
+                    <ion-icon
+                        name="create"
+                        slot="end"
+                        (click)="editAccomplishment(accomplishments.id_accomplishment, accomplishments.accomplishment_description)"
+                    ></ion-icon>
+                </ion-item>
+
+                <ion-item
+                    text-center="text-center"
+                    class="ion-text-center"
+                >
+                    <ion-label>
+                        <ion-button
+                            color="flylinkers"
+                            fill="outline"
+                            (click)="createAccomplishment()"
+                        >Crear interes</ion-button>
+                    </ion-label>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+
+        <!-- ********************************************************************** -->
+        <!-- **********************END SECCION DE INTERESES************************ -->
+        <!-- ********************************************************************** -->
+        <br>
     </form>
 </ion-content>
 

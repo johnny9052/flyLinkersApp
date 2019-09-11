@@ -48,6 +48,7 @@ export interface Notifications {
 
 
 export interface Experiences {
+  id: string;
   title: string;
   company: string;
   location: string;
