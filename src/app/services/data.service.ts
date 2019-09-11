@@ -18,7 +18,7 @@ export class DataService {
   }
 
   getJSONContacts() {
-    // return this.http.get<ModelNetworkData>('/assets/data/network.json');
-    return this.http.get<ModelNetworkData>('http://flylinkers.com/network/network_list_app?profile_pk=79');
+     return this.http.get<ModelNetworkData>('/assets/data/network.json');
+    // return this.http.get<ModelNetworkData>('http://flylinkers.com/network/network_list_app?profile_pk=79');
   }
 }
