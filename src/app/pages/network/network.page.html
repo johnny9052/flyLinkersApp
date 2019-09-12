@@ -132,11 +132,20 @@
                 </ion-avatar>
 
                 <ion-card-title>
-                  <h2>{{contacto.fistName}} {{contacto.lastName}}</h2>
+                  <ion-item lines="none">
+                    <div style="width: 100%; text-align: center;">
+                      <h2>{{contacto.fistName | slice:0:15}} {{contacto.lastName | slice:0:15}}</h2>
+                    </div>
+                  </ion-item>
                 </ion-card-title>
 
                 <ion-card-subtitle>
-                  {{contacto.profession}}
+                  <ion-item lines="none">
+                    <div style="width: 100%; text-align: center;">
+                      <p *ngIf=" contacto.profession !== ''" > {{contacto.profession | slice:0:30}}</p>
+                      <p *ngIf=" contacto.profession == ''" > {{contacto.headline | slice:0:30}}</p>
+                    </div>
+                  </ion-item>
                 </ion-card-subtitle>
 
                 <ion-button
@@ -190,11 +199,20 @@
                 </ion-avatar>
 
                 <ion-card-title>
-                  <h2>{{contactos.fistName}} {{contactos.lastName}}</h2>
+                  <ion-item lines="none">
+                    <div style="width: 100%; text-align: center;">
+                      <h2>{{contactos.fistName | slice:0:15}} {{contactos.lastName | slice:0:15}}</h2>
+                    </div>
+                  </ion-item>
                 </ion-card-title>
 
                 <ion-card-subtitle>
-                  {{contactos.profession}}
+                  <ion-item lines="none">
+                    <div style="width: 100%; text-align: center;">
+                      <p *ngIf=" contactos.profession !== ''" > {{contactos.profession | slice:0:30}}</p>
+                      <p *ngIf=" contactos.profession == ''" > {{contactos.headline | slice:0:30}}</p>
+                    </div>
+                  </ion-item>
                 </ion-card-subtitle>
 
                 <ion-button
