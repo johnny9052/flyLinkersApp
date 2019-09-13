@@ -8,18 +8,18 @@
                     <ion-row class="ion-text-center">
                         <ion-col size="12">
                             <ion-avatar class="image-center top-margin-20">
-                                <img src="/assets/stan-lee.jpg">
+                                <img src="https://flylinkers.com/media/{{(userData.image_perfil !== '' )? userData.image_perfil : 'avatar_2x.png' }}">
                             </ion-avatar>
 
-                            <h3>Nombres Apellidos</h3>
+                            <h3>{{userData.fistName}} {{userData.lastName}}</h3>
 
-                            <h2>Profesión</h2>
+                            <h2>{{userData.profession}}</h2>
 
-                            <p color="flylinkers">Headline</p>
+                            <p color="flylinkers">{{userData.headline}}</p>
 
                             <p>   
                                 <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-                                Colombia
+                                {{userData.residence_country}}
                             </p>
 
                             <ion-button
@@ -39,7 +39,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideSkills()"
                 >
-                    <ion-label>Habilidades (8)</ion-label>
+                    <ion-label>Habilidades ({{userSkills.length}})</ion-label>
                     <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
                     
 
@@ -49,9 +49,9 @@
                     [hidden]="hiddenSkills"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
-                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                    <ion-item *ngFor="let skills of userSkills;">
                         <ion-label>
-                            <h3>Nombre habilidad</h3>
+                            <h3>{{skills.skill_description}}</h3>
                         </ion-label>
                     </ion-item>
                 </ion-card-content>
@@ -62,7 +62,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideExperiences()"
                 >
-                    <ion-label>Experiencias (8)</ion-label>
+                    <ion-label>Experiencias ({{userExperiences.length}})</ion-label>
             
                     <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
@@ -72,9 +72,9 @@
                     [hidden]="hiddenExperiences"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
-                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                    <ion-item *ngFor="let experiences of userExperiences;">
                         <ion-label>
-                            <h3>Nombre experiencia</h3>
+                            <h3>{{experiences.title}}</h3>
                         </ion-label>
                     </ion-item>
                 </ion-card-content>
@@ -85,7 +85,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideAccomplishments()"
                 >
-                    <ion-label>Logros (8)</ion-label>
+                    <ion-label>Logros ({{userAccomplishments.length}})</ion-label>
             
                     <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
@@ -95,9 +95,9 @@
                     [hidden]="hiddenAccomplishments"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
-                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                    <ion-item *ngFor="let accomplishments of userAccomplishments;">
                         <ion-label>
-                            <h3>Nombre logro</h3>
+                            <h3>{{accomplishments.accomplishment_description}}</h3>
                         </ion-label>
                     </ion-item>
                 </ion-card-content>
@@ -109,7 +109,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideInterests()"
                 >
-                    <ion-label>Intereses (8)</ion-label>
+                    <ion-label>Intereses ({{userInterests.length}})</ion-label>
             
                     <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
@@ -119,9 +119,9 @@
                     [hidden]="hiddenInterests"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
-                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                    <ion-item *ngFor="let interests of userInterests;">
                         <ion-label>
-                            <h3>Nombre interes</h3>
+                            <h3>{{interests.interest_description}}</h3>
                         </ion-label>
                     </ion-item>
                 </ion-card-content>
