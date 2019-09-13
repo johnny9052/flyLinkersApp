@@ -207,9 +207,8 @@ export class ProfileService {
 
   /*Obtiene todas las skills del usuario a traves de su PK*/
   getListExperienceUser(pkUser: string) {
-    console.log('vamos a traer algo');
-    return this.http.get<Profile>('https://flylinkers.com/es/network/get_experiences_user_app?pk=' + pkUser);
-}
+      return this.http.get<Profile>('https://flylinkers.com/es/network/get_experiences_user_app?pk=' + pkUser);
+  }
 
 
   /*Funcion que se encarga de registrar un nuevo skill, recibiendo por parametro
@@ -251,7 +250,7 @@ export class ProfileService {
   el pk del usuario*/
   async deleteExperienceService( postData: any) {
     /*URL del web service*/
-    const url = 'https://flylinkers.com/es/network/delete_skill_app/';
+    const url = 'https://flylinkers.com/es/network/delete_experience_app/';
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga('Espere por favor');
 
@@ -286,7 +285,7 @@ export class ProfileService {
   el id del skill y el nuevo contenido del skill*/
   async editExperienceService( postData: any) {
     /*URL del web service*/
-    const url = 'https://flylinkers.com/es/network/edit_skill_app/';
+    const url = 'https://flylinkers.com/es/network/edit_experience_app/';
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga('Espere por favor');
 

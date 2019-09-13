@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Profile, ModelUserData, Skills, Experiences, Accomplishments, Interests } from '../../interfaces/userInterface';
+import {
+  Profile,
+  ModelUserData,
+  Skills,
+  Experiences,
+  Accomplishments,
+  Interests
+} from '../../interfaces/userInterface';
 import { HelperService } from '../../util/HelperService';
 import { ProfileService } from '../../services/profile.service';
-import { Observable } from 'rxjs';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
+
 
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.page.html',
-  styleUrls: ['./profile-edit.page.scss'],
+  styleUrls: ['./profile-edit.page.scss']
 })
 export class ProfileEditPage implements OnInit {
-
   /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
   codeUser = '';
 
@@ -24,6 +30,8 @@ export class ProfileEditPage implements OnInit {
   hiddenEvents = true;
   /*Almacena la configuracion del calendar*/
   customPickerOptions;
+
+  tiempoEspera = 1000;
   /*******END VARIABLES DE CONTROL VISUAL****************/
 
   /****************OBJETOS************************** */
@@ -35,37 +43,43 @@ export class ProfileEditPage implements OnInit {
   userInterests: Interests[] = [];
   /****************END OBJETOS************************** */
 
-
-
   /********************INYECCION DE DEPENDENCIAS********* */
   /*HelperService: Servicio generico para funcionalidades ya implementadas
     ProfileService: Servicio para el consumo de web services del perfil
     AlertController: Permite mostrar alerts emergentes en pantalla */
-  constructor(public helperService: HelperService,
-              public profileService: ProfileService,
-              public alertCtrl: AlertController,
-              private modalCtrl: ModalController) { }
+  constructor(
+    public helperService: HelperService,
+    public profileService: ProfileService,
+    public alertCtrl: AlertController,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
     // Se configura el calendar
     this.customPickerOptions = {
-      buttons: [{
-        text: 'Seleccionar',
-        handler: ( evento ) => {
-          this.userData.birthday_date = evento.year.value + '-' + evento.month.value + '-' + evento.day.value;
+      buttons: [
+        {
+          text: 'Seleccionar',
+          handler: evento => {
+            this.userData.birthday_date =
+              evento.year.value +
+              '-' +
+              evento.month.value +
+              '-' +
+              evento.day.value;
+          }
+        },
+        {
+          text: 'Cancelar',
+          handler: evento => {
+            console.log('close');
+          }
         }
-      }, {
-        text: 'Cancelar',
-        handler: ( evento ) => {
-          console.log('close');
-        }
-      }]
+      ]
     };
   }
-
-
 
   /******************************************************/
   /*********FUNCIONES DE CONTROL GRAFICO ****************/
@@ -95,9 +109,6 @@ export class ProfileEditPage implements OnInit {
   /*********END FUNCIONES DE CONTROL GRAFICO ************/
   /******************************************************/
 
-
-
-
   /*Funcion que se encarga de obtener codigo del usuario que se encuentra identificado*/
   getProfilePk() {
     // Se obtiene el identificador del usuario que ingreso al sistema
@@ -109,12 +120,12 @@ export class ProfileEditPage implements OnInit {
     });
   }
 
-
   /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se
   encuentra logueado*/
   getProfileData(pkUser: string) {
     // Se obtiene toda la informacion del usuario que entro al sistema
-    this.profileService.getProfileData(pkUser).subscribe(data => {
+    this.profileService.getProfileData(pkUser).subscribe(
+      data => {
         let res: any;
         res = data;
         console.log(res);
@@ -124,25 +135,23 @@ export class ProfileEditPage implements OnInit {
         this.userAccomplishments = res.accomplishments;
         this.userInterests = res.interests;
         this.userExperiences = res.experiences;
-      }, error => {
+      },
+      error => {
         console.log('oops', error);
-      });
+      }
+    );
   }
-
 
   /*Funcion que se encarga que actualizar la informacion del perfil del usuario que se encuentre logueado*/
   saveProfileData() {
     this.profileService.saveProfileDataService(this.userData);
   }
 
-
   /******************************************************/
   /*********FUNCIONES DE GESTION DE LOS SKILLS***********/
   /******************************************************/
 
-
   async createSkill() {
-
     const input = await this.alertCtrl.create({
       header: 'Crear',
       // message: 'Ingrese su nueva skill',
@@ -162,9 +171,10 @@ export class ProfileEditPage implements OnInit {
           handler: () => {
             console.log('Confirm Cancel');
           }
-        }, {
+        },
+        {
           text: 'Ok',
-          handler: async ( data ) => {
+          handler: async data => {
             console.log('Confirm Ok', data);
 
             const newSkill = {
@@ -172,8 +182,11 @@ export class ProfileEditPage implements OnInit {
               pk: this.codeUser
             } as Skills;
 
-            await this.profileService.saveSkillService(newSkill);
-            this.getListSkillData();
+            this.profileService.saveSkillService(newSkill).then(response => {
+              setTimeout(() => {
+                this.getListSkillData();
+              }, this.tiempoEspera);
+            });
           }
         }
       ]
@@ -182,26 +195,22 @@ export class ProfileEditPage implements OnInit {
     await input.present();
   }
 
-
-
-
-
   getListSkillData() {
     // Se obtiene toda la informacion del usuario que entro al sistema
-    this.profileService.getListSkillUser(this.codeUser).subscribe(data => {
+    this.profileService.getListSkillUser(this.codeUser).subscribe(
+      data => {
         let res: any;
         res = data;
         console.log(res);
         // Se obtiene la informacion basica del perfil
 
         this.userSkills = res.skill;
-
-      }, error => {
+      },
+      error => {
         console.log('oops', error);
-      });
-
+      }
+    );
   }
-
 
   async deleteSkill(id: string) {
     console.log(id);
@@ -214,20 +223,24 @@ export class ProfileEditPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
+          handler: blah => {
             console.log('Cancelar');
           }
         },
         {
           text: 'Aceptar',
           cssClass: 'secondary',
-          handler: async (blah) => {
+          handler: async blah => {
             console.log('Boton OK ');
             const objSkill = {
               pk: id
             } as Skills;
-            await this.profileService.deleteSkillService(objSkill);
-            this.getListSkillData();
+
+            this.profileService.deleteSkillService(objSkill).then(response => {
+              setTimeout(() => {
+                this.getListSkillData();
+              }, this.tiempoEspera);
+            });
           }
         }
       ]
@@ -237,7 +250,6 @@ export class ProfileEditPage implements OnInit {
   }
 
   async editSkill(id: string, description: string) {
-
     console.log(id);
 
     const input = await this.alertCtrl.create({
@@ -260,9 +272,10 @@ export class ProfileEditPage implements OnInit {
           handler: () => {
             console.log('Confirm Cancel');
           }
-        }, {
+        },
+        {
           text: 'Ok',
-          handler: async ( data ) => {
+          handler: async data => {
             console.log('Confirm Ok', data);
 
             const objSkill = {
@@ -270,8 +283,11 @@ export class ProfileEditPage implements OnInit {
               pk: id
             } as Skills;
 
-            await this.profileService.editSkillService(objSkill);
-            this.getListSkillData();
+            this.profileService.editSkillService(objSkill).then(response => {
+              setTimeout(() => {
+                this.getListSkillData();
+              }, this.tiempoEspera);
+            });
           }
         }
       ]
@@ -280,138 +296,62 @@ export class ProfileEditPage implements OnInit {
     await input.present();
   }
 
-
   /******************************************************/
   /******END FUNCIONES DE GESTION DE LOS SKILLS**********/
   /******************************************************/
-
-
-
-
-
 
   /******************************************************/
   /*********FUNCIONES DE GESTION DE LA EXPERIENCIA*******/
   /******************************************************/
 
 
-  async createExperience() {
-
-    const input = await this.alertCtrl.create({
-      header: 'Crear',
-      // message: 'Ingrese su nueva skill',
-      inputs: [
-        {
-          name: 'titulo',
-          id: 'txtTitulo',
-          type: 'text',
-          placeholder: 'Ingrese un titulo'
-        },
-        {
-          name: 'empresa',
-          id: 'txtEmpresa',
-          type: 'text',
-          placeholder: '¿En que empresa?'
-        },
-        {
-          name: 'ubicacion',
-          id: 'txtUbicacion',
-          type: 'text',
-          placeholder: '¿Cual era la ubicacion?'
-        },
-        {
-          name: 'fechaInicio',
-          id: 'txtFechaInicio',
-          type: 'date',
-          placeholder: 'Eliga una fecha de inicio'
-        },
-        {
-          name: 'fechaFin',
-          id: 'txtFechaFin',
-          type: 'date',
-          placeholder: 'Eliga una fecha de fin'
-        },
-        {
-          name: 'trabajaActualmente',
-          type: 'checkbox',
-          label: 'Trabaja actualmente',
-          value: '1',
-          checked: false        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: async ( data ) => {
-            console.log('Confirm Ok', data);
-
-            const newSkill = {
-              skill_description: data.skill,
-              pk: this.codeUser
-            } as Skills;
-
-            await this.profileService.saveSkillService(newSkill);
-            this.getListExperienceData();
-          }
-        }
-      ]
-    });
-
-    await input.present();
-  }
-
-
-
-
-
   getListExperienceData() {
     // Se obtiene toda la informacion del usuario que entro al sistema
-    this.profileService.getListExperienceUser(this.codeUser).subscribe(data => {
+    this.profileService.getListExperienceUser(this.codeUser).subscribe(
+      data => {
         let res: any;
         res = data;
         console.log(res);
         // Se obtiene la informacion basica del perfil
 
-        this.userExperiences = res.experience;
-
-      }, error => {
+        this.userExperiences = res.experiences;
+      },
+      error => {
         console.log('oops', error);
-      });
-
+      }
+    );
   }
-
 
   async deleteExperience(id: string) {
     console.log(id);
 
     const alert = await this.alertCtrl.create({
-      header: 'Eliminar skill',
-      message: 'Desea eleminar esta skill?',
+      header: 'Eliminar experiencia',
+      message: 'Desea eleminar esta experiencia?',
       buttons: [
         {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
+          handler: blah => {
             console.log('Cancelar');
           }
         },
         {
           text: 'Aceptar',
           cssClass: 'secondary',
-          handler: async (blah) => {
+          handler: async blah => {
             console.log('Boton OK ');
-            const objSkill = {
+            const objExperience = {
               pk: id
-            } as Skills;
-            await this.profileService.deleteSkillService(objSkill);
-            this.getListExperienceData();
+            } as Experiences;
+
+            this.profileService.deleteExperienceService(objExperience).then(response => {
+              setTimeout(() => {
+                this.getListExperienceData();
+              }, this.tiempoEspera);
+            });
+
           }
         }
       ]
@@ -420,68 +360,17 @@ export class ProfileEditPage implements OnInit {
     await alert.present();
   }
 
-  async editExperience(id: string, description: string) {
-
-    console.log(id);
-
-    const input = await this.alertCtrl.create({
-      header: 'Editar',
-      // message: 'Ingrese su nueva skill',
-      inputs: [
-        {
-          name: 'skill',
-          id: 'txtSkill',
-          type: 'text',
-          value: description,
-          placeholder: 'Ingrese su skill'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: async ( data ) => {
-            console.log('Confirm Ok', data);
-
-            const objSkill = {
-              skill_description: data.skill,
-              pk: id
-            } as Skills;
-
-            await this.profileService.editSkillService(objSkill);
-            this.getListExperienceData();
-          }
-        }
-      ]
-    });
-
-    await input.present();
-  }
 
 
   /******************************************************/
   /******END FUNCIONES DE GESTION DE LOS EXPERIENCIA*****/
   /******************************************************/
 
-
-
-
-
-
-
   /******************************************************/
   /*********FUNCIONES DE GESTION DE LOS ACCOMPLISHMENTS**/
   /******************************************************/
 
-
   async createAccomplishment() {
-
     const input = await this.alertCtrl.create({
       header: 'Crear',
       // message: 'Ingrese su nueva skill',
@@ -501,9 +390,10 @@ export class ProfileEditPage implements OnInit {
           handler: () => {
             console.log('Confirm Cancel');
           }
-        }, {
+        },
+        {
           text: 'Ok',
-          handler: async ( data ) => {
+          handler: async data => {
             console.log('Confirm Ok', data);
 
             const newAccomplishment = {
@@ -511,8 +401,13 @@ export class ProfileEditPage implements OnInit {
               pk: this.codeUser
             } as Accomplishments;
 
-            await this.profileService.saveAccomplishmentService(newAccomplishment);
-            this.getListAccomplishmentData();
+            this.profileService
+              .saveAccomplishmentService(newAccomplishment)
+              .then(response => {
+                setTimeout(() => {
+                  this.getListAccomplishmentData();
+                }, this.tiempoEspera);
+              });
           }
         }
       ]
@@ -521,26 +416,22 @@ export class ProfileEditPage implements OnInit {
     await input.present();
   }
 
-
-
-
-
   getListAccomplishmentData() {
     // Se obtiene toda la informacion del usuario que entro al sistema
-    this.profileService.getListAccomplishmentUser(this.codeUser).subscribe(data => {
+    this.profileService.getListAccomplishmentUser(this.codeUser).subscribe(
+      data => {
         let res: any;
         res = data;
         console.log(res);
         // Se obtiene la informacion basica del perfil
 
         this.userAccomplishments = res.accomplishments;
-
-      }, error => {
+      },
+      error => {
         console.log('oops', error);
-      });
-
+      }
+    );
   }
-
 
   async deleteAccomplishment(id: string) {
     console.log(id);
@@ -553,20 +444,26 @@ export class ProfileEditPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
+          handler: blah => {
             console.log('Cancelar');
           }
         },
         {
           text: 'Aceptar',
           cssClass: 'secondary',
-          handler: async (blah) => {
+          handler: async blah => {
             console.log('Boton OK ');
             const objAccomplishment = {
               pk: id
             } as Accomplishments;
-            await this.profileService.deleteAccomplishmentService(objAccomplishment);
-            this.getListAccomplishmentData();
+
+            this.profileService
+              .deleteAccomplishmentService(objAccomplishment)
+              .then(response => {
+                setTimeout(() => {
+                  this.getListAccomplishmentData();
+                }, this.tiempoEspera);
+              });
           }
         }
       ]
@@ -576,7 +473,6 @@ export class ProfileEditPage implements OnInit {
   }
 
   async editAccomplishment(id: string, description: string) {
-
     console.log(id);
 
     const input = await this.alertCtrl.create({
@@ -599,9 +495,10 @@ export class ProfileEditPage implements OnInit {
           handler: () => {
             console.log('Confirm Cancel');
           }
-        }, {
+        },
+        {
           text: 'Ok',
-          handler: async ( data ) => {
+          handler: async data => {
             console.log('Confirm Ok', data);
 
             const objAccomplishments = {
@@ -609,8 +506,13 @@ export class ProfileEditPage implements OnInit {
               pk: id
             } as Accomplishments;
 
-            await this.profileService.editAccomplishmentService(objAccomplishments);
-            this.getListAccomplishmentData();
+            this.profileService
+              .editAccomplishmentService(objAccomplishments)
+              .then(response => {
+                setTimeout(() => {
+                  this.getListAccomplishmentData();
+                }, this.tiempoEspera);
+              });
           }
         }
       ]
@@ -619,21 +521,15 @@ export class ProfileEditPage implements OnInit {
     await input.present();
   }
 
-
   /******************************************************/
   /******END FUNCIONES DE GESTION DE LOS ACCOMPLISHMENTS*/
   /******************************************************/
-
-
-
 
   /******************************************************/
   /*********FUNCIONES DE GESTION DE LOS INTERESES********/
   /******************************************************/
 
-
   async createInterests() {
-
     const input = await this.alertCtrl.create({
       header: 'Crear',
       // message: 'Ingrese su nueva skill',
@@ -653,9 +549,10 @@ export class ProfileEditPage implements OnInit {
           handler: () => {
             console.log('Confirm Cancel');
           }
-        }, {
+        },
+        {
           text: 'Ok',
-          handler: async ( data ) => {
+          handler: async data => {
             console.log('Confirm Ok', data);
 
             const newInterest = {
@@ -663,8 +560,13 @@ export class ProfileEditPage implements OnInit {
               pk: this.codeUser
             } as Interests;
 
-            await this.profileService.saveInterestsService(newInterest);
-            this.getListInterestsData();
+            this.profileService
+              .saveInterestsService(newInterest)
+              .then(response => {
+                setTimeout(() => {
+                  this.getListInterestsData();
+                }, this.tiempoEspera);
+              });
           }
         }
       ]
@@ -673,24 +575,20 @@ export class ProfileEditPage implements OnInit {
     await input.present();
   }
 
-
-
-
-
   getListInterestsData() {
     // Se obtiene toda la informacion del usuario que entro al sistema
-    this.profileService.getListInterestsUser(this.codeUser).subscribe(data => {
+    this.profileService.getListInterestsUser(this.codeUser).subscribe(
+      data => {
         let res: any;
         res = data;
         console.log(res);
         this.userInterests = res.interests;
-
-      }, error => {
+      },
+      error => {
         console.log('oops', error);
-      });
-
+      }
+    );
   }
-
 
   async deleteInterests(id: string) {
     console.log(id);
@@ -703,20 +601,25 @@ export class ProfileEditPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
+          handler: blah => {
             console.log('Cancelar');
           }
         },
         {
           text: 'Aceptar',
           cssClass: 'secondary',
-          handler: async (blah) => {
+          handler: async blah => {
             console.log('Boton OK ');
             const objInterest = {
               pk: id
             } as Interests;
-            await this.profileService.deleteInterestsService(objInterest);
-            this.getListInterestsData();
+            this.profileService
+              .deleteInterestsService(objInterest)
+              .then(response => {
+                setTimeout(() => {
+                  this.getListInterestsData();
+                }, this.tiempoEspera);
+              });
           }
         }
       ]
@@ -725,10 +628,7 @@ export class ProfileEditPage implements OnInit {
     await alert.present();
   }
 
-
-
   async editInterests(id: string, description: string) {
-
     console.log(id);
 
     const input = await this.alertCtrl.create({
@@ -751,9 +651,10 @@ export class ProfileEditPage implements OnInit {
           handler: () => {
             console.log('Confirm Cancel');
           }
-        }, {
+        },
+        {
           text: 'Ok',
-          handler: async ( data ) => {
+          handler: async data => {
             console.log('Confirm Ok', data);
 
             const objInterest = {
@@ -761,8 +662,13 @@ export class ProfileEditPage implements OnInit {
               pk: id
             } as Interests;
 
-            await this.profileService.editInterestsService(objInterest);
-            this.getListInterestsData();
+            this.profileService
+              .editInterestsService(objInterest)
+              .then(response => {
+                setTimeout(() => {
+                  this.getListInterestsData();
+                }, this.tiempoEspera);
+              });
           }
         }
       ]
@@ -771,39 +677,74 @@ export class ProfileEditPage implements OnInit {
     await input.present();
   }
 
-
   /******************************************************/
   /******END FUNCIONES DE GESTION DE LOS SKILLS**********/
   /******************************************************/
 
+  /*Se hacer la referencia al Modal-Info-Page que es la pagina que se quiere cargar*/
+  async crearNuevaExperiencia() {
+    const modal = await this.modalCtrl.create({
+      component: ProfileEditExperiencePage,
+      componentProps: {
+        pk: this.codeUser
+      }
+    });
 
+    await modal.present();
 
+    /* Con esta linea se captura los datos retornados por el modal*/
+    const { data } = await modal.onDidDismiss();
+    console.log('Retorno del modal ', data);
 
-    /*Se hacer la referencia al Modal-Info-Page que es la pagina que se quiere cargar*/
-    async crearNuevaExperiencia() {
-      const modal = await this.modalCtrl.create({
-        component: ProfileEditExperiencePage,
-        componentProps: {
-          pk: this.codeUser
-        }
-      });
+    const newExperience = data as Experiences;
 
-      await modal.present();
+    this.profileService.saveExperienceService(newExperience).then(response => {
+      setTimeout(() => {
+        this.getListExperienceData();
+      }, this.tiempoEspera);
+    });
+  }
 
-      /* Con esta linea se captura los datos retornados por el modal*/
-      const {data} = await modal.onDidDismiss();
-      console.log('Retorno del modal ', data);
+  /*Se hacer la referencia al Modal-Info-Page que es la pagina que se quiere cargar*/
+  async editarExperiencia(
+    id: string,
+    title: string,
+    company: string,
+    location: string,
+    initDate: string,
+    endDate: string,
+    currentlyWorking: string,
+    headlineExperience: string,
+    descriptionExperience: string
+  ) {
+    const modal = await this.modalCtrl.create({
+      component: ProfileEditExperiencePage,
+      componentProps: {
+        pk: this.codeUser,
+        id,
+        title,
+        company,
+        location,
+        initDate,
+        endDate,
+        currentlyWorking,
+        headlineExperience,
+        descriptionExperience
+      }
+    });
 
-      const newExperience = data as Experiences;
+    await modal.present();
 
-      await this.profileService.saveExperienceService(newExperience);
-      this.getListExperienceData();
-    }
+    /* Con esta linea se captura los datos retornados por el modal*/
+    const {data} = await modal.onDidDismiss();
+    console.log('Retorno del modal ', data);
 
+    const editExperience = data as Experiences;
+
+    this.profileService.editExperienceService(editExperience).then(response => {
+      setTimeout(() => {
+        this.getListExperienceData();
+      }, this.tiempoEspera);
+    });
+  }
 }
-
-
-
-
-
-
