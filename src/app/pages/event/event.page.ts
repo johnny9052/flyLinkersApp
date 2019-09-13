@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModelEventsData } from '../../interfaces/events';
+import { ModelEvents } from '../../interfaces/events';
 import { HelperService } from '../../util/HelperService';
 import { EventsService } from '../../services/events.service';
 
@@ -10,7 +10,7 @@ import { EventsService } from '../../services/events.service';
 })
 export class EventPage implements OnInit {
 
-  events: ModelEventsData[] = [];
+  events: ModelEvents[] = [];
 
   codeUser = '';
 
@@ -18,12 +18,16 @@ export class EventPage implements OnInit {
               public helperService: HelperService) { }
 
   ngOnInit() {
+    this.getEventsData();
   }
 
   getEventsData() {
     this.eventsService.getEvents().subscribe(data => {
       console.log(data);
-      // this.events = data;
+      let res: any;
+      res = data;
+      console.log(res.events);
+      this.events = res.events;
 
       // console.log('Lo que tiene es ' + data.contactos_para_conectar[38].image_perfil );
       // tslint:disable-next-line: max-line-length

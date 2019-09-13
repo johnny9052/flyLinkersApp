@@ -2,25 +2,25 @@
 <app-header titulo="Eventos"></app-header>
 
 <ion-content>
-    <ion-list *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1]; let i=index">
-        <ion-card href="http://www.altaccma.com/events/alta-ccma-mro-conference/event-summary-7d6e24b1cb414db2b6e32b281893b3f8.aspx?lang=en">
+    <ion-list *ngFor="let event of events">
+        <ion-card href="{{event.event_site}}">
             <ion-item>
                 <ion-label>
-                    <h3 slot="start">Titulo evento</h3>
+                    <h3 slot="start">{{event.event}}</h3>
                 </ion-label>
             </ion-item>
             <ion-item lines="none">
                 <ion-label>
-                    <h3 slot="start">Fecha inicio: 30/09/2019</h3>
+                    <h3 slot="start">Fecha inicio: {{event.event_init_date}}</h3>
                 </ion-label>
                 <ion-label>
-                    <h3 slot="start">Fecha fin: 10/10/2019</h3>
+                    <h3 slot="start">Fecha fin: {{event.event_end_date}}</h3>
                 </ion-label>
             </ion-item>
             <ion-card-content lines="none">
                 <p>   
                     <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-                    Ubicación del evento
+                    {{event.location}}
                 </p>
             </ion-card-content>
         </ion-card>
