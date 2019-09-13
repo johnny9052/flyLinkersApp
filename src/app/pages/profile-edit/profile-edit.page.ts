@@ -12,7 +12,6 @@ import { ProfileService } from '../../services/profile.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
 
-
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.page.html',
@@ -304,7 +303,6 @@ export class ProfileEditPage implements OnInit {
   /*********FUNCIONES DE GESTION DE LA EXPERIENCIA*******/
   /******************************************************/
 
-
   getListExperienceData() {
     // Se obtiene toda la informacion del usuario que entro al sistema
     this.profileService.getListExperienceUser(this.codeUser).subscribe(
@@ -320,6 +318,89 @@ export class ProfileEditPage implements OnInit {
         console.log('oops', error);
       }
     );
+  }
+
+  /*Se hacer la referencia al Modal-Info-Page que es la pagina que se quiere cargar*/
+  async crearNuevaExperiencia() {
+    const modal = await this.modalCtrl.create({
+      component: ProfileEditExperiencePage,
+      componentProps: {
+        pk: this.codeUser
+      }
+    });
+
+    await modal.present();
+
+    /* Con esta linea se captura los datos retornados por el modal*/
+    const { data } = await modal.onDidDismiss();
+    console.log('Retorno del modal ', data);
+
+    const newExperience = data as Experiences;
+
+    this.profileService.saveExperienceService(newExperience).then(response => {
+      setTimeout(() => {
+        this.getListExperienceData();
+      }, this.tiempoEspera);
+    });
+  }
+
+  /*Se hacer la referencia al Modal-Info-Page que es la pagina que se quiere cargar*/
+  async editarExperiencia(
+    id: string,
+    title: string,
+    company: string,
+    location: string,
+    initDate: string,
+    endDate: string,
+    currentlyWorking: string,
+    headlineExperience: string,
+    descriptionExperience: string
+  ) {
+    const modal = await this.modalCtrl.create({
+      component: ProfileEditExperiencePage,
+      componentProps: {
+        pk: this.codeUser,
+        id,
+        title,
+        company,
+        location,
+        initDate,
+        endDate,
+        currentlyWorking,
+        headlineExperience,
+        descriptionExperience
+      }
+    });
+
+    await modal.present();
+
+    /* Con esta linea se captura los datos retornados por el modal*/
+    const { data } = await modal.onDidDismiss();
+    console.log('Retorno del modal ', data);
+
+    if (data !== 'undefined' && data !== undefined) {
+
+      const editExperience = data as Experiences;
+
+      const temp = {
+        id: data.id,
+        title: data.title,
+        company: data.company,
+        location: data.location,
+        init_date: data.init_date,
+        headline_experience: data.headline_experience,
+        description_experience: data.description_experience,
+        currently_working: data.currently_working
+      } as Experiences;
+
+      this.profileService
+        .editExperienceService(temp)
+        .then(response => {
+          setTimeout(() => {
+            this.getListExperienceData();
+          }, this.tiempoEspera);
+        });
+    }
   }
 
   async deleteExperience(id: string) {
@@ -346,12 +427,13 @@ export class ProfileEditPage implements OnInit {
               pk: id
             } as Experiences;
 
-            this.profileService.deleteExperienceService(objExperience).then(response => {
-              setTimeout(() => {
-                this.getListExperienceData();
-              }, this.tiempoEspera);
-            });
-
+            this.profileService
+              .deleteExperienceService(objExperience)
+              .then(response => {
+                setTimeout(() => {
+                  this.getListExperienceData();
+                }, this.tiempoEspera);
+              });
           }
         }
       ]
@@ -359,8 +441,6 @@ export class ProfileEditPage implements OnInit {
 
     await alert.present();
   }
-
-
 
   /******************************************************/
   /******END FUNCIONES DE GESTION DE LOS EXPERIENCIA*****/
@@ -680,71 +760,4 @@ export class ProfileEditPage implements OnInit {
   /******************************************************/
   /******END FUNCIONES DE GESTION DE LOS SKILLS**********/
   /******************************************************/
-
-  /*Se hacer la referencia al Modal-Info-Page que es la pagina que se quiere cargar*/
-  async crearNuevaExperiencia() {
-    const modal = await this.modalCtrl.create({
-      component: ProfileEditExperiencePage,
-      componentProps: {
-        pk: this.codeUser
-      }
-    });
-
-    await modal.present();
-
-    /* Con esta linea se captura los datos retornados por el modal*/
-    const { data } = await modal.onDidDismiss();
-    console.log('Retorno del modal ', data);
-
-    const newExperience = data as Experiences;
-
-    this.profileService.saveExperienceService(newExperience).then(response => {
-      setTimeout(() => {
-        this.getListExperienceData();
-      }, this.tiempoEspera);
-    });
-  }
-
-  /*Se hacer la referencia al Modal-Info-Page que es la pagina que se quiere cargar*/
-  async editarExperiencia(
-    id: string,
-    title: string,
-    company: string,
-    location: string,
-    initDate: string,
-    endDate: string,
-    currentlyWorking: string,
-    headlineExperience: string,
-    descriptionExperience: string
-  ) {
-    const modal = await this.modalCtrl.create({
-      component: ProfileEditExperiencePage,
-      componentProps: {
-        pk: this.codeUser,
-        id,
-        title,
-        company,
-        location,
-        initDate,
-        endDate,
-        currentlyWorking,
-        headlineExperience,
-        descriptionExperience
-      }
-    });
-
-    await modal.present();
-
-    /* Con esta linea se captura los datos retornados por el modal*/
-    const {data} = await modal.onDidDismiss();
-    console.log('Retorno del modal ', data);
-
-    const editExperience = data as Experiences;
-
-    this.profileService.editExperienceService(editExperience).then(response => {
-      setTimeout(() => {
-        this.getListExperienceData();
-      }, this.tiempoEspera);
-    });
-  }
 }
