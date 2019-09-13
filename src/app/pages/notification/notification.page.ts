@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
+import { ModelNotifications } from '../../interfaces/notifications';
+import { HelperService } from '../../util/HelperService';
+import { NetworkService } from '../../services/network.service';
+import { NotificationsService } from '../../services/notifications.service';
 
 @Component({
   selector: 'app-notification',
@@ -8,9 +12,42 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class NotificationPage implements OnInit {
 
-  constructor(private actionSheetCtrl: ActionSheetController) { }
+  notifications: ModelNotifications[] = [];
+
+  codeUser = '';
+
+  constructor(private actionSheetCtrl: ActionSheetController,
+              private notificationsService: NotificationsService,
+              public helperService: HelperService) { }
 
   ngOnInit() {
+     // Se obtiene el identidicador del usuario que ingreso al sistema
+     this.getProfilePk();
+  }
+
+  getProfilePk() {
+    // Se obtiene el identificador del usuario que ingreso al sistema
+    this.helperService.getLocalData('profilePk').then(response => {
+      this.codeUser = response;
+      console.log(this.codeUser);
+      // Se obtiene toda la informacion del usuario que ingreso al sistema
+      this.getNotificationsData(this.codeUser);
+    });
+  }
+
+  getNotificationsData(pkUser) {
+    this.notificationsService.getNotifications(pkUser).subscribe(data => {
+      console.log(data);
+      let res: any;
+      res = data;
+      console.log(res.items);
+      this.notifications = res.items;
+
+      // console.log('Lo que tiene es ' + data.contactos_para_conectar[38].image_perfil );
+      // tslint:disable-next-line: max-line-length
+      // console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');
+    }
+  );
   }
 
   async presentActionSheet() {

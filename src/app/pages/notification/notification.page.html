@@ -2,14 +2,14 @@
 <app-header titulo="Notificaciones"></app-header>
 
 <ion-content>
-  <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1]; let i=index">
+  <ion-item *ngFor="let notification of notifications">
     <ion-avatar slot="start">
-        <img src="/assets/stan-lee.jpg">
+        <img src="https://flylinkers.com/media/{{notification.img_src}}">
       </ion-avatar>
     <ion-label>
-      <h3 slot="start">David Alberto Angarita García</h3>
-      <p>Le ha gustado tu publicación</p>
-      <p>10/09/2019</p>
+      <h3 slot="start">{{notification.author}}</h3>
+      <p>{{notification.text}}</p>
+      <p>{{notification.date}}</p>
     </ion-label>
     <ion-icon
       name="close-circle"
