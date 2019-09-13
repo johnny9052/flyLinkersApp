@@ -67,9 +67,9 @@ export class NetworkPage implements OnInit {
       this.contactosConectar = data.contactos_para_conectar;
       this.totalContactosConectar = data.cantidad_contactos_para_conectar[0];
 
-      console.log('Lo que tiene es ' + data.contactos_para_conectar[38].image_perfil );
+      // console.log('Lo que tiene es ' + data.contactos_para_conectar[38].image_perfil );
       // tslint:disable-next-line: max-line-length
-      console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');
+      // console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');
     }
   );
   }

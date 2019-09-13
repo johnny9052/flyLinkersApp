@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
+import { HelperService } from '../../util/HelperService';
+import { MasterPageService } from '../../services/master-page.service';
+import { ModelPostsData } from '../../interfaces/posts';
 
 @Component({
   selector: 'app-master-page',
@@ -8,9 +11,38 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class MasterPagePage implements OnInit {
 
-  constructor(private actionSheetCtrl: ActionSheetController) { }
+  posts: ModelPostsData[] = [];
+
+  codeUser = '';
+
+  constructor(private actionSheetCtrl: ActionSheetController,
+              private masterPageService: MasterPageService,
+              public helperService: HelperService) { }
 
   ngOnInit() {
+    // Se obtiene el identidicador del usuario que ingreso al sistema
+    this.getProfilePk();
+  }
+
+  getProfilePk() {
+    // Se obtiene el identificador del usuario que ingreso al sistema
+    this.helperService.getLocalData('profilePk').then(response => {
+      this.codeUser = response;
+      console.log(this.codeUser);
+      // Se obtiene toda la informacion del usuario que ingreso al sistema
+      this.getPostsData(this.codeUser);
+    });
+  }
+
+  getPostsData(pkUser) {
+    this.masterPageService.getPosts(pkUser).subscribe(data => {
+      console.log(data.posts);
+      this.posts = data.posts;
+      // console.log('Lo que tiene es ' + data[0].content );
+      // tslint:disable-next-line: max-line-length
+      // console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');
+    }
+  );
   }
 
   async presentActionSheet() {
