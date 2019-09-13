@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProfileEditPage } from './profile-edit.page';
 import { ComponentsModule } from '../../components/components.module';
+import { ProfileEditExperiencePageModule } from '../profile-edit-experience/profile-edit-experience.module';
+import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
 
 const routes: Routes = [
   {
@@ -16,12 +18,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
+   /*Recordar hacer esta asociacion, apuntanto a la pagina que se quiere cargar como modal*/
+   entryComponents: [
+    ProfileEditExperiencePage
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
+    /*Se importa como modulo, el modulo de la pagina que se quiere cargar (OJOOOO ES EL MODULO)*/
+    ProfileEditExperiencePageModule
   ],
   declarations: [ProfileEditPage]
 })

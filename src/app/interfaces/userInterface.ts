@@ -13,6 +13,7 @@ export interface ModelUserData {
   current_position: string;
   phone: string;
   mobile: string;
+  image_perfil: string;
 }
 
 
@@ -48,6 +49,7 @@ export interface Notifications {
 
 
 export interface Experiences {
+  pk: string;
   id: string;
   title: string;
   company: string;
