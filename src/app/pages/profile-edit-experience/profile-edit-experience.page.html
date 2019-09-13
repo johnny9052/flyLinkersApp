@@ -1,0 +1,131 @@
+<app-header-login titulo="Experiencia"></app-header-login>
+
+<ion-content padding="padding">
+  <!-- Con el position floating da el efecto de materalized, en 
+          donde se selecciona la caja de texto, y sube el texto como el placeholder -->
+
+  <form
+    #formulario="ngForm"
+    (ngSubmit)="enviarDatosAlFormulario()"
+  >
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Titulo</ion-label>
+
+        <ion-input
+          name="title"
+          type="text"
+          required="required"
+          [(ngModel)]="experiencia.title"
+          title="Escribe un titulo"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Compañia</ion-label>
+
+        <ion-input
+          type="text"
+          name="company"
+          required="required"
+          [(ngModel)]="experiencia.company"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Ubicacion</ion-label>
+
+        <ion-input
+          type="text"
+          name="location"
+          required="required"
+          [(ngModel)]="experiencia.location"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha inicio</ion-label>
+
+        <ion-datetime
+          placeholder="Elija una fecha de incio"
+          display-format="YYYY MMMM DD"
+          cancelText="Cancelar"
+          [(ngModel)]="experiencia.init_date"
+          name="init_date"
+          [pickerOptions]="customPickerOptionsInicial"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha fin</ion-label>
+
+        <ion-datetime
+          placeholder="Elija una fecha de fin"
+          display-format="YYYY MMMM DD"
+          cancelText="Cancelar"
+          [(ngModel)]="experiencia.end_date"
+          name="end_date"
+          [pickerOptions]="customPickerOptionsFinal"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Trabajando actualmente</ion-label>
+
+        <ion-select
+          placeholder="Seleccione"
+          name="currently_working"
+          [(ngModel)]="experiencia.currently_working"
+        >
+          <ion-select-option>No</ion-select-option>
+
+          <ion-select-option value="on">Si</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Titular</ion-label>
+
+        <ion-textarea
+          name="headline_experience"
+          [(ngModel)]="experiencia.headline_experience"
+          required="required"
+        ></ion-textarea>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="floating">Descripcion</ion-label>
+
+        <ion-textarea
+          name="description_experience"
+          [(ngModel)]="experiencia.description_experience"
+          required="required"
+        ></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <ion-grid fixed="fixed">
+      <ion-row class="ion-text-center">
+        <ion-col size="12">
+          <ion-button
+            color="flylinkers"
+            type="submit"
+            [disabled]="formulario.invalid"
+            expand="full"
+          >Guardar experiencia</ion-button>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-button
+            color="flylinkers"
+            (click)="cerrarModal()"
+            expand="full"
+          >Cancelar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<app-footer></app-footer>

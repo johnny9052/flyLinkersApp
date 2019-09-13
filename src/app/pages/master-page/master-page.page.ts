@@ -36,8 +36,10 @@ export class MasterPagePage implements OnInit {
 
   getPostsData(pkUser) {
     this.masterPageService.getPosts(pkUser).subscribe(data => {
-      console.log(data.posts);
-      this.posts = data.posts;
+      let res: any;
+      res = data;
+      console.log(res.posts);
+      this.posts = res.posts;
       // console.log('Lo que tiene es ' + data[0].content );
       // tslint:disable-next-line: max-line-length
       // console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');

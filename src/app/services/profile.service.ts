@@ -200,6 +200,131 @@ export class ProfileService {
 
 
 
+  /******************************************************/
+  /*********FUNCIONES DE GESTION DE LOS EXPERIENCE***********/
+  /******************************************************/
+
+
+  /*Obtiene todas las skills del usuario a traves de su PK*/
+  getListExperienceUser(pkUser: string) {
+    console.log('vamos a traer algo');
+    return this.http.get<Profile>('https://flylinkers.com/es/network/get_experiences_user_app?pk=' + pkUser);
+}
+
+
+  /*Funcion que se encarga de registrar un nuevo skill, recibiendo por parametro
+  el pk del usuario*/
+  async saveExperienceService( postData: any) {
+    /*URL del web service*/
+    const url = 'https://flylinkers.com/es/network/create_experience_app/';
+    /*Se muestra una barra de carga*/
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
+
+    // console.log(postData);
+
+    /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
+    this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Se define una variable local para recibir la respuesta*/
+      let res: any;
+      res = data;
+      /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
+      if (res.code === '1') {
+        /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
+        redireccionara al login*/
+        this.helperService.showAlert('Exito', 'Experiencia registrado exitosamente');
+      } else {
+        /*Si no retorna uno es porque el usuario ya existe*/
+        this.helperService.showAlert('Error', 'Error al registrar la experiencia');
+      }
+    }, error => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Sino es porque se genero un error en el servidor*/
+      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+    });
+  }
+
+
+  /*Funcion que se encarga de eliminar un nuevo skill, recibiendo por parametro
+  el pk del usuario*/
+  async deleteExperienceService( postData: any) {
+    /*URL del web service*/
+    const url = 'https://flylinkers.com/es/network/delete_skill_app/';
+    /*Se muestra una barra de carga*/
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
+
+    // console.log(postData);
+
+    /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
+    this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Se define una variable local para recibir la respuesta*/
+      let res: any;
+      res = data;
+      /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
+      if (res.code === '1') {
+        /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
+        redireccionara al login*/
+        this.helperService.showAlert('Exito', 'Skill eliminado exitosamente');
+      } else {
+        /*Si no retorna uno es porque el usuario ya existe*/
+        this.helperService.showAlert('Error', 'Error al eliminar el skill');
+      }
+    }, error => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Sino es porque se genero un error en el servidor*/
+      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+    });
+  }
+
+
+  /*Funcion que se encarga de editar un nuevo skill, recibiendo por parametro
+  el id del skill y el nuevo contenido del skill*/
+  async editExperienceService( postData: any) {
+    /*URL del web service*/
+    const url = 'https://flylinkers.com/es/network/edit_skill_app/';
+    /*Se muestra una barra de carga*/
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
+
+    // console.log(postData);
+
+    /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
+    this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Se define una variable local para recibir la respuesta*/
+      let res: any;
+      res = data;
+      /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
+      if (res.code === '1') {
+        /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
+        redireccionara al login*/
+        this.helperService.showAlert('Exito', 'Skill editado exitosamente');
+      } else {
+        /*Si no retorna uno es porque el usuario ya existe*/
+        this.helperService.showAlert('Error', 'Error al editar el skill');
+      }
+    }, error => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Sino es porque se genero un error en el servidor*/
+      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+    });
+  }
+
+
+  /******************************************************/
+  /******END FUNCIONES DE GESTION DE EXPERIENCE**********/
+  /******************************************************/
+
+
+
+
+
 
 
 

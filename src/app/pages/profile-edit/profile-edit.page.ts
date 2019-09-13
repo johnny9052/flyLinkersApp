@@ -3,7 +3,8 @@ import { Profile, ModelUserData, Skills, Experiences, Accomplishments, Interests
 import { HelperService } from '../../util/HelperService';
 import { ProfileService } from '../../services/profile.service';
 import { Observable } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
 
 @Component({
   selector: 'app-profile-edit',
@@ -42,7 +43,8 @@ export class ProfileEditPage implements OnInit {
     AlertController: Permite mostrar alerts emergentes en pantalla */
   constructor(public helperService: HelperService,
               public profileService: ProfileService,
-              public alertCtrl: AlertController) { }
+              public alertCtrl: AlertController,
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -121,6 +123,7 @@ export class ProfileEditPage implements OnInit {
         this.userSkills = res.skills;
         this.userAccomplishments = res.accomplishments;
         this.userInterests = res.interests;
+        this.userExperiences = res.experiences;
       }, error => {
         console.log('oops', error);
       });
@@ -299,11 +302,41 @@ export class ProfileEditPage implements OnInit {
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'skill',
-          id: 'txtSkill',
+          name: 'titulo',
+          id: 'txtTitulo',
           type: 'text',
-          placeholder: 'Ingrese su skill'
-        }
+          placeholder: 'Ingrese un titulo'
+        },
+        {
+          name: 'empresa',
+          id: 'txtEmpresa',
+          type: 'text',
+          placeholder: '¿En que empresa?'
+        },
+        {
+          name: 'ubicacion',
+          id: 'txtUbicacion',
+          type: 'text',
+          placeholder: '¿Cual era la ubicacion?'
+        },
+        {
+          name: 'fechaInicio',
+          id: 'txtFechaInicio',
+          type: 'date',
+          placeholder: 'Eliga una fecha de inicio'
+        },
+        {
+          name: 'fechaFin',
+          id: 'txtFechaFin',
+          type: 'date',
+          placeholder: 'Eliga una fecha de fin'
+        },
+        {
+          name: 'trabajaActualmente',
+          type: 'checkbox',
+          label: 'Trabaja actualmente',
+          value: '1',
+          checked: false        }
       ],
       buttons: [
         {
@@ -339,13 +372,13 @@ export class ProfileEditPage implements OnInit {
 
   getListExperienceData() {
     // Se obtiene toda la informacion del usuario que entro al sistema
-    this.profileService.getListSkillUser(this.codeUser).subscribe(data => {
+    this.profileService.getListExperienceUser(this.codeUser).subscribe(data => {
         let res: any;
         res = data;
         console.log(res);
         // Se obtiene la informacion basica del perfil
 
-        this.userSkills = res.skill;
+        this.userExperiences = res.experience;
 
       }, error => {
         console.log('oops', error);
@@ -745,6 +778,27 @@ export class ProfileEditPage implements OnInit {
 
 
 
+
+    /*Se hacer la referencia al Modal-Info-Page que es la pagina que se quiere cargar*/
+    async crearNuevaExperiencia() {
+      const modal = await this.modalCtrl.create({
+        component: ProfileEditExperiencePage,
+        componentProps: {
+          pk: this.codeUser
+        }
+      });
+
+      await modal.present();
+
+      /* Con esta linea se captura los datos retornados por el modal*/
+      const {data} = await modal.onDidDismiss();
+      console.log('Retorno del modal ', data);
+
+      const newExperience = data as Experiences;
+
+      await this.profileService.saveExperienceService(newExperience);
+      this.getListExperienceData();
+    }
 
 }
 
