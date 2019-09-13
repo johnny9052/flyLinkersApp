@@ -133,7 +133,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideEvents()"
                 >
-                    <ion-label>Eventos (8)</ion-label>
+                    <ion-label>Eventos ({{events.length}})</ion-label>
                     <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                 </ion-item>
             
@@ -141,15 +141,14 @@
                     [hidden]="hiddenEvents"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
-                    <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1];">
+                    <ion-item *ngFor="let event of events;" (click)="openExternalURL(event.event_site)">
                         <ion-label>
-                            <h3>Nombre evento</h3>
-                            <h3>Url evento</h3>
-                            <h5>Location</h5>
+                            <h3>{{event.event}}</h3>                            
+                            <h5>{{event.location}}</h5>
                         </ion-label>
                         <ion-label slot="end" text-right>
-                            <p>Inicio: 21/09/2019</p>
-                            <p>Fin: 30/09/2019</p>
+                            <p>Inicio: {{event.event_init_date | date: 'dd/MM/yyyy'}}</p>
+                            <p>Fin: {{event.event_end_date | date: 'dd/MM/yyyy'}}</p>
                         </ion-label>
                     </ion-item>
                 </ion-card-content>

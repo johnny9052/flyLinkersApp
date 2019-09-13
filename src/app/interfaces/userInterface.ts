@@ -74,8 +74,14 @@ export interface Interests {
 }
 
 export interface Events {
-  id_interest: string;
-  description: string;
+  id: string;
+  event: string;
+  address: string;
+  author: string;
+  event_end_date: string;
+  event_init_date: string;
+  event_site: string;
+  location: string;
 }
 
 

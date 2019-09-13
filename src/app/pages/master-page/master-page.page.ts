@@ -2,22 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { HelperService } from '../../util/HelperService';
 import { MasterPageService } from '../../services/master-page.service';
-import { ModelPostsData } from '../../interfaces/posts';
+import { ModelPostsData, ModelPosts } from '../../interfaces/posts';
 
 @Component({
   selector: 'app-master-page',
   templateUrl: './master-page.page.html',
-  styleUrls: ['./master-page.page.scss'],
+  styleUrls: ['./master-page.page.scss']
 })
 export class MasterPagePage implements OnInit {
-
-  posts: ModelPostsData[] = [];
+  posts: ModelPosts[] = [];
 
   codeUser = '';
 
-  constructor(private actionSheetCtrl: ActionSheetController,
-              private masterPageService: MasterPageService,
-              public helperService: HelperService) { }
+  constructor(
+    private actionSheetCtrl: ActionSheetController,
+    private masterPageService: MasterPageService,
+    public helperService: HelperService
+  ) {}
 
   ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -40,41 +41,64 @@ export class MasterPagePage implements OnInit {
       res = data;
       console.log(res.posts);
       this.posts = res.posts;
-      // console.log('Lo que tiene es ' + data[0].content );
-      // tslint:disable-next-line: max-line-length
-      // console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');
-    }
-  );
+      this.getMetadataPosts();
+    });
+  }
+
+  getMetadataPosts() {
+
+    this.posts.forEach(postTemp => {
+
+      this.masterPageService.getMetadataPosts(postTemp.external_url_new).subscribe(
+        data => {
+          let res: any;
+          res = data;
+          console.log('Llego la metadada!!! ', res);
+          // Se obtiene la informacion basica del perfil
+          this.posts.metadataDescription = res.description[0];
+          this.posts.metadataImage = res.image[0];
+          this.posts.metadataTitle = res.title[0];
+        },
+        error => {
+          console.log('oops', error);
+        }
+      );
+
+
+    });
   }
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Albums',
       backdropDismiss: false,
-      buttons: [{
-        text: 'Delete',
-        role: 'destructive',
-        icon: 'trash',
-        cssClass: 'rojo',
-        handler: () => {
-          console.log('Delete clicked');
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: 'trash',
+          cssClass: 'rojo',
+          handler: () => {
+            console.log('Delete clicked');
+          }
+        },
+        {
+          text: 'Edit',
+          icon: 'create',
+          handler: () => {
+            console.log('Edit clicked');
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
         }
-      }, {
-        text: 'Edit',
-        icon: 'create',
-        handler: () => {
-          console.log('Edit clicked');
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
+      ]
     });
     await actionSheet.present();
   }
-
 }

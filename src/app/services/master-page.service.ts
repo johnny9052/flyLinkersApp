@@ -14,4 +14,9 @@ export class MasterPageService {
   getPosts(pkUser: string) {
     return this.http.get<ModelPosts>('https://flylinkers.com/es/content_network/get_news_app/?userPk=' + pkUser);
   }
+
+
+  getMetadataPosts(urlMetadata: string) {
+    return this.http.get<ModelPosts>('https://flylinkers.com/es/content_network/get_meta_data_app/?url=' + urlMetadata);
+  }
 }

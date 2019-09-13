@@ -15,6 +15,9 @@ export interface ModelPosts {
       author_image_perfil: string;
       author_lastName: string;
       author_profession: string;
+      metadataTitle: string;
+      metadataDescription: string;
+      metadataImage: string;
 }
 
 export interface ModelPostsData {

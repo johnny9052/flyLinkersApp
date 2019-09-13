@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModelUserData, Profile, Skills, Experiences, Accomplishments, Interests } from '../../interfaces/userInterface';
+import { ModelUserData, Profile, Skills, Experiences, Accomplishments, Interests, Events } from '../../interfaces/userInterface';
 import { HelperService } from 'src/app/util/HelperService';
 import { ProfileService } from 'src/app/services/profile.service';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfilePage implements OnInit {
   userExperiences: Experiences[] = [];
   userAccomplishments: Accomplishments[] = [];
   userInterests: Interests[] = [];
+  events: Events[] = [];
   /****************END OBJETOS************************** */
 
   constructor(public helperService: HelperService,
@@ -84,11 +86,17 @@ export class ProfilePage implements OnInit {
         this.userAccomplishments = res.accomplishments;
         this.userInterests = res.interests;
         this.userExperiences = res.experiences;
+        this.events = res.events;
       },
       error => {
         console.log('oops', error);
       }
     );
+  }
+
+
+  openExternalURL(link: string) {
+    window.open(link, '_system');
   }
 
 
