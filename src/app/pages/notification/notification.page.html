@@ -9,18 +9,8 @@
     <ion-label>
       <h3 slot="start">{{notification.author}}</h3>
       <p>{{notification.text}}</p>
-      <p>{{notification.date}}</p>
+      <p>{{notification.date | date: 'dd/MM/yyyy'}}</p>
     </ion-label>
-    <ion-icon
-      name="close-circle"
-      slot="end"
-    ></ion-icon>
-
-    <ion-icon
-      name="checkmark-circle"
-      slot="end"
-    ></ion-icon>
-    <ion-icon slot= "end" name="more" (click)="presentActionSheet()"></ion-icon>
   </ion-item>
 </ion-content>
 
