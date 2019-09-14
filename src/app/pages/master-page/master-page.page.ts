@@ -55,9 +55,10 @@ export class MasterPagePage implements OnInit {
           res = data;
           console.log('Llego la metadada!!! ', res);
           // Se obtiene la informacion basica del perfil
-          // this.posts.metadataDescription = res.description[0];
-          // this.posts.metadataImage = res.image[0];
-          // this.posts.metadataTitle = res.title[0];
+          postTemp.metadataDescription = res.description[0];
+          postTemp.metadataImage = res.image[0];
+          console.log(postTemp.metadataImage);
+          postTemp.metadataTitle = res.title[0];
         },
         error => {
           console.log('oops', error);
@@ -69,6 +70,7 @@ export class MasterPagePage implements OnInit {
   }
 
   async presentActionSheet() {
+
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Albums',
       backdropDismiss: false,
