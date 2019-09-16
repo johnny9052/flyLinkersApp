@@ -21,28 +21,24 @@
     <ion-item lines="none" *ngIf=" post.image_new !== ''">
       <ion-img src="https://flylinkers.com/media/{{post.image_new}}"></ion-img>
     </ion-item>
-    <ion-item lines="none">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-              <ion-img *ngIf="post.metadataImage" [src]="post.metadataImage" style="width: 350px; height: auto;" >
-              </ion-img>
-          </ion-col>
-          <ion-col>
-            <ion-label>
-              {{post.metadataImage}}
-            </ion-label>
-            <ion-label>
-                {{post.metadataDescription}}
-            </ion-label>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-label><br>{{post.external_url_new}}</ion-label>
+    <ion-item lines="none" *ngIf="(post.metadataImage !== '/' || post.metadataImage !== '/') && post.image_new === '' ">
+      <ion-img [src]="post.metadataImage" style="width: 350px; height: auto;" >
+      </ion-img>
     </ion-item>
+    <ion-item lines="none" *ngIf="post.metadataTitle">
+      <p>
+        {{post.metadataTitle}}
+      </p>
+    </ion-item>
+    <ion-item lines="none" *ngIf="post.metadataDescription">
+      <p>
+        {{post.metadataDescription}}
+      </p>
+    </ion-item>
+    <!-- <ion-label><br>{{post.external_url_new}}</ion-label> -->
     <ion-item lines="none">
-      <ion-label>
-        <h3 slot="start"><br>{{post.publication_date}}</h3>
+      <ion-label slot="start">
+        <h3><br>{{post.publication_date | date: 'dd/MM/yyyy'}}</h3>
       </ion-label>
     </ion-item>
     <ion-row>

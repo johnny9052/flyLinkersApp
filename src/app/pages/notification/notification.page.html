@@ -2,7 +2,7 @@
 <app-header titulo="Notificaciones"></app-header>
 
 <ion-content>
-  <ion-item *ngFor="let notification of notifications">
+  <ion-item *ngFor="let notification of notifications" [color]="notification.unread ? 'light' : ''">
     <ion-avatar slot="start">
         <img src="https://flylinkers.com/media/{{notification.img_src}}">
       </ion-avatar>
