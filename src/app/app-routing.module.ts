@@ -21,7 +21,8 @@ const routes: Routes = [
   { path: 'identify', loadChildren: './pages/identify/identify.module#IdentifyPageModule' },
   { path: 'profile-edit', loadChildren: './pages/profile-edit/profile-edit.module#ProfileEditPageModule' },
   { path: 'new-post', loadChildren: './pages/new-post/new-post.module#NewPostPageModule' },
-  { path: 'detail-post', loadChildren: './pages/detail-post/detail-post.module#DetailPostPageModule' },
+  { path: 'detail-post', loadChildren: './pages/detail-post/detail-post.module#DetailPostPageModule' },  { path: 'view-detail-post', loadChildren: './pages/view-detail-post/view-detail-post.module#ViewDetailPostPageModule' },
+
 ];
 
 @NgModule({
