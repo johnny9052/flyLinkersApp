@@ -34,6 +34,8 @@ export interface ModelContactos{
   headline: string;
   profession: string;
   image_perfil: string;
+  receiver: string;
+  sender: string;
 }
 
 export interface ModelPerfilUsuario {

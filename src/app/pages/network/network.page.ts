@@ -117,4 +117,38 @@ export class NetworkPage implements OnInit {
       }, this.tiempoEspera);
     });
   }
+
+  enviarSolicitudAmistad(pk: string) {
+
+    const solicitud = {
+      pk_sender: this.codeUser,
+      pk_receiver: pk,
+      send_connection: 'True',
+      accept_connection: 'False',
+      reject_connection: 'False'
+    };
+
+    this.networkService.enviarSolicitudAmistad(solicitud).then(response => {
+      setTimeout(() => {
+        this.getContactsData(this.codeUser);
+      }, this.tiempoEspera);
+    });
+  }
+
+  eliminarAmistad(pkSenderUser: string ,pkReceiverUser: string) {
+
+    const solicitud = {
+      pk_sender: pkSenderUser,
+      pk_receiver: pkReceiverUser,
+      send_connection: 'False',
+      accept_connection: 'False',
+      reject_connection: 'True'
+    };
+
+    this.networkService.eliminarAmistad(solicitud).then(response => {
+      setTimeout(() => {
+        this.getContactsData(this.codeUser);
+      }, this.tiempoEspera);
+    });
+  }
 }
