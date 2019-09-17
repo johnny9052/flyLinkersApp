@@ -18,6 +18,7 @@ export interface ModelPosts {
       metadataTitle: string;
       metadataDescription: string;
       metadataImage: string;
+      userPk: string;
 }
 
 export interface ModelPostsData {
