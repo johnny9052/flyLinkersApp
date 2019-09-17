@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { HelperService } from '../util/HelperService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ModelPosts } from '../interfaces/posts';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,11 @@ export class PostService {
       /*Sino es porque se genero un error en el servidor*/
       this.helperService.showAlert('Error', 'Error procesando la transaccion');
     });
+  }
+
+  getPost(pkUser: string, articleId: string) {
+    return this.http.get<ModelPosts>('https://flylinkers.com/es/content_network/get_new_app/?userPk=' +
+                                      pkUser + '&article_id=' + articleId);
   }
 
 }
