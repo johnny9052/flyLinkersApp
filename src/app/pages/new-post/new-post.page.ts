@@ -53,4 +53,8 @@ export class NewPostPage implements OnInit {
 
     this.postService.publicNewPost(obj);
   }
+
+
+
+
 }
