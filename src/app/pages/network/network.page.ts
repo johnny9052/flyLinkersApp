@@ -135,6 +135,23 @@ export class NetworkPage implements OnInit {
     });
   }
 
+  cancelarSolicitudAmistad(pk: string) {
+
+    const solicitud = {
+      pk_sender: this.codeUser,
+      pk_receiver: pk,
+      send_connection: 'False',
+      accept_connection: 'False',
+      reject_connection: 'True'
+    };
+
+    this.networkService.cancelarSolicitudAmistad(solicitud).then(response => {
+      setTimeout(() => {
+        this.getContactsData(this.codeUser);
+      }, this.tiempoEspera);
+    });
+  }
+
   eliminarAmistad(pkSenderUser: string ,pkReceiverUser: string) {
 
     const solicitud = {

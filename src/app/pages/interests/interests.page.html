@@ -2,7 +2,21 @@
 <app-header titulo="Intereses"></app-header>
 
 <ion-content>
-  
+    <ion-card style="width: 100%; margin: 0px !important; border-radius: 2px;" color="flylinkers">
+        <ion-item color="FlyLinkers-Blanco">
+            <ion-label>Intereses ({{userInterests.length}})</ion-label>
+
+            <ion-icon name="cog"></ion-icon>
+        </ion-item>
+
+        <ion-card-content style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;">
+            <ion-item *ngFor="let interests of userInterests;">
+                <ion-label>
+                    <h3>{{interests.interest_description}}</h3>
+                </ion-label>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
 
 
