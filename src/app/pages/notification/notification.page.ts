@@ -16,6 +16,8 @@ export class NotificationPage implements OnInit {
 
   codeUser = '';
 
+  tiempoEspera = 1000;
+
   constructor(private actionSheetCtrl: ActionSheetController,
               private notificationsService: NotificationsService,
               public helperService: HelperService) { }
@@ -78,6 +80,20 @@ export class NotificationPage implements OnInit {
       }]
     });
     await actionSheet.present();
+  }
+
+
+
+  viewNotification(pk: string) {
+
+
+    console.log(pk);
+
+    const obj = {
+      notification_item_pk: pk
+    };
+
+    this.notificationsService.viewNotification(obj);
   }
 
 }

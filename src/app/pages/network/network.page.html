@@ -35,12 +35,14 @@
 
         <ion-icon
           name="close-circle"
-          slot="end"
+          slot="end" 
+          (click)="aceptarSolicitudAmistad(solicitud.pk,false)"
         ></ion-icon>
 
         <ion-icon
           name="checkmark-circle"
-          slot="end"
+          slot="end" 
+          (click)="aceptarSolicitudAmistad(solicitud.pk,true)"
         ></ion-icon>
       </ion-item>
     </ion-card-content>

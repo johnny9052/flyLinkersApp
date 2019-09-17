@@ -1,5 +1,6 @@
 
 export interface ModelNotifications {
+      pk: string;
       author: string;
       date: string;
       img_src: string;

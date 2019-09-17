@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 // tslint:disable-next-line: max-line-length
-import { ModelSolicitudesRecibidas, ModelSolicitudesEnviadas, ModelContactos, ModelContactosParaConectar } from '../../interfaces/interfaces';
+import {
+  ModelSolicitudesRecibidas,
+  ModelSolicitudesEnviadas,
+  ModelContactos,
+  ModelContactosParaConectar
+} from '../../interfaces/interfaces';
 import { HelperService } from '../../util/HelperService';
 import { NetworkService } from '../../services/network.service';
 
 @Component({
   selector: 'app-network',
   templateUrl: './network.page.html',
-  styleUrls: ['./network.page.scss'],
+  styleUrls: ['./network.page.scss']
 })
 export class NetworkPage implements OnInit {
-
-
   hiddenContact = true;
   hiddenRequests = true;
   hiddenPossibleContact = true;
   hiddenRequestsReceived = true;
-
 
   solicitudesRecibidas: ModelSolicitudesRecibidas[] = [];
   totalSolicitudesRecibidas: string;
@@ -32,16 +34,17 @@ export class NetworkPage implements OnInit {
 
   codeUser = '';
 
+  tiempoEspera = 1000;
 
-  constructor(private networkService: NetworkService,
-              public helperService: HelperService) { }
+  constructor(
+    private networkService: NetworkService,
+    public helperService: HelperService
+  ) {}
 
   ngOnInit() {
-     // Se obtiene el identidicador del usuario que ingreso al sistema
-     this.getProfilePk();
+    // Se obtiene el identidicador del usuario que ingreso al sistema
+    this.getProfilePk();
   }
-
-
 
   getProfilePk() {
     // Se obtiene el identificador del usuario que ingreso al sistema
@@ -53,11 +56,10 @@ export class NetworkPage implements OnInit {
     });
   }
 
-
   getContactsData(pkUser) {
     this.networkService.getContacts(pkUser).subscribe(data => {
       console.log(data);
-      console.log( data.lista_contactos);
+      console.log(data.solicitudes_recibidas);
       this.solicitudesRecibidas = data.solicitudes_recibidas;
       this.totalSolicitudesRecibidas = data.cantidad_solicitudes_recibidas[0];
       this.solicitudesEnviadas = data.solicitudes_enviadas;
@@ -70,12 +72,8 @@ export class NetworkPage implements OnInit {
       // console.log('Lo que tiene es ' + data.contactos_para_conectar[38].image_perfil );
       // tslint:disable-next-line: max-line-length
       // console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');
-    }
-  );
+    });
   }
-
-
-
 
   showHideContacts() {
     this.hiddenContact = !this.hiddenContact;
@@ -93,5 +91,30 @@ export class NetworkPage implements OnInit {
     this.hiddenRequestsReceived = !this.hiddenRequestsReceived;
   }
 
+  aceptarSolicitudAmistad(pk: string, status: boolean) {
+    let aceptar;
+    let rechazar;
 
+    if (status) {
+      aceptar = 'True';
+      rechazar = 'False';
+    } else {
+      aceptar = 'False';
+      rechazar = 'True';
+    }
+
+    const solicitud = {
+      pk_sender: pk,
+      pk_receiver: this.codeUser,
+      send_connection: 'False',
+      accept_connection: aceptar,
+      reject_connection: rechazar
+    };
+
+    this.networkService.aceptarSolicitudAmistad(solicitud).then(response => {
+      setTimeout(() => {
+        this.getContactsData(this.codeUser);
+      }, this.tiempoEspera);
+    });
+  }
 }
