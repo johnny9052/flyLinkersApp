@@ -73,39 +73,136 @@
 
     <ion-row>
       <ion-col>
-         <ion-item *ngIf="!post.liked_by_user">
-          <ion-icon name="heart-empty"></ion-icon>
+        <ion-item *ngIf="!post.liked_by_user">
+          <ion-icon name="heart-empty" (click)="generarLikePost(post.id_new)"></ion-icon>
           <div *ngIf="post.likes > 0"> {{post.likes}}</div>
-        </ion-item> 
+        </ion-item>
+        <ion-item *ngIf="post.liked_by_user">
+          <ion-icon name="heart" (click)="generarLikePost(post.id_new)"></ion-icon>
+          <div *ngIf="post.likes > 0"> {{post.likes}}</div>
+        </ion-item>
       </ion-col>
-  
-    <ion-col>
-      <ion-item *ngIf="!post.liked_by_user">
-        <ion-icon name="heart-empty"></ion-icon>
-        <div *ngIf="post.likes > 0"> {{post.likes}}</div>
-      </ion-item>
-      <ion-item *ngIf="post.liked_by_user">
-        <ion-icon name="heart"></ion-icon>
-        <div *ngIf="post.likes > 0"> {{post.likes}}</div>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-icon name="text"></ion-icon>
-        <div *ngIf="post.count_comments > 0"> {{post.count_comments}}</div>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-icon name="share"></ion-icon>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="text" (click)="getComments(post.id_new)"></ion-icon>
+          <div *ngIf="post.count_comments > 0"> {{post.count_comments}}</div>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon name="share"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <form
+        #formulario="ngForm"
+    >
+      <ion-list
+          [hidden]="hiddenComments"
+          style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+      >
+        <ion-item
+          color="FlyLinkers-Blanco"
+        >
+          <ion-label position="floating">Escribe tu comentario</ion-label>
+          <ion-textarea type="text" name="comment" required = "required"></ion-textarea>
+          <ion-button
+            color="flylinkers"
+            type="submit"
+            [disabled]="formulario.invalid"
+            fill="outline"
+            slot="end"
+          >Enviar</ion-button>
+        </ion-item>
+        <ion-item-group *ngFor="let comment of comments">
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+             <img src="https://flylinkers.com/media/{{(comment.comment_author_image !== '' )? comment.comment_author_image: 'avatar_2x.png' }}">
+            </ion-avatar>
+            <ion-label>
+              <h3>{{comment.comment_firstname_author}} {{comment.comment_lastname_author}}</h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <p>{{ comment.comment }}</p>
+          </ion-item>
+          <ion-item slot = "start">
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none" *ngIf="!comment.like_by_user">
+                  <ion-icon name="heart-empty" (click)="generarLikeComment(comment.id_comment)"></ion-icon>
+                  <div *ngIf="comment.likes > 0"> {{comment.likes}}</div>
+                </ion-item>
+                <ion-item lines="none" *ngIf="comment.like_by_user">
+                  <ion-icon name="heart" ></ion-icon>
+                  <div *ngIf="comment.likes > 0"> {{comment.likes}}</div>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-icon name="text" (click)="getRecomments(comment.id_comment, post.id_new)"></ion-icon>
+                  <div *ngIf="comment.count_recomments > 0"> {{comment.count_recomments}}</div>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item [hidden]="hiddenRecomments" [id]=comment.id_comment>
+              <form
+              #formulario="ngForm"
+          >
+            <ion-list
+                [hidden]="hiddenRecomments"
+                style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+            >
+              <ion-item
+                color="FlyLinkers-Blanco"
+              >
+                <ion-label position="floating">Escribe tu recomentario</ion-label>
+                <ion-textarea type="text" name="comment" required = "required"></ion-textarea>
+                <ion-button
+                  color="flylinkers"
+                  type="submit"
+                  [disabled]="formulario.invalid"
+                  fill="outline"
+                  slot="end"
+                >Enviar</ion-button>
+              </ion-item>
+              <ion-item-group *ngFor="let recomment of recomments">
+                <ion-item>
+                  <ion-avatar slot="start">
+                  <img src="https://flylinkers.com/media/{{(recomment.recomment_author_image !== '' )? recomment.recomment_author_image: 'avatar_2x.png' }}">
+                  </ion-avatar>
+                  <ion-label>
+                    <h3>{{recomment.recomment_firstname_author}} {{recomment.recomment_lastname_author}}</h3>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <p>{{recomment.recomment}}</p>
+                </ion-item>
+                <!-- <ion-item slot = "start" *ngIf="!post.liked_by_user">
+                  <ion-row>
+                    <ion-col>
+                      <ion-item lines="none">
+                        <ion-icon name="heart-empty"></ion-icon>
+                        <div *ngIf="post.likes > 0"> {{post.likes}}</div>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <ion-item lines="none">
+                        <ion-icon name="text" (click)="showHideComments()"></ion-icon>
+                        <div *ngIf="post.count_comments > 0"> {{post.count_comments}}</div>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-item>           -->
+              </ion-item-group>
+            </ion-list>
+          </form>
+          </ion-item>          
+        </ion-item-group>
+      </ion-list>
+    </form>
   </ion-card>
-
-  <!-- 
-      
-     -->
 </ion-content>
 
 <app-tab

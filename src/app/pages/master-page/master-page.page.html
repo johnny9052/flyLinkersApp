@@ -44,17 +44,17 @@
     <ion-row>
       <ion-col>
         <ion-item *ngIf="!post.liked_by_user[0]">
-          <ion-icon name="heart-empty"></ion-icon>
+          <ion-icon name="heart-empty" (click)="generarLikePost(post.id_new)"></ion-icon>
           <div *ngIf=" post.likes > 0" > {{post.likes}}</div>
         </ion-item>
         <ion-item *ngIf="post.liked_by_user[0]">
-          <ion-icon name="heart"></ion-icon>
+          <ion-icon name="heart" (click)="generarLikePost(post.id_new)"></ion-icon>
           <div *ngIf=" post.likes > 0" > {{post.likes}}</div>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-icon name="text"></ion-icon>
+          <ion-icon name="text" (click)="viewPost(post.id_new)"></ion-icon>
           <div *ngIf=" post.count_comments > 0" > {{post.count_comments}}</div>
         </ion-item>
       </ion-col>
