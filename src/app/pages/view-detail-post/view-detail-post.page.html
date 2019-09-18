@@ -96,6 +96,7 @@
     </ion-row>
     <form
         #formulario="ngForm"
+        (ngSubmit)="saveComment(post.id_new)"
     >
       <ion-list
           [hidden]="hiddenComments"
@@ -105,7 +106,7 @@
           color="FlyLinkers-Blanco"
         >
           <ion-label position="floating">Escribe tu comentario</ion-label>
-          <ion-textarea type="text" name="comment" required = "required"></ion-textarea>
+          <ion-textarea type="text" name="comment" required = "required" [(ngModel)]="comment.comment"></ion-textarea>
           <ion-button
             color="flylinkers"
             type="submit"
@@ -122,6 +123,7 @@
             <ion-label>
               <h3>{{comment.comment_firstname_author}} {{comment.comment_lastname_author}}</h3>
             </ion-label>
+            <ion-icon slot= "end" name="more" (click)="presentActionSheet(comment.id_comment, 'comment')" *ngIf="codeUser === comment.id_author"></ion-icon>
           </ion-item>
           <ion-item lines="none">
             <p>{{ comment.comment }}</p>

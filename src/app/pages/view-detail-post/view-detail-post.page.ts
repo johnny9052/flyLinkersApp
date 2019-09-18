@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { HelperService } from '../../util/HelperService';
 import { PostService } from '../../services/post.service';
-import { ModelPosts, ModelComments, ModelRecomments } from '../../interfaces/posts';
+import { ModelPosts, ModelComments, ModelRecomments, ModelCommentData } from '../../interfaces/posts';
+
 
 @Component({
   selector: 'app-view-detail-post',
@@ -12,6 +13,7 @@ import { ModelPosts, ModelComments, ModelRecomments } from '../../interfaces/pos
 export class ViewDetailPostPage implements OnInit {
 
   post = {} as ModelPosts;
+  comment = {} as ModelCommentData;
   comments: ModelComments[] = [];
   recomments: ModelRecomments[] = [];
 
@@ -24,7 +26,8 @@ export class ViewDetailPostPage implements OnInit {
 
   constructor(private actionSheetCtrl: ActionSheetController,
               private postService: PostService,
-              public helperService: HelperService) { }
+              public helperService: HelperService,
+              public alertCtrl: AlertController) { }
 
   ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -117,6 +120,16 @@ export class ViewDetailPostPage implements OnInit {
     });
   }
 
+  saveComment(pkPost) {
+    this.comment.pk_profile = this.codeUser;
+    this.comment.pk_post = pkPost;
+    this.postService.saveComment(this.comment).then(response => {
+      setTimeout(() => {
+        this.getPost(this.codeUser, pkPost);
+      }, this.tiempoEspera);
+    });
+  }
+
   generarLikeComment(pkComment: string) {
     const like = {
       pk_comment: pkComment,
@@ -130,7 +143,65 @@ export class ViewDetailPostPage implements OnInit {
     });
   }
 
-  async presentActionSheet() {
+  deleteComment(pkComment: string){
+    const comment = {
+      pk_comment: pkComment,
+    };
+    this.postService.deleteComment(comment).then(response => {
+      setTimeout(() => {
+        this.getComments(this.codeUser);
+      }, this.tiempoEspera);
+    });
+  }
+
+  async editComment(id: string, comment: string, postId: string) {
+    console.log(id);
+
+    const input = await this.alertCtrl.create({
+      header: 'Editar',
+      // message: 'Ingrese su nueva skill',
+      inputs: [
+        {
+          name: 'comment',
+          id: 'txtComment',
+          type: 'text',
+          value: comment,
+          placeholder: 'Ingrese el nuevo comentario'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'Ok',
+          handler: async data => {
+            console.log('Confirm Ok', data);
+
+            const objComment = {
+              comment: data.comment,
+              id_comment: id
+            } as ModelComments;
+
+            this.postService.editComment(objComment).then(response => {
+              setTimeout(() => {
+                this.getComments(postId);
+              }, this.tiempoEspera);
+            });
+          }
+        }
+      ]
+    });
+
+    await input.present();
+  }
+
+  async presentActionSheet(pk: string, action: string) {
 
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Albums',
@@ -143,6 +214,12 @@ export class ViewDetailPostPage implements OnInit {
           cssClass: 'rojo',
           handler: () => {
             console.log('Delete clicked');
+            if(action === 'comment'){
+              this.deleteComment(pk);
+            }
+            if(action === 'update'){
+              this.editComment(pk, comment, postId)
+            }
           }
         },
         {

@@ -30,6 +30,13 @@ export interface ModelComments{
       like_by_user: string;
       likes: number;
       count_recomments: number;
+      id_author: string;
+}
+
+export interface ModelCommentData{
+      comment: string;
+      pk_profile: string;
+      pk_post: string;
 }
 
 export interface ModelRecomments{
