@@ -5,7 +5,7 @@ export interface ModelPosts {
       count_comments: number;
       external_url_new: string;
       image_new: string;
-      liked_by_user: [];
+      liked_by_user: boolean;
       likes: number;
       publication_date: string;
       title: string;

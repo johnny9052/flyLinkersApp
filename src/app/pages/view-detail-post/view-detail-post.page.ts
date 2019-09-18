@@ -39,7 +39,10 @@ export class ViewDetailPostPage implements OnInit {
       let res: any;
       res = data;
       console.log(res.post);
+      console.log('OJOOOOO');
       this.post = res.post;
+      this.post.liked_by_user = res.post.liked_by_user[0];
+      console.log(this.post.liked_by_user[0]);
     });
   }
 

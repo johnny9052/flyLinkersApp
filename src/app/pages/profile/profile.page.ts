@@ -21,7 +21,6 @@ export class ProfilePage implements OnInit {
   hiddenEvents = true;
 
   /****************OBJETOS************************** */
-  profile = {} as Profile;
   userData = {} as ModelUserData;
   userSkills: Skills[] = [];
   userExperiences: Experiences[] = [];
