@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import { ActionSheetController, AlertController, PopoverController } from '@ionic/angular';
 import { HelperService } from '../../util/HelperService';
 import { PostService } from '../../services/post.service';
 import { ModelPosts, ModelComments, ModelRecomments, ModelCommentData } from '../../interfaces/posts';
+import { PopcommentsComponent } from 'src/app/components/popcomments/popcomments.component';
 
 
 @Component({
@@ -27,11 +28,32 @@ export class ViewDetailPostPage implements OnInit {
   constructor(private actionSheetCtrl: ActionSheetController,
               private postService: PostService,
               public helperService: HelperService,
-              public alertCtrl: AlertController) { }
+              public alertCtrl: AlertController,
+              private popoverController: PopoverController) { }
 
   ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
+  }
+
+  async mostrarPop( evento, pk: string, comment: string, postId: string){
+    const popover = await this.popoverController.create({
+      component: PopcommentsComponent,
+      event: evento,
+      backdropDismiss: false
+    });
+
+    await popover.present();
+
+    const { data } = await popover.onWillDismiss();
+    console.log('padre:', data);
+    console.log('id:', pk);
+    if(data.item === 'Delete'){
+      this.deleteComment(pk);
+    }
+    if(data.item === 'Edit'){
+      this.editComment(pk, comment, postId);
+    }
   }
 
   showHideComments() {
@@ -218,7 +240,7 @@ export class ViewDetailPostPage implements OnInit {
               this.deleteComment(pk);
             }
             if(action === 'update'){
-              this.editComment(pk, comment, postId)
+
             }
           }
         },

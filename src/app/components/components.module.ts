@@ -8,6 +8,7 @@ import { FooterLoginComponent } from './footer-login/footer-login.component';
 import { FooterComponent } from './footer/footer.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { PopcommentsComponent } from './popcomments/popcomments.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RouterModule } from '@angular/router';
    TabComponent,
    HeaderLoginComponent,
    FooterLoginComponent,
-   FooterComponent
+   FooterComponent,
+   PopcommentsComponent
   ],
   exports: [
    HeaderComponent,
@@ -24,7 +26,8 @@ import { RouterModule } from '@angular/router';
    TabComponent,
    HeaderLoginComponent,
    FooterLoginComponent,
-   FooterComponent
+   FooterComponent,
+   PopcommentsComponent
 ],
   imports: [
     CommonModule,
