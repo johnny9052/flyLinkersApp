@@ -18,7 +18,8 @@
       <ion-icon
         slot="end"
         name="more"
-        (click)="presentActionSheet()"
+        (click)="presentActionSheet(post.id_new)"
+        *ngIf="post.author_id === codeUser"
       ></ion-icon>
     </ion-item>
 
