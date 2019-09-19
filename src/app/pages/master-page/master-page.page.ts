@@ -3,6 +3,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { HelperService } from '../../util/HelperService';
 import { MasterPageService } from '../../services/master-page.service';
 import { ModelPostsData, ModelPosts } from '../../interfaces/posts';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-master-page',
@@ -14,10 +15,13 @@ export class MasterPagePage implements OnInit {
 
   codeUser = '';
 
+  tiempoEspera = 1000;
+
   constructor(
     private actionSheetCtrl: ActionSheetController,
     private masterPageService: MasterPageService,
-    public helperService: HelperService
+    public helperService: HelperService,
+    private postService: PostService
   ) {}
 
   ngOnInit() {
@@ -67,6 +71,23 @@ export class MasterPagePage implements OnInit {
 
 
     });
+  }
+
+  generarLikePost(pkPost: string) {
+    const like = {
+      pk_post: pkPost,
+      pk_profile: this.codeUser,
+    };
+
+    this.postService.generarLikePost(like).then(response => {
+      setTimeout(() => {
+        this.getPostsData(this.codeUser);
+      }, this.tiempoEspera);
+    });
+  }
+
+  viewPost(idNew){
+
   }
 
   async presentActionSheet() {

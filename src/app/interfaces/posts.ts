@@ -21,6 +21,32 @@ export interface ModelPosts {
       userPk: string;
 }
 
+export interface ModelComments{
+      id_comment: string;
+      comment: string;
+      comment_firstname_author: string;
+      comment_lastname_author: string;
+      comment_author_image: string;
+      like_by_user: string;
+      likes: number;
+      count_recomments: number;
+      id_author: string;
+}
+
+export interface ModelCommentData{
+      comment: string;
+      pk_profile: string;
+      pk_post: string;
+}
+
+export interface ModelRecomments{
+      recomment_id: string;
+      recomment: string;
+      recomment_firstname_author: string;
+      comrecomment_lastname_author: string;
+      recomment_author_image: string;
+}
+
 export interface ModelPostsData {
       posts: ModelPosts[];
 }
