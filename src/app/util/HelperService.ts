@@ -119,4 +119,9 @@ export class HelperService {
     }
   }
 
+
+  abrirUrlExterna(url: string) {
+    window.open(url, '_system');
+  }
+
 }

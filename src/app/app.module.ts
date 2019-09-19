@@ -15,6 +15,10 @@ import { ComponentsModule } from './components/components.module';
 /*Import necesario para el almacenamiento local*/
 import { IonicStorageModule } from '@ionic/storage';
 
+/*Se importa de manera global el uso de la camara*/
+import { Camera } from '@ionic-native/camera/ngx';
+
+
 /*Para instalar cordova en el proyecto
 ionic cordova plugin add cordova-plugin-advanced-http
 npm install @ionic-native/http*/
@@ -33,6 +37,7 @@ npm install @ionic-native/http*/
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     /*Como CORDOVA es un complemento externo, toca meterlo no en Imports sino en providers*/
     // HTTP
