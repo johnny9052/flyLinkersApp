@@ -136,4 +136,10 @@ export class MasterPagePage implements OnInit {
     });
     await actionSheet.present();
   }
+
+  openPage(url: string){
+    if(url !== 'undefined' && url !== undefined && url !== null){
+      this.helperService.abrirUrlExterna(url);
+    }
+  }
 }

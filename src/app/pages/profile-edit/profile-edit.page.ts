@@ -11,6 +11,7 @@ import { HelperService } from '../../util/HelperService';
 import { ProfileService } from '../../services/profile.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
+import { ModelRegister } from '../../interfaces/register';
 
 @Component({
   selector: 'app-profile-edit',
@@ -145,6 +146,98 @@ export class ProfileEditPage implements OnInit {
   saveProfileData() {
     this.profileService.saveProfileDataService(this.userData);
   }
+
+  /******************************************************/
+  /*********FUNCIÓN CAMBIAR CONTRASEÑA ******************/
+  /******************************************************/
+  async changePassword() {
+    const input = await this.alertCtrl.create({
+      header: 'Cambiar password',
+      // message: 'Ingrese su nueva skill',
+      inputs: [
+        {
+          name: 'lastPassword',
+          id: 'txtLastPassword',
+          type: 'password',
+          placeholder: 'Ingrese su password actual'
+        },
+        {
+          name: 'newPassword',
+          id: 'txtNewPassword',
+          type: 'password',
+          placeholder: 'Ingrese su nuevo password'
+        },
+        {
+          name: 'confirmPassword',
+          id: 'txtConfirmPassword',
+          type: 'password',
+          placeholder: 'Repita su nuevo password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'Cambiar',
+          handler: async data => {
+            console.log('Confirm Ok', data);
+
+            const changePassword = {
+              password1: data.lastPassword,
+              password2: data.newPassword,
+              userPk: this.codeUser
+            } as ModelRegister;
+
+            this.profileService.changePassword(changePassword);
+          }
+        }
+      ]
+    });
+
+    await input.present();
+  }
+
+  async deactivateAccount() {
+    const input = await this.alertCtrl.create({
+      header: '¿Seguro desea desactivar su cuenta?',
+      // message: 'Ingrese su nueva skill',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'Ok',
+          handler: async data => {
+            console.log('Confirm Ok', data);
+
+            const user = {
+              userPk: this.codeUser
+            } as ModelRegister;
+
+            this.profileService.deactivateAccount(user);
+          }
+        }
+      ]
+    });
+
+    await input.present();
+  }
+
+
+  /******************************************************/
+  /*********FIN FUNCIÓN CAMBIAR CONTRASEÑA **************/
+  /******************************************************/
 
   /******************************************************/
   /*********FUNCIONES DE GESTION DE LOS SKILLS***********/

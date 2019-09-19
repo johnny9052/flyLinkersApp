@@ -4,4 +4,5 @@ export interface ModelRegister {
     password2: string;
     first_name: string;
     last_name: string;
+    userPk: string;
 }

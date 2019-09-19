@@ -10,7 +10,7 @@
         <h3 slot="start">{{post.author_fistName}} {{post.author_lastName}}</h3>
         <p>{{post.author_profession}}</p>
       </ion-label>
-      <ion-icon slot= "end" name="more" *ngIf=" post.author_id === codeUser" (click)="presentActionSheet(post.id_new)"></ion-icon>
+      <ion-icon slot= "end" name="more" *ngIf="post.author_id === codeUser" (click)="presentActionSheet(post.id_new)"></ion-icon>
     </ion-item>
     <ion-item lines="none" *ngIf=" post.title !== null">
       <h5 slot="start">{{ post.title }}</h5>
@@ -21,16 +21,16 @@
     <ion-item lines="none" *ngIf=" post.image_new !== ''">
       <ion-img src="https://flylinkers.com/media/{{post.image_new}}"></ion-img>
     </ion-item>
-    <ion-item lines="none" *ngIf="(post.metadataImage !== '/' || post.metadataImage !== '/') && post.image_new === '' ">
+    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="(post.metadataImage !== '/' || post.metadataImage !== '/') && post.image_new === '' ">
       <ion-img [src]="post.metadataImage" style="width: 350px; height: auto;" >
       </ion-img>
     </ion-item>
-    <ion-item lines="none" *ngIf="post.metadataTitle">
+    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="post.metadataTitle">
       <p>
         {{post.metadataTitle}}
       </p>
     </ion-item>
-    <ion-item lines="none" *ngIf="post.metadataDescription">
+    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="post.metadataDescription">
       <p>
         {{post.metadataDescription}}
       </p>
