@@ -90,7 +90,18 @@ export class MasterPagePage implements OnInit {
 
   }
 
-  async presentActionSheet() {
+  deletePost(pkPost: string){
+    const comment = {
+      pk_post: pkPost,
+    };
+    this.postService.deletePost(comment).then(response => {
+      setTimeout(() => {
+        this.getMetadataPosts();
+      }, this.tiempoEspera);
+    });
+  }
+
+  async presentActionSheet(pk: string) {
 
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Albums',
@@ -103,6 +114,7 @@ export class MasterPagePage implements OnInit {
           cssClass: 'rojo',
           handler: () => {
             console.log('Delete clicked');
+            this.deletePost(pk);
           }
         },
         {
@@ -123,5 +135,11 @@ export class MasterPagePage implements OnInit {
       ]
     });
     await actionSheet.present();
+  }
+
+  openPage(url: string){
+    if(url !== 'undefined' && url !== undefined && url !== null){
+      this.helperService.abrirUrlExterna(url);
+    }
   }
 }

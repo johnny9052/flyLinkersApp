@@ -90,6 +90,7 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-file-transfer": {}
+     
     },
     "platforms": [
       "android",

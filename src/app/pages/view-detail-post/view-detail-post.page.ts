@@ -176,6 +176,17 @@ export class ViewDetailPostPage implements OnInit {
     });
   }
 
+  deletePost(pkPost: string){
+    const comment = {
+      pk_post: pkPost,
+    };
+    this.postService.deletePost(comment).then(response => {
+      setTimeout(() => {
+        this.getMetadataPosts();
+      }, this.tiempoEspera);
+    });
+  }
+
   async editComment(id: string, comment: string, postId: string) {
     console.log(id);
 
@@ -223,7 +234,7 @@ export class ViewDetailPostPage implements OnInit {
     await input.present();
   }
 
-  async presentActionSheet(pk: string, action: string) {
+  async presentActionSheet(pk: string) {
 
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Albums',
@@ -236,12 +247,7 @@ export class ViewDetailPostPage implements OnInit {
           cssClass: 'rojo',
           handler: () => {
             console.log('Delete clicked');
-            if(action === 'comment'){
-              this.deleteComment(pk);
-            }
-            if(action === 'update'){
-
-            }
+            this.deletePost(pk);
           }
         },
         {

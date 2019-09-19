@@ -40,6 +40,64 @@ export class ProfileService {
        return this.http.get<Profile>('https://flylinkers.com/es/network/get_profile_app/' + pkUser);
   }
 
+  changePassword(postData: any){
+    /*URL del web service*/
+    const url = 'https://flylinkers.com/es/change_password_app/';
+    /*Se muestra una barra de carga*/
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
+    this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Se define una variable local para recibir la respuesta*/
+      let res: any;
+      res = data;
+      /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
+      if (res.code === '1') {
+        /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
+        redireccionara al login*/
+        this.helperService.showAlert('Exito', 'Perfil actualizado exitosamente');
+      } else {
+        /*Si no retorna uno es porque el usuario ya existe*/
+        this.helperService.showAlert('Error', 'Error al actualizar el perfil');
+      }
+    }, error => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Sino es porque se genero un error en el servidor*/
+      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+    });
+  }
+
+  deactivateAccount(postData: any){
+    /*URL del web service*/
+    const url = 'https://flylinkers.com/es/deactivate_account_app/';
+    /*Se muestra una barra de carga*/
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
+    this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Se define una variable local para recibir la respuesta*/
+      let res: any;
+      res = data;
+      /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
+      if (res.code === '1') {
+        /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
+        redireccionara al login*/
+        this.helperService.showAlertRedirect('Exito', 'Cuenta desactivada exitosamente', '/identify');
+      } else {
+        /*Si no retorna uno es porque el usuario ya existe*/
+        this.helperService.showAlert('Error', 'Error al desactivar la cuenta');
+      }
+    }, error => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Sino es porque se genero un error en el servidor*/
+      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+    });
+  }
+
 
   /*Funcion que se encarga de registrar al usuario, recibiendo por parametro
   los datos del usuario*/

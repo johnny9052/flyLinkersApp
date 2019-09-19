@@ -216,16 +216,29 @@
                 </ion-col>
             </ion-row>
 
-            <!-- <ion-row>
+            <ion-row class="ion-text-center">
                 <ion-col size="12">
                     <ion-button
-                        expand="full"
-                        color="flylinkersBlanco"
+                        color="flylinkers"
+                        [disabled]="formulario.invalid"
+                        (click)="changePassword()"
+                        fill="outline"
                     >Cambiar contraseña</ion-button>
                 </ion-col>
             </ion-row>
 
-            <ion-row>
+            <ion-row class="ion-text-center">
+                <ion-col size="12">
+                    <ion-button
+                        color="flylinkers"
+                        [disabled]="formulario.invalid"
+                        (click)="deactivateAccount()"
+                        fill="outline"
+                    >Desactivar cuenta</ion-button>
+                </ion-col>
+            </ion-row>  
+
+            <!-- <ion-row>
                 <ion-col size="12">
                     <ion-button
                         expand="full"
