@@ -3,6 +3,13 @@ import { ModelPosts } from '../../interfaces/posts';
 import { PostService } from '../../services/post.service';
 import { HelperService } from '../../util/HelperService';
 
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
+
+/*Variable global declarada para que no se marque error al momento de utilizar
+el resultado de la camara como un file y no como base64*/
+declare var window: any;
+
 @Component({
   selector: 'app-new-post',
   templateUrl: './new-post.page.html',
@@ -16,7 +23,8 @@ export class NewPostPage implements OnInit {
   codeUser = '';
 
   constructor(public helperService: HelperService,
-              private postService: PostService) {}
+              private postService: PostService,
+              private camera: Camera) {}
 
   ngOnInit() {
      // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -52,6 +60,30 @@ export class NewPostPage implements OnInit {
      };
 
     this.postService.publicNewPost(obj);
+  }
+
+
+  takePicture() {
+
+    const options: CameraOptions = {
+      quality: 60,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.CAMERA
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+
+      const img = window.Ionic.WebView.convertFileSrc( imageData );
+      console.log(img);
+      this.newPost.image_new = img;
+
+    }, (err) => {
+     // Handle error
+    });
+
   }
 
 
