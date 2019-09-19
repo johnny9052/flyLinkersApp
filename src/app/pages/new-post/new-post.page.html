@@ -48,11 +48,14 @@
       <ion-icon
         slot="start"
         name="images"
+        (click)="loadPicture()"
       ></ion-icon>
     </ion-item>
 
-    <ion-item *ngIf=" newPost.image_new !== '' &&  newPost.image_new !== 'undefined' && newPost.image_new !== undefined">      
-      <img [src]="newPost.image_new | imageSanitizer">
+    <ion-item *ngIf=" newPost.image_new !== '' &&  newPost.image_new !== 'undefined' && newPost.image_new !== undefined"> 
+        <ion-card>
+            <img [src]="newPost.image_new | imageSanitizer">
+        </ion-card>           
     </ion-item>
 
     <ion-item>
