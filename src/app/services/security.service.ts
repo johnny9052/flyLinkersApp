@@ -89,7 +89,7 @@ export class SecurityService {
           }
         } else {
           /*Si no retorna uno es porque el usuario ya existe*/
-          this.helperService.showAlert('Error', 'El usuario no existe');
+          this.helperService.showAlert('Error', res.mensaje);
         }
       }, error => {
         /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/

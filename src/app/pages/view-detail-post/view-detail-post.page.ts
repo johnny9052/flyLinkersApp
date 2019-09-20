@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, AlertController, PopoverController } from '@ionic/angular';
 import { HelperService } from '../../util/HelperService';
 import { PostService } from '../../services/post.service';
-import { ModelPosts, ModelComments, ModelRecomments, ModelCommentData } from '../../interfaces/posts';
+import { ModelPosts, ModelComments, ModelRecomments, ModelCommentData, ModelRecommentData } from '../../interfaces/posts';
 import { PopcommentsComponent } from 'src/app/components/popcomments/popcomments.component';
+import { PoprecommentsComponent } from '../../components/poprecomments/poprecomments.component';
 
 
 @Component({
@@ -16,14 +17,16 @@ export class ViewDetailPostPage implements OnInit {
   post = {} as ModelPosts;
   comment = {} as ModelCommentData;
   comments: ModelComments[] = [];
+  recomment = {} as ModelRecommentData;
   recomments: ModelRecomments[] = [];
 
+  idPost = '88';
   codeUser = '';
 
   tiempoEspera = 1000;
 
-  hiddenComments = true;
-  hiddenRecomments = true;
+  hiddenComments = false;
+  hiddenRecomments = false;
 
   constructor(private actionSheetCtrl: ActionSheetController,
               private postService: PostService,
@@ -53,6 +56,27 @@ export class ViewDetailPostPage implements OnInit {
     }
     if(data.item === 'Edit'){
       this.editComment(pk, comment, postId);
+    }
+  }
+
+
+  async mostrarPopRecomment( evento, pk: string, comment: string, postId: string){
+    const popover = await this.popoverController.create({
+      component: PoprecommentsComponent,
+      event: evento,
+      backdropDismiss: false
+    });
+
+    await popover.present();
+
+    const { data } = await popover.onWillDismiss();
+    console.log('padre:', data);
+    console.log('id:', pk);
+    if(data.item === 'Delete'){
+      this.deleteRecomment(pk);
+    }
+    if(data.item === 'Edit'){
+      this.editRecomment(pk, comment, postId);
     }
   }
 
@@ -98,6 +122,7 @@ export class ViewDetailPostPage implements OnInit {
         this.post.metadataImage = res.image[0];
         console.log(this.post.metadataImage);
         this.post.metadataTitle = res.title[0];
+        this.getComments(this.idPost);
       },
       error => {
         console.log('oops', error);
@@ -114,6 +139,7 @@ export class ViewDetailPostPage implements OnInit {
       // this.comments.liked_by_user = res.post.liked_by_user[0];
       // console.log(this.post.liked_by_user[0]);
       this.showHideComments();
+      this.showHideRecomments();
     });
   }
 
@@ -147,7 +173,17 @@ export class ViewDetailPostPage implements OnInit {
     this.comment.pk_post = pkPost;
     this.postService.saveComment(this.comment).then(response => {
       setTimeout(() => {
-        this.getPost(this.codeUser, pkPost);
+        this.getComments(pkPost);
+      }, this.tiempoEspera);
+    });
+  }
+
+  saveRecomment(pkComment, postId) {
+    this.recomment.pk_profile = this.codeUser;
+    this.recomment.pk_comment = pkComment;
+    this.postService.saveRecomment(this.recomment).then(response => {
+      setTimeout(() => {
+        this.getComments(postId);
       }, this.tiempoEspera);
     });
   }
@@ -171,7 +207,18 @@ export class ViewDetailPostPage implements OnInit {
     };
     this.postService.deleteComment(comment).then(response => {
       setTimeout(() => {
-        this.getComments(this.codeUser);
+        this.getComments(this.idPost);
+      }, this.tiempoEspera);
+    });
+  }
+
+  deleteRecomment(pkRecomment: string){
+    const Recomment = {
+      pk_recomment: pkRecomment,
+    };
+    this.postService.deleteRecomment(Recomment).then(response => {
+      setTimeout(() => {
+        this.getComments(this.idPost);
       }, this.tiempoEspera);
     });
   }
@@ -222,6 +269,53 @@ export class ViewDetailPostPage implements OnInit {
             } as ModelComments;
 
             this.postService.editComment(objComment).then(response => {
+              setTimeout(() => {
+                this.getComments(postId);
+              }, this.tiempoEspera);
+            });
+          }
+        }
+      ]
+    });
+
+    await input.present();
+  }
+
+  async editRecomment(id: string, recomment: string, postId: string) {
+    console.log(id);
+
+    const input = await this.alertCtrl.create({
+      header: 'Editar',
+      // message: 'Ingrese su nueva skill',
+      inputs: [
+        {
+          name: 'recomment',
+          id: 'txtRecomment',
+          type: 'text',
+          value: recomment,
+          placeholder: 'Ingrese el nuevo comentario'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'Ok',
+          handler: async data => {
+            console.log('Confirm Ok', data);
+
+            const objRecomment = {
+              recomment: data.recomment,
+              recomment_id: id
+            } as ModelRecomments;
+
+            this.postService.editRecomment(objRecomment).then(response => {
               setTimeout(() => {
                 this.getComments(postId);
               }, this.tiempoEspera);

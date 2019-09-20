@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ViewDetailPostPage } from './view-detail-post.page';
 import { ComponentsModule } from '../../components/components.module';
 import { PopcommentsComponent } from '../../components/popcomments/popcomments.component';
+import { PoprecommentsComponent } from '../../components/poprecomments/poprecomments.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
 
 @NgModule({
   entryComponents:[
-    PopcommentsComponent
+    PopcommentsComponent,
+    PoprecommentsComponent
   ],
   imports: [
     CommonModule,

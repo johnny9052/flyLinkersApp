@@ -85,7 +85,7 @@
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-icon name="text" (click)="getComments(post.id_new)"></ion-icon>
+          <ion-icon name="text" (click)="showHideComments()"></ion-icon>
           <div *ngIf="post.count_comments > 0"> {{post.count_comments}}</div>
         </ion-item>
       </ion-col>
@@ -100,11 +100,11 @@
         (ngSubmit)="saveComment(post.id_new)"
     >
       <ion-list
-          [hidden]="hiddenComments"
           style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
       >
         <ion-item
           color="FlyLinkers-Blanco"
+          [hidden]="hiddenComments"
         >
           <ion-label position="floating">Escribe tu comentario</ion-label>
           <ion-textarea type="text" name="comment" required = "required" [(ngModel)]="comment.comment"></ion-textarea>
@@ -152,6 +152,7 @@
           <ion-item [hidden]="hiddenRecomments" [id]=comment.id_comment>
               <form
               #formulario="ngForm"
+              (ngSubmit)="saveRecomment(comment.id_comment, post.id_new)"
           >
             <ion-list
                 [hidden]="hiddenRecomments"
@@ -161,7 +162,7 @@
                 color="FlyLinkers-Blanco"
               >
                 <ion-label position="floating">Escribe tu recomentario</ion-label>
-                <ion-textarea type="text" name="comment" required = "required"></ion-textarea>
+                <ion-textarea type="text" name="comment" [(ngModel)]="recomment.comment" required = "required"></ion-textarea>
                 <ion-button
                   color="flylinkers"
                   type="submit"
@@ -178,6 +179,12 @@
                   <ion-label>
                     <h3>{{recomment.recomment_firstname_author}} {{recomment.recomment_lastname_author}}</h3>
                   </ion-label>
+                  <ion-icon
+                    slot="end"
+                    name="more"
+                    (click)="mostrarPopRecomment($event, recomment.recomment_id, recomment.recomment ,post.id_new)"
+                    *ngIf="recomment.recomment_id_author === codeUser"
+                  ></ion-icon>
                 </ion-item>
                 <ion-item>
                   <p>{{recomment.recomment}}</p>
