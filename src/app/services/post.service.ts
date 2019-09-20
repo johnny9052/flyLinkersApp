@@ -4,6 +4,7 @@ import { HelperService } from '../util/HelperService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ModelPosts, ModelComments, ModelRecomments } from '../interfaces/posts';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -49,6 +50,7 @@ export class PostService {
       this.helperService.showAlert('Error', 'Error procesando la transaccion');
     });
   }
+
 
   getPost(pkUser: string, articleId: string) {
     return this.http.get<ModelPosts>('https://flylinkers.com/es/content_network/get_new_app/?userPk=' +
@@ -242,5 +244,10 @@ export class PostService {
   getMetadataPosts(urlMetadata: string) {
     return this.http.get<ModelPosts>('https://flylinkers.com/es/content_network/get_meta_data_app/?url=' + urlMetadata);
   }
+
+
+
+
+
 
 }

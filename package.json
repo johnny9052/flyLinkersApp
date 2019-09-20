@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
+    "@ionic-native/base64": "^5.14.0",
     "@ionic-native/camera": "^5.14.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/file-transfer": "^5.14.0",
@@ -28,6 +29,7 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
     "@ionic/storage": "^2.2.0",
+    "com-badrit-base64": "^0.2.0",
     "cordova-android": "8.0.0",
     "cordova-browser": "6.0.0",
     "cordova-ios": "^5.0.1",
@@ -89,8 +91,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-camera": {},
-      "cordova-plugin-file-transfer": {}
-     
+      "cordova-plugin-file-transfer": {},
+      "com-badrit-base64": {}
     },
     "platforms": [
       "android",

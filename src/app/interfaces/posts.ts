@@ -4,6 +4,7 @@ export interface ModelPosts {
       content: string;
       count_comments: number;
       external_url_new: string;
+      image_base64: string;
       image_new: string;
       liked_by_user: boolean;
       likes: number;

@@ -18,8 +18,8 @@ import { IonicStorageModule } from '@ionic/storage';
 /*Se importa de manera global el uso de la camara*/
 import { Camera } from '@ionic-native/camera/ngx';
 
-/*Se importa de manera global el uso del plugin para enviar imagenes al servidor*/
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+/*Se importa de manera global el uso del plugin para CODIFICAR A BASE64 */
+import { Base64 } from '@ionic-native/base64/ngx';
 
 
 /*Para instalar cordova en el proyecto
@@ -41,8 +41,7 @@ npm install @ionic-native/http*/
     StatusBar,
     SplashScreen,
     Camera,
-    // tslint:disable-next-line: deprecation
-    FileTransfer,
+    Base64,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     /*Como CORDOVA es un complemento externo, toca meterlo no en Imports sino en providers*/
     // HTTP

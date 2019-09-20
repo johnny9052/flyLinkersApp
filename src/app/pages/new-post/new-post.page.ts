@@ -5,6 +5,7 @@ import { HelperService } from '../../util/HelperService';
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
+import { Base64 } from '@ionic-native/base64/ngx';
 
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
@@ -24,7 +25,8 @@ export class NewPostPage implements OnInit {
 
   constructor(public helperService: HelperService,
               private postService: PostService,
-              private camera: Camera) {}
+              private camera: Camera,
+              private base64: Base64) {}
 
   ngOnInit() {
      // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -47,24 +49,30 @@ export class NewPostPage implements OnInit {
     this.newPost.publication_date = today;
     this.newPost.userPk = this.codeUser;
 
-    console.log(this.newPost.id_new + 'Este es el valor');
+    // cconsole.log(this.newPost.id_new + 'Este es el valor');
 
     const obj = {
         userPk: this.newPost.userPk,
         title: this.newPost.title,
         content: this.newPost.content,
-        external_url_new: this.newPost.external_url_new,
         publication_date : this.newPost.publication_date,
         image_new: ((this.newPost.image_new === 'undefined' || this.newPost.image_new === undefined ) ? -1 : this.newPost.image_new),
-        article_id: ((this.newPost.id_new === 'undefined' || this.newPost.id_new === undefined ) ? -1 : this.newPost.id_new)
+        article_id: ((this.newPost.id_new === 'undefined' || this.newPost.id_new === undefined ) ? -1 : this.newPost.id_new),
+        // tslint:disable-next-line: max-line-length
+        external_url_new: ((this.newPost.external_url_new === 'undefined' || this.newPost.external_url_new === undefined ) ? -1 : this.newPost.external_url_new),
+        image_base64: this.newPost.image_base64
      };
 
+    console.log('Este es el objeto basico');
+    console.log(obj);
+
     this.postService.publicNewPost(obj);
+
   }
 
 
-  takePicture() {
 
+  takePictureBase64() {
     const options: CameraOptions = {
       quality: 60,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -74,12 +82,30 @@ export class NewPostPage implements OnInit {
       sourceType: this.camera.PictureSourceType.CAMERA
     };
 
-    this.procesarImagen(options);
-
+    this.procesarImagenBase64(options);
   }
 
 
-  loadPicture() {
+
+  procesarImagenBase64(options: CameraOptions) {
+    this.camera.getPicture(options).then((imageData) => {
+
+      const rutaLocalHost = window.Ionic.WebView.convertFileSrc( imageData );
+
+      const filePath = imageData;
+      this.base64.encodeFile(filePath).then((base64File: string) => {
+            this.newPost.image_base64 = base64File;
+            this.newPost.image_new = rutaLocalHost;
+      }, (err) => {
+            console.log(err);
+      });
+    }, (err) => {
+     // Handle error
+    });
+  }
+
+
+  loadPictureBase64() {
     const options: CameraOptions = {
       quality: 60,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -89,21 +115,11 @@ export class NewPostPage implements OnInit {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
     };
 
-    this.procesarImagen(options);
+    this.procesarImagenBase64(options);
   }
 
 
-  procesarImagen(options: CameraOptions){
-    this.camera.getPicture(options).then((imageData) => {
 
-      const img = window.Ionic.WebView.convertFileSrc( imageData );
-      console.log(img);
-      this.newPost.image_new = img;
-
-    }, (err) => {
-     // Handle error
-    });
-  }
 
 
 
