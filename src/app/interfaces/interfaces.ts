@@ -46,7 +46,7 @@ export interface ModelContactosParaConectar {
   image_perfil: string;
 }
 
-export interface ModelContactos{
+export interface ModelContactos {
   pk: string;
   fistName: string;
   lastName: string;
@@ -55,6 +55,7 @@ export interface ModelContactos{
   image_perfil: string;
   receiver: string;
   sender: string;
+  id_contact?: string;
 }
 
 export interface ModelPerfilUsuario {

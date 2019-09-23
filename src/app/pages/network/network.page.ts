@@ -8,6 +8,7 @@ import {
 } from '../../interfaces/interfaces';
 import { HelperService } from '../../util/HelperService';
 import { NetworkService } from '../../services/network.service';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-network',
@@ -38,7 +39,8 @@ export class NetworkPage implements OnInit {
 
   constructor(
     private networkService: NetworkService,
-    public helperService: HelperService
+    public helperService: HelperService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -167,5 +169,16 @@ export class NetworkPage implements OnInit {
         this.getContactsData(this.codeUser);
       }, this.tiempoEspera);
     });
+  }
+
+
+  viewProfile(idProfile: string) {
+    const data: NavigationExtras = {
+      state: {
+        idProfile
+      }
+    };
+
+    this.router.navigate(['profile-detail'], data);
   }
 }

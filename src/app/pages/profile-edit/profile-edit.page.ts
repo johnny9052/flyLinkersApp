@@ -17,8 +17,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { Base64 } from '@ionic-native/base64/ngx';
 
-
-
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
 declare var window: any;
@@ -28,8 +26,6 @@ declare var window: any;
   templateUrl: './profile-edit.page.html',
   styleUrls: ['./profile-edit.page.scss']
 })
-
-
 export class ProfileEditPage implements OnInit {
   /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
   codeUser = '';
@@ -43,7 +39,7 @@ export class ProfileEditPage implements OnInit {
   /*Almacena la configuracion del calendar*/
   customPickerOptions;
 
-  tiempoEspera = 1000;
+  tiempoEspera = 1500;
   /*******END VARIABLES DE CONTROL VISUAL****************/
 
   /****************OBJETOS************************** */
@@ -54,7 +50,6 @@ export class ProfileEditPage implements OnInit {
   userAccomplishments: Accomplishments[] = [];
   userInterests: Interests[] = [];
   /****************END OBJETOS************************** */
-
 
   /********************INYECCION DE DEPENDENCIAS********* */
   /*HelperService: Servicio generico para funcionalidades ya implementadas
@@ -151,7 +146,8 @@ export class ProfileEditPage implements OnInit {
         this.userInterests = res.interests;
         this.userExperiences = res.experiences;
 
-        this.userData.image_perfil = 'https://flylinkers.com/media/' + this.userData.image_perfil;
+        this.userData.image_perfil =
+          'https://flylinkers.com/media/' + this.userData.image_perfil;
       },
       error => {
         console.log('oops', error);
@@ -205,13 +201,20 @@ export class ProfileEditPage implements OnInit {
           handler: async data => {
             console.log('Confirm Ok', data);
 
-            const changePassword = {
-              password1: data.lastPassword,
-              password2: data.newPassword,
-              userPk: this.codeUser
-            } as ModelRegister;
+            if (data.newPassword === data.confirmPassword) {
+              const changePassword = {
+                password1: data.lastPassword,
+                password2: data.newPassword,
+                userPk: this.codeUser
+              } as ModelRegister;
 
-            this.profileService.changePassword(changePassword);
+              this.profileService.changePassword(changePassword);
+            } else {
+              this.helperService.showAlert(
+                'Error',
+                'Las contraseñas no coinciden'
+              );
+            }
           }
         }
       ]
@@ -250,7 +253,6 @@ export class ProfileEditPage implements OnInit {
 
     await input.present();
   }
-
 
   /******************************************************/
   /*********FIN FUNCIÓN CAMBIAR CONTRASEÑA **************/
@@ -443,15 +445,20 @@ export class ProfileEditPage implements OnInit {
 
     /* Con esta linea se captura los datos retornados por el modal*/
     const { data } = await modal.onDidDismiss();
+
     console.log('Retorno del modal ', data);
 
-    const newExperience = data as Experiences;
+    if (data !== 'undefined' && data !== undefined && data !== null && data !== 'null') {
+      const newExperience = data as Experiences;
 
-    this.profileService.saveExperienceService(newExperience).then(response => {
-      setTimeout(() => {
-        this.getListExperienceData();
-      }, this.tiempoEspera);
-    });
+      this.profileService
+        .saveExperienceService(newExperience)
+        .then(response => {
+          setTimeout(() => {
+            this.getListExperienceData();
+          }, this.tiempoEspera);
+        });
+    }
   }
 
   /*Se hacer la referencia al Modal-Info-Page que es la pagina que se quiere cargar*/
@@ -488,8 +495,7 @@ export class ProfileEditPage implements OnInit {
     const { data } = await modal.onDidDismiss();
     console.log('Retorno del modal ', data);
 
-    if (data !== 'undefined' && data !== undefined) {
-
+    if (data !== 'undefined' && data !== undefined && data !== null && data !== 'null') {
       const editExperience = data as Experiences;
 
       const temp = {
@@ -503,13 +509,11 @@ export class ProfileEditPage implements OnInit {
         currently_working: data.currently_working
       } as Experiences;
 
-      this.profileService
-        .editExperienceService(temp)
-        .then(response => {
-          setTimeout(() => {
-            this.getListExperienceData();
-          }, this.tiempoEspera);
-        });
+      this.profileService.editExperienceService(temp).then(response => {
+        setTimeout(() => {
+          this.getListExperienceData();
+        }, this.tiempoEspera);
+      });
     }
   }
 
@@ -871,9 +875,6 @@ export class ProfileEditPage implements OnInit {
   /******END FUNCIONES DE GESTION DE LOS SKILLS**********/
   /******************************************************/
 
-
-
-
   takePictureBase64() {
     const options: CameraOptions = {
       quality: 60,
@@ -887,25 +888,27 @@ export class ProfileEditPage implements OnInit {
     this.procesarImagenBase64(options);
   }
 
-
-
   procesarImagenBase64(options: CameraOptions) {
-    this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options).then(
+      imageData => {
+        const rutaLocalHost = window.Ionic.WebView.convertFileSrc(imageData);
 
-      const rutaLocalHost = window.Ionic.WebView.convertFileSrc( imageData );
-
-      const filePath = imageData;
-      this.base64.encodeFile(filePath).then((base64File: string) => {
+        const filePath = imageData;
+        this.base64.encodeFile(filePath).then(
+          (base64File: string) => {
             this.userData.image_perfil_base64 = base64File;
             this.userData.image_perfil = rutaLocalHost;
-      }, (err) => {
+          },
+          err => {
             console.log(err);
-      });
-    }, (err) => {
-     // Handle error
-    });
+          }
+        );
+      },
+      err => {
+        // Handle error
+      }
+    );
   }
-
 
   loadPictureBase64() {
     const options: CameraOptions = {
@@ -919,5 +922,4 @@ export class ProfileEditPage implements OnInit {
 
     this.procesarImagenBase64(options);
   }
-
 }
