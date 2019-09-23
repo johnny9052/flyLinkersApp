@@ -83,6 +83,9 @@ export interface Events {
   event_init_date: string;
   event_site: string;
   location: string;
+  firstName: string;
+  lastName: string;
+  image_perfil: string;
 }
 
 

@@ -22,7 +22,8 @@ export class NewPostPage implements OnInit {
 
   /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
   codeUser = '';
-
+  imagePerfil = '';
+  
   constructor(public helperService: HelperService,
               private postService: PostService,
               private camera: Camera,
@@ -31,17 +32,26 @@ export class NewPostPage implements OnInit {
   ngOnInit() {
      // Se obtiene el identidicador del usuario que ingreso al sistema
      this.getProfilePk();
+     this.getProfileImage();
   }
 
 
-    /*Funcion que se encarga de obtener codigo del usuario que se encuentra identificado*/
-    getProfilePk() {
-      // Se obtiene el identificador del usuario que ingreso al sistema
-      this.helperService.getLocalData('profilePk').then(response => {
-        this.codeUser = response;
-        console.log(this.codeUser);
-      });
-    }
+  /*Funcion que se encarga de obtener codigo del usuario que se encuentra identificado*/
+  getProfilePk() {
+    // Se obtiene el identificador del usuario que ingreso al sistema
+    this.helperService.getLocalData('profilePk').then(response => {
+      this.codeUser = response;
+      console.log(this.codeUser);
+    });
+  }
+
+  getProfileImage() {
+    // Se obtiene el identificador del usuario que ingreso al sistema
+    this.helperService.getLocalData('image_perfil').then(response => {
+      console.log(response);
+      this.imagePerfil = response;
+    });
+  }
 
   publicPost() {
     const now = new Date();

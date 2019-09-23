@@ -7,4 +7,5 @@ export interface ModelNotifications {
       notification_item_pk: string;
       text: string;
       unread: string;
+      type: string;
 }
