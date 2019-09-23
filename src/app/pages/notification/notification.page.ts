@@ -84,13 +84,14 @@ export class NotificationPage implements OnInit {
 
 
 
-  viewNotification(pk: string) {
+  viewNotification(pk: string, type: string) {
 
 
     console.log(pk);
 
     const obj = {
-      notification_item_pk: pk
+      notification_item_pk: pk,
+      typeNotification: type
     };
 
     this.notificationsService.viewNotification(obj);

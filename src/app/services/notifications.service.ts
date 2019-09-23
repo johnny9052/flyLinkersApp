@@ -38,7 +38,11 @@ export class NotificationsService {
       res = data;
       /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
       if (res.code === '1') {
-        this.navCtrl.navigateBack('/network');
+        if (res.typeNotification === 'Post'){
+          this.navCtrl.navigateBack('/master-page');
+        } else {
+          this.navCtrl.navigateBack('/network');
+        }
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
         this.helperService.showAlert('Error', res.mensaje);

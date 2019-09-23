@@ -79,6 +79,10 @@ export class SecurityService {
           console.log(res);
           /*Se almacena de manera local el identificador del usuario*/
           this.helperService.saveLocalData('profilePk', res.userPk);
+          this.helperService.saveLocalData('firstName', res.firstName);
+          this.helperService.saveLocalData('lastName', res.lastName);
+          this.helperService.saveLocalData('image_perfil', res.image_perfil);
+
 
           if (res.perfil !== '-1') {
             /*Se valida si el usuario ya actualizo los datos del perfil o no para saber si se manda al home o

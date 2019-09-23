@@ -1,4 +1,4 @@
-<app-header search="true"></app-header>
+<app-header titulo ="Noticias"></app-header>
 
 
 <!--POR CADA POST DISPONIBLE SE ESTRUCTURA SU INFORMACION-->
@@ -31,16 +31,16 @@
     </ion-item>
     
     <!--INFORMACION DE LA URL EXTERNA QUE SE PUBLICO-->
-    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="(post.metadataImage !== '/' || post.metadataImage !== '/') && post.image_new === '' ">
+    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="((post.metadataImage !== '/' || post.metadataImage !== '/') && post.image_new === '') && post.external_url_new !=='' ">
       <ion-img [src]="post.metadataImage" style="width: 350px; height: auto;" >
       </ion-img>
     </ion-item>
-    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="post.metadataTitle">
+    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="post.metadataTitle && post.external_url_new !==''">
       <p>
         {{post.metadataTitle}}
       </p>
     </ion-item>
-    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="post.metadataDescription">
+    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="post.metadataDescription && post.external_url_new !==''">
       <p>
         {{post.metadataDescription}}
       </p>
