@@ -11,12 +11,49 @@
                     <ion-row class="ion-text-center">
                         <ion-col size="12">
                             <div class="bordeado">
-                                <ion-avatar class="image-center top-margin-20">
-                                    <img src="https://flylinkers.com/media/{{(userData.image_perfil !== '' )? userData.image_perfil : 'avatar_2x.png' }}">
+                                <!--SI NO TIENE IMAGEN DE PERFIL-->
+                                <ion-avatar *ngIf=" userData.image_perfil === ''" class="image-center top-margin-20">
+                                    <img src="https://flylinkers.com/media/avatar_2x.png">
+                                </ion-avatar>
+
+                                <!--SI TIENE IMAGEN DE PERFIL-->
+                                <ion-avatar *ngIf=" userData.image_perfil !== ''" class="image-center top-margin-20">
+                                    <!-- <img [src]="('https://flylinkers.com/media/' + userData.image_perfil) | imageSanitizer"> -->
+                                    <img [src]="userData.image_perfil | imageSanitizer">
                                 </ion-avatar>
 
                                 <br>
                             </div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-item lines="none">
+                                <ion-grid fixed="fixed">
+                                    <ion-row class="ion-text-center">
+                                        <ion-col size="3"></ion-col>
+
+                                        <ion-col size="3">
+                                            <ion-icon
+                                                name="camera"
+                                                size="large"
+                                                (click)="takePictureBase64()"
+                                            ></ion-icon>
+                                        </ion-col>
+
+                                        <ion-col size="3">
+                                            <ion-icon
+                                                name="images"
+                                                size="large"
+                                                (click)="loadPictureBase64()"
+                                            ></ion-icon>
+                                        </ion-col>
+
+                                        <ion-col size="3"></ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-item>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -236,7 +273,7 @@
                         fill="outline"
                     >Desactivar cuenta</ion-button>
                 </ion-col>
-            </ion-row>  
+            </ion-row>
 
             <!-- <ion-row>
                 <ion-col size="12">

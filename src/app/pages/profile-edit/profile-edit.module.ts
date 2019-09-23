@@ -10,6 +10,8 @@ import { ComponentsModule } from '../../components/components.module';
 import { ProfileEditExperiencePageModule } from '../profile-edit-experience/profile-edit-experience.module';
 import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
 
+import { PipesModule } from '../../pipes/pipes.module';
+
 const routes: Routes = [
   {
     path: '',
@@ -26,6 +28,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    PipesModule,
     RouterModule.forChild(routes),
     ComponentsModule,
     /*Se importa como modulo, el modulo de la pagina que se quiere cargar (OJOOOO ES EL MODULO)*/

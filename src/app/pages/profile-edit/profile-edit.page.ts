@@ -13,11 +13,23 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
 import { ModelRegister } from '../../interfaces/register';
 
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
+import { Base64 } from '@ionic-native/base64/ngx';
+
+
+
+/*Variable global declarada para que no se marque error al momento de utilizar
+el resultado de la camara como un file y no como base64*/
+declare var window: any;
+
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.page.html',
   styleUrls: ['./profile-edit.page.scss']
 })
+
+
 export class ProfileEditPage implements OnInit {
   /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
   codeUser = '';
@@ -43,6 +55,7 @@ export class ProfileEditPage implements OnInit {
   userInterests: Interests[] = [];
   /****************END OBJETOS************************** */
 
+
   /********************INYECCION DE DEPENDENCIAS********* */
   /*HelperService: Servicio generico para funcionalidades ya implementadas
     ProfileService: Servicio para el consumo de web services del perfil
@@ -51,7 +64,9 @@ export class ProfileEditPage implements OnInit {
     public helperService: HelperService,
     public profileService: ProfileService,
     public alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private camera: Camera,
+    private base64: Base64
   ) {}
 
   ngOnInit() {
@@ -135,6 +150,8 @@ export class ProfileEditPage implements OnInit {
         this.userAccomplishments = res.accomplishments;
         this.userInterests = res.interests;
         this.userExperiences = res.experiences;
+
+        this.userData.image_perfil = 'https://flylinkers.com/media/' + this.userData.image_perfil;
       },
       error => {
         console.log('oops', error);
@@ -853,4 +870,54 @@ export class ProfileEditPage implements OnInit {
   /******************************************************/
   /******END FUNCIONES DE GESTION DE LOS SKILLS**********/
   /******************************************************/
+
+
+
+
+  takePictureBase64() {
+    const options: CameraOptions = {
+      quality: 60,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.CAMERA
+    };
+
+    this.procesarImagenBase64(options);
+  }
+
+
+
+  procesarImagenBase64(options: CameraOptions) {
+    this.camera.getPicture(options).then((imageData) => {
+
+      const rutaLocalHost = window.Ionic.WebView.convertFileSrc( imageData );
+
+      const filePath = imageData;
+      this.base64.encodeFile(filePath).then((base64File: string) => {
+            this.userData.image_perfil_base64 = base64File;
+            this.userData.image_perfil = rutaLocalHost;
+      }, (err) => {
+            console.log(err);
+      });
+    }, (err) => {
+     // Handle error
+    });
+  }
+
+
+  loadPictureBase64() {
+    const options: CameraOptions = {
+      quality: 60,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    };
+
+    this.procesarImagenBase64(options);
+  }
+
 }

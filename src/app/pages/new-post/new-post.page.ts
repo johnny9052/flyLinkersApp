@@ -60,7 +60,8 @@ export class NewPostPage implements OnInit {
         article_id: ((this.newPost.id_new === 'undefined' || this.newPost.id_new === undefined ) ? -1 : this.newPost.id_new),
         // tslint:disable-next-line: max-line-length
         external_url_new: ((this.newPost.external_url_new === 'undefined' || this.newPost.external_url_new === undefined ) ? -1 : this.newPost.external_url_new),
-        image_base64: this.newPost.image_base64
+        // tslint:disable-next-line: max-line-length
+        image_base64: ((this.newPost.image_base64 === 'undefined' || this.newPost.image_base64 === undefined ) ? -1 : this.newPost.image_base64)
      };
 
     console.log('Este es el objeto basico');

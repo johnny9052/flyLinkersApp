@@ -102,6 +102,7 @@ export class ProfileService {
   /*Funcion que se encarga de registrar al usuario, recibiendo por parametro
   los datos del usuario*/
   saveProfileDataService( postData: any) {
+    console.log(postData);
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/network/edit_profile_app/';
     /*Se muestra una barra de carga*/

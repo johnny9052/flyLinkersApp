@@ -1,26 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController, PopoverController } from '@ionic/angular';
+import {
+  ActionSheetController,
+  AlertController,
+  PopoverController
+} from '@ionic/angular';
 import { HelperService } from '../../util/HelperService';
 import { PostService } from '../../services/post.service';
-import { ModelPosts, ModelComments, ModelRecomments, ModelCommentData, ModelRecommentData } from '../../interfaces/posts';
+import {
+  ModelPosts,
+  ModelComments,
+  ModelRecomments,
+  ModelCommentData,
+  ModelRecommentData
+} from '../../interfaces/posts';
 import { PopcommentsComponent } from 'src/app/components/popcomments/popcomments.component';
 import { PoprecommentsComponent } from '../../components/poprecomments/poprecomments.component';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-detail-post',
   templateUrl: './view-detail-post.page.html',
-  styleUrls: ['./view-detail-post.page.scss'],
+  styleUrls: ['./view-detail-post.page.scss']
 })
 export class ViewDetailPostPage implements OnInit {
-
   post = {} as ModelPosts;
   comment = {} as ModelCommentData;
   comments: ModelComments[] = [];
   recomment = {} as ModelRecommentData;
   recomments: ModelRecomments[] = [];
 
-  idPost = '88';
+  idPost = '';
   codeUser = '';
 
   tiempoEspera = 1000;
@@ -28,18 +37,46 @@ export class ViewDetailPostPage implements OnInit {
   hiddenComments = false;
   hiddenRecomments = false;
 
-  constructor(private actionSheetCtrl: ActionSheetController,
-              private postService: PostService,
-              public helperService: HelperService,
-              public alertCtrl: AlertController,
-              private popoverController: PopoverController) { }
+  constructor(
+    private actionSheetCtrl: ActionSheetController,
+    private postService: PostService,
+    public helperService: HelperService,
+    public alertCtrl: AlertController,
+    private popoverController: PopoverController,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.idPost = this.router.getCurrentNavigation().extras.state.idPost;
+      }
+    });
+  }
 
   ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
   }
 
-  async mostrarPop( evento, pk: string, comment: string, postId: string){
+  getProfilePk() {
+    // Se obtiene el identificador del usuario que ingreso al sistema
+    this.helperService.getLocalData('profilePk').then(response => {
+      this.codeUser = response;
+      this.getPost(this.codeUser, this.idPost);
+    });
+  }
+
+  getPost(pkUser, articleId) {
+    this.postService.getPost(pkUser, articleId).subscribe(data => {
+      let res: any;
+      res = data;
+      this.post = res.post;
+      this.post.liked_by_user = res.post.liked_by_user[0];
+      this.getMetadataPosts();
+    });
+  }
+
+  async mostrarPop(evento, pk: string, comment: string, postId: string) {
     const popover = await this.popoverController.create({
       component: PopcommentsComponent,
       event: evento,
@@ -49,18 +86,20 @@ export class ViewDetailPostPage implements OnInit {
     await popover.present();
 
     const { data } = await popover.onWillDismiss();
-    console.log('padre:', data);
-    console.log('id:', pk);
-    if(data.item === 'Delete'){
+    if (data.item === 'Delete') {
       this.deleteComment(pk);
     }
-    if(data.item === 'Edit'){
+    if (data.item === 'Edit') {
       this.editComment(pk, comment, postId);
     }
   }
 
-
-  async mostrarPopRecomment( evento, pk: string, comment: string, postId: string){
+  async mostrarPopRecomment(
+    evento,
+    pk: string,
+    comment: string,
+    postId: string
+  ) {
     const popover = await this.popoverController.create({
       component: PoprecommentsComponent,
       event: evento,
@@ -70,12 +109,10 @@ export class ViewDetailPostPage implements OnInit {
     await popover.present();
 
     const { data } = await popover.onWillDismiss();
-    console.log('padre:', data);
-    console.log('id:', pk);
-    if(data.item === 'Delete'){
+    if (data.item === 'Delete') {
       this.deleteRecomment(pk);
     }
-    if(data.item === 'Edit'){
+    if (data.item === 'Edit') {
       this.editRecomment(pk, comment, postId);
     }
   }
@@ -88,39 +125,14 @@ export class ViewDetailPostPage implements OnInit {
     this.hiddenRecomments = !this.hiddenRecomments;
   }
 
-  getProfilePk() {
-    // Se obtiene el identificador del usuario que ingreso al sistema
-    this.helperService.getLocalData('profilePk').then(response => {
-      this.codeUser = response;
-      console.log(this.codeUser);
-      // Se obtiene toda la informacion del usuario que ingreso al sistema
-      this.getPost(this.codeUser, '88');
-    });
-  }
-
-  getPost(pkUser, articleId) {
-    this.postService.getPost(pkUser, articleId).subscribe(data => {
-      let res: any;
-      res = data;
-      console.log(res.post);
-      console.log('OJOOOOO');
-      this.post = res.post;
-      this.post.liked_by_user = res.post.liked_by_user[0];
-      console.log(this.post.liked_by_user[0]);
-      this.getMetadataPosts();
-    });
-  }
-
   getMetadataPosts() {
     this.postService.getMetadataPosts(this.post.external_url_new).subscribe(
       data => {
         let res: any;
         res = data;
-        console.log('Llego la metadada!!! ', res);
         // Se obtiene la informacion basica del perfil
         this.post.metadataDescription = res.description[0];
         this.post.metadataImage = res.image[0];
-        console.log(this.post.metadataImage);
         this.post.metadataTitle = res.title[0];
         this.getComments(this.idPost);
       },
@@ -134,31 +146,27 @@ export class ViewDetailPostPage implements OnInit {
     this.postService.getComments(postId, this.codeUser).subscribe(data => {
       let res: any;
       res = data;
-      console.log(res.comments);
       this.comments = res.comments;
-      // this.comments.liked_by_user = res.post.liked_by_user[0];
-      // console.log(this.post.liked_by_user[0]);
       this.showHideComments();
       this.showHideRecomments();
     });
   }
 
   getRecomments(commentId, postId) {
-    this.postService.getRecomments(commentId, postId, this.codeUser).subscribe(data => {
-      let res: any;
-      res = data;
-      console.log(res.recomments);
-      this.recomments = res.recomments;
-      // this.comments.liked_by_user = res.post.liked_by_user[0];
-      // console.log(this.post.liked_by_user[0]);
-      this.showHideRecomments();
-    });
+    this.postService
+      .getRecomments(commentId, postId, this.codeUser)
+      .subscribe(data => {
+        let res: any;
+        res = data;
+        this.recomments = res.recomments;
+        this.showHideRecomments();
+      });
   }
 
   generarLikePost(pkPost: string) {
     const like = {
       pk_post: pkPost,
-      pk_profile: this.codeUser,
+      pk_profile: this.codeUser
     };
 
     this.postService.generarLikePost(like).then(response => {
@@ -191,7 +199,7 @@ export class ViewDetailPostPage implements OnInit {
   generarLikeComment(pkComment: string) {
     const like = {
       pk_comment: pkComment,
-      pk_profile: this.codeUser,
+      pk_profile: this.codeUser
     };
 
     this.postService.generarLikeComment(like).then(response => {
@@ -201,9 +209,9 @@ export class ViewDetailPostPage implements OnInit {
     });
   }
 
-  deleteComment(pkComment: string){
+  deleteComment(pkComment: string) {
     const comment = {
-      pk_comment: pkComment,
+      pk_comment: pkComment
     };
     this.postService.deleteComment(comment).then(response => {
       setTimeout(() => {
@@ -212,9 +220,9 @@ export class ViewDetailPostPage implements OnInit {
     });
   }
 
-  deleteRecomment(pkRecomment: string){
+  deleteRecomment(pkRecomment: string) {
     const Recomment = {
-      pk_recomment: pkRecomment,
+      pk_recomment: pkRecomment
     };
     this.postService.deleteRecomment(Recomment).then(response => {
       setTimeout(() => {
@@ -223,9 +231,9 @@ export class ViewDetailPostPage implements OnInit {
     });
   }
 
-  deletePost(pkPost: string){
+  deletePost(pkPost: string) {
     const comment = {
-      pk_post: pkPost,
+      pk_post: pkPost
     };
     this.postService.deletePost(comment).then(response => {
       setTimeout(() => {
@@ -235,8 +243,6 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   async editComment(id: string, comment: string, postId: string) {
-    console.log(id);
-
     const input = await this.alertCtrl.create({
       header: 'Editar',
       // message: 'Ingrese su nueva skill',
@@ -262,7 +268,6 @@ export class ViewDetailPostPage implements OnInit {
           text: 'Ok',
           handler: async data => {
             console.log('Confirm Ok', data);
-
             const objComment = {
               comment: data.comment,
               id_comment: id
@@ -282,8 +287,6 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   async editRecomment(id: string, recomment: string, postId: string) {
-    console.log(id);
-
     const input = await this.alertCtrl.create({
       header: 'Editar',
       // message: 'Ingrese su nueva skill',
@@ -329,7 +332,6 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   async presentActionSheet(pk: string) {
-
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Albums',
       backdropDismiss: false,
@@ -363,5 +365,4 @@ export class ViewDetailPostPage implements OnInit {
     });
     await actionSheet.present();
   }
-
 }

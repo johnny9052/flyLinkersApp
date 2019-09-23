@@ -14,6 +14,7 @@ export interface ModelUserData {
   phone: string;
   mobile: string;
   image_perfil: string;
+  image_perfil_base64: string;
 }
 
 
