@@ -34,7 +34,7 @@ export class ViewDetailPostPage implements OnInit {
 
   tiempoEspera = 1000;
 
-  hiddenComments = false;
+  hiddenComments = true;
   hiddenRecomments = false;
 
   constructor(

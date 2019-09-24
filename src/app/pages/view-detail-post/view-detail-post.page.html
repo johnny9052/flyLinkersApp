@@ -41,7 +41,7 @@
 
     <ion-item
       lines="none"
-      *ngIf="(post.metadataImage !== '/' || post.metadataImage !== '/') && post.image_new === ''"
+      *ngIf="((post.metadataImage !== '/' || post.metadataImage !== '/') && post.image_new === '') && post.external_url_new !=='' "
     >
       <ion-img
         [src]="post.metadataImage"
@@ -51,14 +51,14 @@
 
     <ion-item
       lines="none"
-      *ngIf="post.metadataTitle"
+      *ngIf="post.metadataTitle && post.external_url_new !==''"
     >
       <p>{{post.metadataTitle}}</p>
     </ion-item>
 
     <ion-item
       lines="none"
-      *ngIf="post.metadataDescription"
+      *ngIf="post.metadataDescription && post.external_url_new !==''"
     >
       <p>{{post.metadataDescription}}</p>
     </ion-item>

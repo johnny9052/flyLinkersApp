@@ -4,6 +4,7 @@ import { ModelNotifications } from '../../interfaces/notifications';
 import { HelperService } from '../../util/HelperService';
 import { NetworkService } from '../../services/network.service';
 import { NotificationsService } from '../../services/notifications.service';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-notification',
@@ -20,7 +21,8 @@ export class NotificationPage implements OnInit {
 
   constructor(private actionSheetCtrl: ActionSheetController,
               private notificationsService: NotificationsService,
-              public helperService: HelperService) { }
+              public helperService: HelperService,
+              private router: Router) { }
 
   ngOnInit() {
      // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -50,6 +52,31 @@ export class NotificationPage implements OnInit {
       // console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');
     }
   );
+  }
+
+  viewNotification(pk: string, type: string, idPost: string) {
+    console.log(pk);
+
+    const obj = {
+      notification_item_pk: pk,
+      typeNotification: type
+    };
+
+    this.notificationsService.viewNotification(obj);
+    if (idPost !== '-1' && idPost !== '-2') {
+      this.openDetailPost(idPost);
+    }
+  }
+
+  openDetailPost(idPost) {
+
+    const data: NavigationExtras = {
+      state: {
+        idPost
+      }
+    };
+
+    this.router.navigate(['view-detail-post'], data);
   }
 
   async presentActionSheet() {
@@ -84,17 +111,6 @@ export class NotificationPage implements OnInit {
 
 
 
-  viewNotification(pk: string, type: string) {
-
-
-    console.log(pk);
-
-    const obj = {
-      notification_item_pk: pk,
-      typeNotification: type
-    };
-
-    this.notificationsService.viewNotification(obj);
-  }
+  
 
 }
