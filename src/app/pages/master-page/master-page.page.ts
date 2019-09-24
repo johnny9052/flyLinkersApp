@@ -5,6 +5,7 @@ import { MasterPageService } from '../../services/master-page.service';
 import { ModelPosts } from '../../interfaces/posts';
 import { PostService } from '../../services/post.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { debug } from 'util';
 
 
 @Component({
@@ -84,9 +85,25 @@ export class MasterPagePage implements OnInit {
     };
 
     this.postService.generarLikePost(like).then(response => {
-      setTimeout(() => {
-        this.getPostsData(this.codeUser);
-      }, this.tiempoEspera);
+      // setTimeout(() => {
+      //   this.getPostsData(this.codeUser);
+      // }, this.tiempoEspera);
+      // posts
+
+      // tslint:disable-next-line: prefer-for-of
+      for (let x = 0; x < this.posts.length ; x++) {
+        if (this.posts[x].id_new === pkPost) {
+          this.posts[x].liked_by_user[0] = !this.posts[x].liked_by_user[0];
+          if (this.posts[x].liked_by_user[0] === true) {
+            this.posts[x].likes++;
+          } else {
+            this.posts[x].likes--;
+          }
+
+          break;
+        }
+      }
+
     });
   }
 
