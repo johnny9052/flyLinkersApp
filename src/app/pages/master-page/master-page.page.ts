@@ -99,7 +99,6 @@ export class MasterPagePage implements OnInit {
           } else {
             this.posts[x].likes--;
           }
-
           break;
         }
       }
