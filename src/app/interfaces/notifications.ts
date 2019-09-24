@@ -8,4 +8,5 @@ export interface ModelNotifications {
       text: string;
       unread: string;
       type: string;
+      idPost: string;
 }

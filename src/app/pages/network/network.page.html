@@ -137,22 +137,17 @@
                 <img src="https://flylinkers.com/media/{{(contacto.image_perfil !== '' )? contacto.image_perfil : 'avatar_2x.png' }}">
                 </ion-avatar>
 
-                <ion-card-title>
-                  <ion-item lines="none">
-                    <div style="width: 100%; text-align: center;">
-                      <h2>{{contacto.fistName | slice:0:15}} {{contacto.lastName | slice:0:15}}</h2>
-                    </div>
-                  </ion-item>
-                </ion-card-title>
+                <div style="width: 100%; text-align: center;">
+                  <h2>{{contacto.fistName | slice:0:13}}</h2>
+                </div>
+                <div style="width: 100%; text-align: center;">
+                  <h2>{{contacto.lastName | slice:0:13}}</h2>
+                </div>
 
-                <ion-card-subtitle>
-                  <ion-item lines="none">
-                    <div style="width: 100%; text-align: center;">
-                      <p *ngIf=" contacto.profession !== ''" > {{contacto.profession | slice:0:30}}</p>
-                      <p *ngIf=" contacto.profession == ''" > {{contacto.headline | slice:0:30}}</p>
-                    </div>
-                  </ion-item>
-                </ion-card-subtitle>
+                <div style="width: 100%; text-align: center;">
+                  <p *ngIf=" contacto.profession !== ''" > {{contacto.profession | slice:0:13}}</p>
+                  <p *ngIf=" contacto.profession == ''" > {{contacto.headline | slice:0:13}}</p>
+                </div>
 
                 <ion-button
                   color="flylinkers"
@@ -197,38 +192,36 @@
             >
               <ion-card-header color="flylinkers"></ion-card-header>
 
-              <ion-card-content>
+              <div style="width: 100%; text-align: center;">
                 <ion-avatar
                   slot="start"
                   class="image-center top-margin-10"
                 >
                 <img src="https://flylinkers.com/media/{{(contactos.image_perfil !== '' )? contactos.image_perfil : 'avatar_2x.png' }}">
                 </ion-avatar>
+              </div>
+              
+              <div style="width: 100%; text-align: center;">
+                <h2>{{contactos.fistName | slice:0:15}}</h2>
+              </div>
+              <div style="width: 100%; text-align: center;">
+                <h2>{{contactos.lastName | slice:0:15}}</h2>
+              </div>
+              
 
-                <ion-card-title>
-                  <ion-item lines="none">
-                    <div style="width: 100%; text-align: center;">
-                      <h2>{{contactos.fistName | slice:0:15}} {{contactos.lastName | slice:0:15}}</h2>
-                    </div>
-                  </ion-item>
-                </ion-card-title>
+              <ion-item lines="none">
+                <div style="width: 100%; text-align: center;">
+                  <p *ngIf=" contactos.profession !== ''" > {{contactos.profession | slice:0:15}}</p>
+                  <p *ngIf=" contactos.profession == ''" > {{contactos.headline | slice:0:15}}</p>
+                </div>
+              </ion-item>
 
-                <ion-card-subtitle>
-                  <ion-item lines="none">
-                    <div style="width: 100%; text-align: center;">
-                      <p *ngIf=" contactos.profession !== ''" > {{contactos.profession | slice:0:30}}</p>
-                      <p *ngIf=" contactos.profession == ''" > {{contactos.headline | slice:0:30}}</p>
-                    </div>
-                  </ion-item>
-                </ion-card-subtitle>
-
-                <ion-button
-                  color="flylinkers"
-                  fill="outline"
-                  size="small"
-                  (click)="enviarSolicitudAmistad(contactos.pk)"
-                  >Conectar</ion-button>
-              </ion-card-content>
+              <ion-button
+                color="flylinkers"
+                fill="outline"
+                size="small"
+                (click)="enviarSolicitudAmistad(contactos.pk)"
+                >Conectar</ion-button>
             </ion-card>
           </ion-col>
         </ion-row>

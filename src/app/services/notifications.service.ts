@@ -37,12 +37,12 @@ export class NotificationsService {
       let res: any;
       res = data;
       /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
-      if (res.code === '1') {
-        if (res.typeNotification === 'Post'){
-          this.navCtrl.navigateBack('/master-page');
-        } else {
-          this.navCtrl.navigateBack('/network');
-        }
+      if (res.code === '1' && res.idPost === '-2')  {
+        this.helperService.showAlertRedirect('Exito', res.mensaje, '/network');
+      } else if (res.code === '1' && res.idPost === '-1') {
+          this.helperService.showAlert('Error', res.mensaje);
+      } else if (res.code === '1' && res.idPost !== '-1' && res.idPost !== '-2') {
+        this.helperService.showAlert('Exito', res.mensaje);
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
         this.helperService.showAlert('Error', res.mensaje);

@@ -12,6 +12,7 @@ export class TabComponent implements OnInit {
   @Input() notificationsColor: string;
   @Input() messagesColor: string;
   @Input() newPostColor: string;
+  @Input() profileColor: string;
 
   constructor() { }
 
