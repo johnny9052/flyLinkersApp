@@ -7,6 +7,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { Base64 } from '@ionic-native/base64/ngx';
 
+import { ActivatedRoute, Router } from '@angular/router';
+
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
 declare var window: any;
@@ -23,16 +25,48 @@ export class NewPostPage implements OnInit {
   /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
   codeUser = '';
   imagePerfil = '';
-  
+  idPost = '';
+  changeEditImage = false;
+
   constructor(public helperService: HelperService,
               private postService: PostService,
               private camera: Camera,
-              private base64: Base64) {}
+              private base64: Base64,
+              private route: ActivatedRoute,
+              private router: Router) {
+                this.route.queryParams.subscribe(params => {
+                  if (this.router.getCurrentNavigation().extras.state) {
+                    console.log('******************************');
+                    this.idPost = this.router.getCurrentNavigation().extras.state.idPost;
+                    console.log('IdPost: ' + this.idPost);
+                    this.newPost.title = this.router.getCurrentNavigation().extras.state.title;
+                    this.newPost.content = this.router.getCurrentNavigation().extras.state.content;
+                    this.newPost.external_url_new = this.router.getCurrentNavigation().extras.state.externalUrlNew;
+                    this.newPost.image_new = this.router.getCurrentNavigation().extras.state.imageNew;
+
+                    // tslint:disable-next-line: max-line-length
+                    if (this.newPost.image_new !== undefined && this.newPost.image_new !== 'undefined' && this.newPost.image_new !== null && this.newPost.image_new !== 'null' && this.newPost.image_new !== '') {
+                       this.newPost.image_new = 'https://flylinkers.com/media/' +  this.newPost.image_new;
+                    }
+
+                  }
+
+                    // Se obtiene el identidicador del usuario que ingreso al sistema
+                  this.getProfilePk();
+                  this.getProfileImage();
+                });
+              }
 
   ngOnInit() {
-     // Se obtiene el identidicador del usuario que ingreso al sistema
-     this.getProfilePk();
-     this.getProfileImage();
+
+  }
+
+  ionViewWillLeave() {
+    this.newPost = {} as ModelPosts;
+    /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
+    this.codeUser = '';
+    this.imagePerfil = '';
+    this.idPost = '';
   }
 
 
@@ -42,6 +76,30 @@ export class NewPostPage implements OnInit {
     this.helperService.getLocalData('profilePk').then(response => {
       this.codeUser = response;
       console.log(this.codeUser);
+
+      // tslint:disable-next-line: max-line-length
+      if (this.idPost !== undefined && this.idPost !== 'undefined' && this.idPost !== null && this.idPost !== 'null' && this.idPost !== '') {
+        this.getPost(this.codeUser, this.idPost);
+      }
+
+    });
+  }
+
+
+  getPost(pkUser, articleId) {
+
+    console.log('*********VAMOS POR EL POST***********');
+
+    this.postService.getPost(pkUser, articleId).subscribe(data => {
+      let res: any;
+      res = data;
+      this.newPost = res.post;
+      this.newPost.liked_by_user = res.post.liked_by_user[0];
+
+       // tslint:disable-next-line: max-line-length
+      if (this.newPost.image_new !== undefined && this.newPost.image_new !== 'undefined' && this.newPost.image_new !== null && this.newPost.image_new !== 'null' && this.newPost.image_new !== '') {
+        this.newPost.image_new = 'https://flylinkers.com/media/' + this.newPost.image_new;
+      }
     });
   }
 
@@ -61,6 +119,10 @@ export class NewPostPage implements OnInit {
 
     // cconsole.log(this.newPost.id_new + 'Este es el valor');
 
+    if (this.newPost.image_new.includes('flylinkers.com')) {
+      this.newPost.image_new = this.newPost.image_new.split('media/')[1];
+    }
+
     const obj = {
         userPk: this.newPost.userPk,
         title: this.newPost.title,
@@ -74,6 +136,8 @@ export class NewPostPage implements OnInit {
         image_base64: ((this.newPost.image_base64 === 'undefined' || this.newPost.image_base64 === undefined ) ? -1 : this.newPost.image_base64)
      };
 
+
+
     console.log('Este es el objeto basico');
     console.log(obj);
 
@@ -81,6 +145,40 @@ export class NewPostPage implements OnInit {
 
   }
 
+
+
+  editPost() {
+    const now = new Date();
+    const today = now.toISOString().substring(0, 10);
+    this.newPost.publication_date = today;
+    this.newPost.userPk = this.codeUser;
+
+    // cconsole.log(this.newPost.id_new + 'Este es el valor');
+
+    const obj = {
+        pk_post: this.idPost,
+        userPk: this.newPost.userPk,
+        title: this.newPost.title,
+        content: this.newPost.content,
+        publication_date : this.newPost.publication_date,
+        image_new: ((this.newPost.image_new === 'undefined' || this.newPost.image_new === undefined ) ? -1 : this.newPost.image_new),
+        article_id: ((this.newPost.id_new === 'undefined' || this.newPost.id_new === undefined ) ? -1 : this.newPost.id_new),
+        // tslint:disable-next-line: max-line-length
+        external_url_new: ((this.newPost.external_url_new === 'undefined' || this.newPost.external_url_new === undefined ) ? -1 : this.newPost.external_url_new),
+        // tslint:disable-next-line: max-line-length
+        image_base64: ((this.newPost.image_base64 === 'undefined' || this.newPost.image_base64 === undefined ) ? -1 : this.newPost.image_base64)
+     };
+
+    if (!this.changeEditImage) {
+      this.newPost.image_base64 = '-1';
+    }
+
+    console.log('Este es el objeto basico');
+    console.log(obj);
+
+    this.postService.editPost(obj);
+
+  }
 
 
   takePictureBase64() {
@@ -99,6 +197,10 @@ export class NewPostPage implements OnInit {
 
 
   procesarImagenBase64(options: CameraOptions) {
+
+    this.changeEditImage = true;
+
+
     this.camera.getPicture(options).then((imageData) => {
 
       const rutaLocalHost = window.Ionic.WebView.convertFileSrc( imageData );
@@ -128,7 +230,6 @@ export class NewPostPage implements OnInit {
 
     this.procesarImagenBase64(options);
   }
-
 
 
 

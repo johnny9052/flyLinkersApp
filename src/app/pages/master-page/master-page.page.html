@@ -76,7 +76,7 @@
       <!--OPCION DE COMPARTIR LA PUBLICACION-->
       <ion-col>
         <ion-item>
-          <ion-icon name="share"></ion-icon>
+          <ion-icon name="share" (click)="sharedPost(post.content,post.external_url_new,post.image_new,post.title)"></ion-icon>
         </ion-item>
       </ion-col>
     </ion-row>

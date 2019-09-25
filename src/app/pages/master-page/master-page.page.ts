@@ -141,7 +141,13 @@ export class MasterPagePage implements OnInit {
           text: 'Edit',
           icon: 'create',
           handler: () => {
-            console.log('Edit clicked');
+            const data: NavigationExtras = {
+              state: {
+                idPost: pk
+              }
+            };
+
+            this.router.navigate(['new-post'], data);
           }
         },
         {
@@ -174,4 +180,28 @@ export class MasterPagePage implements OnInit {
 
     this.router.navigate(['view-detail-post'], data);
   }
+
+
+
+  sharedPost(content: string, externalUrlNew: string, imageNew: string, title: string) {
+
+    console.log('****************ANTES DE***************************');
+    console.log('Content: ' + content);
+    console.log('externalUrlNew: ' + externalUrlNew);
+    console.log('imageNew: ' + imageNew);
+    console.log('title: ' + title);
+
+    const data: NavigationExtras = {
+      state: {
+        content,
+        externalUrlNew,
+        imageNew,
+        title
+      }
+    };
+
+    this.router.navigate(['new-post'], data);
+  }
+
+
 }

@@ -20,6 +20,8 @@ export interface ModelPosts {
       metadataDescription: string;
       metadataImage: string;
       userPk: string;
+      pk_post: string;
+
 }
 
 export interface ModelComments{

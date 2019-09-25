@@ -75,15 +75,21 @@
             color="flylinkers"
             type="submit"
             [disabled]="formulario.invalid"
-            fill="outline"
+            fill="outline" *ngIf="idPost==='' || idPost=== undefined"
           >Compartir</ion-button>
+
+          <ion-button
+            color="flylinkers"            
+            [disabled]="formulario.invalid"
+            fill="outline" *ngIf="idPost!=='' &&  idPost!== undefined"
+            (click)="editPost()"
+          >Editar</ion-button>
         </ion-col>
 
         <ion-col size="6">
           <ion-button
             color="flylinkers"
-            type="submit"
-            [disabled]="formulario.invalid"
+            routerLink="/master-page"
             fill="outline"
           >Cancelar</ion-button>
         </ion-col>
