@@ -29,6 +29,10 @@ export class HelperService {
      this.storage.set(dataName, val);
   }
 
+  removeLocalData(dataName: string) {
+    this.storage.remove(dataName);
+ }
+
 
   async getLocalData(dataName: string) {
     return await this.storage.get(dataName);

@@ -196,6 +196,7 @@
                 <ion-avatar
                   slot="start"
                   class="image-center top-margin-10"
+                  (click)="viewProfile(contactos.pk)"
                 >
                 <img src="https://flylinkers.com/media/{{(contactos.image_perfil !== '' )? contactos.image_perfil : 'avatar_2x.png' }}">
                 </ion-avatar>
