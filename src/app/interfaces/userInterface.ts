@@ -1,4 +1,5 @@
 export interface ModelUserData {
+  pk: string;
   fistName: string;
   lastName: string;
   gender: string;
