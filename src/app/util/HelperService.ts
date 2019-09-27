@@ -27,7 +27,7 @@ export class HelperService {
               private loadingCtrl: LoadingController,
               private navCtrl: NavController,
               private storage: Storage,
-              private translateService: TranslateService) {
+              private translate: TranslateService) {
                 // this.translateService.setDefaultLang(this.activeLang);
                 this.cargarIdiomaActual();
                }
@@ -56,7 +56,7 @@ export class HelperService {
       message: descripcion,
       buttons: [
         {
-          text: 'Aceptar',
+          text: this.translate.instant('aceptar'),
           cssClass: 'flylinkersColor',
           handler: (blah) => {
             // console.log('Boton OK');
@@ -78,7 +78,7 @@ export class HelperService {
       message: mensaje,
       buttons: [
         {
-          text: 'Aceptar',
+          text: this.translate.instant('aceptar'),
           cssClass: 'flylinkersColor',
           handler: (blah) => {
             /*Cuando se da tap en aceptar redirecciona al login*/
@@ -150,7 +150,7 @@ export class HelperService {
   public cambiarLenguaje(lang) {
     this.saveLocalData('language', lang);
     this.activeLang = lang;
-    this.translateService.use(this.activeLang);
+    this.translate.use(this.activeLang);
   }
 
 

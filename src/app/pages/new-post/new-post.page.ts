@@ -8,6 +8,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
@@ -33,7 +34,8 @@ export class NewPostPage implements OnInit {
               private camera: Camera,
               private base64: Base64,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private translate: TranslateService) {
                 this.route.queryParams.subscribe(params => {
                   if (this.router.getCurrentNavigation().extras.state) {
                     console.log('******************************');

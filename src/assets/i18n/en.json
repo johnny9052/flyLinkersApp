@@ -40,6 +40,11 @@
     "constrasenaConfirmar": "Confirm password",
     "nombre": "First name",
     "apellido": "Last name", 
+    "titulo": "Title",
+    "descripcion": "Description",
+    "url":"url",
+  
+   
 
 
     "***************MENSAJES DE ACCION**********************": "",
@@ -49,7 +54,15 @@
     "errorTransaccion": "Process error",
     "exitoTitulo": "Success",
     "errorTitulo": "Error",
-  
+    "aceptar": "Accept",
+    "borrar": "Delete",
+    "editar": "Edit",
+    "cancelar": "Cancel",
+    "compartir": "Share",  
+     
+    "errorCargandoInformacion": "Error loading information",
+
+
     "***************REGISTRO-DE-USUARIO**********************": "",
 
     "registro": "Register",
@@ -64,5 +77,46 @@
     "acceder": "Log in",
     "olvidoContrasena": "Forgot your password ?",
     "usuarioIdentificado": "User correctly identified",
-    "usuarioNoExiste": "Invalid username or password"
+    "usuarioNoExiste": "Invalid username or password",
+
+    "***************HOME**********************": "",
+  
+    "inicio": "Home",
+    "perfil": "Profile",
+    "notificaciones": "Notifications",
+    "intereses": "Interest",
+    "eventos": "Events",
+    "red": "Network",
+    "patrocinadores": "Sponsors",
+    "noticias": "News",
+    "cargandoPublicaciones": "Loading posts",
+
+
+    
+  "***************NETWORK**********************": "",
+
+  "redContactos": "Network",
+  "solicitudesRecibidas": "Requests Received",
+  "verTodas": "See all",
+  "solicitudesEnviadas":"Requests Sent",
+  "tusConexiones":"Your connections",
+  "verPerfil":"View profile",
+  "conectaGente":"Make connection with the network people",
+  "conectar":"Connect",
+  "solicitudAmistadRecibidaExito": "Friend Request Accepted",
+  "solicitudAmistadEnviadaExito": "Friend Request Sent",
+  "conexionEliminada": "Connection deleted",
+  "solicitudEliminada": "Request deleted",
+
+  "***************POST**********************": "",
+
+  "nuevoPost": "New post",
+  "postPublicado": "Post published",
+  "postEditado": "Post edited",
+  "postBorrado": "Post deleted",
+  "comentarioPublicado": "Comment posted",
+  "comentarioBorrado": "Comment deleted",
+  "comentarioEditado": "Edited Comment"
+  
+
   }

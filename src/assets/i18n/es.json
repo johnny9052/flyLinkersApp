@@ -40,6 +40,11 @@
   "constrasenaConfirmar": "Confirmar contraseña",
   "nombre": "Nombre",
   "apellido": "Apellido", 
+
+  "titulo": "Titulo",
+  "descripcion": "Descripción",
+  "url":"url",
+
   
 
   "***************MENSAJES DE ACCION**********************": "",
@@ -49,7 +54,14 @@
   "errorTransaccion": "Error procesando la transaccion",
   "exitoTitulo": "Exito",
   "errorTitulo": "Error",
-
+  "aceptar": "Aceptar",
+  "borrar": "Borrar",
+  "editar": "Editar",
+  "cancelar": "Cancelar",
+  "compartir": "Compartir",
+  
+  "errorCargandoInformacion": "Error cargando la informacion",
+  
   "***************REGISTRO-DE-USUARIO**********************": "",
 
   "registro": "Registro",
@@ -64,6 +76,47 @@
   "acceder": "Acceder",
   "olvidoContrasena": "¿Olvidaste tu contraseña?",
   "usuarioIdentificado": "Usuario identificado correctamente",
-  "usuarioNoExiste": "Usuario o contraseña invalidos"
+  "usuarioNoExiste": "Usuario o contraseña invalidos",
+
+  "***************HOME**********************": "",
+
+  "inicio": "Inicio",
+  "perfil": "Perfil",
+  "notificaciones": "Notificaciones",
+  "intereses": "Intereses",
+  "eventos": "Eventos",
+  "red": "Red",
+  "patrocinadores": "Patrocinadores",
+  "noticias": "Noticias",
+  "cargandoPublicaciones": "Cargando publicaciones",
+
+
+  "***************NETWORK**********************": "",
+
+  "redContactos": "Red de contactos",
+  "solicitudesRecibidas": "Solicitudes recibidas",
+  "verTodas": "Ver todas",
+  "solicitudesEnviadas":"Solicitudes enviadas",
+  "tusConexiones":"Tus conexiones",
+  "verPerfil":"Ver perfil",
+  "conectaGente":"Conecta con la gente de la red",
+  "conectar":"Conectar",
+  "solicitudAmistadRecibidaExito": "Solicitud de amistad aceptada",
+  "solicitudAmistadEnviadaExito": "Solicitud de amistad enviada",
+  "conexionEliminada": "Conexion eliminada",
+  "solicitudEliminada": "Solicitud eliminada",
+
+
+  "***************POST**********************": "",
+
+  "nuevoPost": "Nuevo post",
+  "postPublicado": "Post publicado exitosamente",
+  "postEditado": "Post editado exitosamente",
+  "postBorrado": "Post borrado exitosamente",
+  "comentarioPublicado": "Comentario publicado",
+  "comentarioBorrado": "Comentario borrado",
+  "comentarioEditado": "Comentario editado"
+  
+
 }
 

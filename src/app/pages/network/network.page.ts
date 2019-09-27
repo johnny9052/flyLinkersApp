@@ -9,6 +9,7 @@ import {
 import { HelperService } from '../../util/HelperService';
 import { NetworkService } from '../../services/network.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-network',
@@ -40,10 +41,15 @@ export class NetworkPage implements OnInit {
   constructor(
     private networkService: NetworkService,
     public helperService: HelperService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
+
+  }
+
+  ionViewWillEnter() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
   }
@@ -59,7 +65,7 @@ export class NetworkPage implements OnInit {
   }
 
   getContactsData(pkUser) {
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.networkService.getContacts(pkUser).subscribe(data => {
       console.log(data);
       console.log(data.solicitudes_recibidas);
@@ -75,7 +81,7 @@ export class NetworkPage implements OnInit {
     },
       error => {
         this.helperService.ocultarBarraCarga();
-        this.helperService.showAlert('Error', 'Error cargando la informacion');
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
         console.log('oops', error);
       });
   }

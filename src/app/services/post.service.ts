@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { HelperService } from '../util/HelperService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ModelPosts, ModelComments, ModelRecomments } from '../interfaces/posts';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable({
@@ -18,7 +19,8 @@ export class PostService {
 
   constructor(private http: HttpClient,
               public alertCtrl: AlertController,
-              public helperService: HelperService) {  }
+              public helperService: HelperService,
+              private translate: TranslateService) {  }
 
 
 
@@ -26,7 +28,7 @@ export class PostService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/content_network/post_new_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -38,16 +40,17 @@ export class PostService {
       if (res.code === '1' || res.code === 1) {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlertRedirect('Exito', 'Post publicado exitosamente', '/master-page');
+        // tslint:disable-next-line: max-line-length
+        this.helperService.showAlertRedirect(this.translate.instant('exitoTitulo'), this.translate.instant('postPublicado'), '/master-page');
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', 'No se puede publicar el post');
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -59,7 +62,7 @@ export class PostService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/content_network/update_post_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -71,16 +74,16 @@ export class PostService {
       if (res.code === '1' || res.code === 1) {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlertRedirect('Exito', 'Post editado exitosamente', '/master-page');
+        this.helperService.showAlertRedirect(this.translate.instant('exitoTitulo'), this.translate.instant('postEditado'), '/master-page');
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', 'No se puede editar el post');
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -134,7 +137,7 @@ export class PostService {
       // this.helperService.ocultarBarraCarga();
 
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -142,7 +145,7 @@ export class PostService {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/content_network/post_comment_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -154,16 +157,16 @@ export class PostService {
       if (res.code === 1) {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('comentarioPublicado'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -171,7 +174,7 @@ export class PostService {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/content_network/reply_comment_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -183,16 +186,16 @@ export class PostService {
       if (res.code === 1) {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('comentarioPublicado'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -201,7 +204,7 @@ export class PostService {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/content_network/delete_comment_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -213,16 +216,16 @@ export class PostService {
       if (res.code === 1) {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('comentarioBorrado'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -230,7 +233,7 @@ export class PostService {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/content_network/delete_recomment_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -242,16 +245,16 @@ export class PostService {
       if (res.code === 1) {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('comentarioBorrado'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -259,7 +262,7 @@ export class PostService {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/content_network/delete_post_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -271,16 +274,16 @@ export class PostService {
       if (res.code === 1) {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('postBorrado'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTitulo'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -288,7 +291,7 @@ export class PostService {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/content_network/update_comment_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -300,16 +303,16 @@ export class PostService {
       if (res.code === 1) {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('comentarioEditado'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -317,7 +320,7 @@ export class PostService {
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/content_network/update_recomment_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -329,16 +332,16 @@ export class PostService {
       if (res.code === 1) {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('comentarioEditado'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTitulo'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -346,7 +349,7 @@ export class PostService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/content_network/comment_like_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/

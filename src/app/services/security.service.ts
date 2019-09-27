@@ -36,7 +36,7 @@ export class SecurityService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/registerApp/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('cargandoPublicaciones'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
