@@ -59,6 +59,7 @@ export class NetworkPage implements OnInit {
   }
 
   getContactsData(pkUser) {
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
     this.networkService.getContacts(pkUser).subscribe(data => {
       console.log(data);
       console.log(data.solicitudes_recibidas);
@@ -70,11 +71,13 @@ export class NetworkPage implements OnInit {
       this.totalContactos = data.cantidad_contactos[0];
       this.contactosConectar = data.contactos_para_conectar;
       this.totalContactosConectar = data.cantidad_contactos_para_conectar[0];
-
-      // console.log('Lo que tiene es ' + data.contactos_para_conectar[38].image_perfil );
-      // tslint:disable-next-line: max-line-length
-      // console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');
-    });
+      this.helperService.ocultarBarraCarga();
+    },
+      error => {
+        this.helperService.ocultarBarraCarga();
+        this.helperService.showAlert('Error', 'Error cargando la informacion');
+        console.log('oops', error);
+      });
   }
 
   showHideContacts() {

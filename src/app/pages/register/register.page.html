@@ -1,5 +1,5 @@
 <app-header-login
-  titulo="Registro"
+  titulo="{{ 'registro' | translate }}"
   botonRegreso="true"
 ></app-header-login>
 
@@ -13,7 +13,7 @@
   >
     <ion-list>
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
+        <ion-label position="floating">{{ 'correo' | translate }}</ion-label>
 
         <ion-input
           name="email"
@@ -21,12 +21,11 @@
           required="required"
           pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
           [(ngModel)]="userNew.email"
-          title="Se necesita tu correo electronico"
         ></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
+        <ion-label position="floating">{{ 'password' | translate }}</ion-label>
 
         <ion-input
           type="Password"
@@ -38,7 +37,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Confirmar contraseña</ion-label>
+        <ion-label position="floating">{{ 'constrasenaConfirmar' | translate }}</ion-label>
 
         <ion-input
           type="Password"
@@ -50,7 +49,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
+        <ion-label position="floating">{{ 'nombre' | translate }}</ion-label>
 
         <ion-input
           type="text"
@@ -61,7 +60,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Apellido</ion-label>
+        <ion-label position="floating">{{ 'apellido' | translate }}</ion-label>
 
         <ion-input
           type="text"
@@ -83,7 +82,9 @@
               text-wrap="text-wrap"
               class="ion-text-justify"
             >
-              Al dar click en Crear Cuenta, aceptas los Términos de Uso y las Políticas de Privacidad y Cookies
+            {{ 'terminosCondiciones' | translate }}
+
+             
             </ion-label>
           </div>
         </ion-col>
@@ -96,7 +97,8 @@
             color="flylinkers"
             type="submit"
             [disabled]="formulario.invalid"
-          >Crear cuenta</ion-button>        
+          >{{ 'crearCuenta' | translate }}
+        </ion-button>        
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -11,8 +11,6 @@ export class HeaderLoginComponent implements OnInit {
   @Input() botonRegreso: boolean;
   @Input() botonIngreso: boolean;
 
-
-
   constructor() { }
 
   ngOnInit() {}

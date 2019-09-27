@@ -10,6 +10,9 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { PopcommentsComponent } from './popcomments/popcomments.component';
 import { PoprecommentsComponent } from './poprecomments/poprecomments.component';
+import { LanguageComponent } from './language/language.component';
+
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { PoprecommentsComponent } from './poprecomments/poprecomments.component'
    FooterLoginComponent,
    FooterComponent,
    PopcommentsComponent,
-   PoprecommentsComponent
+   PoprecommentsComponent,
+   LanguageComponent
   ],
   exports: [
    HeaderComponent,
@@ -30,14 +34,16 @@ import { PoprecommentsComponent } from './poprecomments/poprecomments.component'
    FooterLoginComponent,
    FooterComponent,
    PopcommentsComponent,
-   PoprecommentsComponent
+   PoprecommentsComponent,
+   LanguageComponent
 ],
   imports: [
     CommonModule,
     /*Import necesario para que reconozca las etiquetas del IONIC*/
     IonicModule,
     /*Import necesario para redireccionar*/
-    RouterModule
+    RouterModule,
+    TranslateModule
   ]
 })
 export class ComponentsModule { }

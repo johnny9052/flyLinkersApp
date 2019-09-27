@@ -1,0 +1,69 @@
+{
+
+  "***************IDIOMAS**********************": "",
+
+  "espanol": "Español",
+  "ingles": "Ingles",
+
+  "***************PAGINA-INICIAL**********************": "",
+
+  "mensajeInicial1": "La mejor red de contactos de aviación",
+  "mensajeInicial2": "Es la plataforma interactiva donde la comunidad de la aviación tendrá la oportunidad de intercambiar opiniones, participar en webinars y además tendrá acceso a las últimas noticias, eventos, seminarios e información relevante del sector.",
+  "unete": "Únete gratis ahora",
+  "nosotros": "Nosotros",
+  "primeros": "Primeros",
+  "regresar": "Regresar",
+
+  "***************MISION-VISION**********************": "",
+
+  "misionVision": "Mision y Vision",
+  "mision":"MISIÓN",
+  "misionParte1": "es una plataforma virtual interactiva que genera una red especializada para ejecutivos y profesionales de la comunidad aeronáutica de todo el mundo.",
+  "vision": "VISIÓN",
+  "visionParte1": "será la plataforma líder dentro de la comunidad aeronáutica que brindará a sus usuarios la mejor conexión entre ellos y poder acceder a información relevante de la aviación. Su agenda se centra en el progreso y la prosperidad de la aviación civil a través del fortalecimiento de las relaciones entre profesionales de todo el mundo en un entorno amigable, serio y que apoya el progreso y la innovación en el sector.",
+  "visionParte2": "FlyLinkers proporcionará una plataforma única para:",
+  "visionVineta1": "Intercambiar ideas y mostrar soluciones innovadoras.",
+  "visionVineta2": "Acceder a las noticias más relevantes de la industria aérea con enlaces directos a medios de comunicación claves para el transporte aéreo.",
+  "visionVineta3": "Incrementar la visibilidad profesional y la influencia en el sector.",
+  "visionVineta4": "Interactuar virtualmente con otros miembros.",
+  "visionVineta5": "Destacar las habilidades profesionales del usuario.",
+
+  "***************PRIMEROS-100**********************": "",
+
+  "primeros100":"Primeros 100 inscritos",
+  "primeros100Mensaje": "FlyLinkers quiere agradecer a las 100 primeras personas que confiaron en nosotros. Por ese motivo publicamos aquí el listado de ellos. ¡Gracias Amigos! Esperamos que esta nueva red social sea para ustedes una potente herramienta de comunicación y trabajo y los ayude a crear las redes que necesitan. Atentamente, El Equipo de FlyLinkers",
+
+  "***************CAMPOS DE TEXTO**********************": "",
+
+  "correo": "Correo electronico",
+  "contrasena": "Contraseña",
+  "constrasenaConfirmar": "Confirmar contraseña",
+  "nombre": "Nombre",
+  "apellido": "Apellido", 
+  
+
+  "***************MENSAJES DE ACCION**********************": "",
+
+  "espere":"Espere por favor",
+
+  "errorTransaccion": "Error procesando la transaccion",
+  "exitoTitulo": "Exito",
+  "errorTitulo": "Error",
+
+  "***************REGISTRO-DE-USUARIO**********************": "",
+
+  "registro": "Registro",
+  "terminosCondiciones": "Al dar click en Crear Cuenta, aceptas los Términos de Uso y las Políticas de Privacidad y Cookies",
+  "crearCuenta": "Crear cuenta",
+
+  "nuevoUsuarioExito": "Usuario registrado exitosamente",
+  "nuevoUsuarioExistente": "El usuario ya se encuentra registrado",
+
+  "***************IDENTIFICACION-USUARIO**********************": "",
+  "identificacion": "Identificación",
+  "acceder": "Acceder",
+  "olvidoContrasena": "¿Olvidaste tu contraseña?",
+  "usuarioIdentificado": "Usuario identificado correctamente",
+  "usuarioNoExiste": "Usuario o contraseña invalidos"
+}
+

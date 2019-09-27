@@ -16,12 +16,11 @@ export class MenuComponent implements OnInit {
   constructor(public helperService: HelperService) { }
 
   ngOnInit() {
-    // Se obtiene el identidicador del usuario que ingreso al sistema
+    console.log('Init desde el menu');
     this.getProfilePk();
     this.getProfileFirstName();
     this.getProfileLastName();
     this.getProfileImage();
-
   }
 
   getProfilePk() {

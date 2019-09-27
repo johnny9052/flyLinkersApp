@@ -1,7 +1,34 @@
-<app-header-login
+<!-- <app-header-login
   titulo="FlyLinkers"
   botonIngreso="true"
-></app-header-login>
+></app-header-login> -->
+
+
+<ion-header
+  no-border="no-border"
+>
+  <ion-toolbar color="flylinkers">
+    <ion-buttons slot="end">
+      <ion-button routerLink="/identify" fill="clear">
+        <ion-icon name="person"></ion-icon>
+      </ion-button>
+
+      <ion-button  fill="clear" (click)="mostrarListaIdiomas( $event )">
+        <ion-icon name="globe"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+
+    <ion-title>FlyLinkers</ion-title>
+
+    <ion-thumbnail slot="start" class="imageLogoBanner">
+      <img src="/assets/images/logo.png">
+    </ion-thumbnail>
+  </ion-toolbar>
+</ion-header>
+
+
 
 <ion-content
   fullscreen="fullscreen"
@@ -26,7 +53,7 @@
           <ion-col size="12">
             <ion-text color="flylinkersBlanco">
               <h4>
-                La mejor red de contactos de aviación
+                {{ 'mensajeInicial1' | translate }}
               </h4>
             </ion-text>
           </ion-col>
@@ -36,7 +63,7 @@
           <ion-col size="12">
             <ion-text color="flylinkersBlanco">
               <h6>
-                Es la plataforma interactiva donde la comunidad de la aviación tendrá la oportunidad de intercambiar opiniones, participar en webinars y además tendrá acceso a las últimas noticias, eventos, seminarios e información relevante del sector.
+                {{ 'mensajeInicial2' | translate }}
               </h6>
             </ion-text>
           </ion-col>
@@ -49,7 +76,7 @@
                 expand=""
                 color="flylinkers" 
                 routerLink="/register"
-              >Únete gratis ahora</ion-button>
+              >  {{ 'unete' | translate }}</ion-button>
             </ion-text>
           </ion-col>
         </ion-row>
@@ -90,7 +117,7 @@
             routerLink="/mission-vision"
           ></ion-icon>
           <br>
-          Nosotros
+          {{ 'nosotros' | translate }}
         </ion-col>
 
         <ion-col size="6">             
@@ -100,12 +127,10 @@
               routerLink="/first100"
             ></ion-icon>
             <br>
-            Primeros  
+            {{ 'primeros' | translate }}  
           </ion-col>
           
       </ion-row>
     </ion-grid>
   </ion-toolbar>
 </ion-content>
-
-<!-- <app-footer-login></app-footer-login> -->

@@ -29,8 +29,7 @@ export class MasterPagePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Se obtiene el identidicador del usuario que ingreso al sistema
-    this.getProfilePk();
+
   }
 
   ionViewWillEnter() {
@@ -48,11 +47,18 @@ export class MasterPagePage implements OnInit {
   }
 
   getPostsData(pkUser) {
+    this.helperService.mostrarBarraDeCarga('Cargando publicaciones');
     this.masterPageService.getPosts(pkUser).subscribe(data => {
       let res: any;
       res = data;
       this.posts = res.posts;
+      this.helperService.ocultarBarraCarga();
       this.getMetadataPosts();
+    },
+    error => {
+      this.helperService.ocultarBarraCarga();
+      this.helperService.showAlert('Error', 'Error cargando la informacion');
+      console.log('oops', error);
     });
   }
 
@@ -60,6 +66,7 @@ export class MasterPagePage implements OnInit {
 
     this.posts.forEach(postTemp => {
 
+    if (this.helperService.isValidValue(postTemp.external_url_new)) {
       this.masterPageService.getMetadataPosts(postTemp.external_url_new).subscribe(
         data => {
           let res: any;
@@ -73,6 +80,7 @@ export class MasterPagePage implements OnInit {
           console.log('oops', error);
         }
       );
+    }
 
 
     });

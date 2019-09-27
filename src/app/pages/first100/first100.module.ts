@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { First100Page } from './first100.page';
 import { ComponentsModule } from '../../components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -20,8 +21,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes), 
-    ComponentsModule
+    RouterModule.forChild(routes),
+    ComponentsModule,
+    TranslateModule
   ],
   declarations: [First100Page]
 })

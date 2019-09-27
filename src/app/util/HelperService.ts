@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
+import { TranslateService } from '@ngx-translate/core';
+import { ReplaceSource } from 'webpack-sources';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,9 @@ export class HelperService {
   de una apertura de una barra de carga*/
   isLoadingLoadModal = false;
 
+
+  public activeLang = 'es';
+
   /*Dependencias del servicio
   alertCtrl: Depedencia para los modales
   loadingCtrl: Dependencia para las barras de carga,
@@ -21,7 +26,11 @@ export class HelperService {
   constructor(public alertCtrl: AlertController,
               private loadingCtrl: LoadingController,
               private navCtrl: NavController,
-              private storage: Storage) { }
+              private storage: Storage,
+              private translateService: TranslateService) {
+                // this.translateService.setDefaultLang(this.activeLang);
+                this.cargarIdiomaActual();
+               }
 
 
 
@@ -126,6 +135,34 @@ export class HelperService {
 
   abrirUrlExterna(url: string) {
     window.open(url, '_system');
+  }
+
+
+  isValidValue(val: string) {
+    if (val !== undefined && val !== 'undefined' && val !== null && val !== 'null' && val !== '') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+  public cambiarLenguaje(lang) {
+    this.saveLocalData('language', lang);
+    this.activeLang = lang;
+    this.translateService.use(this.activeLang);
+  }
+
+
+  public cargarIdiomaActual() {
+    this.getLocalData('language').then(response => {
+        console.log('El idioma actual es: ' + response);
+        if (this.isValidValue(response)) {
+          this.cambiarLenguaje(response);
+        } else {
+          this.cambiarLenguaje('en');
+        }
+    });
   }
 
 

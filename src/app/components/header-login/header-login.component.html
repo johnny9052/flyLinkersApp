@@ -7,7 +7,7 @@
       *ngIf="botonRegreso"
     >
       <ion-back-button
-        text="Regresar"
+        text="{{ 'regresar' | translate }}"
         defaultHref="/"
       ></ion-back-button>
     </ion-buttons>
@@ -18,13 +18,9 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>{{titulo}}</ion-title>
 
-    <!-- <ion-buttons slot="start">
-      <ion-avatar>
-        <img src="/assets/images/logo.png">
-      </ion-avatar>
-    </ion-buttons> -->
+
+    <ion-title>{{titulo}}</ion-title>
 
     <ion-thumbnail slot="start" class="imageLogoBanner">
       <img src="/assets/images/logo.png">

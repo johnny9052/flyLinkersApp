@@ -8,6 +8,13 @@ import { IonicModule } from '@ionic/angular';
 import { LogInPage } from './log-in.page';
 import { ComponentsModule } from '../../components/components.module';
 
+/*Necesario para las opciones de la parte superior del idioma tipo popover*/
+import { LanguageComponent } from '../../components/language/language.component';
+
+import { TranslateModule } from '@ngx-translate/core';
+
+
+
 const routes: Routes = [
   {
     path: '',
@@ -16,12 +23,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    LanguageComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
+    TranslateModule
   ],
   declarations: [LogInPage]
 })

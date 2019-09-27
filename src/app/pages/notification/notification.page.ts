@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { ModelNotifications } from '../../interfaces/notifications';
 import { HelperService } from '../../util/HelperService';
-import { NetworkService } from '../../services/network.service';
 import { NotificationsService } from '../../services/notifications.service';
 import { Router, NavigationExtras } from '@angular/router';
 
@@ -25,8 +24,14 @@ export class NotificationPage implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-     // Se obtiene el identidicador del usuario que ingreso al sistema
-     this.getProfilePk();
+
+  }
+
+
+
+  ionViewWillEnter() {
+    // Se obtiene el identidicador del usuario que ingreso al sistema
+    this.getProfilePk();
   }
 
   getProfilePk() {
@@ -40,16 +45,19 @@ export class NotificationPage implements OnInit {
   }
 
   getNotificationsData(pkUser) {
+    this.helperService.mostrarBarraDeCarga('Espere por favor');
     this.notificationsService.getNotifications(pkUser).subscribe(data => {
       console.log(data);
       let res: any;
       res = data;
       console.log(res.items);
       this.notifications = res.items;
-
-      // console.log('Lo que tiene es ' + data.contactos_para_conectar[38].image_perfil );
-      // tslint:disable-next-line: max-line-length
-      // console.log((data.contactos_para_conectar[38].image_perfil !== '' ) ? data.contactos_para_conectar[38].image_perfil : 'https://flylinkers.com/media/avatar_2x.png');
+      this.helperService.ocultarBarraCarga();
+    },
+    error => {
+      this.helperService.ocultarBarraCarga();
+      this.helperService.showAlert('Error', 'Error cargando la informacion');
+      console.log('oops', error);
     }
   );
   }

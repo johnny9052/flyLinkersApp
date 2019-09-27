@@ -1,5 +1,5 @@
 <app-header-login
-  titulo="Primeros 100 inscritos"
+  titulo=" {{ 'primeros100' | translate }}  "
   botonRegreso="true"
 ></app-header-login>
 
@@ -10,13 +10,7 @@
         text-wrap="text-wrap"
         class="ion-text-justify"
       >
-      FlyLinkers quiere agradecer a las 100 primeras personas que confiaron en nosotros. Por ese motivo publicamos aquí el listado de ellos.
-
-      ¡Gracias Amigos! Esperamos que esta nueva red social sea para ustedes una potente herramienta de comunicación y trabajo y los ayude a crear las redes que necesitan.
-
-      Atentamente, 
-
-      El Equipo de FlyLinkers
+      {{ 'primeros100Mensaje' | translate }}
       </ion-label>
     </ion-item>
   </ion-list>

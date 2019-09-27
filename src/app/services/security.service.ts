@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { HelperService } from '../util/HelperService';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -19,7 +20,8 @@ export class SecurityService {
   */
   constructor(private http: HttpClient,
               public alertCtrl: AlertController,
-              public helperService: HelperService
+              public helperService: HelperService,
+              private translate: TranslateService
               ) { }
 
   /*Definicion del header funcional para envios via post*/
@@ -34,7 +36,7 @@ export class SecurityService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/registerApp/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -46,16 +48,17 @@ export class SecurityService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlertRedirect('Exito', 'Usuario registrado exitosamente', '/identify');
+        // tslint:disable-next-line: max-line-length
+        this.helperService.showAlertRedirect(this.translate.instant('exitoTitulo'), this.translate.instant('nuevoUsuarioExito'), '/identify');
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', 'El usuario ya se encuentra registrado');
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('nuevoUsuarioExistente'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -66,7 +69,7 @@ export class SecurityService {
   logInUser( postData: any) {
       const urlLogIn = 'https://flylinkers.com/es/login_user_app/';
       /*Se muestra una barra de carga*/
-      this.helperService.mostrarBarraDeCarga('Espere por favor');
+      this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
       /*Se envian los datos al servidor, enviando la url y los datos*/
       this.http.post(urlLogIn, postData, {headers: this.headersPost}).subscribe(data => {
         /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -87,19 +90,21 @@ export class SecurityService {
           if (res.perfil !== '-1') {
             /*Se valida si el usuario ya actualizo los datos del perfil o no para saber si se manda al home o
             a actualizar los datos de perfil*/
-            this.helperService.showAlertRedirect('Exito', 'Usuario identificado correctamente', '/master-page');
+            // tslint:disable-next-line: max-line-length
+            this.helperService.showAlertRedirect(this.translate.instant('exitoTitulo'), this.translate.instant('usuarioIdentificado'), '/master-page');
           } else {
-            this.helperService.showAlertRedirect('Exito', 'Usuario identificado correctamente', '/profile-edit');
+            // tslint:disable-next-line: max-line-length
+            this.helperService.showAlertRedirect(this.translate.instant('exitoTitulo'), this.translate.instant('usuarioIdentificado'), '/profile-edit');
           }
         } else {
-          /*Si no retorna uno es porque el usuario ya existe*/
-          this.helperService.showAlert('Error', res.mensaje);
+          /*Si no retorna uno es porque el usuario no existe*/
+          this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('usuarioNoExiste'));
         }
       }, error => {
         /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
         this.helperService.ocultarBarraCarga();
         /*Sino es porque se genero un error en el servidor*/
-        this.helperService.showAlert('Error', 'Error procesando la transaccion');
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
         // this.helperService.showAlertRedirect('Exito', 'Usuario identificado correctamente', '/profile-edit');
       });
   }

@@ -119,6 +119,7 @@ showHideEvents() {
 /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se
 encuentra logueado*/
 getProfileData(pkUser: string) {
+  this.helperService.mostrarBarraDeCarga('Espere por favor');
   // Se obtiene toda la informacion del usuario que entro al sistema
   this.profileService.getProfileData(pkUser).subscribe(
     data => {
@@ -132,8 +133,11 @@ getProfileData(pkUser: string) {
       this.userInterests = res.interests;
       this.userExperiences = res.experiences;
       this.events = res.events;
+      this.helperService.ocultarBarraCarga();
     },
     error => {
+      this.helperService.ocultarBarraCarga();
+      this.helperService.showAlert('Error', 'Error cargando la informacion');
       console.log('oops', error);
     }
   );

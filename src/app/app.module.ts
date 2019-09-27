@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 /*Tambien debe importarlo en la parte inferior
 en los imports*/
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
 /*Import necesario para el almacenamiento local*/
 import { IonicStorageModule } from '@ionic/storage';
@@ -20,6 +20,10 @@ import { Camera } from '@ionic-native/camera/ngx';
 
 /*Se importa de manera global el uso del plugin para CODIFICAR A BASE64 */
 import { Base64 } from '@ionic-native/base64/ngx';
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 
 /*Para instalar cordova en el proyecto
@@ -35,6 +39,15 @@ npm install @ionic-native/http*/
     AppRoutingModule,
     HttpClientModule,
     ComponentsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [ HttpClient ]
+      }
+    }),
     IonicStorageModule.forRoot()
   ],
   providers: [

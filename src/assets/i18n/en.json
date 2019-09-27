@@ -1,0 +1,68 @@
+{
+
+  "***************IDIOMAS**********************": "",
+
+  "espanol": "Spanish",
+  "ingles": "English",
+
+  "***************PAGINA-INICIAL**********************": "",
+
+    "mensajeInicial1": "The # 1 Aviation Network",
+    "mensajeInicial2": "Is an interactive platform where the aviation community is able to exchange ideas, participate in webinars and also have access to the latest news, events, seminars and relevant industry information.",
+    "unete": "Join free now",
+    "nosotros": "About us",
+    "primeros": "First",
+    "regresar": "Back",
+
+    "***************MISION-VISION**********************": "",
+
+    "misionVision": "Mission And Vision",
+    "mision":"MISSION",
+    "misionParte1": "is a specific interactive platform that generates a specialized network for entities and professionals of the aeronautical community around the world.",
+    "vision": "VISION",
+    "visionParte1":"will be the leading platform within the aviation community providing its members with the opportunity to access industry specific information. It´s agenda is focused on the progress and prosperity of civil aviation through the strengthening of relationships between professionals around the world in a friendly environment that embraces progression and innovation.",
+    "visionParte2":"FLYLINKERS will provide a unique platform to:",
+    "visionVineta1": "Exchange ideas and showcase innovative solutions.",
+    "visionVineta2": "Access the most relevant and current industry news by having access to direct links to aviation news around the world.",
+    "visionVineta3": "Increase professional visibility and sector influence.",
+    "visionVineta4": "Interact virtually with other members.",
+    "visionVineta5": "Endorse individual’s skillset on their profile.",
+
+    "***************PRIMEROS-100**********************": "",
+
+    "primeros100":"First 100 Registrants",
+    "primeros100Mensaje": "FlyLinkers wants to thank the first 100 people who trusted us. For this reason we publish here the list of them. Thanks friends! We hope that this new social network is a powerful tool for communication and work and helps create the networks they need.  The FlyLinkers Team",
+
+    "***************CAMPOS DE TEXTO**********************": "",
+  
+    "correo": "Email",
+    "contrasena": "Password",
+    "constrasenaConfirmar": "Confirm password",
+    "nombre": "First name",
+    "apellido": "Last name", 
+
+
+    "***************MENSAJES DE ACCION**********************": "",
+
+    "espere":" Please wait",
+   
+    "errorTransaccion": "Process error",
+    "exitoTitulo": "Success",
+    "errorTitulo": "Error",
+  
+    "***************REGISTRO-DE-USUARIO**********************": "",
+
+    "registro": "Register",
+    "terminosCondiciones": "By clicking Create Acount, you agree to FlyLinker's Terms of Use, Privacy Policy and Cookies Policy",
+    "crearCuenta": "Create Account",
+
+    "nuevoUsuarioExito": "User created successfully",
+    "nuevoUsuarioExistente": "User already exists",
+
+    "***************IDENTIFICACION-USUARIO**********************": "",
+    "identificacion": "Log in",
+    "acceder": "Log in",
+    "olvidoContrasena": "Forgot your password ?",
+    "usuarioIdentificado": "User correctly identified",
+    "usuarioNoExiste": "Invalid username or password"
+  }
