@@ -4,6 +4,7 @@ import { ModelNotifications } from '../../interfaces/notifications';
 import { HelperService } from '../../util/HelperService';
 import { NotificationsService } from '../../services/notifications.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notification',
@@ -15,13 +16,15 @@ export class NotificationPage implements OnInit {
   notifications: ModelNotifications[] = [];
 
   codeUser = '';
+  language = '';
 
   tiempoEspera = 1000;
 
   constructor(private actionSheetCtrl: ActionSheetController,
               private notificationsService: NotificationsService,
               public helperService: HelperService,
-              private router: Router) { }
+              private router: Router,
+              private translate: TranslateService) { }
 
   ngOnInit() {
 
@@ -38,15 +41,21 @@ export class NotificationPage implements OnInit {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('profilePk').then(response => {
       this.codeUser = response;
-      console.log(this.codeUser);
-      // Se obtiene toda la informacion del usuario que ingreso al sistema
-      this.getNotificationsData(this.codeUser);
+      this.getLanguage();
     });
   }
 
-  getNotificationsData(pkUser) {
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
-    this.notificationsService.getNotifications(pkUser).subscribe(data => {
+  getLanguage() {
+      // Se obtiene el identificador del usuario que ingreso al sistema
+      this.helperService.getLocalData('language').then(response => {
+        this.language = response;
+        this.getNotificationsData();
+      });
+  }
+
+  getNotificationsData() {
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
+    this.notificationsService.getNotifications(this.codeUser, this.language).subscribe(data => {
       console.log(data);
       let res: any;
       res = data;
@@ -56,7 +65,7 @@ export class NotificationPage implements OnInit {
     },
     error => {
       this.helperService.ocultarBarraCarga();
-      this.helperService.showAlert('Error', 'Error cargando la informacion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
       console.log('oops', error);
     }
   );
@@ -86,39 +95,5 @@ export class NotificationPage implements OnInit {
 
     this.router.navigate(['view-detail-post'], data);
   }
-
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Albums',
-      backdropDismiss: false,
-      buttons: [{
-        text: 'Delete',
-        role: 'destructive',
-        icon: 'trash',
-        cssClass: 'rojo',
-        handler: () => {
-          console.log('Delete clicked');
-        }
-      }, {
-        text: 'Edit',
-        icon: 'create',
-        handler: () => {
-          console.log('Edit clicked');
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
-  }
-
-
-
-  
 
 }

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModelUserData, Profile, Skills, Experiences, Accomplishments, Interests, Events } from '../../interfaces/userInterface';
 import { HelperService } from 'src/app/util/HelperService';
 import { ProfileService } from 'src/app/services/profile.service';
-import { TouchSequence } from 'selenium-webdriver';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +31,8 @@ export class ProfilePage implements OnInit {
   /****************END OBJETOS************************** */
 
   constructor(public helperService: HelperService,
-              public profileService: ProfileService) { }
+              public profileService: ProfileService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -73,7 +75,7 @@ export class ProfilePage implements OnInit {
   /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se
   encuentra logueado*/
   getProfileData(pkUser: string) {
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     // Se obtiene toda la informacion del usuario que entro al sistema
     this.profileService.getProfileData(pkUser).subscribe(
       data => {
@@ -91,7 +93,7 @@ export class ProfilePage implements OnInit {
       },
       error => {
         this.helperService.ocultarBarraCarga();
-        this.helperService.showAlert('Error', 'Error cargando la informacion');
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
         console.log('oops', error);
       }
     );

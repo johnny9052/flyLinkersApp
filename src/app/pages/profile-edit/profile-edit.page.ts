@@ -16,6 +16,7 @@ import { ModelRegister } from '../../interfaces/register';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { Base64 } from '@ionic-native/base64/ngx';
+import { TranslateService } from '@ngx-translate/core';
 
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
@@ -61,7 +62,8 @@ export class ProfileEditPage implements OnInit {
     public alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private camera: Camera,
-    private base64: Base64
+    private base64: Base64,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -71,7 +73,7 @@ export class ProfileEditPage implements OnInit {
     this.customPickerOptions = {
       buttons: [
         {
-          text: 'Seleccionar',
+          text: this.translate.instant('seleccionar'),
           handler: evento => {
             this.userData.birthday_date =
               evento.year.value +
@@ -82,7 +84,7 @@ export class ProfileEditPage implements OnInit {
           }
         },
         {
-          text: 'Cancelar',
+          text: this.translate.instant('cancelar'),
           handler: evento => {
             console.log('close');
           }
@@ -133,7 +135,7 @@ export class ProfileEditPage implements OnInit {
   /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se
   encuentra logueado*/
   getProfileData(pkUser: string) {
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     // Se obtiene toda la informacion del usuario que entro al sistema
     this.profileService.getProfileData(pkUser).subscribe(
       data => {
@@ -153,7 +155,7 @@ export class ProfileEditPage implements OnInit {
       },
       error => {
         this.helperService.ocultarBarraCarga();
-        this.helperService.showAlert('Error', 'Error cargando la informacion');
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('ErrorCargandoInformacion'));
         console.log('oops', error);
       }
     );
@@ -169,31 +171,31 @@ export class ProfileEditPage implements OnInit {
   /******************************************************/
   async changePassword() {
     const input = await this.alertCtrl.create({
-      header: 'Cambiar password',
+      header: this.translate.instant('cambiarPassword'),
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
           name: 'lastPassword',
           id: 'txtLastPassword',
           type: 'password',
-          placeholder: 'Ingrese su password actual'
+          placeholder: this.translate.instant('ingresePasswordActual')
         },
         {
           name: 'newPassword',
           id: 'txtNewPassword',
           type: 'password',
-          placeholder: 'Ingrese su nuevo password'
+          placeholder: this.translate.instant('ingresePasswordNuevo')
         },
         {
           name: 'confirmPassword',
           id: 'txtConfirmPassword',
           type: 'password',
-          placeholder: 'Repita su nuevo password'
+          placeholder: this.translate.instant('repitaPasswordNuevo')
         }
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('cancelar'),
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
@@ -201,7 +203,7 @@ export class ProfileEditPage implements OnInit {
           }
         },
         {
-          text: 'Cambiar',
+          text: this.translate.instant('cambiar'),
           handler: async data => {
             console.log('Confirm Ok', data);
 
@@ -215,8 +217,8 @@ export class ProfileEditPage implements OnInit {
               this.profileService.changePassword(changePassword);
             } else {
               this.helperService.showAlert(
-                'Error',
-                'Las contraseñas no coinciden'
+                this.translate.instant('errorTitulo'),
+                this.translate.instant('passwordsNoCoinciden')
               );
             }
           }

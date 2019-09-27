@@ -11,6 +11,7 @@ import { ProfileEditExperiencePageModule } from '../profile-edit-experience/prof
 import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
 
 import { PipesModule } from '../../pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -32,7 +33,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule,
     /*Se importa como modulo, el modulo de la pagina que se quiere cargar (OJOOOO ES EL MODULO)*/
-    ProfileEditExperiencePageModule
+    ProfileEditExperiencePageModule,
+    TranslateModule
   ],
   declarations: [ProfileEditPage]
 })

@@ -59,7 +59,9 @@
   "editar": "Editar",
   "cancelar": "Cancelar",
   "compartir": "Compartir",
-  
+  "seleccionar":"Seleccionar",
+  "cambiar":"Cambiar",
+
   "errorCargandoInformacion": "Error cargando la informacion",
   
   "***************REGISTRO-DE-USUARIO**********************": "",
@@ -115,8 +117,56 @@
   "postBorrado": "Post borrado exitosamente",
   "comentarioPublicado": "Comentario publicado",
   "comentarioBorrado": "Comentario borrado",
-  "comentarioEditado": "Comentario editado"
+  "comentarioEditado": "Comentario editado",
+
+  "***************NOTIFICACIONES**********************": "",
   
+  "notificacionElementoInexistente": "El elememento notificado ya no existe",
+
+
+  "***************PERFIL**********************": "",
+
+  "perfilActualizado":"Perfil actualizado",
+  "errorActualizarPerfil": "Error al actualizar el perfil",
+  "cuentaDesactivada":"Cuenta desactivada",
+  "errorDesactivandoCuenta":"Error al desactivar la cuenta",
+  "skillRegistrada": "Skill registrada",
+  "errorRegistrarSkill":"Error al registrar el skill",
+  "skillEliminada":"Skill eliminada",
+  "errorEliminarSkill":"Error al eliminar el skill",
+  "skillEditada":"Skill editada",
+  "errorEditarSkill":"Error al editar el skill",
+  "experienciaRegistrada": "Experiencia registrada",
+  "errorRegistrarExperiencia":"Error al registrar la experiencia",
+  "habilidadEliminada":"Habilidad eliminada",
+  "errorEliminarHabilidad":"Error al eliminar la habilidad",
+  "habilidadEditada":"Habilidad editada",
+  "errorEditarHabilidad":"Error al editar la habilidad",
+  "logroRegistrado": "Logro registrado",
+  "errorRegistrarLogro":"Error al registrar el logro",
+  "logroEliminado":"Logro eliminado",
+  "errorEliminarLogro":"Error al eliminar el logro",
+  "logroEditado":"Logro editado",
+  "errorEditarLogro":"Error al editar el logro",
+  "interesRegistrado": "Interes registrado",
+  "errorRegistrarInteres":"Error al registrar el interes",
+  "interesEliminado":"Interes eliminado",
+  "errorEliminarInteres":"Error al eliminar el interes",
+  "interesEditado":"Interes editado",
+  "errorEditarInteres":"Error al editar el interes",
+  "editarPerfil": "Editar perfil",
+  "habilidades": "Habilidades",
+  "experiencias":"Experiencias",
+  "logros":"Logros",
+  "inicioFecha":"Inicio",
+  "finFecha":"Fin",
+
+  "cambiarPassword": "Cambiar contraseña",
+  "ingresePasswordActual":"Ingrese contraseña actual",
+  "ingresePasswordNuevo": "Ingrese su nueva contraseña",
+  "repitaPasswordNuevo":"Repita su nueva contraseña",
+  "passwordsNoCoinciden": "Las contraseñas no coinciden"
+
 
 }
 

@@ -156,7 +156,6 @@ export class HelperService {
 
   public cargarIdiomaActual() {
     this.getLocalData('language').then(response => {
-        console.log('El idioma actual es: ' + response);
         if (this.isValidValue(response)) {
           this.cambiarLenguaje(response);
         } else {
@@ -164,6 +163,8 @@ export class HelperService {
         }
     });
   }
+
+
 
 
 

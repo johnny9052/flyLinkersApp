@@ -59,7 +59,9 @@
     "editar": "Edit",
     "cancelar": "Cancel",
     "compartir": "Share",  
-     
+    "seleccionar":"Select",
+    "cambiar":"Change",
+
     "errorCargandoInformacion": "Error loading information",
 
 
@@ -116,7 +118,53 @@
   "postBorrado": "Post deleted",
   "comentarioPublicado": "Comment posted",
   "comentarioBorrado": "Comment deleted",
-  "comentarioEditado": "Edited Comment"
+  "comentarioEditado": "Edited Comment",
   
+  "***************NOTIFICACIONES**********************": "",
+  
+  "notificacionElementoInexistente": "The notified item no longer exists",
 
+
+  "***************PERFIL**********************": "",
+
+  "perfilActualizado":"Updated profile",
+  "errorActualizarPerfil": "Error updating profile",
+  "cuentaDesactivada":"Account deactivated",
+  "errorDesactivandoCuenta":"Account deactivation failed",
+  "skillRegistrada": "Skill created",
+  "errorRegistrarSkill":"Error registering skill",
+  "skillEliminada":"Skill deleted",
+  "errorEliminarSkill":"Error deleting the skill",
+  "skillEditada":"Skill edited",
+  "errorEditarSkill":"Error editing skill",
+  "experienciaRegistrada": "Registered Experience",
+  "errorRegistrarExperiencia":"Error registering experience",
+  "habilidadEliminada":"Skill removed",
+  "errorEliminarHabilidad":"Error deleting ability",
+  "habilidadEditada":"Edited Skill",
+  "errorEditarHabilidad":"Error editing ability",
+  "logroRegistrado": "accomplishment created",
+  "errorRegistrarLogro":"Error registering accomplishment",
+  "logroEliminado":"Accomplishment removed",
+  "errorEliminarLogro":"Error deleting accomplishment",
+  "logroEditado":"Accomplishment edited",
+  "errorEditarLogro":"Error editing accomplishment",
+  "interesRegistrado": "Registered Interest",
+  "errorRegistrarInteres":"Error registering interest",
+  "interesEliminado":"Interest removed",
+  "errorEliminarInteres":"Error deleting interest",
+  "interesEditado":"Edited Interest",
+  "errorEditarInteres":"Error editing interest",
+  "editarPerfil": "Edit profile",
+  "habilidades": "Skills",
+  "experiencias":"Experiences",
+  "logros":"Accomplishmens",
+  "inicioFecha":"From",
+  "finFecha":"To",
+
+  "cambiarPassword": "Change Password",
+  "ingresePasswordActual":"Enter current password",
+  "ingresePasswordNuevo": "Enter new password",
+  "repitaPasswordNuevo":"Repeat new password",
+  "passwordsNoCoinciden": "Passwords do not match"
   }

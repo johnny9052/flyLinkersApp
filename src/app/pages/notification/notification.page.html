@@ -1,5 +1,5 @@
 
-<app-header titulo="Notificaciones"></app-header>
+<app-header titulo="{{ 'notificaciones' | translate }}"></app-header>
 
 <ion-content>
   <ion-item *ngFor="let notification of notifications" [color]="notification.unread ? 'light' : ''" (click)="viewNotification(notification.notification_item_pk, notification.type, notification.idPost)">
