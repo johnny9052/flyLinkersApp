@@ -36,7 +36,7 @@ export class SecurityService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/registerApp/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga(this.translate.instant('cargandoPublicaciones'));
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -79,7 +79,7 @@ export class SecurityService {
         res = data;
         /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
         if (res.code === '1') {
-          console.log(res);
+          // console.log(res);
           /*Se almacena de manera local el identificador del usuario*/
           this.helperService.saveLocalData('profilePk', res.userPk);
           this.helperService.saveLocalData('firstName', res.firstName);

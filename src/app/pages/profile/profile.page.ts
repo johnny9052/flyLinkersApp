@@ -3,6 +3,7 @@ import { ModelUserData, Profile, Skills, Experiences, Accomplishments, Interests
 import { HelperService } from 'src/app/util/HelperService';
 import { ProfileService } from 'src/app/services/profile.service';
 import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class ProfilePage implements OnInit {
   events: Events[] = [];
   /****************END OBJETOS************************** */
 
-  constructor(public helperService: HelperService,
+  constructor(private blockAccess: BlockAccessService,
+              public helperService: HelperService,
               public profileService: ProfileService,
               private translate: TranslateService) { }
 
@@ -66,7 +68,7 @@ export class ProfilePage implements OnInit {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('profilePk').then(response => {
       this.codeUser = response;
-      console.log(this.codeUser);
+      // console.log(this.codeUser);
       // Se obtiene toda la informacion del usuario que ingreso al sistema
       this.getProfileData(this.codeUser);
     });
@@ -81,7 +83,7 @@ export class ProfilePage implements OnInit {
       data => {
         let res: any;
         res = data;
-        console.log(res);
+        // console.log(res);
         // Se obtiene la informacion basica del perfil
         this.userData = res.profile[0];
         this.userSkills = res.skills;
@@ -94,7 +96,7 @@ export class ProfilePage implements OnInit {
       error => {
         this.helperService.ocultarBarraCarga();
         this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
-        console.log('oops', error);
+        // console.log('oops', error);
       }
     );
   }

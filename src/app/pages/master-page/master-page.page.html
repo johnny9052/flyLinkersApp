@@ -1,8 +1,21 @@
+
+
 <app-header titulo ="{{ 'noticias' | translate }}"></app-header>
 
 
 <!--POR CADA POST DISPONIBLE SE ESTRUCTURA SU INFORMACION-->
 <ion-content class="cards-bg social-cards">
+
+    <ion-card *ngIf="posts.length===0">
+        <ion-item lines="none" >
+            <h5 slot="start">{{ 'noNoticiasQueMostrarTitulo' | translate }}</h5>
+          </ion-item>
+          <ion-card-content>
+              {{ 'noNoticiasQueMostrarDescripcion' | translate }}
+          </ion-card-content>
+    </ion-card>
+      
+
   <ion-card *ngFor="let post of posts">
     <ion-item>
       <!-- IMAGEN EL USUARIO QUE PUBLICA EL POST-->

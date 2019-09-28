@@ -43,7 +43,7 @@ export class NetworkService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('solicitudAmistadRecibidaExito'));
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('exitoTransaccion'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
         this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));

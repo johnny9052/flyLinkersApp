@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModelEvents } from '../../interfaces/events';
 import { HelperService } from '../../util/HelperService';
 import { EventsService } from '../../services/events.service';
+import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 @Component({
   selector: 'app-event',
@@ -14,8 +16,10 @@ export class EventPage implements OnInit {
 
   codeUser = '';
 
-  constructor(private eventsService: EventsService,
-              public helperService: HelperService) { }
+  constructor(private blockAccess: BlockAccessService,
+              private eventsService: EventsService,
+              public helperService: HelperService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
 
@@ -27,19 +31,19 @@ export class EventPage implements OnInit {
   }
 
   getEventsData() {
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.eventsService.getEvents().subscribe(data => {
-      console.log(data);
+      // console.log(data);
       let res: any;
       res = data;
-      console.log(res.events);
+      // console.log(res.events);
       this.events = res.events;
       this.helperService.ocultarBarraCarga();
     },
     error => {
       this.helperService.ocultarBarraCarga();
-      this.helperService.showAlert('Error', 'Error cargando la informacion');
-      console.log('oops', error);
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
+      // console.log('oops', error);
     }
   );
   }

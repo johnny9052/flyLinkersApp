@@ -49,7 +49,7 @@ export class NotificationsService {
             // this.helperService.showAlertRedirect('Exito', res.mensaje, '/network');
             this.navCtrl.navigateBack('/network');
           } else if (res.code === '1' && res.idPost === '-1') {
-            console.log('Parte 1');
+            // console.log('Parte 1');
             this.helperService.showAlert(
               this.translate.instant('errorTitulo'),
               res.mensaje
@@ -59,10 +59,10 @@ export class NotificationsService {
             res.idPost !== '-1' &&
             res.idPost !== '-2'
           ) {
-            console.log('Parte 2');
+            // console.log('Parte 2');
             // this.helperService.showAlert('Exito', res.mensaje);
           } else {
-            console.log('Parte 3');
+            // console.log('Parte 3');
             this.helperService.showAlert(
               this.translate.instant('errorTitulo'),
               this.translate.instant('notificacionElementoInexistente')

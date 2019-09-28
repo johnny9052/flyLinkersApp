@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Experiences } from '../../interfaces/userInterface';
+import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 @Component({
   selector: 'app-profile-edit-experience',
@@ -25,14 +27,16 @@ export class ProfileEditExperiencePage implements OnInit {
   customPickerOptionsInicial;
   customPickerOptionsFinal;
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private blockAccess: BlockAccessService,
+              private modalCtrl: ModalController,
+              private translate: TranslateService) {}
 
   ngOnInit() {
     // Se configura el calendar
     this.customPickerOptionsInicial = {
       buttons: [
         {
-          text: 'Seleccionar',
+          text: this.translate.instant('seleccionar'),
           handler: evento => {
             this.experiencia.init_date =
               evento.year.value +
@@ -43,9 +47,9 @@ export class ProfileEditExperiencePage implements OnInit {
           }
         },
         {
-          text: 'Cancelar',
+          text: this.translate.instant('cancelar'),
           handler: evento => {
-            console.log('close');
+            // console.log('close');
           }
         }
       ]
@@ -55,7 +59,7 @@ export class ProfileEditExperiencePage implements OnInit {
     this.customPickerOptionsFinal = {
       buttons: [
         {
-          text: 'Seleccionar',
+          text: this.translate.instant('seleccionar'),
           handler: evento => {
             this.experiencia.end_date =
               evento.year.value +
@@ -66,9 +70,9 @@ export class ProfileEditExperiencePage implements OnInit {
           }
         },
         {
-          text: 'Cancelar',
+          text: this.translate.instant('cancelar'),
           handler: evento => {
-            console.log('close');
+            // console.log('close');
           }
         }
       ]
@@ -86,7 +90,7 @@ export class ProfileEditExperiencePage implements OnInit {
     this.experiencia.headline_experience = this.headlineExperience;
     this.experiencia.description_experience = this.descriptionExperience;
 
-    console.log('El valor es', this.experiencia.currently_working);
+    // console.log('El valor es', this.experiencia.currently_working);
 
   }
 

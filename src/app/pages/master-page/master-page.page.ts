@@ -6,6 +6,7 @@ import { ModelPosts } from '../../interfaces/posts';
 import { PostService } from '../../services/post.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class MasterPagePage implements OnInit {
   tiempoEspera = 1000;
 
   constructor(
+    private blockAccess: BlockAccessService,
     private actionSheetCtrl: ActionSheetController,
     private masterPageService: MasterPageService,
     public helperService: HelperService,
@@ -59,7 +61,7 @@ export class MasterPagePage implements OnInit {
     error => {
       this.helperService.ocultarBarraCarga();
       this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
-      console.log('oops', error);
+      // console.log('oops', error);
     });
   }
 
@@ -78,7 +80,7 @@ export class MasterPagePage implements OnInit {
           postTemp.metadataTitle = res.title[0];
         },
         error => {
-          console.log('oops', error);
+          // console.log('oops', error);
         }
       );
     }
@@ -115,7 +117,7 @@ export class MasterPagePage implements OnInit {
     });
   }
 
-  viewPost(idNew){
+  viewPost(idNew) {
 
   }
 
@@ -142,7 +144,7 @@ export class MasterPagePage implements OnInit {
           icon: 'trash',
           cssClass: 'rojo',
           handler: () => {
-            console.log('Delete clicked');
+            // console.log('Delete clicked');
             this.deletePost(pk);
           }
         },
@@ -164,7 +166,7 @@ export class MasterPagePage implements OnInit {
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         }
       ]
@@ -173,7 +175,7 @@ export class MasterPagePage implements OnInit {
   }
 
   openPage(url: string) {
-    if (url !== 'undefined' && url !== undefined && url !== null){
+    if (url !== 'undefined' && url !== undefined && url !== null) {
       this.helperService.abrirUrlExterna(url);
     }
   }

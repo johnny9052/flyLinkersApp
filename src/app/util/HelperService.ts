@@ -3,7 +3,6 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { Storage } from '@ionic/storage';
 
 import { TranslateService } from '@ngx-translate/core';
-import { ReplaceSource } from 'webpack-sources';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +58,7 @@ export class HelperService {
           text: this.translate.instant('aceptar'),
           cssClass: 'flylinkersColor',
           handler: (blah) => {
-            // console.log('Boton OK');
+            // // console.log('Boton OK');
           }
         }
       ]
@@ -82,7 +81,7 @@ export class HelperService {
           cssClass: 'flylinkersColor',
           handler: (blah) => {
             /*Cuando se da tap en aceptar redirecciona al login*/
-            this.navCtrl.navigateBack(redirectURL);
+            this.navCtrl.navigateForward(redirectURL);
           }
         }
       ]
@@ -93,6 +92,9 @@ export class HelperService {
 
 
 
+  redireccionar(redirectURL: string) {
+    this.navCtrl.navigateForward(redirectURL);
+  }
 
 
 

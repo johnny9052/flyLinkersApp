@@ -1,10 +1,10 @@
 
-<app-header titulo="Intereses"></app-header>
+<app-header titulo="{{ 'intereses' | translate }}"></app-header>
 
 <ion-content>
     <ion-card style="width: 100%; margin: 0px !important; border-radius: 2px;" color="flylinkers">
         <ion-item color="FlyLinkers-Blanco">
-            <ion-label>Intereses ({{userInterests.length}})</ion-label>
+            <ion-label>{{ 'intereses' | translate }} ({{userInterests.length}})</ion-label>
 
             <ion-icon name="cog" routerLink="/profile"></ion-icon>
         </ion-item>

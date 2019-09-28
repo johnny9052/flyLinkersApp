@@ -1,4 +1,4 @@
-<app-header titulo="Perfil"></app-header>
+<app-header titulo="{{ 'perfil' | translate }}"></app-header>
 
 <ion-content padding="padding">
     <form #formulario="ngForm">
@@ -28,7 +28,7 @@
                                 size="small"
                                 routerLink="/profile-edit"
                                 *ngIf="userData.pk === codeUser"
-                            >Editar perfil</ion-button>
+                            >{{ 'editarPerfil' | translate }}</ion-button>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -40,7 +40,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideSkills()"
                 >
-                    <ion-label>Habilidades ({{userSkills.length}})</ion-label>
+                    <ion-label>{{ 'habilidades' | translate }} ({{userSkills.length}})</ion-label>
                     <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
                     
 
@@ -63,7 +63,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideExperiences()"
                 >
-                    <ion-label>Experiencias ({{userExperiences.length}})</ion-label>
+                    <ion-label>{{ 'experiencias' | translate }} ({{userExperiences.length}})</ion-label>
             
                     <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
@@ -86,7 +86,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideAccomplishments()"
                 >
-                    <ion-label>Logros ({{userAccomplishments.length}})</ion-label>
+                    <ion-label>{{ 'logros' | translate }} ({{userAccomplishments.length}})</ion-label>
             
                     <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
@@ -110,7 +110,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideInterests()"
                 >
-                    <ion-label>Intereses ({{userInterests.length}})</ion-label>
+                    <ion-label>{{ 'intereses' | translate }} ({{userInterests.length}})</ion-label>
             
                     <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
 
@@ -134,7 +134,7 @@
                     color="FlyLinkers-Blanco"
                     (click)="showHideEvents()"
                 >
-                    <ion-label>Eventos ({{events.length}})</ion-label>
+                    <ion-label>{{ 'eventos' | translate }} ({{events.length}})</ion-label>
                     <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                 </ion-item>
             
@@ -148,8 +148,8 @@
                             <h5>{{event.location}}</h5>
                         </ion-label>
                         <ion-label slot="end" text-right>
-                            <p>Inicio: {{event.event_init_date | date: 'dd/MM/yyyy'}}</p>
-                            <p>Fin: {{event.event_end_date | date: 'dd/MM/yyyy'}}</p>
+                            <p>{{ 'inicioFecha' | translate }}: {{event.event_init_date | date: 'dd/MM/yyyy'}}</p>
+                            <p>{{ 'finFecha' | translate }}: {{event.event_end_date | date: 'dd/MM/yyyy'}}</p>
                         </ion-label>
                     </ion-item>
                 </ion-card-content>

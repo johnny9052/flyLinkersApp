@@ -22,6 +22,8 @@ export class HeaderComponent implements OnInit {
     this.helperService.removeLocalData('firstName');
     this.helperService.removeLocalData('lastName');
     this.helperService.removeLocalData('image_perfil');
+    // // console.log('VAMOS A REDIRECCIONAR');
+    this.helperService.redireccionar('/');
   }
 
 }

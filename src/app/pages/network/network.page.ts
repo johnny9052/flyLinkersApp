@@ -10,6 +10,7 @@ import { HelperService } from '../../util/HelperService';
 import { NetworkService } from '../../services/network.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 @Component({
   selector: 'app-network',
@@ -38,11 +39,11 @@ export class NetworkPage implements OnInit {
 
   tiempoEspera = 1000;
 
-  constructor(
-    private networkService: NetworkService,
-    public helperService: HelperService,
-    private router: Router,
-    private translate: TranslateService
+  constructor(private blockAccess: BlockAccessService,
+              private networkService: NetworkService,
+              public helperService: HelperService,
+              private router: Router,
+              private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -58,7 +59,7 @@ export class NetworkPage implements OnInit {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('profilePk').then(response => {
       this.codeUser = response;
-      console.log(this.codeUser);
+      // console.log(this.codeUser);
       // Se obtiene toda la informacion del usuario que ingreso al sistema
       this.getContactsData(this.codeUser);
     });
@@ -67,8 +68,8 @@ export class NetworkPage implements OnInit {
   getContactsData(pkUser) {
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.networkService.getContacts(pkUser).subscribe(data => {
-      console.log(data);
-      console.log(data.solicitudes_recibidas);
+      // console.log(data);
+      // console.log(data.solicitudes_recibidas);
       this.solicitudesRecibidas = data.solicitudes_recibidas;
       this.totalSolicitudesRecibidas = data.cantidad_solicitudes_recibidas[0];
       this.solicitudesEnviadas = data.solicitudes_enviadas;
@@ -82,7 +83,7 @@ export class NetworkPage implements OnInit {
       error => {
         this.helperService.ocultarBarraCarga();
         this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
-        console.log('oops', error);
+        // console.log('oops', error);
       });
   }
 

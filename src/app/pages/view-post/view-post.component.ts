@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class ViewPostComponent implements OnInit {
 
-  constructor() { }
+  constructor(private blockAccess: BlockAccessService) { }
 
   ngOnInit() {
   }

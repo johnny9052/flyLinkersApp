@@ -16,6 +16,8 @@ import {
 import { PopcommentsComponent } from 'src/app/components/popcomments/popcomments.component';
 import { PoprecommentsComponent } from '../../components/poprecomments/poprecomments.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BlockAccessService } from '../../util/blockAccess';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-view-detail-post',
@@ -37,14 +39,15 @@ export class ViewDetailPostPage implements OnInit {
   hiddenComments = true;
   hiddenRecomments = false;
 
-  constructor(
-    private actionSheetCtrl: ActionSheetController,
-    private postService: PostService,
-    public helperService: HelperService,
-    public alertCtrl: AlertController,
-    private popoverController: PopoverController,
-    private route: ActivatedRoute,
-    private router: Router
+  constructor(private blockAccess: BlockAccessService,
+              private actionSheetCtrl: ActionSheetController,
+              private postService: PostService,
+              public helperService: HelperService,
+              public alertCtrl: AlertController,
+              private popoverController: PopoverController,
+              private route: ActivatedRoute,
+              private router: Router,
+              private translate: TranslateService
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -54,6 +57,10 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  ionViewWillEnter() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
   }
@@ -137,7 +144,7 @@ export class ViewDetailPostPage implements OnInit {
         this.getComments(this.idPost);
       },
       error => {
-        console.log('oops', error);
+        // console.log('oops', error);
       }
     );
   }
@@ -261,13 +268,13 @@ export class ViewDetailPostPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            // console.log('Confirm Cancel');
           }
         },
         {
           text: 'Ok',
           handler: async data => {
-            console.log('Confirm Ok', data);
+            // console.log('Confirm Ok', data);
             const objComment = {
               comment: data.comment,
               id_comment: id
@@ -305,13 +312,13 @@ export class ViewDetailPostPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            // console.log('Confirm Cancel');
           }
         },
         {
           text: 'Ok',
           handler: async data => {
-            console.log('Confirm Ok', data);
+            // console.log('Confirm Ok', data);
 
             const objRecomment = {
               recomment: data.recomment,
@@ -342,7 +349,7 @@ export class ViewDetailPostPage implements OnInit {
           icon: 'trash',
           cssClass: 'rojo',
           handler: () => {
-            console.log('Delete clicked');
+            // console.log('Delete clicked');
             this.deletePost(pk);
           }
         },
@@ -350,7 +357,7 @@ export class ViewDetailPostPage implements OnInit {
           text: 'Edit',
           icon: 'create',
           handler: () => {
-            console.log('Edit clicked');
+            // console.log('Edit clicked');
           }
         },
         {
@@ -358,7 +365,7 @@ export class ViewDetailPostPage implements OnInit {
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         }
       ]

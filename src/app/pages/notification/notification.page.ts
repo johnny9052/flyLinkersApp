@@ -5,6 +5,7 @@ import { HelperService } from '../../util/HelperService';
 import { NotificationsService } from '../../services/notifications.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 @Component({
   selector: 'app-notification',
@@ -20,7 +21,8 @@ export class NotificationPage implements OnInit {
 
   tiempoEspera = 1000;
 
-  constructor(private actionSheetCtrl: ActionSheetController,
+  constructor(private blockAccess: BlockAccessService,
+              private actionSheetCtrl: ActionSheetController,
               private notificationsService: NotificationsService,
               public helperService: HelperService,
               private router: Router,
@@ -56,23 +58,23 @@ export class NotificationPage implements OnInit {
   getNotificationsData() {
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.notificationsService.getNotifications(this.codeUser, this.language).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       let res: any;
       res = data;
-      console.log(res.items);
+      // console.log(res.items);
       this.notifications = res.items;
       this.helperService.ocultarBarraCarga();
     },
     error => {
       this.helperService.ocultarBarraCarga();
       this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
-      console.log('oops', error);
+      // console.log('oops', error);
     }
   );
   }
 
   viewNotification(pk: string, type: string, idPost: string) {
-    console.log(pk);
+    // console.log(pk);
 
     const obj = {
       notification_item_pk: pk,

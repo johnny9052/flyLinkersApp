@@ -105,7 +105,7 @@ export class ProfileService {
   /*Funcion que se encarga de registrar al usuario, recibiendo por parametro
   los datos del usuario*/
   saveProfileDataService( postData: any) {
-    console.log(postData);
+    // console.log(postData);
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/network/edit_profile_app/';
     /*Se muestra una barra de carga*/
@@ -144,7 +144,7 @@ export class ProfileService {
 
   /*Obtiene todas las skills del usuario a traves de su PK*/
   getListSkillUser(pkUser: string) {
-    console.log('vamos a traer algo');
+    // console.log('vamos a traer algo');
     return this.http.get<Profile>('https://flylinkers.com/es/network/get_skills_user_app?pk=' + pkUser);
 }
 
@@ -157,7 +157,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -192,7 +192,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -227,7 +227,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -281,7 +281,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -316,7 +316,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -329,10 +329,10 @@ export class ProfileService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('habilidadEliminada'));
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('experienciaEliminada'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorEliminarHabilidad'));
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -351,7 +351,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -364,10 +364,10 @@ export class ProfileService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('habilidadEditada'));
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('experienciaEditada'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorEditarHabilidad'));
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -396,7 +396,7 @@ export class ProfileService {
 
   /*Obtiene todas las skills del usuario a traves de su PK*/
   getListAccomplishmentUser(pkUser: string) {
-    console.log('vamos a traer algo');
+    // console.log('vamos a traer algo');
     return this.http.get<Profile>('https://flylinkers.com/es/network/get_accomplishments_user_app?pk=' + pkUser);
   }
 
@@ -409,7 +409,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -439,13 +439,13 @@ export class ProfileService {
   /*Funcion que se encarga de eliminar un nuevo skill, recibiendo por parametro
   el pk del usuario*/
   async deleteAccomplishmentService( postData: any) {
-    console.log(postData.pk);
+    // console.log(postData.pk);
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/network/delete_accomplishment_app/';
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -480,7 +480,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -524,7 +524,7 @@ export class ProfileService {
 
   /*Obtiene todas las skills del usuario a traves de su PK*/
   getListInterestsUser(pkUser: string) {
-    console.log('vamos a traer algo');
+    // console.log('vamos a traer algo');
     return this.http.get<Profile>('https://flylinkers.com/es/network/get_interests_user_app?pk=' + pkUser);
   }
 
@@ -537,7 +537,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -567,13 +567,13 @@ export class ProfileService {
   /*Funcion que se encarga de eliminar un nuevo skill, recibiendo por parametro
   el pk del usuario*/
   async deleteInterestsService( postData: any) {
-    console.log(postData.pk);
+    // console.log(postData.pk);
     /*URL del web service*/
     const url = 'https://flylinkers.com/es/network/delete_interest_app/';
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
@@ -608,7 +608,7 @@ export class ProfileService {
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
 
-    // console.log(postData);
+    // // console.log(postData);
 
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {

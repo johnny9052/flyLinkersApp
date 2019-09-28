@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 @Component({
   selector: 'app-detail-post',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailPostPage implements OnInit {
 
-  constructor() { }
+  constructor(private blockAccess: BlockAccessService) { }
 
   ngOnInit() {
   }

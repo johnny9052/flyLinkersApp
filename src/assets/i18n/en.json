@@ -37,30 +37,52 @@
   
     "correo": "Email",
     "contrasena": "Password",
+    "password": "Password",
     "constrasenaConfirmar": "Confirm password",
     "nombre": "First name",
+    "nombres": "First name",
     "apellido": "Last name", 
+    "apellidos": "Last name", 
     "titulo": "Title",
     "descripcion": "Description",
     "url":"url",
-  
-   
 
+    "genero":"Gender",
+    "masculino":"Male",
+    "femenino":"Famale",
+    "fechaNacimiento":"Birthday date",
+    "paisResidencia": "Country of residence ",
+    "titular": "Headline ",
+    "profesion": "Profession ",
+    "educacion":"Education",
+    "area":"Area",
+    "empresaActual":"Current company",
+    "cargoActual":"Current position",
+    "telefono":"Phone",
+    "celular":"Mobile",
+
+    "si": "Yes",
+    "no":"No",
 
     "***************MENSAJES DE ACCION**********************": "",
 
     "espere":" Please wait",
-   
+    "exitoTransaccion": "Successful process",
     "errorTransaccion": "Process error",
     "exitoTitulo": "Success",
     "errorTitulo": "Error",
     "aceptar": "Accept",
     "borrar": "Delete",
+    "eliminar": "Delete",
     "editar": "Edit",
     "cancelar": "Cancel",
     "compartir": "Share",  
     "seleccionar":"Select",
+    "seleccione":"Select",
     "cambiar":"Change",
+    "ok": "Ok",
+    "crear": "Create",
+    "enviar": "Send",
 
     "errorCargandoInformacion": "Error loading information",
 
@@ -93,6 +115,10 @@
     "noticias": "News",
     "cargandoPublicaciones": "Loading posts",
 
+    "noNoticiasQueMostrarTitulo":"There is no information to show",
+    "noNoticiasQueMostrarDescripcion":"Increase the number of people in your network to see news and publications",
+
+
 
     
   "***************NETWORK**********************": "",
@@ -119,6 +145,7 @@
   "comentarioPublicado": "Comment posted",
   "comentarioBorrado": "Comment deleted",
   "comentarioEditado": "Edited Comment",
+  "escribeComentario":"Write your comment",
   
   "***************NOTIFICACIONES**********************": "",
   
@@ -140,8 +167,10 @@
   "experienciaRegistrada": "Registered Experience",
   "errorRegistrarExperiencia":"Error registering experience",
   "habilidadEliminada":"Skill removed",
+  "experienciaEliminada":"Experience removed",
   "errorEliminarHabilidad":"Error deleting ability",
   "habilidadEditada":"Edited Skill",
+  "experienciaEditada":"Edited experience",
   "errorEditarHabilidad":"Error editing ability",
   "logroRegistrado": "accomplishment created",
   "errorRegistrarLogro":"Error registering accomplishment",
@@ -158,7 +187,7 @@
   "editarPerfil": "Edit profile",
   "habilidades": "Skills",
   "experiencias":"Experiences",
-  "logros":"Accomplishmens",
+  "logros":"Accomplishments",
   "inicioFecha":"From",
   "finFecha":"To",
 
@@ -166,5 +195,55 @@
   "ingresePasswordActual":"Enter current password",
   "ingresePasswordNuevo": "Enter new password",
   "repitaPasswordNuevo":"Repeat new password",
-  "passwordsNoCoinciden": "Passwords do not match"
+  "passwordsNoCoinciden": "Passwords do not match",
+
+  "desactivarCuenta":"Are you sure you want to deactivate your account?", 
+
+  "desactivarCuentaAccion":"deactivate account",
+
+  "ingreseSkill":"Enter your skill",
+  "eliminarSkill":"Delete skill",
+  "deseaEliminarSkill":"Do you want to eliminate this skill?",
+  "deseaEliminarExperiencia":"Do you want to eliminate this experience?",
+  "ingreseLogro":"Enter your accomplishment",
+  "deseaEliminarLogro":"Do you want to eliminate this accomplishments?",
+  "ingreseInteres":"Enter your interest",
+  "deseaEliminarInteres":"Do you want to eliminate this interest?",
+
+  "guardarPerfil":"Save profile",
+
+  "crearSkill":"Add skill",
+  "crearExperiencia":"Add experience",
+  "crearLogro":"Add accomplishment",
+  "crearInteres":"Add interest",
+
+  "experiencia":"Experience",
+  "empresa": "Company",
+  "ubicacion":"Location",
+  "elijaFechaInicio": "Choose init date",
+  "elijaFechaFin":"Choose end date",
+  "trabajandoActualmente": "Currently working",
+  "guardarExperiencia": "Save experience",
+  "fechaInicio":"Init date",
+  "fechaFin":"End date",
+
+  "***************PROFESIONES**********************": "",
+
+  "administrativo": "Administrative",
+  "agenteRampa":"Airport ramp agent",
+  "agenteCarga":"Aircraft cargo agent",
+  "despachadorAviones":"Aircraft dispatcher",
+  "inspectorMantenimientoAviones":"Aircraft maintenance inspector",
+  "aeronavesTierra":"Aircraft ground handler",
+  "manejadorEquipaje":"Baggage handler",
+  "capitan":"Captain",
+  "cribadorCarga":"Cargo screener",
+  "primerOficial":"First officer",
+  "auxiliarVuelo":"Flight attendant",
+  "maestroCarga":"Loadmaster",
+  "altoEjecutivo":"senior executive",
+  "desarrolladorSoftware":"Software development",
+  "azafata":"Stewardess",
+  "especialistaAlmacen":"Warehouse specialist",
+  "otro":"Other"
   }
