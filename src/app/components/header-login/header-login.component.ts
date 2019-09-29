@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-header-login',
@@ -11,8 +12,22 @@ export class HeaderLoginComponent implements OnInit {
   @Input() botonRegreso: boolean;
   @Input() botonIngreso: boolean;
 
-  constructor() { }
+  ocultar = '';
+
+  constructor( private navCtrl: NavController) { }
 
   ngOnInit() {}
+
+
+  ocultarRegresar() {
+
+    this.ocultar = 'ocultarElemento';
+
+    setTimeout(() => {
+      this.navCtrl.navigateBack('/');
+    }, 1);
+
+  }
+
 
 }

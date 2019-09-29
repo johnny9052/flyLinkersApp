@@ -1,15 +1,17 @@
 <ion-header
-  no-border="no-border"
+  no-border="no-border" 
+  [ngClass]="ocultar"
 >
   <ion-toolbar color="flylinkers">
     <ion-buttons
       slot="end"
       *ngIf="botonRegreso"
     >
-      <ion-back-button
-        text="{{ 'regresar' | translate }}"
-        defaultHref="/"
-      ></ion-back-button>
+
+      <ion-button fill="clear" (click)="ocultarRegresar()">
+        <ion-icon name="arrow-back"></ion-icon>
+        {{ 'regresar' | translate }}
+      </ion-button>
     </ion-buttons>
 
     <ion-buttons slot="end"  *ngIf="botonIngreso">

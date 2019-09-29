@@ -209,4 +209,10 @@ export class MasterPagePage implements OnInit {
   }
 
 
+  recargar() {
+    window.location.reload();
+  }
+
+
+
 }
