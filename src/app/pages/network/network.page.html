@@ -23,11 +23,11 @@
       style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
     >
       <ion-item *ngFor="let solicitud of solicitudesRecibidas">
-        <ion-avatar slot="start">
+        <ion-avatar slot="start" (click)="viewProfile(solicitud.pk)">
           <img src="https://flylinkers.com/media/{{(solicitud.image_perfil !== '' )? solicitud.image_perfil : 'avatar_2x.png' }}">
         </ion-avatar>
 
-        <ion-label>
+        <ion-label (click)="viewProfile(solicitud.pk)">
           <h3>{{solicitud.fistName}}  {{solicitud.lastName}}</h3>
 
           <p>{{solicitud.profession}}</p>
@@ -69,11 +69,11 @@
       style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
     >
       <ion-item *ngFor="let solicitud of solicitudesEnviadas">
-        <ion-avatar slot="start">
+        <ion-avatar slot="start" (click)="viewProfile(solicitud.pk)">
           <img src="https://flylinkers.com/media/{{(solicitud.image_perfil !== '' )? solicitud.image_perfil : 'avatar_2x.png' }}">
         </ion-avatar>
 
-        <ion-label>
+        <ion-label (click)="viewProfile(solicitud.pk)">
           <h3>{{solicitud.fistName}} {{solicitud.lastName}}</h3>
 
           <p>{{solicitud.profession}}</p>
@@ -133,14 +133,15 @@
                 <ion-avatar
                   slot="start"
                   class="image-center top-margin-10"
+                  (click)="viewProfile(contacto.id_contact)"
                 >
                 <img src="https://flylinkers.com/media/{{(contacto.image_perfil !== '' )? contacto.image_perfil : 'avatar_2x.png' }}">
                 </ion-avatar>
 
-                <div style="width: 100%; text-align: center;">
+                <div style="width: 100%; text-align: center;" (click)="viewProfile(contacto.id_contact)">
                   <h2>{{contacto.fistName | slice:0:13}}</h2>
                 </div>
-                <div style="width: 100%; text-align: center;">
+                <div style="width: 100%; text-align: center;" (click)="viewProfile(contacto.id_contact)">
                   <h2>{{contacto.lastName | slice:0:13}}</h2>
                 </div>
 

@@ -213,6 +213,16 @@ export class MasterPagePage implements OnInit {
     window.location.reload();
   }
 
+  viewProfile(idProfile: string) {
+    const data: NavigationExtras = {
+      state: {
+        idProfile
+      }
+    };
+
+    this.router.navigate(['profile-detail'], data);
+  }
+
 
 
 }

@@ -15,9 +15,10 @@ import {
 } from '../../interfaces/posts';
 import { PopcommentsComponent } from 'src/app/components/popcomments/popcomments.component';
 import { PoprecommentsComponent } from '../../components/poprecomments/poprecomments.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { BlockAccessService } from '../../util/blockAccess';
 import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-view-detail-post',
@@ -371,5 +372,14 @@ export class ViewDetailPostPage implements OnInit {
       ]
     });
     await actionSheet.present();
+  }
+  viewProfile(idProfile: string) {
+    const data: NavigationExtras = {
+      state: {
+        idProfile
+      }
+    };
+
+    this.router.navigate(['profile-detail'], data);
   }
 }

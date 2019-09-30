@@ -3,11 +3,11 @@
 <ion-content style="width: 100%; margin: 0px !important;">
   <ion-card>
     <ion-item>
-      <ion-avatar slot="start">
+      <ion-avatar slot="start" (click)="viewProfile(post.author_id)">
         <img src="https://flylinkers.com/media/{{(post.author_image_perfil !== '' )? post.author_image_perfil: 'avatar_2x.png' }}">
       </ion-avatar>
 
-      <ion-label>
+      <ion-label (click)="viewProfile(post.author_id)">
         <h3 slot="start">
           {{post.author_fistName}} {{post.author_lastName}}
         </h3>
@@ -118,10 +118,10 @@
         </ion-item>
         <ion-item-group *ngFor="let comment of comments">
           <ion-item lines="none">
-            <ion-avatar slot="start">
+            <ion-avatar slot="start" (click)="viewProfile(comment.id_author)">
              <img src="https://flylinkers.com/media/{{(comment.comment_author_image !== '' )? comment.comment_author_image: 'avatar_2x.png' }}">
             </ion-avatar>
-            <ion-label>
+            <ion-label (click)="viewProfile(comment.id_author)">
               <h3>{{comment.comment_firstname_author}} {{comment.comment_lastname_author}}</h3>
             </ion-label>
             <ion-icon slot= "end" name="more" (click)="mostrarPop($event, comment.id_comment, comment.comment,post.id_new)" *ngIf="codeUser === comment.id_author"></ion-icon>
@@ -173,10 +173,10 @@
               </ion-item>
               <ion-item-group *ngFor="let recomment of recomments">
                 <ion-item>
-                  <ion-avatar slot="start">
+                  <ion-avatar slot="start" (click)="viewProfile(recomment.recomment_id_author)">
                   <img src="https://flylinkers.com/media/{{(recomment.recomment_author_image !== '' )? recomment.recomment_author_image: 'avatar_2x.png' }}">
                   </ion-avatar>
-                  <ion-label>
+                  <ion-label (click)="viewProfile(recomment.recomment_id_author)">
                     <h3>{{recomment.recomment_firstname_author}} {{recomment.recomment_lastname_author}}</h3>
                   </ion-label>
                   <ion-icon
