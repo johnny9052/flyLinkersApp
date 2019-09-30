@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mission-vision',
@@ -11,5 +12,8 @@ export class MissionVisionPage implements OnInit {
 
   ngOnInit() {
   }
+
+
+
 
 }

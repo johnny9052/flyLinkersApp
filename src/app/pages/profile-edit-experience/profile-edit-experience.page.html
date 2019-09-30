@@ -1,4 +1,4 @@
-<app-header-login titulo="Experiencia"></app-header-login>
+<app-header-login titulo="{{ 'experiencia' | translate }}"></app-header-login>
 
 <ion-content padding="padding">
   <!-- Con el position floating da el efecto de materalized, en 
@@ -10,19 +10,18 @@
   >
     <ion-list>
       <ion-item>
-        <ion-label position="floating">Titulo</ion-label>
+        <ion-label position="floating">{{ 'titulo' | translate }}</ion-label>
 
         <ion-input
           name="title"
           type="text"
           required="required"
           [(ngModel)]="experiencia.title"
-          title="Escribe un titulo"
         ></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Compañia</ion-label>
+        <ion-label position="floating">{{ 'empresa' | translate }}</ion-label>
 
         <ion-input
           type="text"
@@ -33,7 +32,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Ubicacion</ion-label>
+        <ion-label position="floating">{{ 'ubicacion' | translate }}</ion-label>
 
         <ion-input
           type="text"
@@ -44,12 +43,12 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Fecha inicio</ion-label>
+        <ion-label>{{ 'fechaInicio' | translate }}</ion-label>
 
         <ion-datetime
-          placeholder="Elija una fecha de incio"
+          placeholder="{{ 'elijaFechaInicio' | translate }}"
           display-format="YYYY MMMM DD"
-          cancelText="Cancelar"
+          cancelText="{{ 'cancelar' | translate }}"
           [(ngModel)]="experiencia.init_date"
           name="init_date"
           [pickerOptions]="customPickerOptionsInicial"
@@ -57,12 +56,12 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Fecha fin</ion-label>
+        <ion-label>{{ 'fechaFin' | translate }}</ion-label>
 
         <ion-datetime
-          placeholder="Elija una fecha de fin"
+          placeholder="{{ 'elijaFechaFin' | translate }}"
           display-format="YYYY MMMM DD"
-          cancelText="Cancelar"
+          cancelText="{{ 'cancelar' | translate }}"
           [(ngModel)]="experiencia.end_date"
           name="end_date"
           [pickerOptions]="customPickerOptionsFinal"
@@ -70,21 +69,21 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Trabajando actualmente</ion-label>
+        <ion-label>{{ 'trabajandoActualmente' | translate }}</ion-label>
 
         <ion-select
-          placeholder="Seleccione"
+          placeholder="{{ 'seleccione' | translate }}"
           name="currently_working"
           [(ngModel)]="experiencia.currently_working"
         >
-          <ion-select-option value="False">No</ion-select-option>
+          <ion-select-option value="False">{{ 'no' | translate }}</ion-select-option>
 
-          <ion-select-option value="True">Si</ion-select-option>
+          <ion-select-option value="True">{{ 'si' | translate }}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Titular</ion-label>
+        <ion-label position="floating">{{ 'titular' | translate }}</ion-label>
 
         <ion-textarea
           name="headline_experience"
@@ -95,7 +94,7 @@
 
 
       <ion-item>
-        <ion-label position="floating">Descripcion</ion-label>
+        <ion-label position="floating">{{ 'descripcion' | translate }}</ion-label>
 
         <ion-textarea
           name="description_experience"
@@ -113,7 +112,7 @@
             type="submit"
             [disabled]="formulario.invalid"
             expand="full"
-          >Guardar experiencia</ion-button>
+          >{{ 'guardarExperiencia' | translate }}</ion-button>
         </ion-col>
 
         <ion-col size="12">
@@ -121,7 +120,7 @@
             color="flylinkers"
             (click)="cerrarModal()"
             expand="full"
-          >Cancelar</ion-button>
+          >{{ 'cancelar' | translate }}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

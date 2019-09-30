@@ -3,7 +3,6 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { Storage } from '@ionic/storage';
 
 import { TranslateService } from '@ngx-translate/core';
-import { ReplaceSource } from 'webpack-sources';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,7 @@ export class HelperService {
               private loadingCtrl: LoadingController,
               private navCtrl: NavController,
               private storage: Storage,
-              private translateService: TranslateService) {
+              private translate: TranslateService) {
                 // this.translateService.setDefaultLang(this.activeLang);
                 this.cargarIdiomaActual();
                }
@@ -56,10 +55,10 @@ export class HelperService {
       message: descripcion,
       buttons: [
         {
-          text: 'Aceptar',
+          text: this.translate.instant('aceptar'),
           cssClass: 'flylinkersColor',
           handler: (blah) => {
-            // console.log('Boton OK');
+            // // console.log('Boton OK');
           }
         }
       ]
@@ -78,11 +77,11 @@ export class HelperService {
       message: mensaje,
       buttons: [
         {
-          text: 'Aceptar',
+          text: this.translate.instant('aceptar'),
           cssClass: 'flylinkersColor',
           handler: (blah) => {
             /*Cuando se da tap en aceptar redirecciona al login*/
-            this.navCtrl.navigateBack(redirectURL);
+            this.navCtrl.navigateForward(redirectURL);
           }
         }
       ]
@@ -93,6 +92,9 @@ export class HelperService {
 
 
 
+  redireccionar(redirectURL: string) {
+    this.navCtrl.navigateForward(redirectURL);
+  }
 
 
 
@@ -150,13 +152,12 @@ export class HelperService {
   public cambiarLenguaje(lang) {
     this.saveLocalData('language', lang);
     this.activeLang = lang;
-    this.translateService.use(this.activeLang);
+    this.translate.use(this.activeLang);
   }
 
 
   public cargarIdiomaActual() {
     this.getLocalData('language').then(response => {
-        console.log('El idioma actual es: ' + response);
         if (this.isValidValue(response)) {
           this.cambiarLenguaje(response);
         } else {
@@ -164,6 +165,8 @@ export class HelperService {
         }
     });
   }
+
+
 
 
 

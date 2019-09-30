@@ -15,7 +15,7 @@ export class LanguageComponent implements OnInit {
   }
 
   seleccionarIdioma( valor: string) {
-    console.log('item: ', valor);
+    // // console.log('item: ', valor);
     this.popoverCtl.dismiss({
       item: valor
     });

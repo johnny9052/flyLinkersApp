@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModelUserData, Profile, Skills, Experiences, Accomplishments, Interests, Events } from '../../interfaces/userInterface';
 import { HelperService } from 'src/app/util/HelperService';
 import { ProfileService } from 'src/app/services/profile.service';
-import { TouchSequence } from 'selenium-webdriver';
+import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
+
 
 @Component({
   selector: 'app-profile',
@@ -29,8 +31,10 @@ export class ProfilePage implements OnInit {
   events: Events[] = [];
   /****************END OBJETOS************************** */
 
-  constructor(public helperService: HelperService,
-              public profileService: ProfileService) { }
+  constructor(private blockAccess: BlockAccessService,
+              public helperService: HelperService,
+              public profileService: ProfileService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -64,7 +68,7 @@ export class ProfilePage implements OnInit {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('profilePk').then(response => {
       this.codeUser = response;
-      console.log(this.codeUser);
+      // console.log(this.codeUser);
       // Se obtiene toda la informacion del usuario que ingreso al sistema
       this.getProfileData(this.codeUser);
     });
@@ -73,13 +77,13 @@ export class ProfilePage implements OnInit {
   /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se
   encuentra logueado*/
   getProfileData(pkUser: string) {
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     // Se obtiene toda la informacion del usuario que entro al sistema
     this.profileService.getProfileData(pkUser).subscribe(
       data => {
         let res: any;
         res = data;
-        console.log(res);
+        // console.log(res);
         // Se obtiene la informacion basica del perfil
         this.userData = res.profile[0];
         this.userSkills = res.skills;
@@ -91,8 +95,8 @@ export class ProfilePage implements OnInit {
       },
       error => {
         this.helperService.ocultarBarraCarga();
-        this.helperService.showAlert('Error', 'Error cargando la informacion');
-        console.log('oops', error);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
+        // console.log('oops', error);
       }
     );
   }

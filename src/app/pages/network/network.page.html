@@ -1,4 +1,4 @@
-<app-header titulo="Red de contactos"></app-header>
+<app-header titulo="{{ 'redContactos' | translate }}"></app-header>
 
 <ion-content style="width: 100%; margin: 0px !important;">
   <!-- SOLICITUDES DE CONEXION RECIBIDAS -->
@@ -9,13 +9,13 @@
       (click)="showHideRequest()"
     >
 
-      <ion-label>Solicitudes recibidas ({{totalSolicitudesRecibidas}})</ion-label>
+      <ion-label>{{ 'solicitudesRecibidas' | translate }} ({{totalSolicitudesRecibidas}})</ion-label>
 
       <ion-button
         color="light"
         fill="outline"
         slot="end"
-      >Ver todas</ion-button>
+      >{{ 'verTodas' | translate }}</ion-button>
     </ion-item>
 
     <ion-card-content
@@ -55,13 +55,13 @@
       color="flylinkers"
       (click)="showHideRequestReceived()"
     >
-      <ion-label>Solicitudes enviadas ({{totalSolicitudesEnviadas}})</ion-label>
+      <ion-label>{{ 'solicitudesEnviadas' | translate }} ({{totalSolicitudesEnviadas}})</ion-label>
 
       <ion-button
         color="light"
         fill="outline"
         slot="end"
-      >Ver todas</ion-button>
+      >{{ 'verTodas' | translate }}</ion-button>
     </ion-item>
 
     <ion-card-content
@@ -95,13 +95,13 @@
       color="flylinkers"
       (click)="showHideContacts()"
     >
-      <ion-label>Tus conexiones ({{totalContactos}})</ion-label>
+      <ion-label>{{ 'tusConexiones' | translate }} ({{totalContactos}})</ion-label>
 
       <ion-button
         color="light"
         fill="outline"
         slot="end"
-      >Ver todas</ion-button>
+      >{{ 'verTodas' | translate }}</ion-button>
     </ion-item>
 
     <ion-card-content
@@ -154,7 +154,7 @@
                   fill="outline"
                   size="small"
                   (click)="viewProfile(contacto.id_contact)"
-                >Ver perfil</ion-button>
+                >{{ 'verPerfil' | translate }}</ion-button>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -174,7 +174,7 @@
       ></ion-icon>
 
       <ion-label>
-        Conecta con la gente de la red
+        {{ 'conectaGente' | translate }}
       </ion-label>
     </ion-item>
 
@@ -222,7 +222,7 @@
                 fill="outline"
                 size="small"
                 (click)="enviarSolicitudAmistad(contactos.pk)"
-                >Conectar</ion-button>
+                >{{ 'conectar' | translate }}</ion-button>
             </ion-card>
           </ion-col>
         </ion-row>

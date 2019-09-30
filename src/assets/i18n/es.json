@@ -37,19 +37,58 @@
 
   "correo": "Correo electronico",
   "contrasena": "Contraseña",
+  "password": "Contraseña",
   "constrasenaConfirmar": "Confirmar contraseña",
   "nombre": "Nombre",
+  "nombres": "Nombres",
   "apellido": "Apellido", 
+  "apellidos": "Apellidos", 
+
+  "titulo": "Titulo",
+  "descripcion": "Descripción",
+  "url":"url",
+
+  "genero":"Genero",
+  "masculino":"Masculino",
+  "femenino":"Femenino",
+  "fechaNacimiento":"Fecha de nacimiento",
+  "paisResidencia": "Pais de residencia",
+  "titular": "Titular",
+  "profesion": "Profesion",
+  "educacion":"Educacion",
+  "area":"Area",
+  "empresaActual":"Compañia actual",
+  "cargoActual":"Cargo actual",
+  "telefono":"Telefono",
+  "celular":"Celular",
+
+  "si": "Si",
+  "no":"No",
   
 
   "***************MENSAJES DE ACCION**********************": "",
 
   "espere":"Espere por favor",
 
+  "exitoTransaccion": "Transaccion exitosa",
   "errorTransaccion": "Error procesando la transaccion",
   "exitoTitulo": "Exito",
   "errorTitulo": "Error",
+  "aceptar": "Aceptar",
+  "borrar": "Borrar",
+  "eliminar": "Eliminar",
+  "editar": "Editar",
+  "cancelar": "Cancelar",
+  "compartir": "Compartir",
+  "seleccionar":"Seleccionar",
+  "seleccione":"Seleccione",
+  "cambiar":"Cambiar",
+  "ok": "Aceptar",
+  "crear": "Crear",
+  "enviar": "Enviar",
 
+  "errorCargandoInformacion": "Error cargando la informacion",
+  
   "***************REGISTRO-DE-USUARIO**********************": "",
 
   "registro": "Registro",
@@ -64,6 +103,151 @@
   "acceder": "Acceder",
   "olvidoContrasena": "¿Olvidaste tu contraseña?",
   "usuarioIdentificado": "Usuario identificado correctamente",
-  "usuarioNoExiste": "Usuario o contraseña invalidos"
+  "usuarioNoExiste": "Usuario o contraseña invalidos",
+
+  "***************HOME**********************": "",
+
+  "inicio": "Inicio",
+  "perfil": "Perfil",
+  "notificaciones": "Notificaciones",
+  "intereses": "Intereses",
+  "eventos": "Eventos",
+  "red": "Red",
+  "patrocinadores": "Patrocinadores",
+  "noticias": "Noticias",
+  "cargandoPublicaciones": "Cargando publicaciones",
+  "noNoticiasQueMostrarTitulo":"No hay informacion para mostrar",
+  "noNoticiasQueMostrarDescripcion":"Aumenta el numero de personas en tu red para ver noticias y publicaciones",
+
+
+  "***************NETWORK**********************": "",
+
+  "redContactos": "Red de contactos",
+  "solicitudesRecibidas": "Solicitudes recibidas",
+  "verTodas": "Ver todas",
+  "solicitudesEnviadas":"Solicitudes enviadas",
+  "tusConexiones":"Tus conexiones",
+  "verPerfil":"Ver perfil",
+  "conectaGente":"Conecta con la gente de la red",
+  "conectar":"Conectar",
+  "solicitudAmistadRecibidaExito": "Solicitud de amistad aceptada",
+  "solicitudAmistadEnviadaExito": "Solicitud de amistad enviada",
+  "conexionEliminada": "Conexion eliminada",
+  "solicitudEliminada": "Solicitud eliminada",
+
+
+  "***************POST**********************": "",
+
+  "nuevoPost": "Nuevo post",
+  "postPublicado": "Post publicado exitosamente",
+  "postEditado": "Post editado exitosamente",
+  "postBorrado": "Post borrado exitosamente",
+  "comentarioPublicado": "Comentario publicado",
+  "comentarioBorrado": "Comentario borrado",
+  "comentarioEditado": "Comentario editado",
+
+  "escribeComentario":"Escribe tu comentario",
+
+  "***************NOTIFICACIONES**********************": "",
+  
+  "notificacionElementoInexistente": "El elememento notificado ya no existe",
+
+
+  "***************PERFIL**********************": "",
+
+  "perfilActualizado":"Perfil actualizado",
+  "errorActualizarPerfil": "Error al actualizar el perfil",
+  "cuentaDesactivada":"Cuenta desactivada",
+  "errorDesactivandoCuenta":"Error al desactivar la cuenta",
+  "skillRegistrada": "Habilidad registrada",
+  "errorRegistrarSkill":"Error al registrar la habilidad",
+  "skillEliminada":"Habilidad eliminada",
+  "errorEliminarSkill":"Error al eliminar la habilidad",
+  "skillEditada":"Habilidad editada",
+  "errorEditarSkill":"Error al editar la habilidad",
+  "experienciaRegistrada": "Experiencia registrada",
+  "errorRegistrarExperiencia":"Error al registrar la experiencia",
+  "habilidadEliminada":"Habilidad eliminada",
+  "experienciaEliminada":"Experiencia eliminada",
+  "errorEliminarHabilidad":"Error al eliminar la habilidad",
+  "habilidadEditada":"Habilidad editada",
+  "experienciaEditada":"Experiencia editada",
+  "errorEditarHabilidad":"Error al editar la habilidad",
+  "logroRegistrado": "Logro registrado",
+  "errorRegistrarLogro":"Error al registrar el logro",
+  "logroEliminado":"Logro eliminado",
+  "errorEliminarLogro":"Error al eliminar el logro",
+  "logroEditado":"Logro editado",
+  "errorEditarLogro":"Error al editar el logro",
+  "interesRegistrado": "Interes registrado",
+  "errorRegistrarInteres":"Error al registrar el interes",
+  "interesEliminado":"Interes eliminado",
+  "errorEliminarInteres":"Error al eliminar el interes",
+  "interesEditado":"Interes editado",
+  "errorEditarInteres":"Error al editar el interes",
+  "editarPerfil": "Editar perfil",
+  "habilidades": "Habilidades",
+  "experiencias":"Experiencias",
+  "logros":"Logros",
+  "inicioFecha":"Inicio",
+  "finFecha":"Fin",
+
+  "cambiarPassword": "Cambiar contraseña",
+  "ingresePasswordActual":"Ingrese contraseña actual",
+  "ingresePasswordNuevo": "Ingrese su nueva contraseña",
+  "repitaPasswordNuevo":"Repita su nueva contraseña",
+  "passwordsNoCoinciden": "Las contraseñas no coinciden",
+
+  "desactivarCuenta":"¿Seguro desea desactivar su cuenta?",
+
+
+  "desactivarCuentaAccion":"Desactivar cuenta",
+
+  "ingreseSkill":"Ingrese su habilidad",
+  "eliminarSkill":"Eliminar habilidad",
+  "deseaEliminarSkill":"¿Desea eleminar esta habilidad?",
+  "deseaEliminarExperiencia":"¿Desea eleminar esta experiencia?",
+  "ingreseLogro":"Ingrese su logro",
+  "deseaEliminarLogro":"¿Desea eleminar este logro?",
+  "ingreseInteres":"Ingrese su interes",
+  "deseaEliminarInteres":"¿Desea eleminar este interes?",
+
+  "guardarPerfil":"Guardar perfil", 
+
+  "crearSkill":"Agregar habilidad",
+  "crearExperiencia":"Agregar experiencia",
+  "crearLogro":"Agregar logro",
+  "crearInteres":"Agregar interes",
+
+  "experiencia":"Experiencia",
+  "empresa": "Compañia",
+  "ubicacion":"Ubicacion",
+  "elijaFechaInicio": "Elija una fecha de incio",
+  "elijaFechaFin":"Elija una fecha de fin",
+  "trabajandoActualmente": "Trabajando actualmente",
+  "guardarExperiencia": "Guardar experiencia",
+  "fechaInicio":"Fecha inicio",
+  "fechaFin":"Fecha fin",
+
+  "***************PROFESIONES**********************": "",
+
+  "administrativo":"Administrativo",
+  "agenteRampa":"Agente de rampa del aeropuerto",
+  "agenteCarga":"Agente de carga de aviones",
+  "despachadorAviones":"Despachador de aviones",
+  "inspectorMantenimientoAviones":"Inspector de mantenimiento de aeronaves",
+  "aeronavesTierra":"Encargado de aeronaves en tierra",
+  "manejadorEquipaje":"Manejador de equipaje",
+  "capitan":"Capitán",
+  "cribadorCarga":"Cribador de carga",
+  "primerOficial":"Primer oficial",
+  "auxiliarVuelo":"Auxiliar de vuelo",
+  "maestroCarga":"Maestro de carga",
+  "altoEjecutivo":"Alto ejecutivo",
+  "desarrolladorSoftware":"Desarrollo de software",
+  "azafata":"Azafata",
+  "especialistaAlmacen":"Especialista de almacén",
+  "otro":"Otro..."
+  
 }
 

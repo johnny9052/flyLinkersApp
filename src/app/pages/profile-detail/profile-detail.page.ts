@@ -10,6 +10,8 @@ import {
 import { HelperService } from 'src/app/util/HelperService';
 import { ProfileService } from 'src/app/services/profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 @Component({
   selector: 'app-profile-detail',
@@ -38,18 +40,19 @@ userInterests: Interests[] = [];
 events: Events[] = [];
 /****************END OBJETOS************************** */
 
-constructor(
-  public helperService: HelperService,
-  public profileService: ProfileService,
-  private route: ActivatedRoute,
-  private router: Router
+constructor(private blockAccess: BlockAccessService,
+            public helperService: HelperService,
+            public profileService: ProfileService,
+            private route: ActivatedRoute,
+            private router: Router,
+            private translate: TranslateService
 ) {
   this.route.queryParams.subscribe(params => {
     if (this.router.getCurrentNavigation().extras.state) {
       this.codeUserOnlyDetail = this.router.getCurrentNavigation().extras.state.idProfile;
 
-      console.log('Llego dato!!');
-      console.log(this.codeUserOnlyDetail);
+      // console.log('Llego dato!!');
+      // console.log(this.codeUserOnlyDetail);
     }
 
     // tslint:disable-next-line: max-line-length
@@ -69,7 +72,7 @@ ngOnInit() {}
 
 
 ionViewWillEnter() {
-  console.log('Entre');
+  // console.log('Entre');
 }
 
 ionViewWillLeave() {
@@ -119,13 +122,13 @@ showHideEvents() {
 /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se
 encuentra logueado*/
 getProfileData(pkUser: string) {
-  this.helperService.mostrarBarraDeCarga('Espere por favor');
+  this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
   // Se obtiene toda la informacion del usuario que entro al sistema
   this.profileService.getProfileData(pkUser).subscribe(
     data => {
       let res: any;
       res = data;
-      console.log(res);
+      // console.log(res);
       // Se obtiene la informacion basica del perfil
       this.userData = res.profile[0];
       this.userSkills = res.skills;
@@ -137,8 +140,8 @@ getProfileData(pkUser: string) {
     },
     error => {
       this.helperService.ocultarBarraCarga();
-      this.helperService.showAlert('Error', 'Error cargando la informacion');
-      console.log('oops', error);
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
+      // console.log('oops', error);
     }
   );
 }

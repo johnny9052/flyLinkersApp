@@ -1,4 +1,4 @@
-<app-header titulo="Perfil"></app-header>
+<app-header titulo="{{ 'perfil' | translate }}"></app-header>
 
 <ion-content padding="padding">
     <form
@@ -12,12 +12,12 @@
                         <ion-col size="12">
                             <div class="bordeado">
                                 <!--SI NO TIENE IMAGEN DE PERFIL-->
-                                <ion-avatar *ngIf=" userData.image_perfil === ''" class="image-center top-margin-20">
+                                <ion-avatar *ngIf="!this.helperService.isValidValue(userData.image_perfil)" class="image-center top-margin-20">
                                     <img src="https://flylinkers.com/media/avatar_2x.png">
                                 </ion-avatar>
 
                                 <!--SI TIENE IMAGEN DE PERFIL-->
-                                <ion-avatar *ngIf=" userData.image_perfil !== ''" class="image-center top-margin-20">
+                                <ion-avatar *ngIf="this.helperService.isValidValue(userData.image_perfil)" class="image-center top-margin-20">
                                     <!-- <img [src]="('https://flylinkers.com/media/' + userData.image_perfil) | imageSanitizer"> -->
                                     <img [src]="userData.image_perfil | imageSanitizer">
                                 </ion-avatar>
@@ -60,7 +60,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Nombres*</ion-label>
+                <ion-label position="floating">{{ 'nombres' | translate }}*</ion-label>
 
                 <ion-input
                     type="text"
@@ -71,7 +71,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Apellidos*</ion-label>
+                <ion-label position="floating">{{ 'apellidos' | translate }}*</ion-label>
 
                 <ion-input
                     type="text"
@@ -82,26 +82,26 @@
             </ion-item>
 
             <ion-item>
-                <ion-label>Genero*</ion-label>
+                <ion-label>{{ 'genero' | translate }}*</ion-label>
 
                 <ion-select
                     placeholder="Seleccione"
                     [(ngModel)]="userData.gender"
                     name="gender"
                 >
-                    <ion-select-option value="M">Masculino</ion-select-option>
+                    <ion-select-option value="M">{{ 'masculino' | translate }}</ion-select-option>
 
-                    <ion-select-option value="F">Femenino</ion-select-option>
+                    <ion-select-option value="F">{{ 'femenino' | translate }}</ion-select-option>
                 </ion-select>
             </ion-item>
 
             <ion-item>
-                <ion-label>Fecha de nacimiento</ion-label>
+                <ion-label>{{ 'fechaNacimiento' | translate }}</ion-label>
 
                 <ion-datetime
-                    placeholder="Seleccione"
+                    placeholder="{{ 'seleccione' | translate }}"
                     display-format="YYYY MMMM DD"
-                    cancelText="Cancelar"
+                    cancelText="{{ 'cancelar' | translate }}"
                     [(ngModel)]="userData.birthday_date"
                     name="birthday_date"
                     [pickerOptions]="customPickerOptions"
@@ -109,7 +109,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Pais de residencia*</ion-label>
+                <ion-label position="floating">{{ 'paisResidencia' | translate }}*</ion-label>
 
                 <ion-input
                     type="text"
@@ -120,7 +120,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Titular*</ion-label>
+                <ion-label position="floating">{{ 'titular' | translate }}*</ion-label>
 
                 <ion-textarea
                     name="headline"
@@ -130,7 +130,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Profesion*</ion-label>
+                <ion-label position="floating">{{ 'profesion' | translate }}*</ion-label>
 
                 <ion-input
                     type="text"
@@ -141,7 +141,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Educacion</ion-label>
+                <ion-label position="floating">{{ 'educacion' | translate }}</ion-label>
 
                 <ion-input
                     type="text"
@@ -151,57 +151,57 @@
             </ion-item>
 
             <ion-item>
-                <ion-label>Area</ion-label>
+                <ion-label>{{ 'area' | translate }}</ion-label>
 
                 <ion-select
-                    placeholder="Seleccione"
+                    placeholder="{{ 'seleccione' | translate }}"
                     name="area_choices"
                     [(ngModel)]="userData.area_choices"
                 >
-                    <ion-select-option value="administrative">Administrativo</ion-select-option>
+                    <ion-select-option value="administrative">{{ 'administrativo' | translate }}</ion-select-option>
 
                     <ion-select-option value="airport ramp agent">
-                        Agente de rampa del aeropuerto
+                        {{ 'agenteRampa' | translate }}
                     </ion-select-option>
 
-                    <ion-select-option value="aircraft cargo agent">Agente de carga de aviones</ion-select-option>
+                    <ion-select-option value="aircraft cargo agent">{{ 'agenteCarga' | translate }}</ion-select-option>
 
-                    <ion-select-option value="aircraft dispatcher">Despachador de aviones</ion-select-option>
+                    <ion-select-option value="aircraft dispatcher">{{ 'despachadorAviones' | translate }}</ion-select-option>
 
                     <ion-select-option value="aircraft maintenance inspector">
-                        Inspector de mantenimiento de aeronaves
+                        {{ 'inspectorMantenimientoAviones' | translate }}
                     </ion-select-option>
 
                     <ion-select-option value="aircraft ground handler">
-                        Encargado de aeronaves en tierra
+                        {{ 'aeronavesTierra' | translate }}
                     </ion-select-option>
 
-                    <ion-select-option value="baggage handler">Manejador de equipaje</ion-select-option>
+                    <ion-select-option value="baggage handler">{{ 'manejadorEquipaje' | translate }}</ion-select-option>
 
-                    <ion-select-option value="captain">Capitán</ion-select-option>
+                    <ion-select-option value="captain">{{ 'capitan' | translate }}</ion-select-option>
 
-                    <ion-select-option value="cargo screener">Cribador de carga</ion-select-option>
+                    <ion-select-option value="cargo screener">{{ 'cribadorCarga' | translate }}</ion-select-option>
 
-                    <ion-select-option value="first officer">Primer oficial</ion-select-option>
+                    <ion-select-option value="first officer">{{ 'primerOficial' | translate }}</ion-select-option>
 
-                    <ion-select-option value="flight attendant">Auxiliar de vuelo</ion-select-option>
+                    <ion-select-option value="flight attendant">{{ 'auxiliarVuelo' | translate }}</ion-select-option>
 
-                    <ion-select-option value="loadmaster">Maestro de carga</ion-select-option>
+                    <ion-select-option value="loadmaster">{{ 'maestroCarga' | translate }}</ion-select-option>
 
-                    <ion-select-option value="senior executive">Alto ejecutivo</ion-select-option>
+                    <ion-select-option value="senior executive">{{ 'altoEjecutivo' | translate }}</ion-select-option>
 
-                    <ion-select-option value="software development">Desarrollo de software</ion-select-option>
+                    <ion-select-option value="software development">{{ 'desarrolladorSoftware' | translate }}</ion-select-option>
 
-                    <ion-select-option value="stewardess">Azafata</ion-select-option>
+                    <ion-select-option value="stewardess">{{ 'azafata' | translate }}</ion-select-option>
 
-                    <ion-select-option value="warehouse specialist">Especialista de almacén</ion-select-option>
+                    <ion-select-option value="warehouse specialist">{{ 'especialistaAlmacen' | translate }}</ion-select-option>
 
-                    <ion-select-option value="other">Otro...</ion-select-option>
+                    <ion-select-option value="other">{{ 'otro' | translate }}</ion-select-option>
                 </ion-select>
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Compañia actual</ion-label>
+                <ion-label position="floating">{{ 'empresaActual' | translate }}</ion-label>
 
                 <ion-input
                     type="text"
@@ -211,7 +211,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Cargo actual</ion-label>
+                <ion-label position="floating">{{ 'cargoActual' | translate }}</ion-label>
 
                 <ion-input
                     type="text"
@@ -221,7 +221,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Telefono</ion-label>
+                <ion-label position="floating">{{ 'telefono' | translate }}</ion-label>
 
                 <ion-input
                     type="number"
@@ -231,7 +231,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Celular</ion-label>
+                <ion-label position="floating">{{ 'celular' | translate }}</ion-label>
 
                 <ion-input
                     type="number"
@@ -249,7 +249,7 @@
                         type="submit"
                         [disabled]="formulario.invalid"
                         fill="outline"
-                    >Guardar perfil</ion-button>
+                    >{{ 'guardarPerfil' | translate }}</ion-button>
                 </ion-col>
             </ion-row>
 
@@ -260,7 +260,7 @@
                         [disabled]="formulario.invalid"
                         (click)="changePassword()"
                         fill="outline"
-                    >Cambiar contraseña</ion-button>
+                    >{{ 'cambiarPassword' | translate }}</ion-button>
                 </ion-col>
             </ion-row>
 
@@ -271,7 +271,7 @@
                         [disabled]="formulario.invalid"
                         (click)="deactivateAccount()"
                         fill="outline"
-                    >Desactivar cuenta</ion-button>
+                    >{{ 'desactivarCuentaAccion' | translate }}</ion-button>
                 </ion-col>
             </ion-row>
 
@@ -298,7 +298,7 @@
                 (click)="showHideSkills()"
             >
                 <ion-label>
-                    Habilidades ({{userSkills.length}})
+                    {{ 'habilidades' | translate }} ({{userSkills.length}})
                 </ion-label>
 
                 <ion-icon
@@ -338,7 +338,7 @@
                             color="flylinkers"
                             fill="outline"
                             (click)="createSkill()"
-                        >Crear skill</ion-button>
+                        >{{ 'crearSkill' | translate }}</ion-button>
                     </ion-label>
                 </ion-item>
             </ion-card-content>
@@ -361,7 +361,7 @@
                 (click)="showHideExperiences()"
             >
                 <ion-label>
-                    Experiencias ({{userExperiences.length}})
+                    {{ 'experiencias' | translate }} ({{userExperiences.length}})
                 </ion-label>
 
                 <ion-icon
@@ -403,7 +403,7 @@
                             color="flylinkers"
                             fill="outline"
                             (click)="crearNuevaExperiencia()"
-                        >Agregar experiencia</ion-button>
+                        >{{ 'crearExperiencia' | translate }}</ion-button>
                     </ion-label>
                 </ion-item>
             </ion-card-content>
@@ -426,7 +426,7 @@
                 (click)="showHideAccomplishments()"
             >
                 <ion-label>
-                    Logros ({{userAccomplishments.length}})
+                    {{ 'logros' | translate }} ({{userAccomplishments.length}})
                 </ion-label>
 
                 <ion-icon
@@ -468,7 +468,7 @@
                             color="flylinkers"
                             fill="outline"
                             (click)="createAccomplishment()"
-                        >Crear logro</ion-button>
+                        >{{ 'crearLogro' | translate }}</ion-button>
                     </ion-label>
                 </ion-item>
             </ion-card-content>
@@ -491,7 +491,7 @@
                 (click)="showHideInterests()"
             >
                 <ion-label>
-                    Intereses ({{userInterests.length}})
+                    {{ 'intereses' | translate }} ({{userInterests.length}})
                 </ion-label>
 
                 <ion-icon
@@ -533,7 +533,7 @@
                             color="flylinkers"
                             fill="outline"
                             (click)="createInterests()"
-                        >Crear interes</ion-button>
+                        >{{ 'crearInteres' | translate }}</ion-button>
                     </ion-label>
                 </ion-item>
             </ion-card-content>

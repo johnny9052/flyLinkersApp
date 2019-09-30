@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { NewPostPage } from './new-post.page';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
     IonicModule,
     PipesModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
+    TranslateModule
   ],
   declarations: [NewPostPage]
 })

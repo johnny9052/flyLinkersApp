@@ -8,6 +8,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
@@ -28,17 +30,19 @@ export class NewPostPage implements OnInit {
   idPost = '';
   changeEditImage = false;
 
-  constructor(public helperService: HelperService,
+  constructor(private blockAccess: BlockAccessService,
+              public helperService: HelperService,
               private postService: PostService,
               private camera: Camera,
               private base64: Base64,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private translate: TranslateService) {
                 this.route.queryParams.subscribe(params => {
                   if (this.router.getCurrentNavigation().extras.state) {
-                    console.log('******************************');
+                    // console.log('******************************');
                     this.idPost = this.router.getCurrentNavigation().extras.state.idPost;
-                    console.log('IdPost: ' + this.idPost);
+                    // console.log('IdPost: ' + this.idPost);
                     this.newPost.title = this.router.getCurrentNavigation().extras.state.title;
                     this.newPost.content = this.router.getCurrentNavigation().extras.state.content;
                     this.newPost.external_url_new = this.router.getCurrentNavigation().extras.state.externalUrlNew;
@@ -75,7 +79,7 @@ export class NewPostPage implements OnInit {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('profilePk').then(response => {
       this.codeUser = response;
-      console.log(this.codeUser);
+      // console.log(this.codeUser);
 
       // tslint:disable-next-line: max-line-length
       if (this.idPost !== undefined && this.idPost !== 'undefined' && this.idPost !== null && this.idPost !== 'null' && this.idPost !== '') {
@@ -88,7 +92,7 @@ export class NewPostPage implements OnInit {
 
   getPost(pkUser, articleId) {
 
-    console.log('*********VAMOS POR EL POST***********');
+    // console.log('*********VAMOS POR EL POST***********');
 
     this.postService.getPost(pkUser, articleId).subscribe(data => {
       let res: any;
@@ -106,7 +110,7 @@ export class NewPostPage implements OnInit {
   getProfileImage() {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('image_perfil').then(response => {
-      console.log(response);
+      // console.log(response);
       this.imagePerfil = response;
     });
   }
@@ -117,7 +121,7 @@ export class NewPostPage implements OnInit {
     this.newPost.publication_date = today;
     this.newPost.userPk = this.codeUser;
 
-    // cconsole.log(this.newPost.id_new + 'Este es el valor');
+    // c// console.log(this.newPost.id_new + 'Este es el valor');
 
     if (this.newPost.image_new.includes('flylinkers.com')) {
       this.newPost.image_new = this.newPost.image_new.split('media/')[1];
@@ -138,8 +142,8 @@ export class NewPostPage implements OnInit {
 
 
 
-    console.log('Este es el objeto basico');
-    console.log(obj);
+    // console.log('Este es el objeto basico');
+    // console.log(obj);
 
     this.postService.publicNewPost(obj);
 
@@ -153,7 +157,7 @@ export class NewPostPage implements OnInit {
     this.newPost.publication_date = today;
     this.newPost.userPk = this.codeUser;
 
-    // cconsole.log(this.newPost.id_new + 'Este es el valor');
+    // c// console.log(this.newPost.id_new + 'Este es el valor');
 
     const obj = {
         pk_post: this.idPost,
@@ -173,8 +177,8 @@ export class NewPostPage implements OnInit {
       this.newPost.image_base64 = '-1';
     }
 
-    console.log('Este es el objeto basico');
-    console.log(obj);
+    // console.log('Este es el objeto basico');
+    // console.log(obj);
 
     this.postService.editPost(obj);
 
@@ -210,7 +214,7 @@ export class NewPostPage implements OnInit {
             this.newPost.image_base64 = base64File;
             this.newPost.image_new = rutaLocalHost;
       }, (err) => {
-            console.log(err);
+            // console.log(err);
       });
     }, (err) => {
      // Handle error

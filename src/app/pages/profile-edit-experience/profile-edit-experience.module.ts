@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProfileEditExperiencePage } from './profile-edit-experience.page';
 import { ComponentsModule } from '../../components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 // const routes: Routes = [
 //   {
@@ -20,7 +21,8 @@ import { ComponentsModule } from '../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ComponentsModule
+    ComponentsModule,
+    TranslateModule
     // RouterModule.forChild(routes)
   ],
   declarations: [ProfileEditExperiencePage]

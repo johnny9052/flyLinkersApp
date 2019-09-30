@@ -5,7 +5,8 @@ import { MasterPageService } from '../../services/master-page.service';
 import { ModelPosts } from '../../interfaces/posts';
 import { PostService } from '../../services/post.service';
 import { Router, NavigationExtras } from '@angular/router';
-import { debug } from 'util';
+import { TranslateService } from '@ngx-translate/core';
+import { BlockAccessService } from '../../util/blockAccess';
 
 
 @Component({
@@ -21,11 +22,13 @@ export class MasterPagePage implements OnInit {
   tiempoEspera = 1000;
 
   constructor(
+    private blockAccess: BlockAccessService,
     private actionSheetCtrl: ActionSheetController,
     private masterPageService: MasterPageService,
     public helperService: HelperService,
     private postService: PostService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -47,7 +50,7 @@ export class MasterPagePage implements OnInit {
   }
 
   getPostsData(pkUser) {
-    this.helperService.mostrarBarraDeCarga('Cargando publicaciones');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.masterPageService.getPosts(pkUser).subscribe(data => {
       let res: any;
       res = data;
@@ -57,8 +60,8 @@ export class MasterPagePage implements OnInit {
     },
     error => {
       this.helperService.ocultarBarraCarga();
-      this.helperService.showAlert('Error', 'Error cargando la informacion');
-      console.log('oops', error);
+      this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+      // console.log('oops', error);
     });
   }
 
@@ -77,7 +80,7 @@ export class MasterPagePage implements OnInit {
           postTemp.metadataTitle = res.title[0];
         },
         error => {
-          console.log('oops', error);
+          // console.log('oops', error);
         }
       );
     }
@@ -114,7 +117,7 @@ export class MasterPagePage implements OnInit {
     });
   }
 
-  viewPost(idNew){
+  viewPost(idNew) {
 
   }
 
@@ -132,21 +135,21 @@ export class MasterPagePage implements OnInit {
   async presentActionSheet(pk: string) {
 
     const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Albums',
+      // header: 'Albums',
       backdropDismiss: false,
       buttons: [
         {
-          text: 'Delete',
+          text: this.translate.instant('borrar'),
           role: 'destructive',
           icon: 'trash',
           cssClass: 'rojo',
           handler: () => {
-            console.log('Delete clicked');
+            // console.log('Delete clicked');
             this.deletePost(pk);
           }
         },
         {
-          text: 'Edit',
+          text: this.translate.instant('editar'),
           icon: 'create',
           handler: () => {
             const data: NavigationExtras = {
@@ -159,11 +162,11 @@ export class MasterPagePage implements OnInit {
           }
         },
         {
-          text: 'Cancel',
+          text: this.translate.instant('cancelar'),
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         }
       ]
@@ -172,7 +175,7 @@ export class MasterPagePage implements OnInit {
   }
 
   openPage(url: string) {
-    if (url !== 'undefined' && url !== undefined && url !== null){
+    if (url !== 'undefined' && url !== undefined && url !== null) {
       this.helperService.abrirUrlExterna(url);
     }
   }
@@ -193,12 +196,6 @@ export class MasterPagePage implements OnInit {
 
   sharedPost(content: string, externalUrlNew: string, imageNew: string, title: string) {
 
-    console.log('****************ANTES DE***************************');
-    console.log('Content: ' + content);
-    console.log('externalUrlNew: ' + externalUrlNew);
-    console.log('imageNew: ' + imageNew);
-    console.log('title: ' + title);
-
     const data: NavigationExtras = {
       state: {
         content,
@@ -210,6 +207,12 @@ export class MasterPagePage implements OnInit {
 
     this.router.navigate(['new-post'], data);
   }
+
+
+  recargar() {
+    window.location.reload();
+  }
+
 
 
 }

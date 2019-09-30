@@ -9,6 +9,7 @@ import { ViewDetailPostPage } from './view-detail-post.page';
 import { ComponentsModule } from '../../components/components.module';
 import { PopcommentsComponent } from '../../components/popcomments/popcomments.component';
 import { PoprecommentsComponent } from '../../components/poprecomments/poprecomments.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ComponentsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule
   ],
   declarations: [ViewDetailPostPage]
 })

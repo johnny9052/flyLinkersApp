@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ModelNetworkData } from '../interfaces/network';
 import { HelperService } from '../util/HelperService';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class NetworkService {
     });
 
   constructor(private http: HttpClient,
-              public helperService: HelperService) { }
+              public helperService: HelperService,
+              private translate: TranslateService) { }
 
 
   getContacts(pkUser: string) {
@@ -29,7 +31,7 @@ export class NetworkService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/network/connection_actions_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -41,16 +43,16 @@ export class NetworkService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('exitoTransaccion'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -58,7 +60,7 @@ export class NetworkService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/network/connection_actions_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -70,16 +72,16 @@ export class NetworkService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('solicitudAmistadEnviadaExito'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -87,7 +89,7 @@ export class NetworkService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/network/connection_actions_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -99,16 +101,16 @@ export class NetworkService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('conexionEliminada'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 
@@ -116,7 +118,7 @@ export class NetworkService {
     /*URL del web service*/
     const urlRegister = 'https://flylinkers.com/es/network/connection_actions_app/';
     /*Se muestra una barra de carga*/
-    this.helperService.mostrarBarraDeCarga('Espere por favor');
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
     this.http.post(urlRegister, postData, {headers: this.headersPost}).subscribe(data => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
@@ -128,16 +130,16 @@ export class NetworkService {
       if (res.code === '1') {
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
-        this.helperService.showAlert('Exito', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('solicitudEliminada'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
-        this.helperService.showAlert('Error', res.mensaje);
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
       }
     }, error => {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert('Error', 'Error procesando la transaccion');
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
     });
   }
 

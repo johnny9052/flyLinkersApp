@@ -1,5 +1,5 @@
 
-<app-header titulo="Eventos"></app-header>
+<app-header titulo="{{ 'eventos' | translate }}"></app-header>
 
 <ion-content>
     <ion-list *ngFor="let event of events">
@@ -11,10 +11,11 @@
             </ion-item>
             <ion-item lines="none">
                 <ion-label>
-                    <h3 slot="start">Fecha inicio: {{event.event_init_date}}</h3>
+                    <h3 slot="start">{{ 'fechaInicio' | translate }}: {{event.event_init_date}}</h3>
                 </ion-label>
+                
                 <ion-label>
-                    <h3 slot="start">Fecha fin: {{event.event_end_date}}</h3>
+                    <h3 slot="start">{{ 'fechaFin' | translate }}: {{event.event_end_date}}</h3>
                 </ion-label>
             </ion-item>
             <ion-card-content lines="none">

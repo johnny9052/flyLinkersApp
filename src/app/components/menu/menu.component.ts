@@ -16,16 +16,26 @@ export class MenuComponent implements OnInit {
   constructor(public helperService: HelperService) { }
 
   ngOnInit() {
-    console.log('Init desde el menu');
+    // // console.log('Init desde el menu');
     this.getProfilePk();
     this.getProfileFirstName();
     this.getProfileLastName();
     this.getProfileImage();
   }
 
+  ionViewWillEnter() {
+    // // console.log('Init desde el menu');
+    this.getProfilePk();
+    this.getProfileFirstName();
+    this.getProfileLastName();
+    this.getProfileImage();
+  }
+
+
   getProfilePk() {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('profilePk').then(response => {
+      console.log('El id es ' + response);
       console.log(response);
       this.codeUser = response;
     });
@@ -34,7 +44,7 @@ export class MenuComponent implements OnInit {
   getProfileFirstName() {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('firstName').then(response => {
-      console.log(response);
+      console.log('El nombre es ' + response);
       this.firstName = response;
     });
   }
@@ -42,7 +52,7 @@ export class MenuComponent implements OnInit {
   getProfileLastName() {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('lastName').then(response => {
-      console.log(response);
+      console.log('El apellido es ' + response);
       this.lastName = response;
     });
   }
@@ -50,7 +60,7 @@ export class MenuComponent implements OnInit {
   getProfileImage() {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData('image_perfil').then(response => {
-      console.log(response);
+      console.log('La imagen de perfil es ' + response);
       this.imagePerfil = response;
     });
   }

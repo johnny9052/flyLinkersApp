@@ -14,7 +14,7 @@ export class PopcommentsComponent implements OnInit {
 
   onClick(accion: string){
 
-    console.log('accion:', accion);
+    // console.log('accion:', accion);
 
     this.popoverCtrl.dismiss({
       item: accion
