@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, Events } from '@ionic/angular';
 import { HelperService } from '../../util/HelperService';
 import { MasterPageService } from '../../services/master-page.service';
 import { ModelPosts } from '../../interfaces/posts';

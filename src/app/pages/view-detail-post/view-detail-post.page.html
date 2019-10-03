@@ -2,6 +2,8 @@
 
 <ion-content style="width: 100%; margin: 0px !important;">
   <ion-card>
+
+    <!--INFORMACION DEL AUTOR DE LA PUBLICACION-->
     <ion-item>
       <ion-avatar slot="start" (click)="viewProfile(post.author_id)">
         <img src="https://flylinkers.com/media/{{(post.author_image_perfil !== '' )? post.author_image_perfil: 'avatar_2x.png' }}">
@@ -22,7 +24,9 @@
         *ngIf="post.author_id === codeUser"
       ></ion-icon>
     </ion-item>
+    <!--END INFORMACION DEL AUTOR DE LA PUBLICACION-->
 
+    <!--INFORMACION DE LA PUBLICACION-->
     <ion-item
       lines="none"
       *ngIf="post.title !== null"
@@ -72,7 +76,10 @@
       </ion-label>
     </ion-item>
 
+    <!--END INFORMACION DE LA PUBLICACION-->
+
     <ion-row>
+      <!--DAR LIKE A LA PUBLICACION-->
       <ion-col>
         <ion-item *ngIf="!post.liked_by_user">
           <ion-icon name="heart-empty" (click)="generarLikePost(post.id_new)"></ion-icon>
@@ -83,18 +90,26 @@
           <div *ngIf="post.likes > 0"> {{post.likes}}</div>
         </ion-item>
       </ion-col>
+      <!--END DAR LIKE A LA PUBLICACION-->
+
+      <!--ICONO DE COMENTARIOS DE LA PUBLICACION-->
       <ion-col>
         <ion-item>
           <ion-icon name="text" (click)="showHideComments()"></ion-icon>
           <div *ngIf="post.count_comments > 0"> {{post.count_comments}}</div>
         </ion-item>
       </ion-col>
+      <!--END ICONO DE COMENTARIOS DE LA PUBLICACION-->
+
+      <!--ICONO DE COMPARTIR LA PUBLICACION-->
       <ion-col>
         <ion-item>
           <ion-icon name="share"></ion-icon>
         </ion-item>
       </ion-col>
+      <!--END ICONO DE COMPARTIR LA PUBLICACION-->
     </ion-row>
+
     <form
         #formulario="ngForm"
         (ngSubmit)="saveComment(post.id_new)"
@@ -102,6 +117,8 @@
       <ion-list
           style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
       >
+
+        <!--ESCRIBIR COMENTARIO PRINCIPAL-->
         <ion-item
           color="FlyLinkers-Blanco"
           [hidden]="hiddenComments"
@@ -116,7 +133,12 @@
             slot="end"
           >{{ 'enviar' | translate }}</ion-button>
         </ion-item>
+        <!--END ESCRIBIR COMENTARIO PRINCIPAL-->
+
+        <!--LISTADO DE TODOS LOS COMENTARIOS DE LA PUBLICACION-->
         <ion-item-group *ngFor="let comment of comments">
+
+          <!--INFORMACION BASICA DE LAS PERSONAS QUE REALIZAN UN COMENTARIO-->
           <ion-item lines="none">
             <ion-avatar slot="start" (click)="viewProfile(comment.id_author)">
              <img src="https://flylinkers.com/media/{{(comment.comment_author_image !== '' )? comment.comment_author_image: 'avatar_2x.png' }}">
@@ -126,36 +148,57 @@
             </ion-label>
             <ion-icon slot= "end" name="more" (click)="mostrarPop($event, comment.id_comment, comment.comment,post.id_new)" *ngIf="codeUser === comment.id_author"></ion-icon>
           </ion-item>
+          <!--END INFORMACION BASICA DE LAS PERSONAS QUE REALIZAN UN COMENTARIO-->
+
+          <!-- COMENTARIO REALIZADO -->
           <ion-item lines="none">
             <p>{{ comment.comment }}</p>
           </ion-item>
+          <!-- END COMENTARIO REALIZADO -->
+
+          <!--BOTONERA DE OPCIONES DE CADA COMENTARIO REALIZADO-->
           <ion-item slot = "start">
             <ion-row>
+              <!--BOTON DE LIKES DE CADA COMENTARIO REALIZADO-->
               <ion-col>
+                <!--ICONO DE LIKE CUANDO EL USUARIO NO HA DADO LIKE-->
                 <ion-item lines="none" *ngIf="!comment.like_by_user">
                   <ion-icon name="heart-empty" (click)="generarLikeComment(comment.id_comment)"></ion-icon>
                   <div *ngIf="comment.likes > 0"> {{comment.likes}}</div>
                 </ion-item>
+                <!--END ICONO DE LIKE CUANDO EL USUARIO NO HA DADO LIKE-->
+
+                <!--ICONO DE LIKE CUANDO EL USUARIO HA DADO LIKE-->
                 <ion-item lines="none" *ngIf="comment.like_by_user">
-                  <ion-icon name="heart" ></ion-icon>
+                  <ion-icon name="heart" (click)="generarLikeComment(comment.id_comment)"></ion-icon>
                   <div *ngIf="comment.likes > 0"> {{comment.likes}}</div>
                 </ion-item>
+                <!--END ICONO DE LIKE CUANDO EL USUARIO HA DADO LIKE-->
               </ion-col>
+              <!--END BOTON DE LIKES DE CADA COMENTARIO REALIZADO-->
+
+              <!--ICONO PARA HACER UN RECOMENTARIO-->
               <ion-col>
                 <ion-item lines="none">
                   <ion-icon name="text" (click)="getRecomments(comment.id_comment, post.id_new)"></ion-icon>
                   <div *ngIf="comment.count_recomments > 0"> {{comment.count_recomments}}</div>
                 </ion-item>
               </ion-col>
+              <!--END ICONO PARA HACER UN RECOMENTARIO-->
+
             </ion-row>
           </ion-item>
-          <ion-item [hidden]="hiddenRecomments" [id]=comment.id_comment>
+          <!--END BOTONERA DE OPCIONES DE CADA COMENTARIO REALIZADO-->
+
+
+          <!--****************************SECCION DE RECOMENTARIOS**********************************************************-->
+          <ion-item [hidden]="comment.hiddenRecomments" [id]=comment.id_comment>
               <form
               #formulario="ngForm"
               (ngSubmit)="saveRecomment(comment.id_comment, post.id_new)"
           >
             <ion-list
-                [hidden]="hiddenRecomments"
+                [hidden]="comment.hiddenRecomments"
                 style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
             >
               <ion-item
@@ -182,7 +225,7 @@
                   <ion-icon
                     slot="end"
                     name="more"
-                    (click)="mostrarPopRecomment($event, recomment.recomment_id, recomment.recomment ,post.id_new)"
+                    (click)="mostrarPopRecomment($event, recomment.recomment_id, recomment.recomment ,post.id_new, recomment.comment_id)"
                     *ngIf="recomment.recomment_id_author === codeUser"
                   ></ion-icon>
                 </ion-item>
@@ -210,6 +253,10 @@
           </form>
           </ion-item>          
         </ion-item-group>
+
+
+
+
       </ion-list>
     </form>
   </ion-card>
