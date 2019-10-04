@@ -195,4 +195,8 @@ export class NetworkPage implements OnInit {
 
     this.router.navigate(['profile-detail'], data);
   }
+
+  deleteProfileUser(contactosConectar){
+
+  }
 }
