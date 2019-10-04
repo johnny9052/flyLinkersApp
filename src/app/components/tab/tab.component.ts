@@ -1,12 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Events } from '@ionic/angular';
+import { HelperService } from 'src/app/util/HelperService';
+import { TranslateService } from '@ngx-translate/core';
+import { NotificationsService } from 'src/app/services/notifications.service';
+import { ModelNotifications } from '../../interfaces/notifications';
 
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
-  styleUrls: ['./tab.component.scss'],
+  styleUrls: ['./tab.component.scss']
 })
 export class TabComponent implements OnInit {
-
   @Input() homeColor: string;
   @Input() networkColor: string;
   @Input() notificationsColor: string;
@@ -14,8 +18,83 @@ export class TabComponent implements OnInit {
   @Input() newPostColor: string;
   @Input() profileColor: string;
 
-  constructor() { }
+  codeUser = '';
+  language = '';
+  notifications: ModelNotifications[] = [];
+  totalUnreadNotifications = 0;
 
-  ngOnInit() {}
+  constructor(
+    public events: Events,
+    public helperService: HelperService,
+    private translate: TranslateService,
+    private notificationsService: NotificationsService
+  ) {
+    /*Se registra el evento post:notifications, para que cuando este sea llamado
+    cada vez que se carga una nueva pagina despues de que el usuario se identifique
+    y que no sea un componente*/
+    // events.subscribe('post:notifications', () => {
+    //   this.totalUnreadNotifications = 0;
+    //   setTimeout(() => {
+    //   }, 1000);
+    // });
+  }
 
+  ngOnInit() {
+    this.getProfilePk();
+  }
+
+  getProfilePk() {
+    // Se obtiene el identificador del usuario que ingreso al sistema
+    this.helperService.getLocalData('profilePk').then(response => {
+      this.codeUser = response;
+      this.getLanguage();
+    });
+  }
+
+  getLanguage() {
+    // Se obtiene el identificador del usuario que ingreso al sistema
+    this.helperService.getLocalData('language').then(response => {
+      this.language = response;
+      this.getNotificationsData();
+    });
+  }
+
+  getNotificationsData() {
+    // this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
+    this.notificationsService
+      .getNotifications(this.codeUser, this.language)
+      .subscribe(
+        data => {
+          // console.log(data);
+          let res: any;
+          res = data;
+          // console.log(res.items);
+          this.notifications = res.items;
+          this.helperService.ocultarBarraCarga();
+          this.getTotalUnreadNotifications();
+        },
+        error => {
+          this.helperService.ocultarBarraCarga();
+          this.helperService.showAlert(
+            this.translate.instant('errorTitulo'),
+            this.translate.instant('errorCargandoInformacion')
+          );
+          // console.log('oops', error);
+        }
+      );
+  }
+
+
+  getTotalUnreadNotifications() {
+
+    let cont = 0;
+    // tslint:disable-next-line: prefer-const
+    for (let obj of this.notifications) {
+      if (obj.unread === true) {
+        cont++;
+      }
+    }
+
+    this.totalUnreadNotifications = cont;
+  }
 }

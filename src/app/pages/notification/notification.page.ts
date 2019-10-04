@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, Events } from '@ionic/angular';
 import { ModelNotifications } from '../../interfaces/notifications';
 import { HelperService } from '../../util/HelperService';
 import { NotificationsService } from '../../services/notifications.service';
@@ -26,7 +26,8 @@ export class NotificationPage implements OnInit {
               private notificationsService: NotificationsService,
               public helperService: HelperService,
               private router: Router,
-              private translate: TranslateService) { }
+              private translate: TranslateService,
+              private events: Events) { }
 
   ngOnInit() {
 
@@ -37,6 +38,8 @@ export class NotificationPage implements OnInit {
   ionViewWillEnter() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
+    // Se verifica si hay nuevas notificaciones para mostrar en pantalla
+    // this.events.publish('post:notifications');
   }
 
   getProfilePk() {

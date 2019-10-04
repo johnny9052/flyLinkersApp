@@ -28,7 +28,8 @@ export class MasterPagePage implements OnInit {
     public helperService: HelperService,
     private postService: PostService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public events: Events
   ) {}
 
   ngOnInit() {
@@ -38,6 +39,8 @@ export class MasterPagePage implements OnInit {
   ionViewWillEnter() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
+    // Se verifica si hay nuevas notificaciones para mostrar en pantalla
+    // this.events.publish('post:notifications');
   }
 
   getProfilePk() {

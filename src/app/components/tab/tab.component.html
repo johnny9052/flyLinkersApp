@@ -47,7 +47,14 @@ su propiedad tab -->
           <ion-icon [color]="newPostColor" size="large" name="add-circle" routerLink="/new-post"></ion-icon>
         </ion-col>
 
-        <ion-col size="2">
+        <ion-col size="2" *ngIf="totalUnreadNotifications>0">
+          <ion-icon [color]="notificationsColor" size="large" name="notifications"  routerLink="/notification"></ion-icon>
+          <ion-text class="my-label">
+            {{totalUnreadNotifications}}
+          </ion-text>
+        </ion-col>
+
+        <ion-col size="2" *ngIf="totalUnreadNotifications===0">
           <ion-icon [color]="notificationsColor" size="large" name="notifications"  routerLink="/notification"></ion-icon>
         </ion-col>
 
