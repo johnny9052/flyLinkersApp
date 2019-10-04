@@ -6,7 +6,7 @@ export interface ModelNotifications {
       img_src: string;
       notification_item_pk: string;
       text: string;
-      unread: string;
+      unread: boolean;
       type: string;
       idPost: string;
 }

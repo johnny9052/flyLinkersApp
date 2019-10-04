@@ -11,6 +11,7 @@ import { NetworkService } from '../../services/network.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
+import { Events } from '@ionic/angular';
 
 @Component({
   selector: 'app-network',
@@ -43,7 +44,8 @@ export class NetworkPage implements OnInit {
               private networkService: NetworkService,
               public helperService: HelperService,
               private router: Router,
-              private translate: TranslateService
+              private translate: TranslateService,
+              private events: Events
   ) {}
 
   ngOnInit() {
@@ -53,6 +55,8 @@ export class NetworkPage implements OnInit {
   ionViewWillEnter() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
+    // Se verifica si hay nuevas notificaciones para mostrar en pantalla
+    // this.events.publish('post:notifications');
   }
 
   getProfilePk() {
