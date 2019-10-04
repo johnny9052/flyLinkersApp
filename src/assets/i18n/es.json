@@ -105,6 +105,10 @@
   "usuarioIdentificado": "Usuario identificado correctamente",
   "usuarioNoExiste": "Usuario o contraseña invalidos",
 
+
+  "desconectarse":"Desconectarse",
+  "deseaDesconectarse":"¿Esta seguro que desea desconectarse?",
+
   "***************HOME**********************": "",
 
   "inicio": "Inicio",

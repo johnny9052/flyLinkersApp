@@ -24,34 +24,37 @@ export interface ModelPosts {
 
 }
 
-export interface ModelComments{
+export interface ModelComments {
       id_comment: string;
       comment: string;
       comment_firstname_author: string;
       comment_lastname_author: string;
       comment_author_image: string;
-      like_by_user: string;
+      like_by_user: boolean;
       likes: number;
       count_recomments: number;
       id_author: string;
+      hiddenComments: boolean;
+      hiddenRecomments: boolean;
 }
 
-export interface ModelCommentData{
+export interface ModelCommentData {
       comment: string;
       pk_profile: string;
       pk_post: string;
 }
 
-export interface ModelRecomments{
+export interface ModelRecomments {
       recomment_id_author: string;
       recomment_id: string;
       recomment: string;
       recomment_firstname_author: string;
       comrecomment_lastname_author: string;
       recomment_author_image: string;
+      comment_id: string;
 }
 
-export interface ModelRecommentData{
+export interface ModelRecommentData {
       comment: string;
       pk_profile: string;
       pk_comment: string;

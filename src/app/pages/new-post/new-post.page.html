@@ -54,7 +54,12 @@
 
     <ion-item *ngIf=" newPost.image_new !== '' &&  newPost.image_new !== 'undefined' && newPost.image_new !== undefined"> 
         <ion-card>
+          
             <img [src]="newPost.image_new | imageSanitizer">
+
+            <ion-item color="FlyLinkers-Blanco" lines="none" (click)="borrarFoto()">
+                <ion-icon name="trash"  size="small"></ion-icon>
+            </ion-item>
         </ion-card>           
     </ion-item>
 

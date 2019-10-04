@@ -53,6 +53,7 @@ export class ViewDetailPostPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.idPost = this.router.getCurrentNavigation().extras.state.idPost;
+        this.helperService.saveLocalData('currentPostId', this.idPost);
       }
     });
   }
@@ -63,7 +64,14 @@ export class ViewDetailPostPage implements OnInit {
 
   ionViewWillEnter() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
-    this.getProfilePk();
+    this.getCurrentPost();
+  }
+
+  getCurrentPost() {
+    this.helperService.getLocalData('currentPostId').then(response => {
+      this.idPost = response;
+      this.getProfilePk();
+    });
   }
 
   getProfilePk() {
@@ -75,12 +83,19 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   getPost(pkUser, articleId) {
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.postService.getPost(pkUser, articleId).subscribe(data => {
       let res: any;
       res = data;
       this.post = res.post;
       this.post.liked_by_user = res.post.liked_by_user[0];
+      this.helperService.ocultarBarraCarga();
       this.getMetadataPosts();
+    },
+    error => {
+      this.helperService.ocultarBarraCarga();
+      this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+      // console.log('oops', error);
     });
   }
 
@@ -106,7 +121,8 @@ export class ViewDetailPostPage implements OnInit {
     evento,
     pk: string,
     comment: string,
-    postId: string
+    postId: string,
+    commentId: string
   ) {
     const popover = await this.popoverController.create({
       component: PoprecommentsComponent,
@@ -118,20 +134,15 @@ export class ViewDetailPostPage implements OnInit {
 
     const { data } = await popover.onWillDismiss();
     if (data.item === 'Delete') {
-      this.deleteRecomment(pk);
+      this.deleteRecomment(pk, commentId);
     }
     if (data.item === 'Edit') {
-      this.editRecomment(pk, comment, postId);
+      this.editRecomment(pk, comment, postId, commentId);
     }
   }
 
-  showHideComments() {
-    this.hiddenComments = !this.hiddenComments;
-  }
 
-  showHideRecomments() {
-    this.hiddenRecomments = !this.hiddenRecomments;
-  }
+
 
   getMetadataPosts() {
     this.postService.getMetadataPosts(this.post.external_url_new).subscribe(
@@ -155,20 +166,55 @@ export class ViewDetailPostPage implements OnInit {
       let res: any;
       res = data;
       this.comments = res.comments;
-      this.showHideComments();
-      this.showHideRecomments();
+      // this.showHideComments();
+      // this.showHideRecomments();
     });
   }
 
-  getRecomments(commentId, postId) {
+  showHideComments() {
+    this.hiddenComments = !this.hiddenComments;
+  }
+
+
+  getRecomments(commentId, postId, verRecomentarios?: boolean) {
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.postService
       .getRecomments(commentId, postId, this.codeUser)
       .subscribe(data => {
         let res: any;
         res = data;
         this.recomments = res.recomments;
-        this.showHideRecomments();
+
+        if (verRecomentarios) {
+         // tslint:disable-next-line: prefer-const
+         for (let obj of this.comments) {
+           if (obj.id_comment === commentId) {
+             obj.hiddenRecomments =  false;
+           }
+         }
+        } else {
+          this.showHideRecomments(commentId);
+        }
+
+        this.helperService.ocultarBarraCarga();
+      },
+      error => {
+        this.helperService.ocultarBarraCarga();
+        this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+        // console.log('oops', error);
       });
+  }
+
+
+  showHideRecomments(commentId: string) {
+    // tslint:disable-next-line: prefer-const
+    for (let obj of this.comments) {
+      if (obj.id_comment === commentId) {
+        obj.hiddenRecomments =  !obj.hiddenRecomments;
+      } else {
+        obj.hiddenRecomments =  true;
+      }
+    }
   }
 
   generarLikePost(pkPost: string) {
@@ -179,7 +225,15 @@ export class ViewDetailPostPage implements OnInit {
 
     this.postService.generarLikePost(like).then(response => {
       setTimeout(() => {
-        this.getPost(this.codeUser, pkPost);
+        // this.getPost(this.codeUser, pkPost);
+        this.post.liked_by_user = !this.post.liked_by_user;
+
+        if (this.post.liked_by_user === true) {
+          this.post.likes++;
+        } else {
+          this.post.likes--;
+        }
+
       }, this.tiempoEspera);
     });
   }
@@ -189,6 +243,8 @@ export class ViewDetailPostPage implements OnInit {
     this.comment.pk_post = pkPost;
     this.postService.saveComment(this.comment).then(response => {
       setTimeout(() => {
+        this.comment = {} as ModelCommentData;
+        this.post.count_comments++;
         this.getComments(pkPost);
       }, this.tiempoEspera);
     });
@@ -199,7 +255,9 @@ export class ViewDetailPostPage implements OnInit {
     this.recomment.pk_comment = pkComment;
     this.postService.saveRecomment(this.recomment).then(response => {
       setTimeout(() => {
-        this.getComments(postId);
+        this.aumentarNumeroRecomentarios(pkComment);
+        this.recomment = {} as ModelRecommentData;
+        this.getRecomments(pkComment, postId, true);
       }, this.tiempoEspera);
     });
   }
@@ -212,7 +270,21 @@ export class ViewDetailPostPage implements OnInit {
 
     this.postService.generarLikeComment(like).then(response => {
       setTimeout(() => {
-        this.getComments(this.codeUser);
+        // this.getComments(this.codeUser);
+
+        // tslint:disable-next-line: prefer-const
+        for (let obj of this.comments) {
+          // tslint:disable-next-line: radix
+          if (parseInt(obj.id_comment) === parseInt(pkComment)) {
+            obj.like_by_user = !obj.like_by_user;
+            if (obj.like_by_user === true) {
+              obj.likes++;
+            } else {
+              obj.likes--;
+            }
+          }
+        }
+
       }, this.tiempoEspera);
     });
   }
@@ -223,18 +295,21 @@ export class ViewDetailPostPage implements OnInit {
     };
     this.postService.deleteComment(comment).then(response => {
       setTimeout(() => {
+        this.post.count_comments--;
         this.getComments(this.idPost);
       }, this.tiempoEspera);
     });
   }
 
-  deleteRecomment(pkRecomment: string) {
+  deleteRecomment(pkRecomment: string, commentId: string) {
     const Recomment = {
       pk_recomment: pkRecomment
     };
     this.postService.deleteRecomment(Recomment).then(response => {
       setTimeout(() => {
-        this.getComments(this.idPost);
+        // this.getComments(this.idPost);
+        this.disminuirNumeroRecomentarios(commentId);
+        this.getRecomments(commentId, this.idPost, true);
       }, this.tiempoEspera);
     });
   }
@@ -294,7 +369,7 @@ export class ViewDetailPostPage implements OnInit {
     await input.present();
   }
 
-  async editRecomment(id: string, recomment: string, postId: string) {
+  async editRecomment(id: string, recomment: string, postId: string, commentId: string) {
     const input = await this.alertCtrl.create({
       header: 'Editar',
       // message: 'Ingrese su nueva skill',
@@ -328,7 +403,8 @@ export class ViewDetailPostPage implements OnInit {
 
             this.postService.editRecomment(objRecomment).then(response => {
               setTimeout(() => {
-                this.getComments(postId);
+                // this.getComments(postId);
+                this.getRecomments(commentId, postId, true);
               }, this.tiempoEspera);
             });
           }
@@ -358,7 +434,13 @@ export class ViewDetailPostPage implements OnInit {
           text: 'Edit',
           icon: 'create',
           handler: () => {
-            // console.log('Edit clicked');
+            const data: NavigationExtras = {
+              state: {
+                idPost: pk
+              }
+            };
+
+            this.router.navigate(['new-post'], data);
           }
         },
         {
@@ -382,4 +464,56 @@ export class ViewDetailPostPage implements OnInit {
 
     this.router.navigate(['profile-detail'], data);
   }
+
+
+
+
+
+  aumentarNumeroRecomentarios(commentId: string) {
+    // tslint:disable-next-line: prefer-const
+    for (let obj of this.comments) {
+      // tslint:disable-next-line: radix
+      if (parseInt(obj.id_comment) === parseInt(commentId)) {
+        console.log('Encontre el ' + commentId);
+        obj.count_recomments++;
+        break;
+      }
+    }
+  }
+
+
+  disminuirNumeroRecomentarios(commentId: string) {
+    // tslint:disable-next-line: prefer-const
+    for (let obj of this.comments) {
+      // tslint:disable-next-line: radix
+      if (parseInt(obj.id_comment) === parseInt(commentId)) {
+        console.log('Encontre el ' + commentId);
+        obj.count_recomments--;
+        break;
+      }
+    }
+  }
+
+
+
+  sharedPost(content: string, externalUrlNew: string, imageNew: string, title: string) {
+
+    const data: NavigationExtras = {
+      state: {
+        content,
+        externalUrlNew,
+        imageNew,
+        title
+      }
+    };
+
+    this.router.navigate(['new-post'], data);
+  }
+
+
+
 }
+
+
+
+

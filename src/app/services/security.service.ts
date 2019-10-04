@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Events } from '@ionic/angular';
 import { HelperService } from '../util/HelperService';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -21,7 +21,8 @@ export class SecurityService {
   constructor(private http: HttpClient,
               public alertCtrl: AlertController,
               public helperService: HelperService,
-              private translate: TranslateService
+              private translate: TranslateService,
+              public events: Events
               ) { }
 
   /*Definicion del header funcional para envios via post*/
@@ -86,6 +87,9 @@ export class SecurityService {
           this.helperService.saveLocalData('lastName', res.lastName);
           this.helperService.saveLocalData('image_perfil', res.image_perfil);
 
+          /*Se activa el evento user:logIn, el cual se registro en el menu, para que tan pronto se identique 
+          un usuario, se actualice la informacion en pantalla*/
+          this.events.publish('user:logIn');
 
           if (res.perfil !== '-1') {
             /*Se valida si el usuario ya actualizo los datos del perfil o no para saber si se manda al home o
