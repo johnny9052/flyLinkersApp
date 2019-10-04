@@ -103,6 +103,10 @@
     "usuarioIdentificado": "User correctly identified",
     "usuarioNoExiste": "Invalid username or password",
 
+    "desconectarse":"Sign out",
+    "deseaDesconectarse":"¿Are you sure you want to disconnect?",
+
+
     "***************HOME**********************": "",
   
     "inicio": "Home",

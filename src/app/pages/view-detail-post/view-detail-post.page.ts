@@ -53,6 +53,7 @@ export class ViewDetailPostPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.idPost = this.router.getCurrentNavigation().extras.state.idPost;
+        this.helperService.saveLocalData('currentPostId', this.idPost);
       }
     });
   }
@@ -63,7 +64,14 @@ export class ViewDetailPostPage implements OnInit {
 
   ionViewWillEnter() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
-    this.getProfilePk();
+    this.getCurrentPost();
+  }
+
+  getCurrentPost() {
+    this.helperService.getLocalData('currentPostId').then(response => {
+      this.idPost = response;
+      this.getProfilePk();
+    });
   }
 
   getProfilePk() {
@@ -75,12 +83,19 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   getPost(pkUser, articleId) {
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.postService.getPost(pkUser, articleId).subscribe(data => {
       let res: any;
       res = data;
       this.post = res.post;
       this.post.liked_by_user = res.post.liked_by_user[0];
+      this.helperService.ocultarBarraCarga();
       this.getMetadataPosts();
+    },
+    error => {
+      this.helperService.ocultarBarraCarga();
+      this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+      // console.log('oops', error);
     });
   }
 
@@ -162,6 +177,7 @@ export class ViewDetailPostPage implements OnInit {
 
 
   getRecomments(commentId, postId, verRecomentarios?: boolean) {
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.postService
       .getRecomments(commentId, postId, this.codeUser)
       .subscribe(data => {
@@ -179,6 +195,13 @@ export class ViewDetailPostPage implements OnInit {
         } else {
           this.showHideRecomments(commentId);
         }
+
+        this.helperService.ocultarBarraCarga();
+      },
+      error => {
+        this.helperService.ocultarBarraCarga();
+        this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+        // console.log('oops', error);
       });
   }
 
@@ -411,7 +434,13 @@ export class ViewDetailPostPage implements OnInit {
           text: 'Edit',
           icon: 'create',
           handler: () => {
-            // console.log('Edit clicked');
+            const data: NavigationExtras = {
+              state: {
+                idPost: pk
+              }
+            };
+
+            this.router.navigate(['new-post'], data);
           }
         },
         {
@@ -463,6 +492,22 @@ export class ViewDetailPostPage implements OnInit {
         break;
       }
     }
+  }
+
+
+
+  sharedPost(content: string, externalUrlNew: string, imageNew: string, title: string) {
+
+    const data: NavigationExtras = {
+      state: {
+        content,
+        externalUrlNew,
+        imageNew,
+        title
+      }
+    };
+
+    this.router.navigate(['new-post'], data);
   }
 
 
