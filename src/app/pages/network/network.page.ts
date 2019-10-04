@@ -78,6 +78,7 @@ export class NetworkPage implements OnInit {
       this.totalContactos = data.cantidad_contactos[0];
       this.contactosConectar = data.contactos_para_conectar;
       this.totalContactosConectar = data.cantidad_contactos_para_conectar[0];
+      this.deleteProfileUser();
       this.helperService.ocultarBarraCarga();
     },
       error => {
@@ -192,7 +193,15 @@ export class NetworkPage implements OnInit {
     this.router.navigate(['profile-detail'], data);
   }
 
-  deleteProfileUser(contactosConectar){
-
+  deleteProfileUser(){
+    let posicion = 0;
+    for (let obj of this.contactosConectar) {
+      // tslint:disable-next-line:radix
+      if (parseInt(obj.pk) === parseInt(this.codeUser)) {
+        this.contactosConectar.splice(posicion, 1);
+        break;
+      }
+      posicion++;
+    }
   }
 }
