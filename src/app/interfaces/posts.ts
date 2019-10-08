@@ -51,6 +51,7 @@ export interface ModelRecomments {
       recomment_firstname_author: string;
       comrecomment_lastname_author: string;
       recomment_author_image: string;
+      recomment_profession_author: string;
       comment_id: string;
 }
 

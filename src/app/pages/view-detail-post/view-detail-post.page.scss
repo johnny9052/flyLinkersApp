@@ -1,0 +1,19 @@
+page-list {
+    // reduce min height restriction
+       .item {
+           min-height: 0.5rem;
+           max-height: 8rem;
+       }
+       // set height of thumbnail
+       .item-md ion-thumbnail ion-img,
+       .item-md ion-thumbnail img,
+       .item ion-thumbnail ion-img,
+       .item ion-thumbnail img {
+           width: 50px;
+           height: 50px;
+       }
+       // set max height of list item
+       .small-list {
+           max-height: 50px;
+       }
+    }

@@ -20,8 +20,8 @@ export class IdentifyPage implements OnInit {
               public helperService: HelperService) { }
 
   ngOnInit() {
-    this.userDataLogIn.username = 'alexander9052@gmail.com';
-    this.userDataLogIn.password = 'Dragon9052';
+    this.userDataLogIn.username = '';
+    this.userDataLogIn.password = '';
   }
 
 
