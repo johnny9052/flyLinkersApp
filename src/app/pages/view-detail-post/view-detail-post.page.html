@@ -193,45 +193,62 @@
 
           <!--****************************SECCION DE RECOMENTARIOS**********************************************************-->
           <ion-item [hidden]="comment.hiddenRecomments" [id]=comment.id_comment>
-              <form
+            <form
               #formulario="ngForm"
               (ngSubmit)="saveRecomment(comment.id_comment, post.id_new)"
-          >
+            >
             <ion-list
                 [hidden]="comment.hiddenRecomments"
                 style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
             >
               <ion-item
                 color="FlyLinkers-Blanco"
+                class = "page-list"
               >
                 <ion-label position="floating">{{ 'escribeComentario' | translate }}</ion-label>
                 <ion-textarea type="text" name="comment" [(ngModel)]="recomment.comment" required = "required"></ion-textarea>
-                <ion-button
+              </ion-item>
+              <ion-item>
+                  <ion-button
                   color="flylinkers"
                   type="submit"
                   [disabled]="formulario.invalid"
                   fill="outline"
-                  slot="end"
+                  slot="start"
                 >{{ 'enviar' | translate }}</ion-button>
               </ion-item>
-              <ion-item-group *ngFor="let recomment of recomments">
-                <ion-item>
-                  <ion-avatar slot="start" (click)="viewProfile(recomment.recomment_id_author)">
-                  <img src="https://flylinkers.com/media/{{(recomment.recomment_author_image !== '' )? recomment.recomment_author_image: 'avatar_2x.png' }}">
-                  </ion-avatar>
-                  <ion-label (click)="viewProfile(recomment.recomment_id_author)">
-                    <h3>{{recomment.recomment_firstname_author}} {{recomment.recomment_lastname_author}}</h3>
-                  </ion-label>
-                  <ion-icon
-                    slot="end"
-                    name="more"
-                    (click)="mostrarPopRecomment($event, recomment.recomment_id, recomment.recomment ,post.id_new, recomment.comment_id)"
-                    *ngIf="recomment.recomment_id_author === codeUser"
-                  ></ion-icon>
-                </ion-item>
-                <ion-item>
-                  <p>{{recomment.recomment}}</p>
-                </ion-item>
+              <ion-item *ngFor="let recomment of recomments">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="12">
+                      <ion-chip>
+                          <ion-avatar (click)="viewProfile(recomment.recomment_id_author)">
+                            <img src="https://flylinkers.com/media/{{(recomment.recomment_author_image !== '' )? recomment.recomment_author_image: 'avatar_2x.png' }}">
+                          </ion-avatar>
+                          <ion-label (click)="viewProfile(recomment.recomment_id_author)">
+                            <h3>{{recomment.recomment_firstname_author}} {{recomment.recomment_lastname_author}}</h3>
+                          </ion-label>
+                          <ion-label>
+                            <ion-icon
+                              slot="end"
+                              name="more"
+                              (click)="mostrarPopRecomment($event, recomment.recomment_id, recomment.recomment ,post.id_new, recomment.comment_id)"
+                              *ngIf="recomment.recomment_id_author === codeUser"
+                            ></ion-icon>
+                          </ion-label>
+                      </ion-chip>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size= "2">
+                    </ion-col>
+                    <ion-col size= "10">
+                      <p>{{recomment.recomment}}</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              
                 <!-- <ion-item slot = "start" *ngIf="!post.liked_by_user">
                   <ion-row>
                     <ion-col>
@@ -248,7 +265,6 @@
                     </ion-col>
                   </ion-row>
                 </ion-item>           -->
-              </ion-item-group>
             </ion-list>
           </form>
           </ion-item>          
