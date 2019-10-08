@@ -40,7 +40,7 @@ export class MasterPagePage implements OnInit {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
     // Se verifica si hay nuevas notificaciones para mostrar en pantalla
-    // this.events.publish('post:notifications');
+    this.events.publish('post:notifications');
   }
 
   getProfilePk() {

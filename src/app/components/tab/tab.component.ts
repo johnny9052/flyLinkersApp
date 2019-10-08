@@ -32,11 +32,12 @@ export class TabComponent implements OnInit {
     /*Se registra el evento post:notifications, para que cuando este sea llamado
     cada vez que se carga una nueva pagina despues de que el usuario se identifique
     y que no sea un componente*/
-    // events.subscribe('post:notifications', () => {
-    //   this.totalUnreadNotifications = 0;
-    //   setTimeout(() => {
-    //   }, 1000);
-    // });
+    events.subscribe('post:notifications', () => {
+      this.totalUnreadNotifications = 0;
+      setTimeout(() => {
+        this.getProfilePk();
+      }, 1000);
+    });
   }
 
   ngOnInit() {
