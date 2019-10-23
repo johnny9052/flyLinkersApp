@@ -86,12 +86,15 @@ export class SecurityService {
           this.helperService.saveLocalData('firstName', res.firstName);
           this.helperService.saveLocalData('lastName', res.lastName);
           this.helperService.saveLocalData('image_perfil', res.image_perfil);
+          this.helperService.saveLocalData('profileUser', res.perfil);
 
-          /*Se activa el evento user:logIn, el cual se registro en el menu, para que tan pronto se identique 
+          /*Se activa el evento user:logIn, el cual se registro en el menu, para que tan pronto se identique
           un usuario, se actualice la informacion en pantalla*/
           this.events.publish('user:logIn');
 
           if (res.perfil !== '-1') {
+            console.log('***********************************************');
+            console.log(res.perfil);
             /*Se valida si el usuario ya actualizo los datos del perfil o no para saber si se manda al home o
             a actualizar los datos de perfil*/
             // tslint:disable-next-line: max-line-length

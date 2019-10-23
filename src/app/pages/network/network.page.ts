@@ -12,6 +12,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
 import { Events } from '@ionic/angular';
+import { ValidateFullProfile } from '../../util/validateFullProfile';
 
 @Component({
   selector: 'app-network',
@@ -45,7 +46,8 @@ export class NetworkPage implements OnInit {
               public helperService: HelperService,
               private router: Router,
               private translate: TranslateService,
-              private events: Events
+              private events: Events,
+              private validateFullProfileService: ValidateFullProfile
   ) {}
 
   ngOnInit() {
@@ -53,6 +55,8 @@ export class NetworkPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
+    this.validateFullProfileService.validateDataFullProfile();
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
     // Se verifica si hay nuevas notificaciones para mostrar en pantalla

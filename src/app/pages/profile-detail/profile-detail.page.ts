@@ -12,6 +12,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
+import { ValidateFullProfile } from '../../util/validateFullProfile';
 
 @Component({
   selector: 'app-profile-detail',
@@ -45,7 +46,8 @@ constructor(private blockAccess: BlockAccessService,
             public profileService: ProfileService,
             private route: ActivatedRoute,
             private router: Router,
-            private translate: TranslateService
+            private translate: TranslateService,
+            private validateFullProfileService: ValidateFullProfile
 ) {
   this.route.queryParams.subscribe(params => {
     if (this.router.getCurrentNavigation().extras.state) {
@@ -72,7 +74,8 @@ ngOnInit() {}
 
 
 ionViewWillEnter() {
-  // console.log('Entre');
+    // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
+    this.validateFullProfileService.validateDataFullProfile();
 }
 
 ionViewWillLeave() {

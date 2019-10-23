@@ -5,6 +5,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { ThrowStmt } from '@angular/compiler';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
+import { ValidateFullProfile } from '../../util/validateFullProfile';
 
 @Component({
   selector: 'app-interests',
@@ -19,13 +20,16 @@ export class InterestsPage implements OnInit {
   constructor(private blockAccess: BlockAccessService,
               public helperService: HelperService,
               public profileService: ProfileService,
-              private translate: TranslateService) { }
+              private translate: TranslateService,
+              private validateFullProfileService: ValidateFullProfile) { }
 
   ngOnInit() {
 
   }
 
   ionViewWillEnter() {
+     // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
+     this.validateFullProfileService.validateDataFullProfile();
      // Se obtiene el identidicador del usuario que ingreso al sistema
      this.getProfilePk();
   }

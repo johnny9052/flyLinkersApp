@@ -119,6 +119,8 @@ export class ProfileService {
       res = data;
       /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
       if (res.code === '1') {
+        /*Se almacena un valor quemado en el profileUser para que la validacion de si ya ha diligenciado el perfil sea valido*/
+        this.helperService.saveLocalData('profileUser', '1');
         /*Se muestra un modal indicando que el registro fue exitoso, el cual al ser presionado
         redireccionara al login*/
         this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('perfilActualizado'));

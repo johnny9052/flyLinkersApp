@@ -18,6 +18,7 @@ import { PoprecommentsComponent } from '../../components/poprecomments/poprecomm
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { BlockAccessService } from '../../util/blockAccess';
 import { TranslateService } from '@ngx-translate/core';
+import { ValidateFullProfile } from '../../util/validateFullProfile';
 
 
 @Component({
@@ -48,7 +49,8 @@ export class ViewDetailPostPage implements OnInit {
               private popoverController: PopoverController,
               private route: ActivatedRoute,
               private router: Router,
-              private translate: TranslateService
+              private translate: TranslateService,
+              private validateFullProfileService: ValidateFullProfile
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -63,6 +65,8 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
+    this.validateFullProfileService.validateDataFullProfile();
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getCurrentPost();
   }

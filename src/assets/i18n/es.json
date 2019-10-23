@@ -87,6 +87,8 @@
   "crear": "Crear",
   "enviar": "Enviar",
 
+  "alerta": "Alerta",
+
   "errorCargandoInformacion": "Error cargando la informacion",
   
   "***************REGISTRO-DE-USUARIO**********************": "",
@@ -158,6 +160,8 @@
 
 
   "***************PERFIL**********************": "",
+
+  "debeActualizarPerfil": "Debe actualizar su perfil para utilizar flyLinkers",
 
   "perfilActualizado":"Perfil actualizado",
   "errorActualizarPerfil": "Error al actualizar el perfil",

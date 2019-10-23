@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ModelUserData, Profile, Skills, Experiences, Accomplishments, Interests, Events } from '../../interfaces/userInterface';
+import {
+  ModelUserData,
+  Profile,
+  Skills,
+  Experiences,
+  Accomplishments,
+  Interests,
+  Events
+} from '../../interfaces/userInterface';
 import { HelperService } from 'src/app/util/HelperService';
 import { ProfileService } from 'src/app/services/profile.service';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
-
+import { ValidateFullProfile } from '../../util/validateFullProfile';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
-
   /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
   codeUser = '';
 
@@ -31,10 +38,18 @@ export class ProfilePage implements OnInit {
   events: Events[] = [];
   /****************END OBJETOS************************** */
 
-  constructor(private blockAccess: BlockAccessService,
-              public helperService: HelperService,
-              public profileService: ProfileService,
-              private translate: TranslateService) { }
+  constructor(
+    private blockAccess: BlockAccessService,
+    public helperService: HelperService,
+    public profileService: ProfileService,
+    private translate: TranslateService,
+    private validateFullProfileService: ValidateFullProfile
+  ) {}
+
+  ionViewWillEnter() {
+    // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
+    this.validateFullProfileService.validateDataFullProfile();
+  }
 
   ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -60,8 +75,6 @@ export class ProfilePage implements OnInit {
   showHideEvents() {
     this.hiddenEvents = !this.hiddenEvents;
   }
-
-
 
   /*Funcion que se encarga de obtener codigo del usuario que se encuentra identificado*/
   getProfilePk() {
@@ -95,16 +108,16 @@ export class ProfilePage implements OnInit {
       },
       error => {
         this.helperService.ocultarBarraCarga();
-        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
+        this.helperService.showAlert(
+          this.translate.instant('errorTitulo'),
+          this.translate.instant('errorCargandoInformacion')
+        );
         // console.log('oops', error);
       }
     );
   }
 
-
   openExternalURL(link: string) {
     window.open(link, '_system');
   }
-
-
 }

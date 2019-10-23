@@ -10,6 +10,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
+import { ValidateFullProfile } from '../../util/validateFullProfile';
 
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
@@ -37,7 +38,8 @@ export class NewPostPage implements OnInit {
     private base64: Base64,
     private route: ActivatedRoute,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private validateFullProfileService: ValidateFullProfile
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -70,7 +72,14 @@ export class NewPostPage implements OnInit {
 
   ngOnInit() {}
 
+
+  ionViewWillEnter() {
+    // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
+    this.validateFullProfileService.validateDataFullProfile();
+  }
+
   ionViewWillLeave() {
+
     this.newPost = {} as ModelPosts;
     /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
     this.codeUser = '';

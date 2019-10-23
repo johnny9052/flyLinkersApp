@@ -7,6 +7,7 @@ import { PostService } from '../../services/post.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
+import { ValidateFullProfile } from '../../util/validateFullProfile';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class MasterPagePage implements OnInit {
 
   constructor(
     private blockAccess: BlockAccessService,
+    private validateFullProfileService: ValidateFullProfile,
     private actionSheetCtrl: ActionSheetController,
     private masterPageService: MasterPageService,
     public helperService: HelperService,
@@ -37,6 +39,8 @@ export class MasterPagePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
+    this.validateFullProfileService.validateDataFullProfile();
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
     // Se verifica si hay nuevas notificaciones para mostrar en pantalla
