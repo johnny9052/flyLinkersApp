@@ -83,6 +83,7 @@
     "ok": "Ok",
     "crear": "Create",
     "enviar": "Send",
+    "opciones":"Options",
 
     "alerta": "Alert",
 
@@ -106,6 +107,7 @@
     "minimo8Caracteres": "8 characters minimum",
     "soloLetras": "Only letters",
     "DebeAceptarTerminosCondiciones":"You must accept the terms of Use, Privacy Policy and Cookies Policy",
+    "aceptarTerminosCondiciones":"Accept terms of Use, Privacy Policy and Cookies Policy",
 
     "***************IDENTIFICACION-USUARIO**********************": "",
     "identificacion": "Log in",
@@ -133,7 +135,19 @@
     "noNoticiasQueMostrarTitulo":"There is no information to show",
     "noNoticiasQueMostrarDescripcion":"Increase the number of people in your network to see news and publications",
 
+    "denunciar":"Denunciate",
 
+
+    "***************DENUNCIAR**********************": "",
+    "descripcionDenuncia":"Denunce description",
+    "tipoDenuncia":"Denunce type",
+    "enviarDenuncia": "Send denunce",
+
+    "contenidoInapropiado":"Inappropriate content",
+    "contenidoFalso":"False, fraudulent content",
+    "otroContenido":"Other content",
+
+    "denunciaEnviada": "Denunce sent",
 
     
   "***************NETWORK**********************": "",

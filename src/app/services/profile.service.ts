@@ -643,6 +643,36 @@ export class ProfileService {
 
 
 
+  /*Funcion que se encarga de registrar al usuario, recibiendo por parametro
+  los datos del usuario*/
+  denunciateUser( postData: any) {
+    // console.log(postData);
+    /*URL del web service*/
+    const url = 'https://flylinkers.com/es/xxxxxx/xxxxxxxx/';
+    /*Se muestra una barra de carga*/
+    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
+    /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
+    this.http.post(url, postData, {headers: this.headersPost}).subscribe(data => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Se define una variable local para recibir la respuesta*/
+      let res: any;
+      res = data;
+      /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
+      if (res.code === '1') {
+        this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('denunciaEnviada'));
+      } else {
+        /*Si no retorna uno es porque el usuario ya existe*/
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
+      }
+    }, error => {
+      /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
+      this.helperService.ocultarBarraCarga();
+      /*Sino es porque se genero un error en el servidor*/
+      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
+    });
+  }
+
 
 
 }

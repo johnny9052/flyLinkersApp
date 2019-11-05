@@ -9,7 +9,7 @@ import {
 } from '../../interfaces/userInterface';
 import { HelperService } from '../../util/HelperService';
 import { ProfileService } from '../../services/profile.service';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ActionSheetController } from '@ionic/angular';
 import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
 import { ModelRegister } from '../../interfaces/register';
 
@@ -65,7 +65,7 @@ export class ProfileEditPage implements OnInit {
               private modalCtrl: ModalController,
               private camera: Camera,
               private base64: Base64,
-              private translate: TranslateService
+              private translate: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -934,4 +934,7 @@ export class ProfileEditPage implements OnInit {
 
     this.procesarImagenBase64(options);
   }
+
+
+
 }

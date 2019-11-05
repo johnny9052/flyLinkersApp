@@ -140,7 +140,8 @@
             <ion-label
               color="primary"
               text-wrap="text-wrap"
-              class="ion-text-justify"
+              class="ion-text-justify" 
+              (click)="openPage()"
             >
               {{ "verTerminosCondiciones" | translate }}
             </ion-label>
@@ -152,7 +153,7 @@
         <ion-col size="12">
           <ion-item lines="none">
             <ion-label>
-              Aceptar terminos y condiciones
+              {{ "aceptarTerminosCondiciones" | translate }}
             </ion-label>
 
             <ion-checkbox

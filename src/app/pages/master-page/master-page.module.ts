@@ -8,6 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { MasterPagePage } from './master-page.page';
 import { ComponentsModule } from '../../components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { DenunciarPostPage } from '../denunciar-post/denunciar-post.page';
+import { DenunciarPostPageModule } from '../denunciar-post/denunciar-post.module';
 
 const routes: Routes = [
   {
@@ -17,13 +19,19 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    /*Necesario para que funcione el modal*/
+    DenunciarPostPage
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    TranslateModule
+    TranslateModule,
+    /*Necesario para que funcione el modal*/
+    DenunciarPostPageModule
   ],
   declarations: [MasterPagePage]
 })

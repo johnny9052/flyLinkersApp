@@ -29,6 +29,10 @@
       </ion-label>
       <!--PUNTOS SUSPENSIVOS PARA OPCIONES ADICIONALES, DADO EL CASO DE QUE SEA EL USUARIO QUE PUBLICO EL POST-->
       <ion-icon slot= "end" name="more" *ngIf="post.author_id === codeUser" (click)="presentActionSheet(post.id_new)"></ion-icon>
+
+      <!--PUNTOS SUSPENSIVOS PARA OPCIONES ADICIONALES, DADO EL CASO DE NO SEA EL USUARIO QUIEN PUBLICO EL POSTS-->
+      <ion-icon slot= "end" name="more" *ngIf="post.author_id !== codeUser" (click)="presentActionSheetNotUser(post.id_new)"></ion-icon>
+
     </ion-item>
     <!--TITULO DEL POST O PUBLICACION-->
     <ion-item lines="none" *ngIf=" post.title !== null">

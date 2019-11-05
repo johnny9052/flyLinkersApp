@@ -9,6 +9,8 @@ import { ProfileDetailPage } from './profile-detail.page';
 
 import { ComponentsModule } from '../../components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { DenunciarUsuarioPage } from '../denunciar-usuario/denunciar-usuario.page';
+import { DenunciarUsuarioPageModule } from '../denunciar-usuario/denunciar-usuario.module';
 
 const routes: Routes = [
   {
@@ -18,13 +20,19 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    /*Necesario para que funcione el modal*/
+    DenunciarUsuarioPage
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    TranslateModule
+    TranslateModule,
+    /*Necesario para que funcione el modal*/
+    DenunciarUsuarioPageModule
   ],
   declarations: [ProfileDetailPage]
 })

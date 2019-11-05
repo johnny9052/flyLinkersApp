@@ -13,6 +13,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
 import { ValidateFullProfile } from '../../util/validateFullProfile';
+import { ActionSheetController, ModalController } from '@ionic/angular';
+import { DenunciarUsuarioPage } from '../denunciar-usuario/denunciar-usuario.page';
+import { ModelDenunciateUser } from '../../interfaces/denunciate';
 
 @Component({
   selector: 'app-profile-detail',
@@ -47,7 +50,9 @@ constructor(private blockAccess: BlockAccessService,
             private route: ActivatedRoute,
             private router: Router,
             private translate: TranslateService,
-            private validateFullProfileService: ValidateFullProfile
+            private validateFullProfileService: ValidateFullProfile,
+            private actionSheetCtrl: ActionSheetController,
+            private modalCtrl: ModalController,
 ) {
   this.route.queryParams.subscribe(params => {
     if (this.router.getCurrentNavigation().extras.state) {
@@ -151,5 +156,62 @@ getProfileData(pkUser: string) {
 
 openExternalURL(link: string) {
   window.open(link, '_system');
+}
+
+
+
+
+async presentActionSheetNotUser(pkUserToDenunciate: string) {
+
+  const actionSheet = await this.actionSheetCtrl.create({
+    // header: 'Albums',
+    backdropDismiss: false,
+    buttons: [
+      {
+        text: this.translate.instant('denunciar'),
+        role: 'destructive',
+        icon: 'flag',
+        cssClass: 'rojo',
+        handler: () => {
+          // console.log('Delete clicked');
+          this.abrirModalDenunciarUser(pkUserToDenunciate);
+        }
+      },
+      {
+        text: this.translate.instant('cancelar'),
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          // console.log('Cancel clicked');
+        }
+      }
+    ]
+  });
+  await actionSheet.present();
+}
+
+
+
+async abrirModalDenunciarUser(pkUserToDenunciate: string) {
+
+  const modal = await this.modalCtrl.create({
+    component: DenunciarUsuarioPage,
+    componentProps: {
+      pkUserToDenunciate,
+      codeUser: this.codeUser
+    }
+  });
+
+  await modal.present();
+
+  const { data } = await modal.onDidDismiss();
+
+  console.log('Datos a enviar al web service', data );
+
+  if (this.helperService.isValidValue(data)) {
+    const newDenunce = data as ModelDenunciateUser;
+    // this.profileService.denunciateUser(newDenunce);
+  }
+
 }
 }

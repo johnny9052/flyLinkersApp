@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModelUserData, ModelUserLogIn } from '../../interfaces/userInterface';
 import { SecurityService } from '../../services/security.service';
 import { HelperService } from '../../util/HelperService';
+import { DenunciarUsuarioPage } from '../denunciar-usuario/denunciar-usuario.page';
 
 @Component({
   selector: 'app-identify',
@@ -11,7 +12,6 @@ import { HelperService } from '../../util/HelperService';
 export class IdentifyPage implements OnInit {
 
   userDataLogIn = {} as ModelUserLogIn;
-
 
 
 
@@ -30,7 +30,7 @@ export class IdentifyPage implements OnInit {
   }
 
   openPage(url: string) {
-    if (url !== 'undefined' && url !== undefined && url !== null){
+    if (url !== 'undefined' && url !== undefined && url !== null) {
       this.helperService.abrirUrlExterna(url);
     }
   }

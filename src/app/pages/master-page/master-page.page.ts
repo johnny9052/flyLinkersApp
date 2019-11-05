@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, Events } from '@ionic/angular';
+import { ActionSheetController, Events, ModalController } from '@ionic/angular';
 import { HelperService } from '../../util/HelperService';
 import { MasterPageService } from '../../services/master-page.service';
 import { ModelPosts } from '../../interfaces/posts';
@@ -8,6 +8,8 @@ import { Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
 import { ValidateFullProfile } from '../../util/validateFullProfile';
+import { DenunciarPostPage } from '../denunciar-post/denunciar-post.page';
+import { ModelDenunciate } from '../../interfaces/denunciate';
 
 
 @Component({
@@ -31,7 +33,8 @@ export class MasterPagePage implements OnInit {
     private postService: PostService,
     private router: Router,
     private translate: TranslateService,
-    public events: Events
+    public events: Events,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -180,6 +183,64 @@ export class MasterPagePage implements OnInit {
     });
     await actionSheet.present();
   }
+
+
+
+  async presentActionSheetNotUser(pk: string) {
+
+    const actionSheet = await this.actionSheetCtrl.create({
+      // header: 'Albums',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: this.translate.instant('denunciar'),
+          role: 'destructive',
+          icon: 'flag',
+          cssClass: 'rojo',
+          handler: () => {
+            // console.log('Delete clicked');
+            this.abrirModalDenunciarPost(pk);
+          }
+        },
+        {
+          text: this.translate.instant('cancelar'),
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            // console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+
+
+  async abrirModalDenunciarPost(pkPost: string) {
+
+    const modal = await this.modalCtrl.create({
+      component: DenunciarPostPage,
+      componentProps: {
+        pkPost,
+        codeUser: this.codeUser
+      }
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+
+    console.log('Datos a enviar al web service', data );
+
+    if (this.helperService.isValidValue(data)) {
+      const newDenunce = data as ModelDenunciate;
+      // this.masterPageService.denunciatePost(newDenunce);
+    }
+
+  }
+
+
 
   openPage(url: string) {
     if (url !== 'undefined' && url !== undefined && url !== null) {

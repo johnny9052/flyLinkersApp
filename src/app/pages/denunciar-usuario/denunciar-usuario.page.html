@@ -1,0 +1,74 @@
+<app-header-login titulo="{{ 'denunciar' | translate }}"></app-header-login>
+
+<ion-content padding="padding">
+  <!-- Con el position floating da el efecto de materalized, en 
+          donde se selecciona la caja de texto, y sube el texto como el placeholder -->
+
+  <form #formulario="ngForm" (ngSubmit)="enviarDatosAlFormulario()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">{{
+          "descripcionDenuncia" | translate
+        }}</ion-label>
+
+        <ion-textarea
+          name="descripcionDenuncia"
+          [(ngModel)]="denunciate.descriptionDenunciate"
+          required="required"
+        ></ion-textarea>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>{{ "tipoDenuncia" | translate }}</ion-label>
+
+        <ion-select
+          placeholder="{{ 'seleccione' | translate }}"
+          name="tipoDenuncia"
+          [(ngModel)]="denunciate.typeDenunciate" 
+          required="required"
+        >
+          <ion-select-option value="contenidoInapropiado">{{
+            "contenidoInapropiado" | translate
+          }}</ion-select-option>
+
+          <ion-select-option value="contenidoFalso">{{
+            "contenidoFalso" | translate
+          }}</ion-select-option>
+
+          <ion-select-option value="otroContenido">{{
+            "otroContenido" | translate
+          }}</ion-select-option>
+
+
+        </ion-select>
+      </ion-item>
+    
+    </ion-list>
+
+    <ion-grid fixed="fixed">
+      <ion-row class="ion-text-center">
+        <ion-col size="12">
+          <ion-button
+            color="flylinkers"
+            type="submit"
+            [disabled]="formulario.invalid"
+            expand="full"
+            >{{ "enviarDenuncia" | translate }}</ion-button
+          >
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-button
+            color="flylinkers"
+            (click)="cerrarModal()"
+            expand="full"
+            >{{ "cancelar" | translate }}</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<app-footer></app-footer>

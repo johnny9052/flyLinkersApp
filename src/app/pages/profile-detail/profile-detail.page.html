@@ -29,6 +29,14 @@
                                 routerLink="/profile-edit"
                                 *ngIf="userData.pk === codeUser"
                             >{{ 'editarPerfil' | translate }}</ion-button>
+
+                            <ion-button
+                            color="flylinkers"
+                            fill="outline"
+                            size="small"
+                            (click)="presentActionSheetNotUser(userData.pk)"                            
+                            *ngIf="userData.pk !== codeUser"
+                        >{{ 'opciones' | translate }}</ion-button>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
