@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'new-post', loadChildren: './pages/new-post/new-post.module#NewPostPageModule' },
   { path: 'detail-post', loadChildren: './pages/detail-post/detail-post.module#DetailPostPageModule' },  { path: 'view-detail-post', loadChildren: './pages/view-detail-post/view-detail-post.module#ViewDetailPostPageModule' },
   { path: 'profile-detail', loadChildren: './pages/profile-detail/profile-detail.module#ProfileDetailPageModule' },
+  { path: 'term-of-use', loadChildren: './pages/term-of-use/term-of-use.module#TermOfUsePageModule' },
 
 ];
 

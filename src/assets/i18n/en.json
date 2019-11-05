@@ -93,10 +93,19 @@
 
     "registro": "Register",
     "terminosCondiciones": "By clicking Create Acount, you agree to FlyLinker's Terms of Use, Privacy Policy and Cookies Policy",
+    "verTerminosCondiciones": "See privacy Policy and Cookies Policy",
     "crearCuenta": "Create Account",
 
     "nuevoUsuarioExito": "User created successfully",
     "nuevoUsuarioExistente": "User already exists",
+
+    "***************VALIDACIONES CAMPO**********************": "",
+
+    "obligatorio":"Required",
+    "invalido": "Invalid",
+    "minimo8Caracteres": "8 characters minimum",
+    "soloLetras": "Only letters",
+    "DebeAceptarTerminosCondiciones":"You must accept the terms of Use, Privacy Policy and Cookies Policy",
 
     "***************IDENTIFICACION-USUARIO**********************": "",
     "identificacion": "Log in",

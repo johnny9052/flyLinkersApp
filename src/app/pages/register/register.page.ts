@@ -17,6 +17,10 @@ export class RegisterPage implements OnInit {
   /*Modelo del usuario que se enviara al servidor*/
   userNew =  {} as ModelRegister;
 
+  hero = {name : '' };
+
+  terminosCondiciones = false;
+
 
   /*Dependencias utilizadas en el proyecto
   HelperService: Clase utilitaria
@@ -29,12 +33,18 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
+  /*Validacion de formulario https://angular.io/guide/form-validation*/
+
    registerUser() {
+     if (this.terminosCondiciones) {
        if (this.userNew.password1 === this.userNew.password2) {
          this.securityService.registerUser(this.userNew);
        } else {
          this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('passwordsNoCoinciden'));
        }
+      } else {
+        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('DebeAceptarTerminosCondiciones'));
+      }
   }
 
 

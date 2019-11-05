@@ -95,11 +95,20 @@
 
   "registro": "Registro",
   "terminosCondiciones": "Al dar click en Crear Cuenta, aceptas los Términos de Uso y las Políticas de Privacidad y Cookies",
+  "verTerminosCondiciones":"Ver políticas de Privacidad y Cookies",
   "crearCuenta": "Crear cuenta",
 
   "nuevoUsuarioExito": "Usuario registrado exitosamente",
   "nuevoUsuarioExistente": "El usuario ya se encuentra registrado",
 
+
+  "***************VALIDACIONES CAMPO**********************": "",
+  "obligatorio":"Obligatorio",
+  "invalido": "Invalido",
+  "minimo8Caracteres": "Minimo 8 caracteres",
+  "soloLetras": "Solo letras",
+  "DebeAceptarTerminosCondiciones":"Debe aceptar los términos de Uso y las Políticas de Privacidad y Cookies",
+  
   "***************IDENTIFICACION-USUARIO**********************": "",
   "identificacion": "Identificación",
   "acceder": "Acceder",

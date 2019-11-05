@@ -7,67 +7,123 @@
   <!-- Con el position floating da el efecto de materalized, en 
           donde se selecciona la caja de texto, y sube el texto como el placeholder -->
 
-  <form
-    #formulario="ngForm"
-    (ngSubmit)="registerUser()"
-  >
+  <form #formulario="ngForm" (ngSubmit)="registerUser()">
     <ion-list>
       <ion-item>
-        <ion-label position="floating">{{ 'correo' | translate }}</ion-label>
+        <ion-label position="floating">{{ "correo" | translate }}</ion-label>
 
         <ion-input
+          id="email"
           name="email"
           type="email"
           required="required"
           pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
           [(ngModel)]="userNew.email"
+          #email="ngModel"
         ></ion-input>
       </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">{{ 'password' | translate }}</ion-label>
+      <ion-item lines="none" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <ion-label *ngIf="email.errors.required" color="danger">
+            {{ "obligatorio" | translate }}
+          </ion-label>
+          <ion-label *ngIf="email.invalid" color="danger">
+            {{ "invalido" | translate }}
+          </ion-label>
+      </ion-item>
+
+      <ion-item >
+        <ion-label position="floating">{{ "password" | translate }}</ion-label>
 
         <ion-input
           type="Password"
+          id="password"
           name="password"
           required="required"
-          [(ngModel)]="userNew.password1" 
+          [(ngModel)]="userNew.password1"
           pattern="[A-Za-z0-9@#$%^&+=]{8,}"
+          #password="ngModel"
         ></ion-input>
       </ion-item>
 
+      <ion-item lines="none" *ngIf="password.invalid && (password.dirty || password.touched)">
+        <ion-label *ngIf="password.errors.required" color="danger">
+          {{ "obligatorio" | translate }}
+        </ion-label>
+        <ion-label *ngIf="password.invalid" color="danger">
+          {{ "minimo8Caracteres" | translate }}
+        </ion-label>
+      </ion-item>
+
       <ion-item>
-        <ion-label position="floating">{{ 'constrasenaConfirmar' | translate }}</ion-label>
+        <ion-label position="floating">{{
+          "constrasenaConfirmar" | translate
+        }}</ion-label>
 
         <ion-input
           type="Password"
-          name="password"
+          name="password2"
           required="required"
           [(ngModel)]="userNew.password2"
           pattern="[A-Za-z0-9@#$%^&+=]{8,}"
+          id="password2"
+          #password2="ngModel"
         ></ion-input>
       </ion-item>
 
+      <ion-item lines="none" *ngIf="password2.invalid && (password2.dirty || password2.touched)">
+        <ion-label *ngIf="password2.errors.required" color="danger">
+          {{ "obligatorio" | translate }}
+        </ion-label>
+        <ion-label *ngIf="password2.invalid" color="danger">
+          {{ "minimo8Caracteres" | translate }}
+        </ion-label>
+      </ion-item>
+
       <ion-item>
-        <ion-label position="floating">{{ 'nombre' | translate }}</ion-label>
+        <ion-label position="floating">{{ "nombre" | translate }}</ion-label>
 
         <ion-input
           type="text"
           name="nombre"
           required="required"
           [(ngModel)]="userNew.first_name"
+          pattern="([A-zÀ-ž\s]){1,50}"
+          id="nombre"
+          #nombre="ngModel"
         ></ion-input>
       </ion-item>
 
+      <ion-item lines="none" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+        <ion-label *ngIf="nombre.errors.required" color="danger">
+          {{ "obligatorio" | translate }}
+        </ion-label>
+        <ion-label *ngIf="nombre.invalid" color="danger">
+          {{ "soloLetras" | translate }}
+        </ion-label>
+      </ion-item>
+
       <ion-item>
-        <ion-label position="floating">{{ 'apellido' | translate }}</ion-label>
+        <ion-label position="floating">{{ "apellido" | translate }}</ion-label>
 
         <ion-input
           type="text"
           name="apellido"
           required="required"
           [(ngModel)]="userNew.last_name"
+          pattern="([A-zÀ-ž\s]){1,50}"
+          id="apellido"
+          #apellido="ngModel"
         ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+        <ion-label *ngIf="apellido.errors.required" color="danger">
+          {{ "obligatorio" | translate }}
+        </ion-label>
+        <ion-label *ngIf="apellido.invalid" color="danger">
+          {{ "soloLetras" | translate }}
+        </ion-label>
       </ion-item>
     </ion-list>
 
@@ -78,15 +134,35 @@
       <ion-row>
         <ion-col size="12">
           <div class="ion-text-center">
+            <ion-label text-wrap="text-wrap" class="ion-text-justify">
+              {{ "terminosCondiciones" | translate }}
+            </ion-label>
             <ion-label
+              color="primary"
               text-wrap="text-wrap"
               class="ion-text-justify"
             >
-            {{ 'terminosCondiciones' | translate }}
-
-             
+              {{ "verTerminosCondiciones" | translate }}
             </ion-label>
           </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-label>
+              Aceptar terminos y condiciones
+            </ion-label>
+
+            <ion-checkbox
+              required="required"
+              name="estadoTerminosCondiciones"
+              [(ngModel)]="terminosCondiciones"
+              color="primary"
+            >
+            </ion-checkbox>
+          </ion-item>
         </ion-col>
       </ion-row>
 
@@ -97,8 +173,8 @@
             color="flylinkers"
             type="submit"
             [disabled]="formulario.invalid"
-          >{{ 'crearCuenta' | translate }}
-        </ion-button>        
+            >{{ "crearCuenta" | translate }}
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
