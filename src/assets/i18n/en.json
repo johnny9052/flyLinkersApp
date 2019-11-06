@@ -87,6 +87,8 @@
 
     "alerta": "Alert",
 
+    "info":"Info",
+
     "errorCargandoInformacion": "Error loading information",
 
 
@@ -148,7 +150,7 @@
     "otroContenido":"Other content",
 
     "denunciaEnviada": "Denunce sent",
-
+    "denunciaYaExiste":"Denunce already exists",
     
   "***************NETWORK**********************": "",
 

@@ -235,7 +235,7 @@ export class MasterPagePage implements OnInit {
 
     if (this.helperService.isValidValue(data)) {
       const newDenunce = data as ModelDenunciate;
-      // this.masterPageService.denunciatePost(newDenunce);
+      this.masterPageService.denunciatePost(newDenunce);
     }
 
   }

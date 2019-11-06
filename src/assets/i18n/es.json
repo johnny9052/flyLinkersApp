@@ -87,6 +87,7 @@
   "crear": "Crear",
   "enviar": "Enviar",
   "opciones":"Opciones",
+  "info":"Informacion",
 
   "alerta": "Alerta",
 
@@ -149,6 +150,7 @@
 
   "denunciaEnviada": "Denuncia enviada",
 
+  "denunciaYaExiste":"La denuncia ya existe",
 
   "***************NETWORK**********************": "",
 
