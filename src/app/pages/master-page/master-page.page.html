@@ -1,73 +1,132 @@
-
-
-<app-header titulo ="{{ 'noticias' | translate }}"></app-header>
-
+<app-header titulo="{{ 'noticias' | translate }}"></app-header>
 
 <!--POR CADA POST DISPONIBLE SE ESTRUCTURA SU INFORMACION-->
 <ion-content class="cards-bg social-cards">
-
-   <ion-card *ngIf="posts.length===0">
-        <ion-item lines="none" >
-            <h5 slot="start">{{ 'noNoticiasQueMostrarTitulo' | translate }}</h5>
-          </ion-item>
-          <ion-card-content>
-              {{ 'noNoticiasQueMostrarDescripcion' | translate }}
-          </ion-card-content>
-    </ion-card>
-      
+  <ion-card *ngIf="posts.length === 0">
+    <ion-item lines="none">
+      <h5 slot="start">{{ "noNoticiasQueMostrarTitulo" | translate }}</h5>
+    </ion-item>
+    <ion-card-content>
+      {{ "noNoticiasQueMostrarDescripcion" | translate }}
+    </ion-card-content>
+  </ion-card>
 
   <ion-card *ngFor="let post of posts">
     <ion-item>
       <!-- IMAGEN EL USUARIO QUE PUBLICA EL POST-->
       <ion-avatar slot="start" (click)="viewProfile(post.author_id)">
-          <img src="https://flylinkers.com/media/{{(post.author_image_perfil !== '' )? post.author_image_perfil: 'avatar_2x.png' }}">
+        <img
+          src="https://flylinkers.com/media/{{
+            post.author_image_perfil !== ''
+              ? post.author_image_perfil
+              : 'avatar_2x.png'
+          }}"
+        />
       </ion-avatar>
       <ion-label (click)="viewProfile(post.author_id)">
         <!-- NOMBRES Y PROFESION DEL USUARIO QUE PUBLICO EL POST-->
-        <h3 slot="start">{{post.author_fistName}} {{post.author_lastName}}</h3>
-        <p>{{post.author_profession}}</p>
+        <h3 slot="start">
+          {{ post.author_fistName }} {{ post.author_lastName }}
+        </h3>
+        <p>{{ post.author_profession }}</p>
       </ion-label>
       <!--PUNTOS SUSPENSIVOS PARA OPCIONES ADICIONALES, DADO EL CASO DE QUE SEA EL USUARIO QUE PUBLICO EL POST-->
-      <ion-icon slot= "end" name="more" *ngIf="post.author_id === codeUser" (click)="presentActionSheet(post.id_new)"></ion-icon>
+      <ion-icon
+        slot="end"
+        name="more"
+        *ngIf="post.author_id === codeUser"
+        (click)="presentActionSheet(post.id_new)"
+      ></ion-icon>
 
       <!--PUNTOS SUSPENSIVOS PARA OPCIONES ADICIONALES, DADO EL CASO DE NO SEA EL USUARIO QUIEN PUBLICO EL POSTS-->
-      <ion-icon slot= "end" name="more" *ngIf="post.author_id !== codeUser" (click)="presentActionSheetNotUser(post.id_new)"></ion-icon>
-
+      <ion-icon
+        slot="end"
+        name="more"
+        *ngIf="post.author_id !== codeUser"
+        (click)="presentActionSheetNotUser(post.id_new)"
+      ></ion-icon>
     </ion-item>
     <!--TITULO DEL POST O PUBLICACION-->
-    <ion-item lines="none" *ngIf=" post.title !== null">
-      <h5 slot="start">{{ post.title }}</h5>
+    <ion-item lines="none" *ngIf="post.title !== null">
+      <h5 slot="start" *ngIf="post.title.length > 301">
+        {{ post.title | slice: 0:301 }} .....
+      </h5>
+      <h5 slot="start" *ngIf="post.title.length <= 301">{{ post.title }}</h5>
     </ion-item>
     <!--CONTENIDO DEL POST O DE LA PUBLICACION-->
-    <ion-card-content *ngIf=" post.content !== null">
-        {{post.content}}
+    <ion-card-content *ngIf="post.content !== null">
+      <span *ngIf="post.content.length > 301"
+        >{{ post.content | slice: 0:301 }} .....</span
+      >
+      <span *ngIf="post.content.length <= 301">{{ post.content }}</span>
     </ion-card-content>
     <!--IMAGEN DEL POST O PUBLICACION -->
-    <ion-item lines="none" *ngIf=" post.image_new !== ''">
-      <ion-img src="https://flylinkers.com/media/{{post.image_new}}"></ion-img>
+    <ion-item lines="none" *ngIf="post.image_new !== ''">
+      <ion-img
+        src="https://flylinkers.com/media/{{ post.image_new }}"
+      ></ion-img>
     </ion-item>
-    
+
     <!--INFORMACION DE LA URL EXTERNA QUE SE PUBLICO-->
-    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="((post.metadataImage !== '/' || post.metadataImage !== '/') && post.image_new === '') && post.external_url_new !=='' ">
-      <ion-img [src]="post.metadataImage" style="width: 350px; height: auto;" >
+    <ion-item
+      (click)="openPage(post.external_url_new)"
+      lines="none"
+      *ngIf="
+        (post.metadataImage !== '/' || post.metadataImage !== '/') &&
+        post.image_new === '' &&
+        post.external_url_new !== ''
+      "
+    >
+      <ion-img [src]="post.metadataImage" style="width: 350px; height: auto;">
       </ion-img>
     </ion-item>
-    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="post.metadataTitle && post.external_url_new !==''">
-      <p>
-        {{post.metadataTitle}}
+
+    <!--TITULO INFORMACION DE LA URL EXTERNA QUE SE PUBLICO-->
+    <ion-item
+      (click)="openPage(post.external_url_new)"
+      lines="none"
+      *ngIf="post.metadataTitle && post.external_url_new !== ''"
+    >
+      <p *ngIf="post.metadataTitle.length > 301">
+        {{ post.metadataTitle | slice: 0:301 }} .....
+      </p>
+      <p *ngIf="post.metadataTitle.length <= 301">
+        {{ post.metadataTitle }}
       </p>
     </ion-item>
-    <ion-item (click)="openPage(post.external_url_new)" lines="none" *ngIf="post.metadataDescription && post.external_url_new !==''">
-      <p>
-        {{post.metadataDescription}}
+
+    <!--DESCRIPCION INFORMACION DE LA URL EXTERNA QUE SE PUBLICO-->
+    <ion-item
+      (click)="openPage(post.external_url_new)"
+      lines="none"
+      *ngIf="post.metadataDescription && post.external_url_new !== ''"
+    >
+      <p *ngIf="post.metadataDescription.length > 301">
+        {{ post.metadataDescription | slice: 0:301 }} .....
+      </p>
+      <p *ngIf="post.metadataDescription.length <= 301">
+        {{ post.metadataDescription }}
       </p>
     </ion-item>
+
     <!--END INFORMACION DE LA URL EXTERNA QUE SE PUBLICO-->
+
+    <ion-item
+      lines="none"
+      (click)="openDetailPost(post.id_new)"
+      *ngIf="post.content !== null"
+    >
+      <ion-label slot="start" color="primary" *ngIf="post.content.length > 301">
+        <h5>
+          Ver mas
+        </h5>
+      </ion-label>
+    </ion-item>
 
     <!--FECHA DE LA PUBLICACION-->
     <ion-item lines="none">
       <ion-label slot="start">
-        <h3><br>{{post.publication_date | date: 'dd/MM/yyyy'}}</h3>
+        <h3><br />{{ post.publication_date | date: "dd/MM/yyyy" }}</h3>
       </ion-label>
     </ion-item>
     <!--TOTAL DE COMENTARIOS, LIKES Y OPCIONES DEL POST-->
@@ -75,31 +134,46 @@
       <ion-col>
         <!--MUESTRA EL CORAZON DEL LIKE PINTATO O NO SEGUN SI EL USUARIO YA DIO LIKE A LA PUBLICACION-->
         <ion-item *ngIf="!post.liked_by_user[0]">
-          <ion-icon name="heart-empty" (click)="generarLikePost(post.id_new)"></ion-icon>
-          <div *ngIf=" post.likes > 0" > {{post.likes}}</div>
+          <ion-icon
+            name="heart-empty"
+            (click)="generarLikePost(post.id_new)"
+          ></ion-icon>
+          <div *ngIf="post.likes > 0">{{ post.likes }}</div>
         </ion-item>
         <ion-item *ngIf="post.liked_by_user[0]">
-          <ion-icon name="heart" (click)="generarLikePost(post.id_new)"></ion-icon>
-          <div *ngIf=" post.likes > 0" > {{post.likes}}</div>
+          <ion-icon
+            name="heart"
+            (click)="generarLikePost(post.id_new)"
+          ></ion-icon>
+          <div *ngIf="post.likes > 0">{{ post.likes }}</div>
         </ion-item>
       </ion-col>
       <!--INDICA LA CANTIDAD DE COMENTARIOS DE LA PUBLICACION-->
       <ion-col (click)="openDetailPost(post.id_new)">
         <ion-item>
           <ion-icon name="text"></ion-icon>
-          <div *ngIf=" post.count_comments > 0" > {{post.count_comments}}</div>
+          <div *ngIf="post.count_comments > 0">{{ post.count_comments }}</div>
         </ion-item>
       </ion-col>
       <!--OPCION DE COMPARTIR LA PUBLICACION-->
       <ion-col>
         <ion-item>
-          <ion-icon name="share" (click)="sharedPost(post.content,post.external_url_new,post.image_new,post.title)"></ion-icon>
+          <ion-icon
+            name="share"
+            (click)="
+              sharedPost(
+                post.content,
+                post.external_url_new,
+                post.image_new,
+                post.title
+              )
+            "
+          ></ion-icon>
         </ion-item>
       </ion-col>
     </ion-row>
     <!--END TOTAL DE COMENTARIOS, LIKES Y OPCIONES DEL POST-->
   </ion-card>
-
 </ion-content>
 
 <app-tab

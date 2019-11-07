@@ -648,7 +648,7 @@ export class ProfileService {
   denunciateUser( postData: any) {
     // console.log(postData);
     /*URL del web service*/
-    const url = 'https://flylinkers.com/es/xxxxxx/xxxxxxxx/';
+    const url = 'https://flylinkers.com/es/network/profile_denunciate_app/';
     /*Se muestra una barra de carga*/
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     /*Se envian los datos al servidor, enviando la url, los datos y la configuracion necesaria del header*/
@@ -659,7 +659,7 @@ export class ProfileService {
       let res: any;
       res = data;
       /*Si el codigo enviado por el servidor es 1, es porque fue exitoso el registro*/
-      if (res.code === '1') {
+      if (res.code === '1' || res.code === 1) {
         this.helperService.showAlert(this.translate.instant('exitoTitulo'), this.translate.instant('denunciaEnviada'));
       } else {
         /*Si no retorna uno es porque el usuario ya existe*/
@@ -669,7 +669,7 @@ export class ProfileService {
       /*Se Oculta la barra de carga tan pronto se recibe una respuesta*/
       this.helperService.ocultarBarraCarga();
       /*Sino es porque se genero un error en el servidor*/
-      this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorTransaccion'));
+      this.helperService.showAlert(this.translate.instant('info'), 'La denuncia ya existe');
     });
   }
 

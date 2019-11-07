@@ -210,7 +210,7 @@ async abrirModalDenunciarUser(pkUserToDenunciate: string) {
 
   if (this.helperService.isValidValue(data)) {
     const newDenunce = data as ModelDenunciateUser;
-    // this.profileService.denunciateUser(newDenunce);
+    this.profileService.denunciateUser(newDenunce);
   }
 
 }
