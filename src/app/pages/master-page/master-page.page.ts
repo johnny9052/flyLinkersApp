@@ -64,7 +64,6 @@ export class MasterPagePage implements OnInit {
     this.masterPageService.getPosts(pkUser).subscribe(data => {
       let res: any;
       res = data;
-      console.log(res.posts);
       this.posts = res.posts;
       this.helperService.ocultarBarraCarga();
       this.getMetadataPosts();
