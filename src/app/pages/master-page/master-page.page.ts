@@ -38,14 +38,15 @@ export class MasterPagePage implements OnInit {
   ) {}
 
   ngOnInit() {
-
+    /*Se obtiene el identidicador del usuario que ingreso al sistema, esto
+    posteriormente desencadena el listado de los posts */
+    this.getProfilePk();
   }
 
   ionViewWillEnter() {
     // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
     this.validateFullProfileService.validateDataFullProfile();
-    // Se obtiene el identidicador del usuario que ingreso al sistema
-    this.getProfilePk();
+
     // Se verifica si hay nuevas notificaciones para mostrar en pantalla
     this.events.publish('post:notifications');
   }
@@ -290,6 +291,24 @@ export class MasterPagePage implements OnInit {
 
     this.router.navigate(['profile-detail'], data);
   }
+
+
+
+
+  // refreshPost(event) {
+  //   this.masterPageService.getPosts(this.codeUser).subscribe(data => {
+  //     let res: any;
+  //     res = data;
+  //     this.posts = res.posts;
+  //     event.target.complete();
+  //     this.getMetadataPosts();
+  //   },
+  //   error => {
+  //     event.target.complete();
+  //     this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+  //     // console.log('oops', error);
+  //   });
+  // }
 
 
 

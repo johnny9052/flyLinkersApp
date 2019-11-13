@@ -2,6 +2,10 @@
 
 <!--POR CADA POST DISPONIBLE SE ESTRUCTURA SU INFORMACION-->
 <ion-content class="cards-bg social-cards">
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="refreshPost($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> -->
+
   <ion-card *ngIf="posts.length === 0">
     <ion-item lines="none">
       <h5 slot="start">{{ "noNoticiasQueMostrarTitulo" | translate }}</h5>
