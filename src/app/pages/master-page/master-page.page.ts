@@ -295,20 +295,20 @@ export class MasterPagePage implements OnInit {
 
 
 
-  // refreshPost(event) {
-  //   this.masterPageService.getPosts(this.codeUser).subscribe(data => {
-  //     let res: any;
-  //     res = data;
-  //     this.posts = res.posts;
-  //     event.target.complete();
-  //     this.getMetadataPosts();
-  //   },
-  //   error => {
-  //     event.target.complete();
-  //     this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
-  //     // console.log('oops', error);
-  //   });
-  // }
+  refreshPost(event) {
+    this.masterPageService.getPosts(this.codeUser).subscribe(data => {
+      let res: any;
+      res = data;
+      this.posts = res.posts;
+      event.target.complete();
+      this.getMetadataPosts();
+    },
+    error => {
+      event.target.complete();
+      this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+      // console.log('oops', error);
+    });
+  }
 
 
 
