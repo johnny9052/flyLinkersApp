@@ -23,6 +23,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PipesModule } from './pipes/pipes.module';
 
 
 
@@ -39,6 +40,7 @@ npm install @ionic-native/http*/
     AppRoutingModule,
     HttpClientModule,
     ComponentsModule,
+    PipesModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -73,6 +73,7 @@ export class ViewDetailPostPage implements OnInit {
 
   getCurrentPost() {
     this.helperService.getLocalData('currentPostId').then(response => {
+      console.log('kjhhkjhjk');
       this.idPost = response;
       this.getProfilePk();
     });
@@ -87,8 +88,10 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   getPost(pkUser, articleId) {
+    console.log('vamos a traer, mandado ' + pkUser + ' ' + articleId);
     this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
     this.postService.getPost(pkUser, articleId).subscribe(data => {
+      console.log(data);
       let res: any;
       res = data;
       this.post = res.post;
@@ -99,7 +102,7 @@ export class ViewDetailPostPage implements OnInit {
     error => {
       this.helperService.ocultarBarraCarga();
       this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
-      // console.log('oops', error);
+      console.log('oops', error);
     });
   }
 

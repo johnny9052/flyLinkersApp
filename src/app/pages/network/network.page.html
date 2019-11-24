@@ -24,7 +24,7 @@
     >
       <ion-item *ngFor="let solicitud of solicitudesRecibidas">
         <ion-avatar slot="start" (click)="viewProfile(solicitud.pk)">
-          <img src="https://flylinkers.com/media/{{(solicitud.image_perfil !== '' )? solicitud.image_perfil : 'avatar_2x.png' }}">
+          <ion-img src="https://flylinkers.com/media/{{(solicitud.image_perfil !== '' )? solicitud.image_perfil : 'avatar_2x.png' }}"></ion-img>
         </ion-avatar>
 
         <ion-label (click)="viewProfile(solicitud.pk)">
@@ -70,7 +70,7 @@
     >
       <ion-item *ngFor="let solicitud of solicitudesEnviadas">
         <ion-avatar slot="start" (click)="viewProfile(solicitud.pk)">
-          <img src="https://flylinkers.com/media/{{(solicitud.image_perfil !== '' )? solicitud.image_perfil : 'avatar_2x.png' }}">
+          <ion-img src="https://flylinkers.com/media/{{(solicitud.image_perfil !== '' )? solicitud.image_perfil : 'avatar_2x.png' }}"></ion-img>
         </ion-avatar>
 
         <ion-label (click)="viewProfile(solicitud.pk)">
@@ -135,7 +135,7 @@
                   class="image-center top-margin-10"
                   (click)="viewProfile(contacto.id_contact)"
                 >
-                <img src="https://flylinkers.com/media/{{(contacto.image_perfil !== '' )? contacto.image_perfil : 'avatar_2x.png' }}">
+                <ion-img src="https://flylinkers.com/media/{{(contacto.image_perfil !== '' )? contacto.image_perfil : 'avatar_2x.png' }}"></ion-img>
                 </ion-avatar>
 
                 <div style="width: 100%; text-align: center;" (click)="viewProfile(contacto.id_contact)">
@@ -177,14 +177,17 @@
       <ion-label>
         {{ 'conectaGente' | translate }}
       </ion-label>
+
+      <ion-searchbar showCancelButton="never" (ionChange)="networkSearchFilter( $event )"></ion-searchbar>
     </ion-item>
+
 
     <ion-card-content style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;">
       <ion-grid>
         <ion-row>
           <ion-col
             size="6"
-            *ngFor="let contactos of contactosConectar;"
+            *ngFor="let contactos of contactosConectar | filtro: networkTextSearch;"
           >
             <ion-card
               mode="ios"
@@ -199,7 +202,7 @@
                   class="image-center top-margin-10"
                   (click)="viewProfile(contactos.pk)"
                 >
-                <img src="https://flylinkers.com/media/{{(contactos.image_perfil !== '' )? contactos.image_perfil : 'avatar_2x.png' }}">
+                <ion-img src="https://flylinkers.com/media/{{(contactos.image_perfil !== '' )? contactos.image_perfil : 'avatar_2x.png' }}"></ion-img>
                 </ion-avatar>
               </div>
               

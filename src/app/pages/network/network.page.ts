@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
 import { Events } from '@ionic/angular';
 import { ValidateFullProfile } from '../../util/validateFullProfile';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-network',
@@ -40,6 +41,8 @@ export class NetworkPage implements OnInit {
   codeUser = '';
 
   tiempoEspera = 1000;
+
+  networkTextSearch = '';
 
   constructor(private blockAccess: BlockAccessService,
               private networkService: NetworkService,
@@ -211,5 +214,11 @@ export class NetworkPage implements OnInit {
       }
       posicion++;
     }
+  }
+
+
+  networkSearchFilter(event) {
+    this.networkTextSearch = event.detail.value;
+    console.log(event);
   }
 }
