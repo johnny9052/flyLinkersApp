@@ -64,12 +64,6 @@
       >
       <span *ngIf="post.content.length <= 301">{{ post.content }}</span>
     </ion-card-content>
-    <!--IMAGEN DEL POST O PUBLICACION -->
-    <ion-item lines="none" *ngIf="post.image_new !== ''">
-      <ion-img
-        src="https://flylinkers.com/media/{{ post.image_new }}"
-      ></ion-img>
-    </ion-item>
 
     <!--INFORMACION DE LA URL EXTERNA QUE SE PUBLICO-->
     <ion-item
@@ -125,6 +119,13 @@
           {{ "verMas" | translate }}
         </h5>
       </ion-label>
+    </ion-item>
+    
+    <!--IMAGEN DEL POST O PUBLICACION -->
+    <ion-item lines="none" *ngIf="post.image_new !== ''">
+      <ion-img
+        src="https://flylinkers.com/media/{{ post.image_new }}"
+      ></ion-img>
     </ion-item>
 
     <!--FECHA DE LA PUBLICACION-->
