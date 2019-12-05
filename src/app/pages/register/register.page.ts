@@ -19,6 +19,8 @@ export class RegisterPage implements OnInit {
 
   terminosCondiciones = false;
 
+  rutaTerminosReferencia = '';
+
   /*Dependencias utilizadas en el proyecto
   HelperService: Clase utilitaria
   SecurityService: Servicio para el envio de los datos*/
@@ -29,7 +31,9 @@ export class RegisterPage implements OnInit {
     private modalCtrl: ModalController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.createURLPolicies();
+  }
 
   /*Validacion de formulario https://angular.io/guide/form-validation*/
 
@@ -59,6 +63,19 @@ export class RegisterPage implements OnInit {
 
       if (url !== 'undefined' && url !== undefined && url !== null) {
         this.helperService.abrirUrlExterna(url);
+      }
+    });
+  }
+
+
+  createURLPolicies() {
+    // Se obtiene el identificador del usuario que ingreso al sistema
+    this.helperService.getLocalData('language').then(response => {
+
+      const url = 'https://flylinkers.com/' + response + '/privacy-policies';
+
+      if (url !== 'undefined' && url !== undefined && url !== null) {
+         this.rutaTerminosReferencia = url;
       }
     });
   }
