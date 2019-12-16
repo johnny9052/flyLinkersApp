@@ -24,6 +24,11 @@ export class MasterPagePage implements OnInit {
 
   tiempoEspera = 1000;
 
+  /*Variable utilizada como bandera para saber cuando ya se consulto noticias. Se utiliza para que solo cuando
+  se consulto si existian noticias, y ademas efectivamente no se encontraron noticias entonces se muestra el mensaje
+  de que no existe informacion que mostrar*/
+  yaSeConsultoNoticias = false;
+
   constructor(
     private blockAccess: BlockAccessService,
     private validateFullProfileService: ValidateFullProfile,
@@ -67,10 +72,12 @@ export class MasterPagePage implements OnInit {
       res = data;
       this.posts = res.posts;
       this.helperService.ocultarBarraCarga();
+      this.yaSeConsultoNoticias = true;
       this.getMetadataPosts();
     },
     error => {
       this.helperService.ocultarBarraCarga();
+      this.yaSeConsultoNoticias = true;
       this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
       // console.log('oops', error);
     });

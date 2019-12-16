@@ -13,7 +13,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
 import { Events } from '@ionic/angular';
 import { ValidateFullProfile } from '../../util/validateFullProfile';
-import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-network',
@@ -61,7 +60,11 @@ export class NetworkPage implements OnInit {
     // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
     this.validateFullProfileService.validateDataFullProfile();
     // Se obtiene el identidicador del usuario que ingreso al sistema
+
+    /*Se obtiene el identidicador del usuario que ingreso al sistema, esto
+    posteriormente desencadena el listado de los posts */
     this.getProfilePk();
+
     // Se verifica si hay nuevas notificaciones para mostrar en pantalla
     // this.events.publish('post:notifications');
   }
@@ -97,6 +100,28 @@ export class NetworkPage implements OnInit {
         this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('errorCargandoInformacion'));
         // console.log('oops', error);
       });
+  }
+
+
+
+  refreshPost(event) {
+    this.networkService.getContacts(this.codeUser).subscribe(data => {
+      this.solicitudesRecibidas = data.solicitudes_recibidas;
+      this.totalSolicitudesRecibidas = data.cantidad_solicitudes_recibidas[0];
+      this.solicitudesEnviadas = data.solicitudes_enviadas;
+      this.totalSolicitudesEnviadas = data.cantidad_solicitudes_enviadas[0];
+      this.contactos = data.lista_contactos;
+      this.totalContactos = data.cantidad_contactos[0];
+      this.contactosConectar = data.contactos_para_conectar;
+      this.totalContactosConectar = data.cantidad_contactos_para_conectar[0];
+      this.deleteProfileUser();
+      event.target.complete();
+    },
+    error => {
+      event.target.complete();
+      this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+      // console.log('oops', error);
+    });
   }
 
   showHideContacts() {
@@ -204,6 +229,8 @@ export class NetworkPage implements OnInit {
     this.router.navigate(['profile-detail'], data);
   }
 
+
+  /*El metodo trae al mismo usuario conectado como un usuario para poder contactar, por lo tanto se elimina de la lista*/
   deleteProfileUser(){
     let posicion = 0;
     for (let obj of this.contactosConectar) {

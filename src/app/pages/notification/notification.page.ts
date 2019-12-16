@@ -80,6 +80,25 @@ export class NotificationPage implements OnInit {
   );
   }
 
+
+
+  refreshPost(event) {
+    this.notificationsService.getNotifications(this.codeUser, this.language).subscribe(data => {
+       // console.log(data);
+       let res: any;
+       res = data;
+       // console.log(res.items);
+       this.notifications = res.items;
+       event.target.complete();
+    },
+    error => {
+      event.target.complete();
+      this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+      // console.log('oops', error);
+    });
+  }
+
+
   viewNotification(pk: string, type: string, idPost: string) {
     // console.log(pk);
 

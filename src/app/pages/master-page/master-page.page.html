@@ -6,7 +6,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-card *ngIf="posts.length === 0">
+  <ion-card *ngIf="posts.length === 0 && yaSeConsultoNoticias === true">
     <ion-item lines="none">
       <h5 slot="start">{{ "noNoticiasQueMostrarTitulo" | translate }}</h5>
     </ion-item>
@@ -105,6 +105,14 @@
       <p *ngIf="post.metadataDescription.length <= 301">
         {{ post.metadataDescription }}
       </p>
+    </ion-item>
+
+    <ion-item>
+      <a *ngIf="post.external_url_new !== undefined && post.external_url_new !== 'undefined' && 
+      post.external_url_new !== null && post.external_url_new !== 'null' && 
+      post.external_url_new !== ''" target="_blank" style="text-decoration: none;"  [href]="post.external_url_new">      
+      {{ "verFuenteOriginal" | translate }}
+      </a>
     </ion-item>
 
     <!--END INFORMACION DE LA URL EXTERNA QUE SE PUBLICO-->

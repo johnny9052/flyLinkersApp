@@ -1,6 +1,12 @@
 <app-header titulo="{{ 'redContactos' | translate }}"></app-header>
 
 <ion-content style="width: 100%; margin: 0px !important;">
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPost($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
   <!-- SOLICITUDES DE CONEXION RECIBIDAS -->
 
   <ion-card style="width: 100%; margin: 0px !important; border-radius: 0px;">

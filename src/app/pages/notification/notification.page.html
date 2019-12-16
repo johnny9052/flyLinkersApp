@@ -2,6 +2,12 @@
 <app-header titulo="{{ 'notificaciones' | translate }}"></app-header>
 
 <ion-content>
+
+    <ion-refresher slot="fixed" (ionRefresh)="refreshPost($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+
+
   <ion-item *ngFor="let notification of notifications" [color]="notification.unread ? 'light' : ''" (click)="viewNotification(notification.notification_item_pk, notification.type, notification.idPost)">
     <ion-avatar slot="start">
         <img src="https://flylinkers.com/media/{{(notification.img_src !== '' )? notification.img_src: 'avatar_2x.png' }}">

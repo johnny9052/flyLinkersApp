@@ -137,17 +137,17 @@
             <ion-label text-wrap="text-wrap" class="ion-text-justify">
               {{ "terminosCondiciones" | translate }}
             </ion-label>
-            <ion-label
+            <!-- <ion-label
               color="primary"
               text-wrap="text-wrap"
               class="ion-text-justify" 
               (click)="openPage()"
             >
               {{ "verTerminosCondiciones" | translate }}
-            </ion-label>
+            </ion-label> -->
 
-            <a [href]="rutaTerminosReferencia" target="_blank">
-              Intento 2
+            <a [href]="rutaTerminosReferencia" target="_blank" style="text-decoration: none;">
+              {{ "verTerminosCondiciones" | translate }} 
             </a>
           </div>
         </ion-col>
