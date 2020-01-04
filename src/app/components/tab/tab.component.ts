@@ -71,11 +71,11 @@ export class TabComponent implements OnInit {
           res = data;
           // console.log(res.items);
           this.notifications = res.items;
-          this.helperService.ocultarBarraCarga();
+          // this.helperService.ocultarBarraCarga();
           this.getTotalUnreadNotifications();
         },
         error => {
-          this.helperService.ocultarBarraCarga();
+          // this.helperService.ocultarBarraCarga();
           this.helperService.showAlert(
             this.translate.instant('errorTitulo'),
             this.translate.instant('errorCargandoInformacion')

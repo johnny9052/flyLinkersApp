@@ -36,6 +36,7 @@ export class NetworkPage implements OnInit {
 
   contactosConectar: ModelContactosParaConectar[] = [];
   totalContactosConectar: string;
+  contactoABuscar: string;
 
   codeUser = '';
 
@@ -90,9 +91,18 @@ export class NetworkPage implements OnInit {
       this.totalSolicitudesEnviadas = data.cantidad_solicitudes_enviadas[0];
       this.contactos = data.lista_contactos;
       this.totalContactos = data.cantidad_contactos[0];
-      this.contactosConectar = data.contactos_para_conectar;
-      this.totalContactosConectar = data.cantidad_contactos_para_conectar[0];
-      this.deleteProfileUser();
+
+      /*Primero se pinto la informacion adicional, ya la lista de contactos como es tan
+      pesada, se ejecuta medio segundo despues, para que la info basica se refresque y
+      posteriormente se pase a esta informacion*/
+      setTimeout(() => {
+       this.contactosConectar = data.contactos_para_conectar;
+       this.totalContactosConectar = data.cantidad_contactos_para_conectar[0];
+       /*Como en la lista de contactos llega el mismo usuario que se encuentra conectado, se
+       elimina de la lista*/
+       this.deleteProfileUser();
+      }, 500);
+
       this.helperService.ocultarBarraCarga();
     },
       error => {

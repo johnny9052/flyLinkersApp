@@ -98,7 +98,6 @@ export class HelperService {
 
 
 
-
   /*Funcion que muestra una barra de carga con un mensaje*/
   async mostrarBarraDeCarga(mensaje: string) {
     /*Antes de crear un nuevo mensaje de carga se verifica que no haya una peticion

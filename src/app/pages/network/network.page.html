@@ -184,13 +184,16 @@
         {{ 'conectaGente' | translate }}
       </ion-label>
 
-      <ion-searchbar showCancelButton="never" (ionChange)="networkSearchFilter( $event )"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="contactoABuscar" showCancelButton="never" (ionChange)="networkSearchFilter( $event )"></ion-searchbar>
     </ion-item>
 
 
     <ion-card-content style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;">
       <ion-grid>
-        <ion-row>
+        <!-- Si el usuario no ha escrito nada en el filtro de busqueda, solo se mostrara los X primeros contactos, esto se 
+        encuentra definido en el template llamado 'algunosContactosAMostrar', si el usuario ha escrito algo, solo se mostraran 
+        los contactos que cumplen con ese criterio de busqueda -->
+        <ion-row *ngIf="contactoABuscar !== undefined && contactoABuscar !== 'undefined' && contactoABuscar !== null && contactoABuscar !== 'null' && contactoABuscar !== '';else algunosContactosAMostrar">
           <ion-col
             size="6"
             *ngFor="let contactos of contactosConectar | filtro: networkTextSearch;"
@@ -236,6 +239,62 @@
             </ion-card>
           </ion-col>
         </ion-row>
+
+        <!-- Definicion del template que solo se activa cuando el usuario no ha escrito nada, y solo se mostraran los primero X 
+        contactos de la lista-->
+        <ng-template #algunosContactosAMostrar>
+
+          <ion-row>
+            <ion-col
+              size="6"
+              *ngFor="let contactos of contactosConectar.slice(0, 20);"
+            >
+              <ion-card
+                mode="ios"
+                style="width: 100%; margin: 0px !important; border-radius: 10px; padding: 0px !important;"
+                class="ion-text-center"
+              >
+                <ion-card-header color="flylinkers"></ion-card-header>
+  
+                <div style="width: 100%; text-align: center;">
+                  <ion-avatar
+                    slot="start"
+                    class="image-center top-margin-10"
+                    (click)="viewProfile(contactos.pk)"
+                  >
+                  <ion-img src="https://flylinkers.com/media/{{(contactos.image_perfil !== '' )? contactos.image_perfil : 'avatar_2x.png' }}"></ion-img>
+                  </ion-avatar>
+                </div>
+                
+                <div style="width: 100%; text-align: center;">
+                  <h2>{{contactos.fistName | slice:0:15}}</h2>
+                </div>
+                <div style="width: 100%; text-align: center;">
+                  <h2>{{contactos.lastName | slice:0:15}}</h2>
+                </div>
+                
+  
+                <ion-item lines="none">
+                  <div style="width: 100%; text-align: center;">
+                    <p *ngIf=" contactos.profession !== ''" > {{contactos.profession | slice:0:15}}</p>
+                    <p *ngIf=" contactos.profession == ''" > {{contactos.headline | slice:0:15}}</p>
+                  </div>
+                </ion-item>
+  
+                <ion-button
+                  color="flylinkers"
+                  fill="outline"
+                  size="small"
+                  (click)="enviarSolicitudAmistad(contactos.pk)"
+                  >{{ 'conectar' | translate }}</ion-button>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+
+        </ng-template>
+
+
       </ion-grid>
     </ion-card-content>
   </ion-card>

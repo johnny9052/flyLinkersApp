@@ -43,6 +43,7 @@ export class MasterPagePage implements OnInit {
   ) {}
 
   ngOnInit() {
+
     /*Se obtiene el identidicador del usuario que ingreso al sistema, esto
     posteriormente desencadena el listado de los posts */
     this.getProfilePk();
@@ -54,6 +55,7 @@ export class MasterPagePage implements OnInit {
 
     // Se verifica si hay nuevas notificaciones para mostrar en pantalla
     this.events.publish('post:notifications');
+
   }
 
   getProfilePk() {
@@ -70,12 +72,14 @@ export class MasterPagePage implements OnInit {
     this.masterPageService.getPosts(pkUser).subscribe(data => {
       let res: any;
       res = data;
+      // console.log('Ya llego la info de los post');
       this.posts = res.posts;
       this.helperService.ocultarBarraCarga();
       this.yaSeConsultoNoticias = true;
       this.getMetadataPosts();
     },
     error => {
+      console.log('Error cargando info');
       this.helperService.ocultarBarraCarga();
       this.yaSeConsultoNoticias = true;
       this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
