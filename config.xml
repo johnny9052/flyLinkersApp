@@ -101,15 +101,15 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-        <string />
+        <string>Need camera access to take pictures</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
-        <string />
+        <string>Need photo library access to get pictures from there</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-        <string />
+        <string>Need location access to find things nearby</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
-        <string />
+        <string>Need photo library access to save pictures there</string>
     </edit-config>
 </widget>
