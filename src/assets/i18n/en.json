@@ -280,5 +280,17 @@
   "desarrolladorSoftware":"Software development",
   "azafata":"Stewardess",
   "especialistaAlmacen":"Warehouse specialist",
-  "otro":"Other"
+  "otro":"Other",
+
+  "***************MENSAJES Y CHAT**********************": "",
+
+  "mensajes":"Messages",
+  "chat":"Chat",
+  "ingreseMensaje":"Type a message"
+
+
   }
+
+
+
+  

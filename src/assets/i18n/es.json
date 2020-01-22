@@ -282,7 +282,13 @@
   "desarrolladorSoftware":"Desarrollo de software",
   "azafata":"Azafata",
   "especialistaAlmacen":"Especialista de almacén",
-  "otro":"Otro..."
+  "otro":"Otro...",
+
+  "***************MENSAJES Y CHAT**********************": "",
+
+  "mensajes":"Mensajes",
+  "chat":"Chat",
+  "ingreseMensaje":"Ingrese mensaje"
   
 }
 

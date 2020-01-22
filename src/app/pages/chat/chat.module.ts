@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MessagesPage } from './messages.page';
+import { ChatPage } from './chat.page';
 import { ComponentsModule } from '../../components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: MessagesPage
+    component: ChatPage
   }
 ];
 
@@ -25,6 +25,6 @@ const routes: Routes = [
     ComponentsModule,
     TranslateModule
   ],
-  declarations: [MessagesPage]
+  declarations: [ChatPage]
 })
-export class MessagesPageModule {}
+export class ChatPageModule {}

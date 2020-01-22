@@ -1,16 +1,44 @@
 
-<app-header titulo="Mensajes"></app-header>
+<app-header titulo="{{ 'mensajes' | translate }}"></app-header>
 
 <ion-content>
-  
+  <ion-list no-padding >
+    <ion-item *ngFor="let chat of chatData"  lines="none" (click)="viewChat(1)">
+      <div class="borderBottomLine"></div>
+      <div class="listSection">
+        <div class="UserimgSection">
+          <ion-avatar class="chatImage" slot="start">
+            <ion-img [src]="chat.image"></ion-img>
+            <span class="onlineOffline_icon" [ngStyle]="{'background-color':(chat.status === 'online'? '#1a9aaf' : '#c23616')}"></span>
+          </ion-avatar>
+        </div>
+        <div class="usernameSection" padding-start padding>
+          <h5>
+            <ion-icon *ngIf="chat.group" name="people" color="medium"></ion-icon>
+            <ion-icon name="microphone" *ngIf="chat.broadcast" color="medium"></ion-icon>
+             {{chat.name}}
+            </h5>
+          <p class="descText" no-margin no-padding>{{chat.description}}</p>
+        </div>
+      </div>
+      <!-- <div slot="end" class="lastSection">
+        <ion-note *ngIf="chat.badge || !chat.time" class="sendTime">{{chat.sendTime}}</ion-note>
+          <ion-badge slot="end" class="userBadge" *ngIf="chat.badge">{{chat.badge}}</ion-badge>
+          <ion-note slot="end" *ngIf="chat.time">{{chat.time}}</ion-note>
+      </div> -->
+      
+    </ion-item>
+  </ion-list>
 </ion-content>
 
 
-
+<!-- 
 <app-tab
   homeColor="flylinkersBlanco"
   networkColor="flylinkersBlanco"
   notificationsColor="flylinkersBlanco"
   messagesColor="flylinkersGrisOscuro"
   newPostColor="flylinkersBlanco"
-></app-tab>
+></app-tab> -->
+
+<app-tab></app-tab>
