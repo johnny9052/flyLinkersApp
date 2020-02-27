@@ -49,7 +49,6 @@ export class NetworkPage implements OnInit {
               public helperService: HelperService,
               private router: Router,
               private translate: TranslateService,
-              private events: Events,
               private validateFullProfileService: ValidateFullProfile
   ) {}
 
@@ -90,7 +89,7 @@ export class NetworkPage implements OnInit {
       this.solicitudesEnviadas = data.solicitudes_enviadas;
       this.totalSolicitudesEnviadas = data.cantidad_solicitudes_enviadas[0];
       this.contactos = data.lista_contactos;
-      this.totalContactos = data.cantidad_contactos[0];
+      this.totalContactos = data.cantidad_contactos;
 
       /*Primero se pinto la informacion adicional, ya la lista de contactos como es tan
       pesada, se ejecuta medio segundo despues, para que la info basica se refresque y

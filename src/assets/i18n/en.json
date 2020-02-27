@@ -169,6 +169,13 @@
   "conexionEliminada": "Connection deleted",
   "solicitudEliminada": "Request deleted",
 
+  "flylinkers":"Flylinkers",
+  "tusSolicitudesRecibidas":"Your request received",
+  "tusSolicitudesEnviadas":"Your request sent",
+  "otrosUsuarios":"Other users",
+  
+
+
   "***************POST**********************": "",
 
   "nuevoPost": "New post",

@@ -24,10 +24,17 @@
       >{{ 'verTodas' | translate }}</ion-button>
     </ion-item>
 
+
+    <ion-card-header [hidden]="hiddenRequests">
+      <ion-card-subtitle>{{ 'flylinkers' | translate }}</ion-card-subtitle>
+      <ion-card-title>{{ 'tusSolicitudesRecibidas' | translate }}</ion-card-title>
+    </ion-card-header>
+
     <ion-card-content
       [hidden]="hiddenRequests"
       style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
     >
+
       <ion-item *ngFor="let solicitud of solicitudesRecibidas">
         <ion-avatar slot="start" (click)="viewProfile(solicitud.pk)">
           <ion-img src="https://flylinkers.com/media/{{(solicitud.image_perfil !== '' )? solicitud.image_perfil : 'avatar_2x.png' }}"></ion-img>
@@ -51,6 +58,7 @@
           (click)="aceptarSolicitudAmistad(solicitud.pk,true)"
         ></ion-icon>
       </ion-item>
+      <br>
     </ion-card-content>
   </ion-card>
 
@@ -69,6 +77,12 @@
         slot="end"
       >{{ 'verTodas' | translate }}</ion-button>
     </ion-item>
+
+
+    <ion-card-header [hidden]="hiddenRequestsReceived">
+      <ion-card-subtitle>{{ 'flylinkers' | translate }}</ion-card-subtitle>
+      <ion-card-title>{{ 'tusSolicitudesEnviadas' | translate }}</ion-card-title>
+    </ion-card-header>
 
     <ion-card-content
       [hidden]="hiddenRequestsReceived"
@@ -91,6 +105,8 @@
           (click)="cancelarSolicitudAmistad(solicitud.pk)" 
         ></ion-icon>
       </ion-item>
+
+      <br>
     </ion-card-content>
   </ion-card>
 
@@ -109,6 +125,11 @@
         slot="end"
       >{{ 'verTodas' | translate }}</ion-button>
     </ion-item>
+
+    <ion-card-header [hidden]="hiddenContact">
+      <ion-card-subtitle>{{ 'flylinkers' | translate }}</ion-card-subtitle>
+      <ion-card-title>{{ 'tusConexiones' | translate }}</ion-card-title>
+    </ion-card-header>
 
     <ion-card-content
       [hidden]="hiddenContact"
@@ -167,6 +188,7 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+      <br>
     </ion-card-content>
   </ion-card>
 
@@ -186,6 +208,11 @@
 
       <ion-searchbar [(ngModel)]="contactoABuscar" showCancelButton="never" (ionChange)="networkSearchFilter( $event )"></ion-searchbar>
     </ion-item>
+
+    <ion-card-header>
+      <ion-card-subtitle>{{ 'flylinkers' | translate }}</ion-card-subtitle>
+      <ion-card-title>{{ 'otrosUsuarios' | translate }}</ion-card-title>
+    </ion-card-header>
 
 
     <ion-card-content style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;">

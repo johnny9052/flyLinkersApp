@@ -1,32 +1,36 @@
-
 <app-header titulo="{{ 'eventos' | translate }}"></app-header>
 
 <ion-content>
-    <ion-list *ngFor="let event of events">
-        <ion-card href="{{event.event_site}}">
-            <ion-item>
-                <ion-label>
-                    <h3 slot="start">{{event.event}}</h3>
-                </ion-label>
-            </ion-item>
-            <ion-item lines="none">
-                <ion-label>
-                    <h3 slot="start">{{ 'fechaInicio' | translate }}: {{event.event_init_date}}</h3>
-                </ion-label>
-                
-                <ion-label>
-                    <h3 slot="start">{{ 'fechaFin' | translate }}: {{event.event_end_date}}</h3>
-                </ion-label>
-            </ion-item>
-            <ion-card-content lines="none">
-                <p>   
-                    <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-                    {{event.location}}
-                </p>
-            </ion-card-content>
-        </ion-card>
-    </ion-list>
-</ion-content>
+  <ion-list *ngFor="let event of events">
+    <ion-card href="{{event.event_site}}">
+      <ion-item>
+        <ion-label>
+          <h3 slot="start">{{event.event}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+          <h3 slot="start">
+            {{ 'fechaInicio' | translate }}: {{event.event_init_date | date: 'dd/MM/yyyy HH:mm'}}
+          </h3>
+        </ion-label>
+      </ion-item>
 
+      <ion-item lines="none">
+        <ion-label>
+          <h3 slot="start">
+            {{ 'fechaFin' | translate }}: {{event.event_end_date | date: 'dd/MM/yyyy HH:mm'}}
+          </h3>
+        </ion-label>
+      </ion-item>
+      <ion-card-content lines="none">
+        <p>
+          <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+          {{event.location}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>
 
 <app-tab></app-tab>

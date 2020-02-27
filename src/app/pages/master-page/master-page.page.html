@@ -156,6 +156,7 @@
         <ion-item *ngIf="post.liked_by_user[0]">
           <ion-icon
             name="heart"
+            color="flylinkersRojo"
             (click)="generarLikePost(post.id_new)"
           ></ion-icon>
           <div *ngIf="post.likes > 0">{{ post.likes }}</div>
@@ -172,7 +173,7 @@
       <ion-col>
         <ion-item>
           <ion-icon
-            name="share"
+            name="md-share"
             (click)="
               sharedPost(
                 post.content,

@@ -18,7 +18,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { BlockAccessService } from '../../util/blockAccess';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
@@ -461,6 +460,29 @@ export class ProfileEditPage implements OnInit {
     // console.log('Retorno del modal ', data);
 
     if (data !== 'undefined' && data !== undefined && data !== null && data !== 'null') {
+
+      /* Validamos si los datos que no son obligatorios fueron diligenciados, porque si estos no se 
+      diligenciaron no se crean en el objeto y por ende no se mandan al backend y genera error. Para 
+      esto, los atributos que no se crearon en el objeto se deben crear como vacios */
+
+      if(!this.helperService.isValidValue(data.end_date)){
+        data.end_date = '';
+      }
+
+      if(!this.helperService.isValidValue(data.currently_working)){
+        data.currently_working = 'False';
+      }
+
+      if(!this.helperService.isValidValue(data.headline_experience)){
+        data.headline_experience = '';
+      }
+
+      if(!this.helperService.isValidValue(data.description_experience)){
+        data.description_experience = '';
+      }
+
+
+
       const newExperience = data as Experiences;
 
       this.profileService
