@@ -89,8 +89,6 @@ export class NotificationPage implements OnInit {
       .updateStatusNotifications(this.codeUser, this.language)
       .subscribe(
         data => {
-          console.log("SE SUPONE QUE YA SE ACTUALIZO");
-          console.log(data);
           // Se verifica si hay nuevas notificaciones para mostrar en pantalla
           this.events.publish("post:notifications");
           // let res: any;

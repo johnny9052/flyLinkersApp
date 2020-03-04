@@ -267,29 +267,28 @@ export class NetworkPage implements OnInit {
   }
 
   deleteUsuariosPeticionesRealizadas() {
-    let posicion;
+    let posicion = 0;
     /* Luego, vamos a quitar de la lista las solicitudes de amistad que uno como usuario ha enviado o que le han enviado */
     for (let obj of this.solicitudesEnviadas) {
-      let position = this.contactosConectar
+      posicion = this.contactosConectar
         .map(function(e) {
           return e.pk;
         })
         .indexOf(obj.pk);
 
-      if (posicion !== -1 && posicion == "-1") {
+      if (posicion > 0) {
         this.contactosConectar.splice(posicion, 1);
       }
     }
 
-
     for (let obj of this.solicitudesRecibidas) {
-      let position = this.contactosConectar
+      posicion = this.contactosConectar
         .map(function(e) {
           return e.pk;
         })
         .indexOf(obj.pk);
 
-      if (posicion !== -1 && posicion == "-1") {
+      if (posicion > 0) {
         this.contactosConectar.splice(posicion, 1);
       }
     }
@@ -322,6 +321,6 @@ export class NetworkPage implements OnInit {
       }
 
       event.target.complete();
-    }, 1000);
+    }, 700);
   }
 }

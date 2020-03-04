@@ -384,7 +384,7 @@ export class MasterPagePage implements OnInit {
         },
         error => {
           console.log("Error cargando info");
-          this.helperService.ocultarBarraCarga();
+          event.target.complete();
           this.yaSeConsultoNoticias = true;
           this.helperService.showAlert(
             this.translate.instant("error"),

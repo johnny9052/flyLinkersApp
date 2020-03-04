@@ -89,9 +89,6 @@ export class TabComponent implements OnInit {
   getTotalUnreadNotifications() {
 
     let cont = 0;
-    
-    console.log('ESTA ES LA INFO DE LAS NOTIFICACIONES');
-    console.log(this.notifications);
 
     for (let obj of this.notifications) {
       if (obj.view === false) {

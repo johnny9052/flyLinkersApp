@@ -24,6 +24,13 @@ export class NetworkService {
   }
 
 
+  getContactsByLimits(pkUser: string, minLimit: number, maxLimit: number) {
+    return this.http.get<ModelNetworkData>('https://flylinkers.com/es/network/network_list_app_ok/?profile_pk=' + pkUser + 
+    '&initialLimit='+ minLimit + '&finalLimit=' + maxLimit);
+ }
+
+
+
 
   /*Funcion que se encarga de registrar al usuario, recibiendo por parametro
   los datos del usuario*/
