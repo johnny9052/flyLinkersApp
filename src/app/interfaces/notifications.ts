@@ -9,4 +9,5 @@ export interface ModelNotifications {
       unread: boolean;
       type: string;
       idPost: string;
+      view: boolean;
 }

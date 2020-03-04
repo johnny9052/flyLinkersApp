@@ -42,6 +42,23 @@
         ></ion-input>
       </ion-item>
 
+
+      
+      <ion-item>
+        <ion-label>{{ 'trabajandoActualmente' | translate }}</ion-label>
+
+        <ion-select
+          placeholder="{{ 'seleccione' | translate }}"
+          name="currently_working"
+          [(ngModel)]="experiencia.currently_working"
+          (ionChange)="cambioTrabajoActual($event)"
+        >
+          <ion-select-option value="False">{{ 'no' | translate }}</ion-select-option>
+
+          <ion-select-option value="True">{{ 'si' | translate }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <ion-item>
         <ion-label>{{ 'fechaInicio' | translate }}</ion-label>
 
@@ -55,7 +72,8 @@
         ></ion-datetime>
       </ion-item>
 
-      <ion-item>
+
+      <ion-item *ngIf="statusTrabajoActual">
         <ion-label>{{ 'fechaFin' | translate }}</ion-label>
 
         <ion-datetime
@@ -68,20 +86,7 @@
         ></ion-datetime>
       </ion-item>
 
-      <ion-item>
-        <ion-label>{{ 'trabajandoActualmente' | translate }}</ion-label>
-
-        <ion-select
-          placeholder="{{ 'seleccione' | translate }}"
-          name="currently_working"
-          [(ngModel)]="experiencia.currently_working"
-        >
-          <ion-select-option value="False">{{ 'no' | translate }}</ion-select-option>
-
-          <ion-select-option value="True">{{ 'si' | translate }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-
+  
       <ion-item>
         <ion-label position="floating">{{ 'titular' | translate }}</ion-label>
 

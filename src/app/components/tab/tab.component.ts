@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ɵConsole } from '@angular/core';
 import { Events } from '@ionic/angular';
 import { HelperService } from 'src/app/util/HelperService';
 import { TranslateService } from '@ngx-translate/core';
@@ -89,9 +89,12 @@ export class TabComponent implements OnInit {
   getTotalUnreadNotifications() {
 
     let cont = 0;
-    // tslint:disable-next-line: prefer-const
+    
+    console.log('ESTA ES LA INFO DE LAS NOTIFICACIONES');
+    console.log(this.notifications);
+
     for (let obj of this.notifications) {
-      if (obj.unread === true) {
+      if (obj.view === false) {
         cont++;
       }
     }

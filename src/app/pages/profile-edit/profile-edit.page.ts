@@ -465,7 +465,7 @@ export class ProfileEditPage implements OnInit {
       diligenciaron no se crean en el objeto y por ende no se mandan al backend y genera error. Para 
       esto, los atributos que no se crearon en el objeto se deben crear como vacios */
 
-      if(!this.helperService.isValidValue(data.end_date)){
+      if(!this.helperService.isValidValue(data.end_date) && data.currently_working === false){
         data.end_date = '';
       }
 

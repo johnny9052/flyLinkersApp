@@ -15,7 +15,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let post of posts;">
+  <ion-card *ngFor="let post of posts.slice(0, totalContactosAMostrarEnListado);">
     <ion-item>
       <!-- IMAGEN EL USUARIO QUE PUBLICA EL POST-->
       <ion-avatar slot="start" (click)="viewProfile(post.author_id)">
@@ -188,6 +188,24 @@
     </ion-row>
     <!--END TOTAL DE COMENTARIOS, LIKES Y OPCIONES DEL POST-->
   </ion-card>
+
+   <!-- Cada cuantos pixeles se quiere cargar nueva informacion -->
+
+   <br />
+
+   <ion-infinite-scroll
+     threshold="150px"
+     (ionInfinite)="loadMorePostByLimits($event)"
+   >
+     <!-- Icono que aparece del cargando junto con el texto ,
+           var la documentacion en las properties donde indican 
+           todos los iconos de cargado disponibles -->
+
+     <ion-infinite-scroll-content
+       loadingSpinner="crescent"
+       loadingText="{{ 'cargandoMasInformacion' | translate }}"
+     ></ion-infinite-scroll-content>
+   </ion-infinite-scroll>
 </ion-content>
 
 <app-tab

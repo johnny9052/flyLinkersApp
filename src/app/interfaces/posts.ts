@@ -21,7 +21,7 @@ export interface ModelPosts {
       metadataImage: string;
       userPk: string;
       pk_post: string;
-
+      metadataOk: boolean;
 }
 
 export interface ModelComments {

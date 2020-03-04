@@ -28,6 +28,14 @@ export class NotificationsService {
     );
   }
 
+
+  updateStatusNotifications(pkUser: string, language: string) {
+    return this.http.get<ModelNotifications>(
+      'https://flylinkers.com/' + language + '/notifications/clean_notifications_app/?profile_pk=' +
+        pkUser
+    );
+  }
+
   async viewNotification(postData: any) {
     /*URL del web service*/
     const urlRegister =
