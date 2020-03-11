@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePage } from './profile.page';
 import { ComponentsModule } from '../../components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { PipesModule } from '../../pipes/pipes.module';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    TranslateModule
+    TranslateModule,
+    PipesModule
   ],
   declarations: [ProfilePage]
 })

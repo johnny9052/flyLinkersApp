@@ -1,36 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
-  Profile,
   ModelUserData,
   Skills,
   Experiences,
   Accomplishments,
   Interests
-} from '../../interfaces/userInterface';
-import { HelperService } from '../../util/HelperService';
-import { ProfileService } from '../../services/profile.service';
-import { AlertController, ModalController, ActionSheetController } from '@ionic/angular';
-import { ProfileEditExperiencePage } from '../profile-edit-experience/profile-edit-experience.page';
-import { ModelRegister } from '../../interfaces/register';
+} from "../../interfaces/userInterface";
+import { HelperService } from "../../util/HelperService";
+import { ProfileService } from "../../services/profile.service";
+import {
+  AlertController,
+  ModalController
+} from "@ionic/angular";
+import { ProfileEditExperiencePage } from "../profile-edit-experience/profile-edit-experience.page";
+import { ModelRegister } from "../../interfaces/register";
 
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 
-import { Base64 } from '@ionic-native/base64/ngx';
-import { TranslateService } from '@ngx-translate/core';
-import { BlockAccessService } from '../../util/blockAccess';
+import { Base64 } from "@ionic-native/base64/ngx";
+import { TranslateService } from "@ngx-translate/core";
+import { BlockAccessService } from "../../util/blockAccess";
 
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
 declare var window: any;
 
 @Component({
-  selector: 'app-profile-edit',
-  templateUrl: './profile-edit.page.html',
-  styleUrls: ['./profile-edit.page.scss']
+  selector: "app-profile-edit",
+  templateUrl: "./profile-edit.page.html",
+  styleUrls: ["./profile-edit.page.scss"]
 })
 export class ProfileEditPage implements OnInit {
   /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
-  codeUser = '';
+  codeUser = "";
 
   /*******VARIABLES DE CONTROL VISUAL****************/
   hiddenSkills = true;
@@ -38,14 +40,18 @@ export class ProfileEditPage implements OnInit {
   hiddenAccomplishments = true;
   hiddenInterests = true;
   hiddenEvents = true;
+  /*******END VARIABLES DE CONTROL VISUAL****************/
+
   /*Almacena la configuracion del calendar*/
   customPickerOptions;
 
+  /*El tiempo espera es utilizado para que, cuando se agregue un nuevo elemento como un skill o 
+  similares, se de un tiempo suficiente para almacenar y poder actualizar la lista con todos los
+  nuevos elementos*/
   tiempoEspera = 1500;
-  /*******END VARIABLES DE CONTROL VISUAL****************/
+  
 
   /****************OBJETOS************************** */
-  profile = {} as Profile;
   userData = {} as ModelUserData;
   userSkills: Skills[] = [];
   userExperiences: Experiences[] = [];
@@ -57,14 +63,15 @@ export class ProfileEditPage implements OnInit {
   /*HelperService: Servicio generico para funcionalidades ya implementadas
     ProfileService: Servicio para el consumo de web services del perfil
     AlertController: Permite mostrar alerts emergentes en pantalla */
-  constructor(private blockAccess: BlockAccessService,
-              public helperService: HelperService,
-              public profileService: ProfileService,
-              public alertCtrl: AlertController,
-              private modalCtrl: ModalController,
-              private camera: Camera,
-              private base64: Base64,
-              private translate: TranslateService,
+  constructor(
+    private blockAccess: BlockAccessService,
+    public helperService: HelperService,
+    public profileService: ProfileService,
+    public alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    private camera: Camera,
+    private base64: Base64,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -74,18 +81,18 @@ export class ProfileEditPage implements OnInit {
     this.customPickerOptions = {
       buttons: [
         {
-          text: this.translate.instant('seleccionar'),
+          text: this.translate.instant("seleccionar"),
           handler: evento => {
             this.userData.birthday_date =
               evento.year.value +
-              '-' +
+              "-" +
               evento.month.value +
-              '-' +
+              "-" +
               evento.day.value;
           }
         },
         {
-          text: this.translate.instant('cancelar'),
+          text: this.translate.instant("cancelar"),
           handler: evento => {
             // console.log('close');
           }
@@ -125,7 +132,7 @@ export class ProfileEditPage implements OnInit {
   /*Funcion que se encarga de obtener codigo del usuario que se encuentra identificado*/
   getProfilePk() {
     // Se obtiene el identificador del usuario que ingreso al sistema
-    this.helperService.getLocalData('profilePk').then(response => {
+    this.helperService.getLocalData("profilePk").then(response => {
       this.codeUser = response;
       // console.log(this.codeUser);
       // Se obtiene toda la informacion del usuario que ingreso al sistema
@@ -136,7 +143,7 @@ export class ProfileEditPage implements OnInit {
   /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se
   encuentra logueado*/
   getProfileData(pkUser: string) {
-    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
+    this.helperService.mostrarBarraDeCarga(this.translate.instant("espere"));
     // Se obtiene toda la informacion del usuario que entro al sistema
     this.profileService.getProfileData(pkUser).subscribe(
       data => {
@@ -151,12 +158,19 @@ export class ProfileEditPage implements OnInit {
         this.userExperiences = res.experiences;
 
         // tslint:disable-next-line: max-line-length
-        this.userData.image_perfil = (this.helperService.isValidValue(this.userData.image_perfil)) ? 'https://flylinkers.com/media/' + this.userData.image_perfil : 'https://flylinkers.com/media/avatar_2x.png';
+        this.userData.image_perfil = this.helperService.isValidValue(
+          this.userData.image_perfil
+        )
+          ? "https://flylinkers.com/media/" + this.userData.image_perfil
+          : "https://flylinkers.com/media/avatar_2x.png";
         this.helperService.ocultarBarraCarga();
       },
       error => {
         this.helperService.ocultarBarraCarga();
-        this.helperService.showAlert(this.translate.instant('errorTitulo'), this.translate.instant('ErrorCargandoInformacion'));
+        this.helperService.showAlert(
+          this.translate.instant("errorTitulo"),
+          this.translate.instant("ErrorCargandoInformacion")
+        );
         // console.log('oops', error);
       }
     );
@@ -164,9 +178,12 @@ export class ProfileEditPage implements OnInit {
 
   /*Funcion que se encarga que actualizar la informacion del perfil del usuario que se encuentre logueado*/
   saveProfileData() {
-
     // tslint:disable-next-line: max-line-length
-    this.userData.image_perfil_base64 = (this.helperService.isValidValue(this.userData.image_perfil_base64)) ? this.userData.image_perfil_base64 : '-1';
+    this.userData.image_perfil_base64 = this.helperService.isValidValue(
+      this.userData.image_perfil_base64
+    )
+      ? this.userData.image_perfil_base64
+      : "-1";
 
     this.profileService.saveProfileDataService(this.userData);
   }
@@ -176,39 +193,39 @@ export class ProfileEditPage implements OnInit {
   /******************************************************/
   async changePassword() {
     const input = await this.alertCtrl.create({
-      header: this.translate.instant('cambiarPassword'),
+      header: this.translate.instant("cambiarPassword"),
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'lastPassword',
-          id: 'txtLastPassword',
-          type: 'password',
-          placeholder: this.translate.instant('ingresePasswordActual')
+          name: "lastPassword",
+          id: "txtLastPassword",
+          type: "password",
+          placeholder: this.translate.instant("ingresePasswordActual")
         },
         {
-          name: 'newPassword',
-          id: 'txtNewPassword',
-          type: 'password',
-          placeholder: this.translate.instant('ingresePasswordNuevo')
+          name: "newPassword",
+          id: "txtNewPassword",
+          type: "password",
+          placeholder: this.translate.instant("ingresePasswordNuevo")
         },
         {
-          name: 'confirmPassword',
-          id: 'txtConfirmPassword',
-          type: 'password',
-          placeholder: this.translate.instant('repitaPasswordNuevo')
+          name: "confirmPassword",
+          id: "txtConfirmPassword",
+          type: "password",
+          placeholder: this.translate.instant("repitaPasswordNuevo")
         }
       ],
       buttons: [
         {
-          text: this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: this.translate.instant('cambiar'),
+          text: this.translate.instant("cambiar"),
           handler: async data => {
             // console.log('Confirm Ok', data);
 
@@ -222,8 +239,8 @@ export class ProfileEditPage implements OnInit {
               this.profileService.changePassword(changePassword);
             } else {
               this.helperService.showAlert(
-                this.translate.instant('errorTitulo'),
-                this.translate.instant('passwordsNoCoinciden')
+                this.translate.instant("errorTitulo"),
+                this.translate.instant("passwordsNoCoinciden")
               );
             }
           }
@@ -236,19 +253,19 @@ export class ProfileEditPage implements OnInit {
 
   async deactivateAccount() {
     const input = await this.alertCtrl.create({
-      header: this.translate.instant('desactivarCuenta'),
+      header: this.translate.instant("desactivarCuenta"),
       // message: 'Ingrese su nueva skill',
       buttons: [
         {
-          text: this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: this.translate.instant('aceptar'),
+          text: this.translate.instant("aceptar"),
           handler: async data => {
             // console.log('Confirm Ok', data);
 
@@ -275,27 +292,27 @@ export class ProfileEditPage implements OnInit {
 
   async createSkill() {
     const input = await this.alertCtrl.create({
-      header: this.translate.instant('crear'),
+      header: this.translate.instant("crear"),
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'skill',
-          id: 'txtSkill',
-          type: 'text',
-          placeholder: this.translate.instant('ingreseSkill')
+          name: "skill",
+          id: "txtSkill",
+          type: "text",
+          placeholder: this.translate.instant("ingreseSkill")
         }
       ],
       buttons: [
         {
-          text: this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: this.translate.instant('ok'),
+          text: this.translate.instant("ok"),
           handler: async data => {
             // console.log('Confirm Ok', data);
 
@@ -338,20 +355,20 @@ export class ProfileEditPage implements OnInit {
     // console.log(id);
 
     const alert = await this.alertCtrl.create({
-      header: this.translate.instant('eliminarSkill'),
-      message: this.translate.instant('deseaEliminarSkill'),
+      header: this.translate.instant("eliminarSkill"),
+      message: this.translate.instant("deseaEliminarSkill"),
       buttons: [
         {
-          text:  this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: blah => {
             // console.log('Cancelar');
           }
         },
         {
-          text:  this.translate.instant('aceptar'),
-          cssClass: 'secondary',
+          text: this.translate.instant("aceptar"),
+          cssClass: "secondary",
           handler: async blah => {
             // console.log('Boton OK ');
             const objSkill = {
@@ -375,28 +392,28 @@ export class ProfileEditPage implements OnInit {
     // console.log(id);
 
     const input = await this.alertCtrl.create({
-      header:  this.translate.instant('editar'),
+      header: this.translate.instant("editar"),
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'skill',
-          id: 'txtSkill',
-          type: 'text',
+          name: "skill",
+          id: "txtSkill",
+          type: "text",
           value: description,
-          placeholder:  this.translate.instant('ingreseSkill')
+          placeholder: this.translate.instant("ingreseSkill")
         }
       ],
       buttons: [
         {
-          text:  this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: this.translate.instant('ok'),
+          text: this.translate.instant("ok"),
           handler: async data => {
             // console.log('Confirm Ok', data);
 
@@ -459,29 +476,34 @@ export class ProfileEditPage implements OnInit {
 
     // console.log('Retorno del modal ', data);
 
-    if (data !== 'undefined' && data !== undefined && data !== null && data !== 'null') {
-
+    if (
+      data !== "undefined" &&
+      data !== undefined &&
+      data !== null &&
+      data !== "null"
+    ) {
       /* Validamos si los datos que no son obligatorios fueron diligenciados, porque si estos no se 
       diligenciaron no se crean en el objeto y por ende no se mandan al backend y genera error. Para 
       esto, los atributos que no se crearon en el objeto se deben crear como vacios */
 
-      if(!this.helperService.isValidValue(data.end_date) && data.currently_working === false){
-        data.end_date = '';
+      if (
+        !this.helperService.isValidValue(data.end_date) &&
+        data.currently_working === false
+      ) {
+        data.end_date = "";
       }
 
-      if(!this.helperService.isValidValue(data.currently_working)){
-        data.currently_working = 'False';
+      if (!this.helperService.isValidValue(data.currently_working)) {
+        data.currently_working = "False";
       }
 
-      if(!this.helperService.isValidValue(data.headline_experience)){
-        data.headline_experience = '';
+      if (!this.helperService.isValidValue(data.headline_experience)) {
+        data.headline_experience = "";
       }
 
-      if(!this.helperService.isValidValue(data.description_experience)){
-        data.description_experience = '';
+      if (!this.helperService.isValidValue(data.description_experience)) {
+        data.description_experience = "";
       }
-
-
 
       const newExperience = data as Experiences;
 
@@ -529,7 +551,12 @@ export class ProfileEditPage implements OnInit {
     const { data } = await modal.onDidDismiss();
     // console.log('Retorno del modal ', data);
 
-    if (data !== 'undefined' && data !== undefined && data !== null && data !== 'null') {
+    if (
+      data !== "undefined" &&
+      data !== undefined &&
+      data !== null &&
+      data !== "null"
+    ) {
       const editExperience = data as Experiences;
 
       const temp = {
@@ -555,20 +582,20 @@ export class ProfileEditPage implements OnInit {
     // console.log(id);
 
     const alert = await this.alertCtrl.create({
-      header:  this.translate.instant('eliminar'),
-      message: this.translate.instant('deseaEliminarExperiencia'),
+      header: this.translate.instant("eliminar"),
+      message: this.translate.instant("deseaEliminarExperiencia"),
       buttons: [
         {
-          text: this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: blah => {
             // console.log('Cancelar');
           }
         },
         {
-          text: this.translate.instant('aceptar'),
-          cssClass: 'secondary',
+          text: this.translate.instant("aceptar"),
+          cssClass: "secondary",
           handler: async blah => {
             // console.log('Boton OK ');
             const objExperience = {
@@ -600,27 +627,27 @@ export class ProfileEditPage implements OnInit {
 
   async createAccomplishment() {
     const input = await this.alertCtrl.create({
-      header: this.translate.instant('crear'),
+      header: this.translate.instant("crear"),
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'accomplishment',
-          id: 'txtAccomplishment',
-          type: 'text',
-          placeholder: this.translate.instant('ingreseLogro')
+          name: "accomplishment",
+          id: "txtAccomplishment",
+          type: "text",
+          placeholder: this.translate.instant("ingreseLogro")
         }
       ],
       buttons: [
         {
-          text: this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: this.translate.instant('ok'),
+          text: this.translate.instant("ok"),
           handler: async data => {
             // console.log('Confirm Ok', data);
 
@@ -665,20 +692,20 @@ export class ProfileEditPage implements OnInit {
     // console.log(id);
 
     const alert = await this.alertCtrl.create({
-      header: this.translate.instant('eliminar'),
-      message: this.translate.instant('deseaEliminarLogro'),
+      header: this.translate.instant("eliminar"),
+      message: this.translate.instant("deseaEliminarLogro"),
       buttons: [
         {
-          text: this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: blah => {
             // console.log('Cancelar');
           }
         },
         {
-          text: this.translate.instant('aceptar'),
-          cssClass: 'secondary',
+          text: this.translate.instant("aceptar"),
+          cssClass: "secondary",
           handler: async blah => {
             // console.log('Boton OK ');
             const objAccomplishment = {
@@ -704,28 +731,28 @@ export class ProfileEditPage implements OnInit {
     // console.log(id);
 
     const input = await this.alertCtrl.create({
-      header: this.translate.instant('editar'),
+      header: this.translate.instant("editar"),
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'accomplishment',
-          id: 'txtAccomplishment',
-          type: 'text',
+          name: "accomplishment",
+          id: "txtAccomplishment",
+          type: "text",
           value: description,
-          placeholder: this.translate.instant('ingreseLogro')
+          placeholder: this.translate.instant("ingreseLogro")
         }
       ],
       buttons: [
         {
-          text: this.translate.instant('cancel'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancel"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: this.translate.instant('ok'),
+          text: this.translate.instant("ok"),
           handler: async data => {
             // console.log('Confirm Ok', data);
 
@@ -759,27 +786,27 @@ export class ProfileEditPage implements OnInit {
 
   async createInterests() {
     const input = await this.alertCtrl.create({
-      header: this.translate.instant('crear'),
+      header: this.translate.instant("crear"),
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'interests',
-          id: 'txtInterests',
-          type: 'text',
-          placeholder: this.translate.instant('ingreseInteres')
+          name: "interests",
+          id: "txtInterests",
+          type: "text",
+          placeholder: this.translate.instant("ingreseInteres")
         }
       ],
       buttons: [
         {
-          text: this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: this.translate.instant('ok'),
+          text: this.translate.instant("ok"),
           handler: async data => {
             // console.log('Confirm Ok', data);
 
@@ -822,20 +849,20 @@ export class ProfileEditPage implements OnInit {
     // console.log(id);
 
     const alert = await this.alertCtrl.create({
-      header: this.translate.instant('eliminar'),
-      message: this.translate.instant('deseaEliminarInteres'),
+      header: this.translate.instant("eliminar"),
+      message: this.translate.instant("deseaEliminarInteres"),
       buttons: [
         {
-          text: this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: blah => {
             // console.log('Cancelar');
           }
         },
         {
-          text: this.translate.instant('aceptar'),
-          cssClass: 'secondary',
+          text: this.translate.instant("aceptar"),
+          cssClass: "secondary",
           handler: async blah => {
             // console.log('Boton OK ');
             const objInterest = {
@@ -860,28 +887,28 @@ export class ProfileEditPage implements OnInit {
     // console.log(id);
 
     const input = await this.alertCtrl.create({
-      header: this.translate.instant('editar'),
+      header: this.translate.instant("editar"),
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'interest',
-          id: 'txtInterest',
-          type: 'text',
+          name: "interest",
+          id: "txtInterest",
+          type: "text",
           value: description,
-          placeholder: this.translate.instant('ingreseInteres')
+          placeholder: this.translate.instant("ingreseInteres")
         }
       ],
       buttons: [
         {
-          text: this.translate.instant('cancelar'),
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: this.translate.instant("cancelar"),
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: this.translate.instant('ok'),
+          text: this.translate.instant("ok"),
           handler: async data => {
             // console.log('Confirm Ok', data);
 
@@ -956,7 +983,4 @@ export class ProfileEditPage implements OnInit {
 
     this.procesarImagenBase64(options);
   }
-
-
-
 }

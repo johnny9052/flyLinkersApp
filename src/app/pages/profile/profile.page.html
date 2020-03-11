@@ -7,8 +7,15 @@
                 <ion-grid fixed="fixed">
                     <ion-row class="ion-text-center">
                         <ion-col size="12">
-                            <ion-avatar class="image-center top-margin-20">
-                                <img src="https://flylinkers.com/media/{{(userData.image_perfil !== '' )? userData.image_perfil : 'avatar_2x.png' }}">
+                            <!--SI NO TIENE IMAGEN DE PERFIL-->
+                            <ion-avatar *ngIf="!this.helperService.isValidValue(userData.image_perfil)" class="image-center top-margin-20">
+                                <img src="https://flylinkers.com/media/avatar_2x.png">
+                            </ion-avatar>
+
+                            <!--SI TIENE IMAGEN DE PERFIL-->
+                            <ion-avatar *ngIf="this.helperService.isValidValue(userData.image_perfil)" class="image-center top-margin-20">
+                                <!-- <img [src]="('https://flylinkers.com/media/' + userData.image_perfil) | imageSanitizer"> -->
+                                <img [src]="userData.image_perfil | imageSanitizer">
                             </ion-avatar>
 
                             <h3>{{userData.fistName}} {{userData.lastName}}</h3>

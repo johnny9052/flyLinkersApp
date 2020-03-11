@@ -1,28 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   ModelUserData,
-  Profile,
   Skills,
   Experiences,
   Accomplishments,
   Interests,
   Events
-} from '../../interfaces/userInterface';
-import { HelperService } from 'src/app/util/HelperService';
-import { ProfileService } from 'src/app/services/profile.service';
-import { TranslateService } from '@ngx-translate/core';
-import { BlockAccessService } from '../../util/blockAccess';
-import { ValidateFullProfile } from '../../util/validateFullProfile';
+} from "../../interfaces/userInterface";
+import { HelperService } from "src/app/util/HelperService";
+import { ProfileService } from "src/app/services/profile.service";
+import { TranslateService } from "@ngx-translate/core";
+import { BlockAccessService } from "../../util/blockAccess";
+import { ValidateFullProfile } from "../../util/validateFullProfile";
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss']
+  selector: "app-profile",
+  templateUrl: "./profile.page.html",
+  styleUrls: ["./profile.page.scss"]
 })
 export class ProfilePage implements OnInit {
   /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
-  codeUser = '';
+  codeUser = "";
 
+  /*******VARIABLES DE CONTROL VISUAL****************/
   hiddenSkills = true;
   hiddenExperiences = true;
   hiddenAccomplishments = true;
@@ -47,14 +47,15 @@ export class ProfilePage implements OnInit {
   ) {}
 
   ionViewWillEnter() {
-    // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
-    this.validateFullProfileService.validateDataFullProfile();
-  }
-
-  ngOnInit() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
     this.getProfilePk();
   }
+
+  ngOnInit() {}
+
+  /******************************************************/
+  /*********FUNCIONES DE CONTROL GRAFICO ****************/
+  /******************************************************/
 
   showHideSkills() {
     this.hiddenSkills = !this.hiddenSkills;
@@ -76,11 +77,18 @@ export class ProfilePage implements OnInit {
     this.hiddenEvents = !this.hiddenEvents;
   }
 
+  /******************************************************/
+  /*********END FUNCIONES DE CONTROL GRAFICO ************/
+  /******************************************************/
+
+
   /*Funcion que se encarga de obtener codigo del usuario que se encuentra identificado*/
   getProfilePk() {
     // Se obtiene el identificador del usuario que ingreso al sistema
-    this.helperService.getLocalData('profilePk').then(response => {
+    this.helperService.getLocalData("profilePk").then(response => {
       this.codeUser = response;
+      // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
+      this.validateFullProfileService.validateDataFullProfile();
       // console.log(this.codeUser);
       // Se obtiene toda la informacion del usuario que ingreso al sistema
       this.getProfileData(this.codeUser);
@@ -90,7 +98,7 @@ export class ProfilePage implements OnInit {
   /*Funcion que se encarga de traer toda la informacion del perfil del usuario que se
   encuentra logueado*/
   getProfileData(pkUser: string) {
-    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
+    this.helperService.mostrarBarraDeCarga(this.translate.instant("espere"));
     // Se obtiene toda la informacion del usuario que entro al sistema
     this.profileService.getProfileData(pkUser).subscribe(
       data => {
@@ -104,13 +112,21 @@ export class ProfilePage implements OnInit {
         this.userInterests = res.interests;
         this.userExperiences = res.experiences;
         this.events = res.events;
+
+        // tslint:disable-next-line: max-line-length
+        this.userData.image_perfil = this.helperService.isValidValue(
+          this.userData.image_perfil
+        )
+          ? "https://flylinkers.com/media/" + this.userData.image_perfil
+          : "https://flylinkers.com/media/avatar_2x.png";
+
         this.helperService.ocultarBarraCarga();
       },
       error => {
         this.helperService.ocultarBarraCarga();
         this.helperService.showAlert(
-          this.translate.instant('errorTitulo'),
-          this.translate.instant('errorCargandoInformacion')
+          this.translate.instant("errorTitulo"),
+          this.translate.instant("errorCargandoInformacion")
         );
         // console.log('oops', error);
       }
@@ -118,6 +134,6 @@ export class ProfilePage implements OnInit {
   }
 
   openExternalURL(link: string) {
-    window.open(link, '_system');
+    window.open(link, "_system");
   }
 }

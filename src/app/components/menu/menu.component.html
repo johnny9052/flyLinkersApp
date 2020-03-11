@@ -13,9 +13,17 @@
       <ion-chip
         color="flylinkers"
       >
-        <ion-avatar>
-          <img src="https://flylinkers.com/media/{{(imagePerfil !== '' )? imagePerfil: 'avatar_2x.png' }}">
-        </ion-avatar>
+
+         <!--SI NO TIENE IMAGEN DE PERFIL-->
+         <ion-avatar *ngIf="!this.helperService.isValidValue(imagePerfil)">
+          <img src="https://flylinkers.com/media/avatar_2x.png">
+      </ion-avatar>
+
+      <!--SI TIENE IMAGEN DE PERFIL-->
+      <ion-avatar *ngIf="this.helperService.isValidValue(imagePerfil)">
+          <!-- <img [src]="('https://flylinkers.com/media/' + userData.image_perfil) | imageSanitizer"> -->
+          <img [src]="imagePerfil | imageSanitizer">
+      </ion-avatar>
 
         <ion-label color="flylinkersBlanco">{{firstName}} {{lastName}} </ion-label>
       </ion-chip>

@@ -17,6 +17,7 @@ import { PoprecommentsComponent } from './poprecomments/poprecomments.component'
 import { LanguageComponent } from './language/language.component';
 
 import { TranslateModule } from '@ngx-translate/core';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicModule,
     /*Import necesario para redireccionar*/
     RouterModule,
-    TranslateModule
+    TranslateModule, 
+    PipesModule
   ]
 })
 export class ComponentsModule { }
