@@ -88,7 +88,7 @@ export class ProfilePage implements OnInit {
     this.helperService.getLocalData("profilePk").then(response => {
       this.codeUser = response;
       // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
-      this.validateFullProfileService.validateDataFullProfile();
+      // this.validateFullProfileService.validateDataFullProfile();
       // console.log(this.codeUser);
       // Se obtiene toda la informacion del usuario que ingreso al sistema
       this.getProfileData(this.codeUser);
