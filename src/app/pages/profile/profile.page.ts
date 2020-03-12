@@ -104,7 +104,7 @@ export class ProfilePage implements OnInit {
       data => {
         let res: any;
         res = data;
-        // console.log(res);
+        console.log(res);
         // Se obtiene la informacion basica del perfil
         this.userData = res.profile[0];
         this.userSkills = res.skills;

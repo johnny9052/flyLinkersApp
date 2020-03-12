@@ -24,30 +24,35 @@
                 <img [src]="userData.image_perfil | imageSanitizer" />
               </ion-avatar>
 
-              <!--    <h3>{{userData.fistName}} {{userData.lastName}}</h3>
+              <!-- https://ionicframework.com/docs/api/label
+              https://ionicframework.com/docs/api/text -->
 
-                            
- -->
+              <ion-text>
+                <h3>{{userData.fistName}}</h3>
+              </ion-text>
 
-              <ion-item>
-                <ion-label position="floating"
-                  >{{ 'nombres' | translate }}*</ion-label
-                >
+              <ion-text>
+                <h3>{{userData.lastName}}</h3>
+              </ion-text>
+              
+              
 
-                <ion-input
-                  type="text"
-                  name="firstName"
-                  required="required"
-                  [(ngModel)]="userData.fistName"
-                ></ion-input>
-              </ion-item>
+
+<!--               <ion-input
+                type="text"
+                name="firstName"              
+                [(ngModel)]="userData.fistName"
+                class="h3"
+                readonly
+              ></ion-input>
 
               <ion-input
                 type="text"
                 name="lastName"
-                required="required"
                 [(ngModel)]="userData.lastName"
-              ></ion-input>
+                class="h3"
+                readonly
+              ></ion-input> -->
 
               <h2>{{userData.profession}}</h2>
 

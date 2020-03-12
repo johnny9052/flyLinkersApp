@@ -15,7 +15,9 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let post of posts.slice(0, totalContactosAMostrarEnListado);">
+  <ion-card
+    *ngFor="let post of posts.slice(0, totalContactosAMostrarEnListado);"
+  >
     <ion-item>
       <!-- IMAGEN EL USUARIO QUE PUBLICA EL POST-->
       <ion-avatar slot="start" (click)="viewProfile(post.author_id)">
@@ -74,9 +76,11 @@
         post.image_new === '' &&
         post.external_url_new !== ''
       "
-    >
-      <ion-img [src]="post.metadataImage" style="width: 350px; height: auto;">
-      </ion-img>
+    ><!--  -->
+      <!--       <ion-img [src]="post.metadataImage" style="width: 350px; height: auto;">
+      </ion-img> -->
+
+      <img [src]="post.metadataImage" style="width: 350px; height: auto;" />
     </ion-item>
 
     <!--TITULO INFORMACION DE LA URL EXTERNA QUE SE PUBLICO-->
@@ -108,10 +112,15 @@
     </ion-item>
 
     <ion-item>
-      <a *ngIf="post.external_url_new !== undefined && post.external_url_new !== 'undefined' && 
+      <a
+        *ngIf="post.external_url_new !== undefined && post.external_url_new !== 'undefined' && 
       post.external_url_new !== null && post.external_url_new !== 'null' && 
-      post.external_url_new !== ''" target="_blank" style="text-decoration: none;"  [href]="post.external_url_new">      
-      {{ "verFuenteOriginal" | translate }}
+      post.external_url_new !== ''"
+        target="_blank"
+        style="text-decoration: none;"
+        [href]="post.external_url_new"
+      >
+        {{ "verFuenteOriginal" | translate }}
       </a>
     </ion-item>
 
@@ -128,12 +137,14 @@
         </h5>
       </ion-label>
     </ion-item>
-    
+
     <!--IMAGEN DEL POST O PUBLICACION -->
     <ion-item lines="none" *ngIf="post.image_new !== ''">
-      <ion-img
+      <!--   <ion-img
         src="https://flylinkers.com/media/{{ post.image_new }}"
-      ></ion-img>
+      ></ion-img> -->
+
+      <img src="https://flylinkers.com/media/{{ post.image_new }}" />
     </ion-item>
 
     <!--FECHA DE LA PUBLICACION-->
@@ -189,23 +200,23 @@
     <!--END TOTAL DE COMENTARIOS, LIKES Y OPCIONES DEL POST-->
   </ion-card>
 
-   <!-- Cada cuantos pixeles se quiere cargar nueva informacion -->
+  <!-- Cada cuantos pixeles se quiere cargar nueva informacion -->
 
-   <br />
+  <br />
 
-   <ion-infinite-scroll
-     threshold="150px"
-     (ionInfinite)="loadMorePostByLimits($event)"
-   >
-     <!-- Icono que aparece del cargando junto con el texto ,
+  <ion-infinite-scroll
+    threshold="150px"
+    (ionInfinite)="loadMorePostByLimits($event)"
+  >
+    <!-- Icono que aparece del cargando junto con el texto ,
            var la documentacion en las properties donde indican 
            todos los iconos de cargado disponibles -->
 
-     <ion-infinite-scroll-content
-       loadingSpinner="crescent"
-       loadingText="{{ 'cargandoMasInformacion' | translate }}"
-     ></ion-infinite-scroll-content>
-   </ion-infinite-scroll>
+    <ion-infinite-scroll-content
+      loadingSpinner="crescent"
+      loadingText="{{ 'cargandoMasInformacion' | translate }}"
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <app-tab
