@@ -2,11 +2,25 @@
 
 <ion-content style="width: 100%; margin: 0px !important;">
   <ion-card>
-
     <!--INFORMACION DEL AUTOR DE LA PUBLICACION-->
     <ion-item>
-      <ion-avatar slot="start" (click)="viewProfile(post.author_id)">
-        <img src="https://flylinkers.com/media/{{(post.author_image_perfil !== '' )? post.author_image_perfil: 'avatar_2x.png' }}">
+      <!--SI NO TIENE IMAGEN DE PERFIL-->
+      <ion-avatar
+        slot="start"
+        (click)="viewProfile(post.author_id)"
+        *ngIf="!this.helperService.isValidValue(post.author_image_perfil)"
+      >
+        <img src="https://flylinkers.com/media/avatar_2x.png" />
+      </ion-avatar>
+      <!--SI TIENE IMAGEN DE PERFIL-->
+      <ion-avatar
+        slot="start"
+        (click)="viewProfile(post.author_id)"
+        *ngIf="this.helperService.isValidValue(post.author_image_perfil)"
+      >
+        <img
+          src="https://flylinkers.com/media/{{(post.author_image_perfil !== '' )? post.author_image_perfil: 'avatar_2x.png' }}"
+        />
       </ion-avatar>
 
       <ion-label (click)="viewProfile(post.author_id)">
@@ -27,18 +41,17 @@
     <!--END INFORMACION DEL AUTOR DE LA PUBLICACION-->
 
     <!--INFORMACION DE LA PUBLICACION-->
-    <ion-item
-      lines="none"
-      *ngIf="post.title !== null"
-    >
+    <ion-item lines="none" *ngIf="post.title !== null">
       <h5 slot="start">{{ post.title }}</h5>
     </ion-item>
 
-    <ion-card-content *ngIf="post.content !== null">{{post.content}}</ion-card-content>
+    <ion-card-content *ngIf="post.content !== null"
+      >{{post.content}}</ion-card-content
+    >
 
     <ion-item
       lines="none"
-      *ngIf="post.image_new !== ''"
+      *ngIf="this.helperService.isValidValue(post.image_new)"
     >
       <ion-img src="https://flylinkers.com/media/{{post.image_new}}"></ion-img>
     </ion-item>
@@ -70,7 +83,7 @@
     <ion-item lines="none">
       <ion-label slot="start">
         <h3>
-          <br>
+          <br />
           {{post.publication_date | date: 'dd/MM/yyyy'}}
         </h3>
       </ion-label>
@@ -82,12 +95,19 @@
       <!--DAR LIKE A LA PUBLICACION-->
       <ion-col>
         <ion-item *ngIf="!post.liked_by_user">
-          <ion-icon name="heart-empty" (click)="generarLikePost(post.id_new)"></ion-icon>
-          <div *ngIf="post.likes > 0"> {{post.likes}}</div>
+          <ion-icon
+            name="heart-empty"
+            (click)="generarLikePost(post.id_new)"
+          ></ion-icon>
+          <div *ngIf="post.likes > 0">{{post.likes}}</div>
         </ion-item>
         <ion-item *ngIf="post.liked_by_user">
-          <ion-icon name="heart" (click)="generarLikePost(post.id_new)"></ion-icon>
-          <div *ngIf="post.likes > 0"> {{post.likes}}</div>
+          <ion-icon
+            name="heart"
+            (click)="generarLikePost(post.id_new)"
+            color="flylinkersRojo"
+          ></ion-icon>
+          <div *ngIf="post.likes > 0">{{post.likes}}</div>
         </ion-item>
       </ion-col>
       <!--END DAR LIKE A LA PUBLICACION-->
@@ -96,7 +116,7 @@
       <ion-col>
         <ion-item>
           <ion-icon name="text" (click)="showHideComments()"></ion-icon>
-          <div *ngIf="post.count_comments > 0"> {{post.count_comments}}</div>
+          <div *ngIf="post.count_comments > 0">{{post.count_comments}}</div>
         </ion-item>
       </ion-col>
       <!--END ICONO DE COMENTARIOS DE LA PUBLICACION-->
@@ -104,49 +124,62 @@
       <!--ICONO DE COMPARTIR LA PUBLICACION-->
       <ion-col>
         <ion-item>
-          <ion-icon name="share" (click)="sharedPost(post.content,post.external_url_new,post.image_new,post.title)"></ion-icon>
+          <ion-icon
+            name="share"
+            (click)="sharedPost(post.content,post.external_url_new,post.image_new,post.title)"
+          ></ion-icon>
         </ion-item>
       </ion-col>
       <!--END ICONO DE COMPARTIR LA PUBLICACION-->
     </ion-row>
 
-    <form
-        #formulario="ngForm"
-        (ngSubmit)="saveComment(post.id_new)"
-    >
+    <form #formulario="ngForm" (ngSubmit)="saveComment(post.id_new)">
       <ion-list
-          style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+        style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
       >
-
         <!--ESCRIBIR COMENTARIO PRINCIPAL-->
-        <ion-item
-          color="FlyLinkers-Blanco"
-          [hidden]="hiddenComments"
-        >
-          <ion-label position="floating">{{ 'escribeComentario' | translate }}</ion-label>
-          <ion-textarea type="text" name="comment" required = "required" [(ngModel)]="comment.comment"></ion-textarea>
+        <ion-item color="FlyLinkers-Blanco" [hidden]="hiddenComments">
+          <ion-label position="floating"
+            >{{ 'escribeComentario' | translate }}</ion-label
+          >
+          <ion-textarea
+            type="text"
+            name="comment"
+            required="required"
+            [(ngModel)]="comment.comment"
+          ></ion-textarea>
           <ion-button
             color="flylinkers"
             type="submit"
             [disabled]="formulario.invalid"
             fill="outline"
             slot="end"
-          >{{ 'enviar' | translate }}</ion-button>
+            >{{ 'enviar' | translate }}</ion-button
+          >
         </ion-item>
         <!--END ESCRIBIR COMENTARIO PRINCIPAL-->
 
         <!--LISTADO DE TODOS LOS COMENTARIOS DE LA PUBLICACION-->
         <ion-item-group *ngFor="let comment of comments">
-
           <!--INFORMACION BASICA DE LAS PERSONAS QUE REALIZAN UN COMENTARIO-->
           <ion-item lines="none">
             <ion-avatar slot="start" (click)="viewProfile(comment.id_author)">
-             <img src="https://flylinkers.com/media/{{(comment.comment_author_image !== '' )? comment.comment_author_image: 'avatar_2x.png' }}">
+              <img
+                src="https://flylinkers.com/media/{{(comment.comment_author_image !== '' )? comment.comment_author_image: 'avatar_2x.png' }}"
+              />
             </ion-avatar>
             <ion-label (click)="viewProfile(comment.id_author)">
-              <h3>{{comment.comment_firstname_author}} {{comment.comment_lastname_author}}</h3>
+              <h3>
+                {{comment.comment_firstname_author}}
+                {{comment.comment_lastname_author}}
+              </h3>
             </ion-label>
-            <ion-icon slot= "end" name="more" (click)="mostrarPop($event, comment.id_comment, comment.comment,post.id_new)" *ngIf="codeUser === comment.id_author"></ion-icon>
+            <ion-icon
+              slot="end"
+              name="more"
+              (click)="mostrarPop($event, comment.id_comment, comment.comment,post.id_new)"
+              *ngIf="codeUser === comment.id_author"
+            ></ion-icon>
           </ion-item>
           <!--END INFORMACION BASICA DE LAS PERSONAS QUE REALIZAN UN COMENTARIO-->
 
@@ -157,21 +190,27 @@
           <!-- END COMENTARIO REALIZADO -->
 
           <!--BOTONERA DE OPCIONES DE CADA COMENTARIO REALIZADO-->
-          <ion-item slot = "start">
+          <ion-item slot="start">
             <ion-row>
               <!--BOTON DE LIKES DE CADA COMENTARIO REALIZADO-->
               <ion-col>
                 <!--ICONO DE LIKE CUANDO EL USUARIO NO HA DADO LIKE-->
                 <ion-item lines="none" *ngIf="!comment.like_by_user">
-                  <ion-icon name="heart-empty" (click)="generarLikeComment(comment.id_comment)"></ion-icon>
-                  <div *ngIf="comment.likes > 0"> {{comment.likes}}</div>
+                  <ion-icon
+                    name="heart-empty"
+                    (click)="generarLikeComment(comment.id_comment)"
+                  ></ion-icon>
+                  <div *ngIf="comment.likes > 0">{{comment.likes}}</div>
                 </ion-item>
                 <!--END ICONO DE LIKE CUANDO EL USUARIO NO HA DADO LIKE-->
 
                 <!--ICONO DE LIKE CUANDO EL USUARIO HA DADO LIKE-->
                 <ion-item lines="none" *ngIf="comment.like_by_user">
-                  <ion-icon name="heart" (click)="generarLikeComment(comment.id_comment)"></ion-icon>
-                  <div *ngIf="comment.likes > 0"> {{comment.likes}}</div>
+                  <ion-icon
+                    name="heart"
+                    (click)="generarLikeComment(comment.id_comment)"
+                  ></ion-icon>
+                  <div *ngIf="comment.likes > 0">{{comment.likes}}</div>
                 </ion-item>
                 <!--END ICONO DE LIKE CUANDO EL USUARIO HA DADO LIKE-->
               </ion-col>
@@ -180,53 +219,73 @@
               <!--ICONO PARA HACER UN RECOMENTARIO-->
               <ion-col>
                 <ion-item lines="none">
-                  <ion-icon name="text" (click)="getRecomments(comment.id_comment, post.id_new)"></ion-icon>
-                  <div *ngIf="comment.count_recomments > 0"> {{comment.count_recomments}}</div>
+                  <ion-icon
+                    name="text"
+                    (click)="getRecomments(comment.id_comment, post.id_new)"
+                  ></ion-icon>
+                  <div *ngIf="comment.count_recomments > 0">
+                    {{comment.count_recomments}}
+                  </div>
                 </ion-item>
               </ion-col>
               <!--END ICONO PARA HACER UN RECOMENTARIO-->
-
             </ion-row>
           </ion-item>
           <!--END BOTONERA DE OPCIONES DE CADA COMENTARIO REALIZADO-->
 
-
           <!--****************************SECCION DE RECOMENTARIOS**********************************************************-->
-          <ion-item [hidden]="comment.hiddenRecomments" [id]=comment.id_comment>
+          <ion-item
+            [hidden]="comment.hiddenRecomments"
+            [id]="comment.id_comment"
+          >
             <form
               #formulario="ngForm"
               (ngSubmit)="saveRecomment(comment.id_comment, post.id_new)"
             >
-            <ion-list
+              <ion-list
                 [hidden]="comment.hiddenRecomments"
                 style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
-            >
-              <ion-item
-                color="FlyLinkers-Blanco"
-                class = "page-list"
               >
-                <ion-label position="floating">{{ 'escribeComentario' | translate }}</ion-label>
-                <ion-textarea type="text" name="comment" [(ngModel)]="recomment.comment" required = "required"></ion-textarea>
-              </ion-item>
-              <ion-item>
+                <ion-item color="FlyLinkers-Blanco" class="page-list">
+                  <ion-label position="floating"
+                    >{{ 'escribeComentario' | translate }}</ion-label
+                  >
+                  <ion-textarea
+                    type="text"
+                    name="comment"
+                    [(ngModel)]="recomment.comment"
+                    required="required"
+                  ></ion-textarea>
+                </ion-item>
+                <ion-item>
                   <ion-button
-                  color="flylinkers"
-                  type="submit"
-                  [disabled]="formulario.invalid"
-                  fill="outline"
-                  slot="start"
-                >{{ 'enviar' | translate }}</ion-button>
-              </ion-item>
-              <ion-item *ngFor="let recomment of recomments">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col size="12">
-                      <ion-chip>
-                          <ion-avatar (click)="viewProfile(recomment.recomment_id_author)">
-                            <img src="https://flylinkers.com/media/{{(recomment.recomment_author_image !== '' )? recomment.recomment_author_image: 'avatar_2x.png' }}">
+                    color="flylinkers"
+                    type="submit"
+                    [disabled]="formulario.invalid"
+                    fill="outline"
+                    slot="start"
+                    >{{ 'enviar' | translate }}</ion-button
+                  >
+                </ion-item>
+                <ion-item *ngFor="let recomment of recomments">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="12">
+                        <ion-chip>
+                          <ion-avatar
+                            (click)="viewProfile(recomment.recomment_id_author)"
+                          >
+                            <img
+                              src="https://flylinkers.com/media/{{(recomment.recomment_author_image !== '' )? recomment.recomment_author_image: 'avatar_2x.png' }}"
+                            />
                           </ion-avatar>
-                          <ion-label (click)="viewProfile(recomment.recomment_id_author)">
-                            <h3>{{recomment.recomment_firstname_author}} {{recomment.recomment_lastname_author}}</h3>
+                          <ion-label
+                            (click)="viewProfile(recomment.recomment_id_author)"
+                          >
+                            <h3>
+                              {{recomment.recomment_firstname_author}}
+                              {{recomment.recomment_lastname_author}}
+                            </h3>
                           </ion-label>
                           <ion-label>
                             <ion-icon
@@ -236,19 +295,18 @@
                               *ngIf="recomment.recomment_id_author === codeUser"
                             ></ion-icon>
                           </ion-label>
-                      </ion-chip>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col size= "2">
-                    </ion-col>
-                    <ion-col size= "10">
-                      <p>{{recomment.recomment}}</p>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-item>
-              
+                        </ion-chip>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="2"> </ion-col>
+                      <ion-col size="10">
+                        <p>{{recomment.recomment}}</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-item>
+
                 <!-- <ion-item slot = "start" *ngIf="!post.liked_by_user">
                   <ion-row>
                     <ion-col>
@@ -265,14 +323,10 @@
                     </ion-col>
                   </ion-row>
                 </ion-item>           -->
-            </ion-list>
-          </form>
-          </ion-item>          
+              </ion-list>
+            </form>
+          </ion-item>
         </ion-item-group>
-
-
-
-
       </ion-list>
     </form>
   </ion-card>

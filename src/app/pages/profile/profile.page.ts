@@ -12,7 +12,7 @@ import { ProfileService } from "src/app/services/profile.service";
 import { TranslateService } from "@ngx-translate/core";
 import { BlockAccessService } from "../../util/blockAccess";
 import { ValidateFullProfile } from "../../util/validateFullProfile";
-import { Events } from '@ionic/angular';
+import { Events } from "@ionic/angular";
 
 @Component({
   selector: "app-profile",
@@ -48,9 +48,10 @@ export class ProfilePage implements OnInit {
     public eventsAction: Events,
     private zone: NgZone
   ) {
-    this.eventsAction.subscribe('updateScreen', () => {
+    /* Se define un evento para poder renderizar la pagina en cualquier momento */
+    this.eventsAction.subscribe("updateScreenProfile", () => {
       this.zone.run(() => {
-        console.log('force update the screen');
+        console.log("force update the screen");
       });
     });
   }
@@ -89,7 +90,6 @@ export class ProfilePage implements OnInit {
   /******************************************************/
   /*********END FUNCIONES DE CONTROL GRAFICO ************/
   /******************************************************/
-
 
   /*Funcion que se encarga de obtener codigo del usuario que se encuentra identificado*/
   getProfilePk() {
@@ -131,8 +131,8 @@ export class ProfilePage implements OnInit {
 
         this.helperService.ocultarBarraCarga();
 
-        this.eventsAction.publish('updateScreen');
-        
+        /* Se llama al evento que renderiza la pagina */
+        this.eventsAction.publish("updateScreenProfile");
       },
       error => {
         this.helperService.ocultarBarraCarga();
@@ -148,4 +148,5 @@ export class ProfilePage implements OnInit {
   openExternalURL(link: string) {
     window.open(link, "_system");
   }
+
 }

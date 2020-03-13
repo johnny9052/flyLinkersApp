@@ -10,22 +10,21 @@
 >
   <ion-header>
     <ion-toolbar color="flylinkers">
-      <ion-chip
-        color="flylinkers"
-      >
+      <ion-chip color="flylinkers">
+        <!--SI NO TIENE IMAGEN DE PERFIL-->
+        <ion-avatar *ngIf="!this.helperService.isValidValue(imagePerfil)">
+          <img src="https://flylinkers.com/media/avatar_2x.png" />
+        </ion-avatar>
 
-         <!--SI NO TIENE IMAGEN DE PERFIL-->
-         <ion-avatar *ngIf="!this.helperService.isValidValue(imagePerfil)">
-          <img src="https://flylinkers.com/media/avatar_2x.png">
-      </ion-avatar>
-
-      <!--SI TIENE IMAGEN DE PERFIL-->
-      <ion-avatar *ngIf="this.helperService.isValidValue(imagePerfil)">
+        <!--SI TIENE IMAGEN DE PERFIL-->
+        <ion-avatar *ngIf="this.helperService.isValidValue(imagePerfil)">
           <!-- <img [src]="('https://flylinkers.com/media/' + userData.image_perfil) | imageSanitizer"> -->
-          <img [src]="imagePerfil | imageSanitizer">
-      </ion-avatar>
+          <img [src]="imagePerfil | imageSanitizer" />
+        </ion-avatar>
 
-        <ion-label color="flylinkersBlanco">{{firstName}} {{lastName}} </ion-label>
+        <ion-label color="flylinkersBlanco"
+          >{{ firstName }} {{ lastName }}
+        </ion-label>
       </ion-chip>
     </ion-toolbar>
   </ion-header>
@@ -34,25 +33,17 @@
     <ion-list>
       <ion-menu-toggle>
         <ion-item routerLink="/master-page">
-          <ion-icon
-            name="home"
-            slot="start"
-            color="flylinkers"
-          ></ion-icon>
+          <ion-icon name="home" slot="start" color="flylinkers"></ion-icon>
 
-          <ion-label>{{ 'inicio' | translate }}</ion-label>
+          <ion-label>{{ "inicio" | translate }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
 
       <ion-menu-toggle>
         <ion-item routerLink="/profile">
-          <ion-icon
-            name="person"
-            slot="start"
-            color="flylinkers"
-          ></ion-icon>
+          <ion-icon name="person" slot="start" color="flylinkers"></ion-icon>
 
-          <ion-label>{{ 'perfil' | translate }}</ion-label>
+          <ion-label>{{ "perfil" | translate }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
 
@@ -64,10 +55,10 @@
             color="flylinkers"
           ></ion-icon>
 
-          <ion-label>{{ 'notificaciones' | translate }}</ion-label>
+          <ion-label>{{ "notificaciones" | translate }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
-<!-- 
+      <!-- 
       <ion-menu-toggle>
         <ion-item routerLink="/messages">
           <ion-icon
@@ -82,49 +73,33 @@
 
       <ion-menu-toggle>
         <ion-item routerLink="/interests">
-          <ion-icon
-            name="flag"
-            slot="start"
-            color="flylinkers"
-          ></ion-icon>
+          <ion-icon name="flag" slot="start" color="flylinkers"></ion-icon>
 
-          <ion-label>{{ 'intereses' | translate }}</ion-label>
+          <ion-label>{{ "intereses" | translate }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
 
       <ion-menu-toggle>
         <ion-item routerLink="/event">
-          <ion-icon
-            name="locate"
-            slot="start"
-            color="flylinkers"
-          ></ion-icon>
+          <ion-icon name="locate" slot="start" color="flylinkers"></ion-icon>
 
-          <ion-label>{{ 'eventos' | translate }}</ion-label>
+          <ion-label>{{ "eventos" | translate }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
 
       <ion-menu-toggle>
         <ion-item routerLink="/network">
-          <ion-icon
-            name="people"
-            slot="start"
-            color="flylinkers"
-          ></ion-icon>
+          <ion-icon name="people" slot="start" color="flylinkers"></ion-icon>
 
-          <ion-label>{{ 'red' | translate }}</ion-label>
+          <ion-label>{{ "red" | translate }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
 
       <ion-menu-toggle>
         <ion-item routerLink="/sponsor">
-          <ion-icon
-            name="flag"
-            slot="start"
-            color="flylinkers"
-          ></ion-icon>
+          <ion-icon name="flag" slot="start" color="flylinkers"></ion-icon>
 
-          <ion-label>{{ 'patrocinadores' | translate }}</ion-label>
+          <ion-label>{{ "patrocinadores" | translate }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
       <!-- <ion-menu-toggle>

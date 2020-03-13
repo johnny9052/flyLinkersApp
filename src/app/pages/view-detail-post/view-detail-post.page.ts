@@ -1,30 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   ActionSheetController,
   AlertController,
   PopoverController
-} from '@ionic/angular';
-import { HelperService } from '../../util/HelperService';
-import { PostService } from '../../services/post.service';
+} from "@ionic/angular";
+import { HelperService } from "../../util/HelperService";
+import { PostService } from "../../services/post.service";
 import {
   ModelPosts,
   ModelComments,
   ModelRecomments,
   ModelCommentData,
   ModelRecommentData
-} from '../../interfaces/posts';
-import { PopcommentsComponent } from 'src/app/components/popcomments/popcomments.component';
-import { PoprecommentsComponent } from '../../components/poprecomments/poprecomments.component';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
-import { BlockAccessService } from '../../util/blockAccess';
-import { TranslateService } from '@ngx-translate/core';
-import { ValidateFullProfile } from '../../util/validateFullProfile';
-
+} from "../../interfaces/posts";
+import { PopcommentsComponent } from "src/app/components/popcomments/popcomments.component";
+import { PoprecommentsComponent } from "../../components/poprecomments/poprecomments.component";
+import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
+import { BlockAccessService } from "../../util/blockAccess";
+import { TranslateService } from "@ngx-translate/core";
+import { ValidateFullProfile } from "../../util/validateFullProfile";
 
 @Component({
-  selector: 'app-view-detail-post',
-  templateUrl: './view-detail-post.page.html',
-  styleUrls: ['./view-detail-post.page.scss']
+  selector: "app-view-detail-post",
+  templateUrl: "./view-detail-post.page.html",
+  styleUrls: ["./view-detail-post.page.scss"]
 })
 export class ViewDetailPostPage implements OnInit {
   post = {} as ModelPosts;
@@ -33,36 +32,35 @@ export class ViewDetailPostPage implements OnInit {
   recomment = {} as ModelRecommentData;
   recomments: ModelRecomments[] = [];
 
-  idPost = '';
-  codeUser = '';
+  idPost = "";
+  codeUser = "";
 
   tiempoEspera = 1000;
 
   hiddenComments = true;
   hiddenRecomments = false;
 
-  constructor(private blockAccess: BlockAccessService,
-              private actionSheetCtrl: ActionSheetController,
-              private postService: PostService,
-              public helperService: HelperService,
-              public alertCtrl: AlertController,
-              private popoverController: PopoverController,
-              private route: ActivatedRoute,
-              private router: Router,
-              private translate: TranslateService,
-              private validateFullProfileService: ValidateFullProfile
+  constructor(
+    private blockAccess: BlockAccessService,
+    private actionSheetCtrl: ActionSheetController,
+    private postService: PostService,
+    public helperService: HelperService,
+    public alertCtrl: AlertController,
+    private popoverController: PopoverController,
+    private route: ActivatedRoute,
+    private router: Router,
+    private translate: TranslateService,
+    private validateFullProfileService: ValidateFullProfile
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.idPost = this.router.getCurrentNavigation().extras.state.idPost;
-        this.helperService.saveLocalData('currentPostId', this.idPost);
+        this.helperService.saveLocalData("currentPostId", this.idPost);
       }
     });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
@@ -72,8 +70,8 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   getCurrentPost() {
-    this.helperService.getLocalData('currentPostId').then(response => {
-      console.log('kjhhkjhjk');
+    this.helperService.getLocalData("currentPostId").then(response => {
+      console.log("kjhhkjhjk");
       this.idPost = response;
       this.getProfilePk();
     });
@@ -81,29 +79,34 @@ export class ViewDetailPostPage implements OnInit {
 
   getProfilePk() {
     // Se obtiene el identificador del usuario que ingreso al sistema
-    this.helperService.getLocalData('profilePk').then(response => {
+    this.helperService.getLocalData("profilePk").then(response => {
       this.codeUser = response;
       this.getPost(this.codeUser, this.idPost);
     });
   }
 
   getPost(pkUser, articleId) {
-    console.log('vamos a traer, mandado ' + pkUser + ' ' + articleId);
-    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
-    this.postService.getPost(pkUser, articleId).subscribe(data => {
-      console.log(data);
-      let res: any;
-      res = data;
-      this.post = res.post;
-      this.post.liked_by_user = res.post.liked_by_user[0];
-      this.helperService.ocultarBarraCarga();
-      this.getMetadataPosts();
-    },
-    error => {
-      this.helperService.ocultarBarraCarga();
-      this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
-      console.log('oops', error);
-    });
+    console.log("vamos a traer, mandado " + pkUser + " " + articleId);
+    this.helperService.mostrarBarraDeCarga(this.translate.instant("espere"));
+    this.postService.getPost(pkUser, articleId).subscribe(
+      data => {
+        console.log(data);
+        let res: any;
+        res = data;
+        this.post = res.post;
+        this.post.liked_by_user = res.post.liked_by_user[0];
+        this.helperService.ocultarBarraCarga();
+        this.getMetadataPosts();
+      },
+      error => {
+        this.helperService.ocultarBarraCarga();
+        this.helperService.showAlert(
+          this.translate.instant("error"),
+          this.translate.instant("errorCargandoInformacion")
+        );
+        console.log("oops", error);
+      }
+    );
   }
 
   async mostrarPop(evento, pk: string, comment: string, postId: string) {
@@ -116,10 +119,10 @@ export class ViewDetailPostPage implements OnInit {
     await popover.present();
 
     const { data } = await popover.onWillDismiss();
-    if (data.item === 'Delete') {
+    if (data.item === "Delete") {
       this.deleteComment(pk);
     }
-    if (data.item === 'Edit') {
+    if (data.item === "Edit") {
       this.editComment(pk, comment, postId);
     }
   }
@@ -140,32 +143,31 @@ export class ViewDetailPostPage implements OnInit {
     await popover.present();
 
     const { data } = await popover.onWillDismiss();
-    if (data.item === 'Delete') {
+    if (data.item === "Delete") {
       this.deleteRecomment(pk, commentId);
     }
-    if (data.item === 'Edit') {
+    if (data.item === "Edit") {
       this.editRecomment(pk, comment, postId, commentId);
     }
   }
 
-
-
-
   getMetadataPosts() {
-    this.postService.getMetadataPosts(this.post.external_url_new).subscribe(
-      data => {
-        let res: any;
-        res = data;
-        // Se obtiene la informacion basica del perfil
-        this.post.metadataDescription = res.description[0];
-        this.post.metadataImage = res.image[0];
-        this.post.metadataTitle = res.title[0];
-        this.getComments(this.idPost);
-      },
-      error => {
-        // console.log('oops', error);
-      }
-    );
+    if (this.helperService.isValidValue(this.post.external_url_new)) {
+      this.postService.getMetadataPosts(this.post.external_url_new).subscribe(
+        data => {
+          let res: any;
+          res = data;
+          // Se obtiene la informacion basica del perfil
+          this.post.metadataDescription = res.description[0];
+          this.post.metadataImage = res.image[0];
+          this.post.metadataTitle = res.title[0];
+          this.getComments(this.idPost);
+        },
+        error => {
+          // console.log('oops', error);
+        }
+      );
+    }
   }
 
   getComments(postId) {
@@ -182,23 +184,21 @@ export class ViewDetailPostPage implements OnInit {
     this.hiddenComments = !this.hiddenComments;
   }
 
-
   getRecomments(commentId, postId, verRecomentarios?: boolean) {
-    this.helperService.mostrarBarraDeCarga(this.translate.instant('espere'));
-    this.postService
-      .getRecomments(commentId, postId, this.codeUser)
-      .subscribe(data => {
+    this.helperService.mostrarBarraDeCarga(this.translate.instant("espere"));
+    this.postService.getRecomments(commentId, postId, this.codeUser).subscribe(
+      data => {
         let res: any;
         res = data;
         this.recomments = res.recomments;
 
         if (verRecomentarios) {
-         // tslint:disable-next-line: prefer-const
-         for (let obj of this.comments) {
-           if (obj.id_comment === commentId) {
-             obj.hiddenRecomments =  false;
-           }
-         }
+          // tslint:disable-next-line: prefer-const
+          for (let obj of this.comments) {
+            if (obj.id_comment === commentId) {
+              obj.hiddenRecomments = false;
+            }
+          }
         } else {
           this.showHideRecomments(commentId);
         }
@@ -207,19 +207,22 @@ export class ViewDetailPostPage implements OnInit {
       },
       error => {
         this.helperService.ocultarBarraCarga();
-        this.helperService.showAlert(this.translate.instant('error'), this.translate.instant('errorCargandoInformacion'));
+        this.helperService.showAlert(
+          this.translate.instant("error"),
+          this.translate.instant("errorCargandoInformacion")
+        );
         // console.log('oops', error);
-      });
+      }
+    );
   }
-
 
   showHideRecomments(commentId: string) {
     // tslint:disable-next-line: prefer-const
     for (let obj of this.comments) {
       if (obj.id_comment === commentId) {
-        obj.hiddenRecomments =  !obj.hiddenRecomments;
+        obj.hiddenRecomments = !obj.hiddenRecomments;
       } else {
-        obj.hiddenRecomments =  true;
+        obj.hiddenRecomments = true;
       }
     }
   }
@@ -240,7 +243,6 @@ export class ViewDetailPostPage implements OnInit {
         } else {
           this.post.likes--;
         }
-
       }, this.tiempoEspera);
     });
   }
@@ -291,7 +293,6 @@ export class ViewDetailPostPage implements OnInit {
             }
           }
         }
-
       }, this.tiempoEspera);
     });
   }
@@ -334,28 +335,28 @@ export class ViewDetailPostPage implements OnInit {
 
   async editComment(id: string, comment: string, postId: string) {
     const input = await this.alertCtrl.create({
-      header: 'Editar',
+      header: "Editar",
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'comment',
-          id: 'txtComment',
-          type: 'text',
+          name: "comment",
+          id: "txtComment",
+          type: "text",
           value: comment,
-          placeholder: 'Ingrese el nuevo comentario'
+          placeholder: "Ingrese el nuevo comentario"
         }
       ],
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: "Cancel",
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: 'Ok',
+          text: "Ok",
           handler: async data => {
             // console.log('Confirm Ok', data);
             const objComment = {
@@ -376,30 +377,35 @@ export class ViewDetailPostPage implements OnInit {
     await input.present();
   }
 
-  async editRecomment(id: string, recomment: string, postId: string, commentId: string) {
+  async editRecomment(
+    id: string,
+    recomment: string,
+    postId: string,
+    commentId: string
+  ) {
     const input = await this.alertCtrl.create({
-      header: 'Editar',
+      header: "Editar",
       // message: 'Ingrese su nueva skill',
       inputs: [
         {
-          name: 'recomment',
-          id: 'txtRecomment',
-          type: 'text',
+          name: "recomment",
+          id: "txtRecomment",
+          type: "text",
           value: recomment,
-          placeholder: 'Ingrese el nuevo comentario'
+          placeholder: "Ingrese el nuevo comentario"
         }
       ],
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: "Cancel",
+          role: "cancel",
+          cssClass: "secondary",
           handler: () => {
             // console.log('Confirm Cancel');
           }
         },
         {
-          text: 'Ok',
+          text: "Ok",
           handler: async data => {
             // console.log('Confirm Ok', data);
 
@@ -424,22 +430,22 @@ export class ViewDetailPostPage implements OnInit {
 
   async presentActionSheet(pk: string) {
     const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Albums',
+      header: "Albums",
       backdropDismiss: false,
       buttons: [
         {
-          text: 'Delete',
-          role: 'destructive',
-          icon: 'trash',
-          cssClass: 'rojo',
+          text: "Delete",
+          role: "destructive",
+          icon: "trash",
+          cssClass: "rojo",
           handler: () => {
             // console.log('Delete clicked');
             this.deletePost(pk);
           }
         },
         {
-          text: 'Edit',
-          icon: 'create',
+          text: "Edit",
+          icon: "create",
           handler: () => {
             const data: NavigationExtras = {
               state: {
@@ -447,13 +453,13 @@ export class ViewDetailPostPage implements OnInit {
               }
             };
 
-            this.router.navigate(['new-post'], data);
+            this.router.navigate(["new-post"], data);
           }
         },
         {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
+          text: "Cancel",
+          icon: "close",
+          role: "cancel",
           handler: () => {
             // console.log('Cancel clicked');
           }
@@ -469,42 +475,39 @@ export class ViewDetailPostPage implements OnInit {
       }
     };
 
-    this.router.navigate(['profile-detail'], data);
+    this.router.navigate(["profile-detail"], data);
   }
-
-
-
-
 
   aumentarNumeroRecomentarios(commentId: string) {
     // tslint:disable-next-line: prefer-const
     for (let obj of this.comments) {
       // tslint:disable-next-line: radix
       if (parseInt(obj.id_comment) === parseInt(commentId)) {
-        console.log('Encontre el ' + commentId);
+        console.log("Encontre el " + commentId);
         obj.count_recomments++;
         break;
       }
     }
   }
 
-
   disminuirNumeroRecomentarios(commentId: string) {
     // tslint:disable-next-line: prefer-const
     for (let obj of this.comments) {
       // tslint:disable-next-line: radix
       if (parseInt(obj.id_comment) === parseInt(commentId)) {
-        console.log('Encontre el ' + commentId);
+        console.log("Encontre el " + commentId);
         obj.count_recomments--;
         break;
       }
     }
   }
 
-
-
-  sharedPost(content: string, externalUrlNew: string, imageNew: string, title: string) {
-
+  sharedPost(
+    content: string,
+    externalUrlNew: string,
+    imageNew: string,
+    title: string
+  ) {
     const data: NavigationExtras = {
       state: {
         content,
@@ -514,13 +517,6 @@ export class ViewDetailPostPage implements OnInit {
       }
     };
 
-    this.router.navigate(['new-post'], data);
+    this.router.navigate(["new-post"], data);
   }
-
-
-
 }
-
-
-
-
