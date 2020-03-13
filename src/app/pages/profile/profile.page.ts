@@ -1,17 +1,18 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, NgZone } from "@angular/core";
 import {
   ModelUserData,
   Skills,
   Experiences,
   Accomplishments,
   Interests,
-  Events
+  EventsFly
 } from "../../interfaces/userInterface";
 import { HelperService } from "src/app/util/HelperService";
 import { ProfileService } from "src/app/services/profile.service";
 import { TranslateService } from "@ngx-translate/core";
 import { BlockAccessService } from "../../util/blockAccess";
 import { ValidateFullProfile } from "../../util/validateFullProfile";
+import { Events } from '@ionic/angular';
 
 @Component({
   selector: "app-profile",
@@ -35,7 +36,7 @@ export class ProfilePage implements OnInit {
   userExperiences: Experiences[] = [];
   userAccomplishments: Accomplishments[] = [];
   userInterests: Interests[] = [];
-  events: Events[] = [];
+  events: EventsFly[] = [];
   /****************END OBJETOS************************** */
 
   constructor(
@@ -43,8 +44,16 @@ export class ProfilePage implements OnInit {
     public helperService: HelperService,
     public profileService: ProfileService,
     private translate: TranslateService,
-    private validateFullProfileService: ValidateFullProfile
-  ) {}
+    private validateFullProfileService: ValidateFullProfile,
+    public eventsAction: Events,
+    private zone: NgZone
+  ) {
+    this.eventsAction.subscribe('updateScreen', () => {
+      this.zone.run(() => {
+        console.log('force update the screen');
+      });
+    });
+  }
 
   ionViewWillEnter() {
     // Se obtiene el identidicador del usuario que ingreso al sistema
@@ -88,7 +97,7 @@ export class ProfilePage implements OnInit {
     this.helperService.getLocalData("profilePk").then(response => {
       this.codeUser = response;
       // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
-      // this.validateFullProfileService.validateDataFullProfile();
+      this.validateFullProfileService.validateDataFullProfile();
       // console.log(this.codeUser);
       // Se obtiene toda la informacion del usuario que ingreso al sistema
       this.getProfileData(this.codeUser);
@@ -121,6 +130,9 @@ export class ProfilePage implements OnInit {
           : "https://flylinkers.com/media/avatar_2x.png";
 
         this.helperService.ocultarBarraCarga();
+
+        this.eventsAction.publish('updateScreen');
+        
       },
       error => {
         this.helperService.ocultarBarraCarga();

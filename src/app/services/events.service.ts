@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HelperService } from '../util/HelperService';
-import { ModelEvents } from '../interfaces/events';
+import { ModelEvents } from '../interfaces/eventsFly';
 
 @Injectable({
   providedIn: 'root'

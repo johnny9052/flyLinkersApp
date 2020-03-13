@@ -5,7 +5,7 @@ import {
   Experiences,
   Accomplishments,
   Interests,
-  Events
+  EventsFly
 } from '../../interfaces/userInterface';
 import { HelperService } from 'src/app/util/HelperService';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -41,7 +41,7 @@ userSkills: Skills[] = [];
 userExperiences: Experiences[] = [];
 userAccomplishments: Accomplishments[] = [];
 userInterests: Interests[] = [];
-events: Events[] = [];
+events: EventsFly[] = [];
 /****************END OBJETOS************************** */
 
 constructor(private blockAccess: BlockAccessService,

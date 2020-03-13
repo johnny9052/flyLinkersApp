@@ -27,7 +27,7 @@ export interface ModelUserLogIn {
 
 export interface Profile {
   userData: ModelUserData[];
-  events: Events[];
+  events: EventsFly[];
   skills: Skills[];
   interests: Interests[];
   accomplishments: Accomplishments[];
@@ -75,7 +75,7 @@ export interface Interests {
   interest_description: string;
 }
 
-export interface Events {
+export interface EventsFly {
   id: string;
   event: string;
   address: string;

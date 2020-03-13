@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModelEvents } from '../../interfaces/events';
+import { ModelEvents } from '../../interfaces/eventsFly';
 import { HelperService } from '../../util/HelperService';
 import { EventsService } from '../../services/events.service';
 import { TranslateService } from '@ngx-translate/core';
