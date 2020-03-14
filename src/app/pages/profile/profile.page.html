@@ -24,17 +24,24 @@
                 <img [src]="userData.image_perfil | imageSanitizer" />
               </ion-avatar>
 
+              <ion-button (click)="renderizarYa()" expand="block" fill="clear" shape="round">
+                RENDERIZAR!!!
+              </ion-button>
+
               <!-- https://ionicframework.com/docs/api/label
               https://ionicframework.com/docs/api/text -->
 
+              
               <h3>{{userData.fistName}}</h3>
 
               <h3>{{userData.lastName}}</h3>
 
               <h2>{{userData.profession}}</h2>
 
-              <p color="flylinkers">{{userData.headline}}</p>
-
+              <ion-label>
+                <p color="flylinkers">{{userData.headline}}</p>
+              </ion-label>
+              
               <p>
                 <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
                 {{userData.residence_country}}

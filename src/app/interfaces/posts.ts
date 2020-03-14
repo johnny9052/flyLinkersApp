@@ -53,6 +53,8 @@ export interface ModelRecomments {
       recomment_author_image: string;
       recomment_profession_author: string;
       comment_id: string;
+      //Este ultimo atributo validar si realmente va
+      recomment_lastname_author:string;
 }
 
 export interface ModelRecommentData {

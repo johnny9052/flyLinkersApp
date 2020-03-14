@@ -149,4 +149,8 @@ export class ProfilePage implements OnInit {
     window.open(link, "_system");
   }
 
+  renderizarYa(){
+    this.eventsAction.publish("updateScreenProfile");
+  }
+
 }
