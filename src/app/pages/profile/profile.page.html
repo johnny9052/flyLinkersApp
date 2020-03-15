@@ -24,17 +24,20 @@
                 <img [src]="userData.image_perfil | imageSanitizer" />
               </ion-avatar>
 
-              <ion-button
-                (click)="renderizarYa()"
-                expand="block"
-                fill="clear"
-                shape="round"
-              >
-                RENDERIZAR!!!
-              </ion-button>
-
               <!-- https://ionicframework.com/docs/api/label
               https://ionicframework.com/docs/api/text -->
+
+              <ion-label>OPCION 1</ion-label>
+
+              <ion-label>{{userData.fistName}}</ion-label>
+
+              <ion-label>OPCION 2</ion-label>
+
+              <ion-label>
+                <h3>{{userData.lastName}}</h3>
+              </ion-label>
+
+              <ion-label>OPCION 3</ion-label>
 
               <ion-input
                 type="text"
@@ -52,13 +55,25 @@
                 readonly
               ></ion-input>
 
-              <ion-text>
-                <h2>{{userData.profession}}</h2>
-              </ion-text>
+              <ion-label>OPCION 4</ion-label>
+
+              <h3>{{userData.fistName}}</h3>
+
+              <ion-label>OPCION 5</ion-label>
 
               <ion-text>
-                <p color="flylinkers">{{userData.headline}}</p>
+                <h3>{{userData.fistName}}</h3>
               </ion-text>
+
+              <ion-label>OPCION 6</ion-label>
+
+              <ion-text>
+                <h3>{{userData.lastName}}</h3>
+              </ion-text>
+
+              <h2>{{userData.profession}}</h2>
+
+              <p color="flylinkers">{{userData.headline}}</p>
 
               <p>
                 <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
