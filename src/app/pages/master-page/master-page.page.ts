@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ActionSheetController,
   Events,
@@ -51,15 +51,8 @@ export class MasterPagePage implements OnInit {
     private translate: TranslateService,
     public events: Events,
     private modalCtrl: ModalController,
-    public eventsAction: Events,
-    private zone: NgZone
   ) {
-    /* Se define un evento para poder renderizar la pagina en cualquier momento */
-    this.eventsAction.subscribe("updateScreenMasterPage", () => {
-      this.zone.run(() => {
-        console.log("force update the screen");
-      });
-    });
+    
   }
 
   ngOnInit() {
@@ -390,9 +383,6 @@ export class MasterPagePage implements OnInit {
           this.yaSeConsultoNoticias = true;
           this.getMetadataPosts();
           this.totalContactosAMostrarEnListado += 10;
-
-          /* Se llama al evento que renderiza la pagina */
-          this.eventsAction.publish("updateScreenMasterPage");
         },
         error => {
           console.log("Error cargando info");
