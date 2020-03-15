@@ -24,24 +24,42 @@
                 <img [src]="userData.image_perfil | imageSanitizer" />
               </ion-avatar>
 
-              <ion-button (click)="renderizarYa()" expand="block" fill="clear" shape="round">
+              <ion-button
+                (click)="renderizarYa()"
+                expand="block"
+                fill="clear"
+                shape="round"
+              >
                 RENDERIZAR!!!
               </ion-button>
 
               <!-- https://ionicframework.com/docs/api/label
               https://ionicframework.com/docs/api/text -->
 
-              
-              <h3>{{userData.fistName}}</h3>
+              <ion-input
+                type="text"
+                name="firstName"
+                [(ngModel)]="userData.fistName"
+                class="h3"
+                readonly
+              ></ion-input>
 
-              <h3>{{userData.lastName}}</h3>
+              <ion-input
+                type="text"
+                name="lastName"
+                [(ngModel)]="userData.lastName"
+                class="h3"
+                readonly
+              ></ion-input>
 
-              <h2>{{userData.profession}}</h2>
+              <ion-text>
+                <h2>{{userData.profession}}</h2>
+              </ion-text>
 
-              <ion-label>
+              <ion-text>
                 <p color="flylinkers">{{userData.headline}}</p>
-              </ion-label>
-              
+              </ion-text>
+
               <p>
                 <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
                 {{userData.residence_country}}
