@@ -49,7 +49,7 @@ export class ProfilePage implements OnInit {
     private zone: NgZone
   ) {
     /* Se define un evento para poder renderizar la pagina en cualquier momento */
-    this.eventsAction.subscribe("updateScreenProfile", () => {
+    this.eventsAction.subscribe("updateScreen", () => {
       this.zone.run(() => {
         console.log("force update the screen");
       });
@@ -132,7 +132,7 @@ export class ProfilePage implements OnInit {
         this.helperService.ocultarBarraCarga();
 
         /* Se llama al evento que renderiza la pagina */
-        this.eventsAction.publish("updateScreenProfile");
+        this.eventsAction.publish("updateScreen");
       },
       error => {
         this.helperService.ocultarBarraCarga();
@@ -150,7 +150,7 @@ export class ProfilePage implements OnInit {
   }
 
   renderizarYa(){
-    this.eventsAction.publish("updateScreenProfile");
+    this.eventsAction.publish("updateScreen");
   }
 
 }
