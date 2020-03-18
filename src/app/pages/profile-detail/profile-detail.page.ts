@@ -226,7 +226,7 @@ encuentra logueado*/
       this.hiddenAccomplishments = true;
       this.hiddenInterests = true;
       this.hiddenEvents = true;
-    }, 200);
+    }, 100);
   }
 
 }
