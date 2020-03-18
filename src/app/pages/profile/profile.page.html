@@ -47,18 +47,16 @@
             </p>
 
             <ion-button
-                color="flylinkers"
-                fill="outline"
-                size="small"
-                routerLink="/profile-edit"
-                >{{ 'editarPerfil' | translate }}</ion-button
-              >
+              color="flylinkers"
+              fill="outline"
+              size="small"
+              routerLink="/profile-edit"
+              >{{ 'editarPerfil' | translate }}</ion-button
+            >
           </ion-col>
         </ion-row>
       </ion-item>
     </ion-list>
-
-   
 
     <!-- ********************************************************************** -->
     <!-- *************************SECCION DE HABILIDADES*********************** -->
@@ -84,18 +82,6 @@
           <ion-label>
             <h3>{{skills.skill_description}}</h3>
           </ion-label>
-
-          <ion-icon
-            name="trash"
-            slot="end"
-            (click)="deleteSkill(skills.id)"
-          ></ion-icon>
-
-          <ion-icon
-            name="create"
-            slot="end"
-            (click)="editSkill(skills.id, skills.skill_description)"
-          ></ion-icon>
         </ion-item>
 
         <ion-item text-center="text-center" class="ion-text-center">
