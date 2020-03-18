@@ -83,17 +83,6 @@
             <h3>{{skills.skill_description}}</h3>
           </ion-label>
         </ion-item>
-
-        <ion-item text-center="text-center" class="ion-text-center">
-          <ion-label>
-            <ion-button
-              color="flylinkers"
-              fill="outline"
-              (click)="createSkill()"
-              >{{ 'crearSkill' | translate }}</ion-button
-            >
-          </ion-label>
-        </ion-item>
       </ion-card-content>
     </ion-card>
 
@@ -124,21 +113,10 @@
         <ion-item *ngFor="let experiences of userExperiences;">
           <ion-label>
             <h3>{{experiences.title}}</h3>
-          </ion-label>
-
-    
+          </ion-label>    
         </ion-item>
 
-        <ion-item text-center="text-center" class="ion-text-center">
-          <ion-label>
-            <ion-button
-              color="flylinkers"
-              fill="outline"
-              (click)="crearNuevaExperiencia()"
-              >{{ 'crearExperiencia' | translate }}</ion-button
-            >
-          </ion-label>
-        </ion-item>
+
       </ion-card-content>
     </ion-card>
 
@@ -174,17 +152,6 @@
           </ion-label>
 
       
-        </ion-item>
-
-        <ion-item text-center="text-center" class="ion-text-center">
-          <ion-label>
-            <ion-button
-              color="flylinkers"
-              fill="outline"
-              (click)="createAccomplishment()"
-              >{{ 'crearLogro' | translate }}</ion-button
-            >
-          </ion-label>
         </ion-item>
       </ion-card-content>
     </ion-card>
@@ -231,17 +198,6 @@
             slot="end"
             (click)="editInterests(interests.id, interests.interest_description)"
           ></ion-icon>
-        </ion-item>
-
-        <ion-item text-center="text-center" class="ion-text-center">
-          <ion-label>
-            <ion-button
-              color="flylinkers"
-              fill="outline"
-              (click)="createInterests()"
-              >{{ 'crearInteres' | translate }}</ion-button
-            >
-          </ion-label>
         </ion-item>
       </ion-card-content>
     </ion-card>
