@@ -35,11 +35,11 @@ export class ProfilePage implements OnInit {
   codeUser = "";
 
   /*******VARIABLES DE CONTROL VISUAL****************/
-  hiddenSkills = true;
-  hiddenExperiences = true;
-  hiddenAccomplishments = true;
-  hiddenInterests = true;
-  hiddenEvents = true;
+  hiddenSkills = false;
+  hiddenExperiences = false;
+  hiddenAccomplishments = false;
+  hiddenInterests = false;
+  hiddenEvents = false;
   /*******END VARIABLES DE CONTROL VISUAL****************/
 
   /*Almacena la configuracion del calendar*/
