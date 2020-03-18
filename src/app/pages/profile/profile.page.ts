@@ -24,11 +24,11 @@ export class ProfilePage implements OnInit {
   codeUser = "";
 
   /*******VARIABLES DE CONTROL VISUAL****************/
-  hiddenSkills = true;
-  hiddenExperiences = true;
-  hiddenAccomplishments = true;
-  hiddenInterests = true;
-  hiddenEvents = true;
+  hiddenSkills = false;
+  hiddenExperiences = false;
+  hiddenAccomplishments = false;
+  hiddenInterests = false;
+  hiddenEvents = false;
 
   /****************OBJETOS************************** */
   userData = {} as ModelUserData;
@@ -122,6 +122,7 @@ export class ProfilePage implements OnInit {
         this.userExperiences = res.experiences;
         this.events = res.events;
         this.recortarFechas();
+        this.ocultarListadosDatos();
 
         // tslint:disable-next-line: max-line-length
         this.userData.image_perfil = this.helperService.isValidValue(
@@ -150,15 +151,24 @@ export class ProfilePage implements OnInit {
     window.open(link, "_system");
   }
 
-  renderizarYa(){
+  renderizarYa() {
     this.eventsAction.publish("updateScreen");
   }
 
-  recortarFechas(){
+  recortarFechas() {
     this.events.forEach(element => {
-       element.event_init_date = element.event_init_date.substring(0, 10);
-       element.event_end_date = element.event_end_date.substring(0, 10);
+      element.event_init_date = element.event_init_date.substring(0, 10);
+      element.event_end_date = element.event_end_date.substring(0, 10);
     });
   }
 
+  ocultarListadosDatos() {
+    setTimeout(() => {
+      this.hiddenSkills = true;
+      this.hiddenExperiences = true;
+      this.hiddenAccomplishments = true;
+      this.hiddenInterests = true;
+      this.hiddenEvents = true;
+    }, 200);
+  }
 }
