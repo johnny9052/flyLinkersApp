@@ -45,57 +45,20 @@
               <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
               {{userData.residence_country}}
             </p>
+
+            <ion-button
+                color="flylinkers"
+                fill="outline"
+                size="small"
+                routerLink="/profile-edit"
+                >{{ 'editarPerfil' | translate }}</ion-button
+              >
           </ion-col>
         </ion-row>
       </ion-item>
     </ion-list>
 
-    <ion-grid fixed="fixed">
-      <ion-row class="ion-text-center">
-        <ion-col size="12">
-          <ion-button
-            color="flylinkers"
-            type="submit"
-            [disabled]="formulario.invalid"
-            fill="outline"
-            >{{ 'guardarPerfil' | translate }}</ion-button
-          >
-        </ion-col>
-      </ion-row>
-
-      <ion-row class="ion-text-center">
-        <ion-col size="12">
-          <ion-button
-            color="flylinkers"
-            [disabled]="formulario.invalid"
-            (click)="changePassword()"
-            fill="outline"
-            >{{ 'cambiarPassword' | translate }}</ion-button
-          >
-        </ion-col>
-      </ion-row>
-
-      <ion-row class="ion-text-center">
-        <ion-col size="12">
-          <ion-button
-            color="flylinkers"
-            [disabled]="formulario.invalid"
-            (click)="deactivateAccount()"
-            fill="outline"
-            >{{ 'desactivarCuentaAccion' | translate }}</ion-button
-          >
-        </ion-col>
-      </ion-row>
-
-      <!-- <ion-row>
-                <ion-col size="12">
-                    <ion-button
-                        expand="full"
-                        color="flylinkersRojo"
-                    >Desactivar cuenta</ion-button>
-                </ion-col>
-            </ion-row> -->
-    </ion-grid>
+   
 
     <!-- ********************************************************************** -->
     <!-- *************************SECCION DE HABILIDADES*********************** -->
