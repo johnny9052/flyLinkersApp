@@ -54,9 +54,8 @@
 
                 </ion-item>
             
-                <!-- [hidden]="hiddenSkills" -->
                 <ion-card-content
-                    
+                    [hidden]="hiddenSkills"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
                     <ion-item *ngFor="let skills of userSkills;">
@@ -78,9 +77,8 @@
 
                 </ion-item>
             
-                <!-- [hidden]="hiddenExperiences" -->
                 <ion-card-content
-                    
+                    [hidden]="hiddenExperiences"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
                     <ion-item *ngFor="let experiences of userExperiences;">
@@ -102,9 +100,8 @@
 
                 </ion-item>
             
-                <!-- [hidden]="hiddenAccomplishments" -->
                 <ion-card-content
-                    
+                    [hidden]="hiddenAccomplishments"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
                     <ion-item *ngFor="let accomplishments of userAccomplishments;">
@@ -127,9 +124,8 @@
 
                 </ion-item>
             
-                <!-- [hidden]="hiddenInterests" -->
                 <ion-card-content
-                    
+                    [hidden]="hiddenInterests"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
                     <ion-item *ngFor="let interests of userInterests;">
@@ -150,9 +146,8 @@
                     <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                 </ion-item>
             
-                <!-- [hidden]="hiddenEvents" -->
                 <ion-card-content
-                    
+                    [hidden]="hiddenEvents"
                     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
                 >
                     <ion-item *ngFor="let event of events;" (click)="openExternalURL(event.event_site)">
