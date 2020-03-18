@@ -936,51 +936,5 @@ export class ProfilePage implements OnInit {
   /******END FUNCIONES DE GESTION DE LOS SKILLS**********/
   /******************************************************/
 
-  takePictureBase64() {
-    const options: CameraOptions = {
-      quality: 60,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.CAMERA
-    };
 
-    this.procesarImagenBase64(options);
-  }
-
-  procesarImagenBase64(options: CameraOptions) {
-    this.camera.getPicture(options).then(
-      imageData => {
-        const rutaLocalHost = window.Ionic.WebView.convertFileSrc(imageData);
-
-        const filePath = imageData;
-        this.base64.encodeFile(filePath).then(
-          (base64File: string) => {
-            this.userData.image_perfil_base64 = base64File;
-            this.userData.image_perfil = rutaLocalHost;
-          },
-          err => {
-            // console.log(err);
-          }
-        );
-      },
-      err => {
-        // Handle error
-      }
-    );
-  }
-
-  loadPictureBase64() {
-    const options: CameraOptions = {
-      quality: 60,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-    };
-
-    this.procesarImagenBase64(options);
-  }
 }
