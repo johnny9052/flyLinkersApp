@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   ActionSheetController,
   Events,
@@ -50,10 +50,8 @@ export class MasterPagePage implements OnInit {
     private router: Router,
     private translate: TranslateService,
     public events: Events,
-    private modalCtrl: ModalController,
-  ) {
-    
-  }
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {
     /*Se obtiene el identidicador del usuario que ingreso al sistema, esto
@@ -92,6 +90,7 @@ export class MasterPagePage implements OnInit {
           res = data;
           // console.log('Ya llego la info de los post');
           this.posts = res.posts;
+          this.recortarFechas();
           this.helperService.ocultarBarraCarga();
           this.yaSeConsultoNoticias = true;
           this.getMetadataPosts();
@@ -133,7 +132,6 @@ export class MasterPagePage implements OnInit {
         }
       }
     });
-
   }
 
   generarLikePost(pkPost: string) {
@@ -313,33 +311,34 @@ export class MasterPagePage implements OnInit {
   }
 
   refreshPost(event) {
-
     this.totalContactosAMostrarEnListado = 0;
 
     this.masterPageService
-    .getMetadataPostsByLimits(
-      this.codeUser,
-      this.totalContactosAMostrarEnListado,
-      this.totalContactosAMostrarEnListado + 10
-    ).subscribe(
-      data => {
-        let res: any;
-        res = data;
-        this.posts = res.posts;
-        event.target.complete();
-        this.getMetadataPosts();
-        this.totalContactosAMostrarEnListado += 10;
-        this.events.publish("post:notifications");
-      },
-      error => {
-        event.target.complete();
-        this.helperService.showAlert(
-          this.translate.instant("error"),
-          this.translate.instant("errorCargandoInformacion")
-        );
-        // console.log('oops', error);
-      }
-    );
+      .getMetadataPostsByLimits(
+        this.codeUser,
+        this.totalContactosAMostrarEnListado,
+        this.totalContactosAMostrarEnListado + 10
+      )
+      .subscribe(
+        data => {
+          let res: any;
+          res = data;
+          this.posts = res.posts;
+          this.recortarFechas();
+          event.target.complete();
+          this.getMetadataPosts();
+          this.totalContactosAMostrarEnListado += 10;
+          this.events.publish("post:notifications");
+        },
+        error => {
+          event.target.complete();
+          this.helperService.showAlert(
+            this.translate.instant("error"),
+            this.translate.instant("errorCargandoInformacion")
+          );
+          // console.log('oops', error);
+        }
+      );
   }
 
   loadMoreContacts(event) {
@@ -376,9 +375,10 @@ export class MasterPagePage implements OnInit {
         data => {
           let res: any;
           res = data;
-    
+
           this.posts = this.posts.concat(res.posts);
-      
+
+          this.recortarFechas();
           event.target.complete();
           this.yaSeConsultoNoticias = true;
           this.getMetadataPosts();
@@ -395,5 +395,14 @@ export class MasterPagePage implements OnInit {
           // console.log('oops', error);
         }
       );
+  }
+
+  recortarFechas() {
+    this.posts.forEach(element => {
+      if (element.publication_date.length > 10) {
+        console.log('entre');
+        element.publication_date = element.publication_date.substring(0, 10);
+      }
+    });
   }
 }
