@@ -4,7 +4,8 @@ import {
   Skills,
   Experiences,
   Accomplishments,
-  Interests
+  Interests,
+  EventsFly
 } from "../../interfaces/userInterface";
 import { HelperService } from "../../util/HelperService";
 import { ProfileService } from "../../services/profile.service";
@@ -57,6 +58,7 @@ export class ProfilePage implements OnInit {
   userExperiences: Experiences[] = [];
   userAccomplishments: Accomplishments[] = [];
   userInterests: Interests[] = [];
+  events: EventsFly[] = [];
   /****************END OBJETOS************************** */
 
   /********************INYECCION DE DEPENDENCIAS********* */
@@ -156,6 +158,7 @@ export class ProfilePage implements OnInit {
         this.userAccomplishments = res.accomplishments;
         this.userInterests = res.interests;
         this.userExperiences = res.experiences;
+        this.events = res.events;
 
         // tslint:disable-next-line: max-line-length
         this.userData.image_perfil = this.helperService.isValidValue(
