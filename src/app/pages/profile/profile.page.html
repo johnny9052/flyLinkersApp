@@ -36,53 +36,20 @@
         <ion-row class="ion-text-center">
           <ion-col size="12">
             <h3>{{userData.fistName}} {{userData.lastName}}</h3>
+
+            <h2>{{userData.profession}}</h2>
+
+            <p color="flylinkers">{{userData.headline}}</p>
+
+            <p>
+              <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+              {{userData.residence_country}}
+            </p>
           </ion-col>
         </ion-row>
       </ion-item>
 
-      <ion-item>
-        <ion-label position="floating"
-          >{{ 'apellidos' | translate }}*</ion-label
-        >
-        <ion-input
-          type="text"
-          name="lastName"
-          required="required"
-          [(ngModel)]="userData.lastName"
-        ></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>{{ 'genero' | translate }}*</ion-label>
-
-        <ion-select
-          placeholder="Seleccione"
-          [(ngModel)]="userData.gender"
-          name="gender"
-        >
-          <ion-select-option value="M"
-            >{{ 'masculino' | translate }}</ion-select-option
-          >
-
-          <ion-select-option value="F"
-            >{{ 'femenino' | translate }}</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>{{ 'fechaNacimiento' | translate }}</ion-label>
-
-        <ion-datetime
-          placeholder="{{ 'seleccione' | translate }}"
-          display-format="YYYY MMMM DD"
-          cancelText="{{ 'cancelar' | translate }}"
-          [(ngModel)]="userData.birthday_date"
-          name="birthday_date"
-          [pickerOptions]="customPickerOptions"
-        ></ion-datetime>
-      </ion-item>
-
+    
       <ion-item>
         <ion-label position="floating"
           >{{ 'paisResidencia' | translate }}*</ion-label
