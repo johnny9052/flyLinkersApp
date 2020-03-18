@@ -144,6 +144,9 @@ getProfileData(pkUser: string) {
       this.userInterests = res.interests;
       this.userExperiences = res.experiences;
       this.events = res.events;
+
+      this.recortarFechas();
+
       this.helperService.ocultarBarraCarga();
     },
     error => {
@@ -213,5 +216,13 @@ async abrirModalDenunciarUser(pkUserToDenunciate: string) {
     this.profileService.denunciateUser(newDenunce);
   }
 
+}
+
+
+recortarFechas(){
+  this.events.forEach(element => {
+     element.event_init_date = element.event_init_date.substring(0, 10);
+     element.event_end_date = element.event_end_date.substring(0, 10);
+  });
 }
 }

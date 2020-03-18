@@ -42,6 +42,7 @@ export class EventPage implements OnInit {
       res = data;
       // console.log(res.events);
       this.events = res.events;
+      this.recortarFechas();
       this.helperService.ocultarBarraCarga();
     },
     error => {
@@ -50,5 +51,13 @@ export class EventPage implements OnInit {
       // console.log('oops', error);
     }
   );
+  }
+
+
+  recortarFechas(){
+    this.events.forEach(element => {
+       element.event_init_date = element.event_init_date.substring(0, 10);
+       element.event_end_date = element.event_end_date.substring(0, 10);
+    });
   }
 }
