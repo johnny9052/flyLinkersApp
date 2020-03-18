@@ -111,11 +111,10 @@
       </p>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="post.external_url_new !== undefined && post.external_url_new !== 'undefined' && 
+    post.external_url_new !== null && post.external_url_new !== 'null' && 
+    post.external_url_new !== ''">
       <a
-        *ngIf="post.external_url_new !== undefined && post.external_url_new !== 'undefined' && 
-      post.external_url_new !== null && post.external_url_new !== 'null' && 
-      post.external_url_new !== ''"
         target="_blank"
         style="text-decoration: none;"
         [href]="post.external_url_new"
