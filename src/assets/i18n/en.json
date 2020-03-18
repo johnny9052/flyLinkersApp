@@ -88,7 +88,7 @@
     "alerta": "Alert",
 
     "info":"Info",
-
+    "camposRequeridos":"Enter the required information",
     "errorCargandoInformacion": "Error loading information",
     "cargandoMasInformacion":"Loading information",
 

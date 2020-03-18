@@ -1,33 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { ModelPosts } from '../../interfaces/posts';
-import { PostService } from '../../services/post.service';
-import { HelperService } from '../../util/HelperService';
+import { Component, OnInit } from "@angular/core";
+import { ModelPosts } from "../../interfaces/posts";
+import { PostService } from "../../services/post.service";
+import { HelperService } from "../../util/HelperService";
 
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 
-import { Base64 } from '@ionic-native/base64/ngx';
+import { Base64 } from "@ionic-native/base64/ngx";
 
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { BlockAccessService } from '../../util/blockAccess';
-import { ValidateFullProfile } from '../../util/validateFullProfile';
+import { ActivatedRoute, Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { BlockAccessService } from "../../util/blockAccess";
+import { ValidateFullProfile } from "../../util/validateFullProfile";
 
 /*Variable global declarada para que no se marque error al momento de utilizar
 el resultado de la camara como un file y no como base64*/
 declare var window: any;
 
 @Component({
-  selector: 'app-new-post',
-  templateUrl: './new-post.page.html',
-  styleUrls: ['./new-post.page.scss']
+  selector: "app-new-post",
+  templateUrl: "./new-post.page.html",
+  styleUrls: ["./new-post.page.scss"]
 })
 export class NewPostPage implements OnInit {
   newPost = {} as ModelPosts;
 
   /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
-  codeUser = '';
-  imagePerfil = '';
-  idPost = '';
+  codeUser = "";
+  imagePerfil = "";
+  idPost = "";
   changeEditImage = false;
 
   constructor(
@@ -54,13 +54,13 @@ export class NewPostPage implements OnInit {
         // tslint:disable-next-line: max-line-length
         if (
           this.newPost.image_new !== undefined &&
-          this.newPost.image_new !== 'undefined' &&
+          this.newPost.image_new !== "undefined" &&
           this.newPost.image_new !== null &&
-          this.newPost.image_new !== 'null' &&
-          this.newPost.image_new !== ''
+          this.newPost.image_new !== "null" &&
+          this.newPost.image_new !== ""
         ) {
           this.newPost.image_new =
-            'https://flylinkers.com/media/' + this.newPost.image_new;
+            "https://flylinkers.com/media/" + this.newPost.image_new;
         }
       }
 
@@ -72,35 +72,33 @@ export class NewPostPage implements OnInit {
 
   ngOnInit() {}
 
-
   ionViewWillEnter() {
     // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
     this.validateFullProfileService.validateDataFullProfile();
   }
 
   ionViewWillLeave() {
-
     this.newPost = {} as ModelPosts;
     /*************CODIGO GLOBAL DEL USUARIO IDENTIFICADO********************* */
-    this.codeUser = '';
-    this.imagePerfil = '';
-    this.idPost = '';
+    this.codeUser = "";
+    this.imagePerfil = "";
+    this.idPost = "";
   }
 
   /*Funcion que se encarga de obtener codigo del usuario que se encuentra identificado*/
   getProfilePk() {
     // Se obtiene el identificador del usuario que ingreso al sistema
-    this.helperService.getLocalData('profilePk').then(response => {
+    this.helperService.getLocalData("profilePk").then(response => {
       this.codeUser = response;
       // console.log(this.codeUser);
 
       // tslint:disable-next-line: max-line-length
       if (
         this.idPost !== undefined &&
-        this.idPost !== 'undefined' &&
+        this.idPost !== "undefined" &&
         this.idPost !== null &&
-        this.idPost !== 'null' &&
-        this.idPost !== ''
+        this.idPost !== "null" &&
+        this.idPost !== ""
       ) {
         this.getPost(this.codeUser, this.idPost);
       }
@@ -119,71 +117,80 @@ export class NewPostPage implements OnInit {
       // tslint:disable-next-line: max-line-length
       if (
         this.newPost.image_new !== undefined &&
-        this.newPost.image_new !== 'undefined' &&
+        this.newPost.image_new !== "undefined" &&
         this.newPost.image_new !== null &&
-        this.newPost.image_new !== 'null' &&
-        this.newPost.image_new !== ''
+        this.newPost.image_new !== "null" &&
+        this.newPost.image_new !== ""
       ) {
         this.newPost.image_new =
-          'https://flylinkers.com/media/' + this.newPost.image_new;
+          "https://flylinkers.com/media/" + this.newPost.image_new;
       }
     });
   }
 
   getProfileImage() {
     // Se obtiene el identificador del usuario que ingreso al sistema
-    this.helperService.getLocalData('image_perfil').then(response => {
+    this.helperService.getLocalData("image_perfil").then(response => {
       // console.log(response);
       this.imagePerfil = response;
     });
   }
 
   publicPost() {
-    const now = new Date();
-    const today = now.toISOString().substring(0, 10);
-    this.newPost.publication_date = today;
-    this.newPost.userPk = this.codeUser;
+    if (
+      (this.helperService.isValidValue(this.newPost.title) &&
+        this.helperService.isValidValue(this.newPost.content)) ||
+      this.helperService.isValidValue(this.newPost.external_url_new)
+    ) {
+      const now = new Date();
+      const today = now.toISOString().substring(0, 10);
+      this.newPost.publication_date = today;
+      this.newPost.userPk = this.codeUser;
 
-    // c// console.log(this.newPost.id_new + 'Este es el valor');
+      // c// console.log(this.newPost.id_new + 'Este es el valor');
 
-    if (this.helperService.isValidValue(this.newPost.image_new)) {
-      if (this.newPost.image_new.includes('flylinkers.com')) {
-        this.newPost.image_new = this.newPost.image_new.split('media/')[1];
+      if (this.helperService.isValidValue(this.newPost.image_new)) {
+        if (this.newPost.image_new.includes("flylinkers.com")) {
+          this.newPost.image_new = this.newPost.image_new.split("media/")[1];
+        }
       }
+
+      const obj = {
+        userPk: this.newPost.userPk,
+        title: this.newPost.title,
+        content: this.newPost.content,
+        publication_date: this.newPost.publication_date,
+        image_new:
+          this.newPost.image_new === "undefined" ||
+          this.newPost.image_new === undefined
+            ? -1
+            : this.newPost.image_new,
+        article_id:
+          this.newPost.id_new === "undefined" ||
+          this.newPost.id_new === undefined
+            ? -1
+            : this.newPost.id_new,
+        // tslint:disable-next-line: max-line-length
+        external_url_new:
+          this.newPost.external_url_new === "undefined" ||
+          this.newPost.external_url_new === undefined
+            ? -1
+            : this.newPost.external_url_new,
+        // tslint:disable-next-line: max-line-length
+        image_base64:
+          this.newPost.image_base64 === "undefined" ||
+          this.newPost.image_base64 === undefined
+            ? -1
+            : this.newPost.image_base64
+      };
+
+      // console.log('Este es el objeto basico');
+      // console.log(obj);
+
+      this.postService.publicNewPost(obj);
+    } else {
+      this.helperService.showAlert(this.translate.instant('alerta'),this.translate.instant('camposRequeridos'));
     }
-
-    const obj = {
-      userPk: this.newPost.userPk,
-      title: this.newPost.title,
-      content: this.newPost.content,
-      publication_date: this.newPost.publication_date,
-      image_new:
-        this.newPost.image_new === 'undefined' ||
-        this.newPost.image_new === undefined
-          ? -1
-          : this.newPost.image_new,
-      article_id:
-        this.newPost.id_new === 'undefined' || this.newPost.id_new === undefined
-          ? -1
-          : this.newPost.id_new,
-      // tslint:disable-next-line: max-line-length
-      external_url_new:
-        this.newPost.external_url_new === 'undefined' ||
-        this.newPost.external_url_new === undefined
-          ? -1
-          : this.newPost.external_url_new,
-      // tslint:disable-next-line: max-line-length
-      image_base64:
-        this.newPost.image_base64 === 'undefined' ||
-        this.newPost.image_base64 === undefined
-          ? -1
-          : this.newPost.image_base64
-    };
-
-    // console.log('Este es el objeto basico');
-    // console.log(obj);
-
-    this.postService.publicNewPost(obj);
   }
 
   editPost() {
@@ -201,30 +208,30 @@ export class NewPostPage implements OnInit {
       content: this.newPost.content,
       publication_date: this.newPost.publication_date,
       image_new:
-        this.newPost.image_new === 'undefined' ||
+        this.newPost.image_new === "undefined" ||
         this.newPost.image_new === undefined
           ? -1
           : this.newPost.image_new,
       article_id:
-        this.newPost.id_new === 'undefined' || this.newPost.id_new === undefined
+        this.newPost.id_new === "undefined" || this.newPost.id_new === undefined
           ? -1
           : this.newPost.id_new,
       // tslint:disable-next-line: max-line-length
       external_url_new:
-        this.newPost.external_url_new === 'undefined' ||
+        this.newPost.external_url_new === "undefined" ||
         this.newPost.external_url_new === undefined
           ? -1
           : this.newPost.external_url_new,
       // tslint:disable-next-line: max-line-length
       image_base64:
-        this.newPost.image_base64 === 'undefined' ||
+        this.newPost.image_base64 === "undefined" ||
         this.newPost.image_base64 === undefined
           ? -1
           : this.newPost.image_base64
     };
 
     if (!this.changeEditImage) {
-      this.newPost.image_base64 = '-1';
+      this.newPost.image_base64 = "-1";
     }
 
     // console.log('Este es el objeto basico');
@@ -283,11 +290,9 @@ export class NewPostPage implements OnInit {
     this.procesarImagenBase64(options);
   }
 
-
   borrarFoto() {
-    this.newPost.image_new = '';
+    this.newPost.image_new = "";
     this.newPost.image_base64 = undefined;
     this.changeEditImage = true;
   }
-
 }

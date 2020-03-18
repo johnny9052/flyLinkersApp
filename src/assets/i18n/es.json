@@ -89,6 +89,7 @@
   "opciones":"Opciones",
   "info":"Informacion",
   "alerta": "Alerta",
+  "camposRequeridos":"Ingrese la informacion requerida",
   "errorCargandoInformacion": "Error cargando la informacion",
   "cargandoMasInformacion":"Cargando más información",
   
