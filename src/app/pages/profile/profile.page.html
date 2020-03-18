@@ -152,7 +152,7 @@
     <!-- *************************SECCION DE EXPERIENCIAS********************** -->
     <!-- ********************************************************************** -->
 
-    <!--  <ion-card
+     <ion-card
       style="width: 100%; margin: 0px !important; border-radius: 2px;"
       color="flylinkers"
     >
@@ -164,8 +164,9 @@
         <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
       </ion-item>
 
+      <!-- [hidden]="hiddenExperiences" -->
       <ion-card-content
-        [hidden]="hiddenExperiences"
+        
         style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
       >
         <ion-item *ngFor="let experiences of userExperiences;">
@@ -176,7 +177,7 @@
     
         </ion-item>
 
-        <ion-item text-center="text-center" class="ion-text-center">
+      <!--   <ion-item text-center="text-center" class="ion-text-center">
           <ion-label>
             <ion-button
               color="flylinkers"
@@ -185,10 +186,10 @@
               >{{ 'crearExperiencia' | translate }}</ion-button
             >
           </ion-label>
-        </ion-item>
+        </ion-item> -->
       </ion-card-content>
     </ion-card>
- -->
+
     <!-- ********************************************************************** -->
     <!-- **********************END SECCION DE EXPERIENCIAS********************* -->
     <!-- ********************************************************************** -->
@@ -197,7 +198,7 @@
     <!-- *************************SECCION DE LOGROS**************************** -->
     <!-- ********************************************************************** -->
 
-    <!--  <ion-card
+     <ion-card
       style="width: 100%; margin: 0px !important; border-radius: 2px;"
       color="flylinkers"
     >
@@ -209,8 +210,9 @@
         <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
       </ion-item>
 
+      <!-- [hidden]="hiddenAccomplishments" -->
       <ion-card-content
-        [hidden]="hiddenAccomplishments"
+        
         style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
       >
         <ion-item *ngFor="let accomplishments of userAccomplishments;">
@@ -223,7 +225,7 @@
       
         </ion-item>
 
-        <ion-item text-center="text-center" class="ion-text-center">
+<!--         <ion-item text-center="text-center" class="ion-text-center">
           <ion-label>
             <ion-button
               color="flylinkers"
@@ -232,9 +234,9 @@
               >{{ 'crearLogro' | translate }}</ion-button
             >
           </ion-label>
-        </ion-item>
+        </ion-item> -->
       </ion-card-content>
-    </ion-card> -->
+    </ion-card>
 
     <!-- ********************************************************************** -->
     <!-- **********************END SECCION DE LOGROS*************************** -->
@@ -244,7 +246,7 @@
     <!-- *************************SECCION DE INTERESES************************* -->
     <!-- ********************************************************************** -->
 
-    <!--  <ion-card
+     <ion-card
       style="width: 100%; margin: 0px !important; border-radius: 2px;"
       color="flylinkers"
     >
@@ -256,8 +258,9 @@
         <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
       </ion-item>
 
+      <!-- [hidden]="hiddenInterests" -->
       <ion-card-content
-        [hidden]="hiddenInterests"
+        
         style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
       >
         <ion-item *ngFor="let interests of userInterests;">
@@ -267,7 +270,7 @@
             </h3>
           </ion-label>
 
-          <ion-icon
+        <!--   <ion-icon
             name="trash"
             slot="end"
             (click)="deleteInterests(interests.id)"
@@ -277,10 +280,10 @@
             name="create"
             slot="end"
             (click)="editInterests(interests.id, interests.interest_description)"
-          ></ion-icon>
+          ></ion-icon> -->
         </ion-item>
 
-        <ion-item text-center="text-center" class="ion-text-center">
+  <!--       <ion-item text-center="text-center" class="ion-text-center">
           <ion-label>
             <ion-button
               color="flylinkers"
@@ -289,9 +292,9 @@
               >{{ 'crearInteres' | translate }}</ion-button
             >
           </ion-label>
-        </ion-item>
+        </ion-item> -->
       </ion-card-content>
-    </ion-card> -->
+    </ion-card>
 
     <!-- ********************************************************************** -->
     <!-- **********************END SECCION DE INTERESES************************ -->
