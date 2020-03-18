@@ -142,6 +142,20 @@ export class NewPostPage implements OnInit {
         this.helperService.isValidValue(this.newPost.content)) ||
       this.helperService.isValidValue(this.newPost.external_url_new)
     ) {
+      this.newPost.title = this.helperService.isValidValue(this.newPost.title)
+        ? this.newPost.title
+        : "";
+      this.newPost.content = this.helperService.isValidValue(
+        this.newPost.content
+      )
+        ? this.newPost.content
+        : "";
+      this.newPost.external_url_new = this.helperService.isValidValue(
+        this.newPost.external_url_new
+      )
+        ? this.newPost.external_url_new
+        : "";
+
       const now = new Date();
       const today = now.toISOString().substring(0, 10);
       this.newPost.publication_date = today;
@@ -189,55 +203,84 @@ export class NewPostPage implements OnInit {
 
       this.postService.publicNewPost(obj);
     } else {
-      this.helperService.showAlert(this.translate.instant('alerta'),this.translate.instant('camposRequeridos'));
+      this.helperService.showAlert(
+        this.translate.instant("alerta"),
+        this.translate.instant("camposRequeridos")
+      );
     }
   }
 
   editPost() {
-    const now = new Date();
-    const today = now.toISOString().substring(0, 10);
-    this.newPost.publication_date = today;
-    this.newPost.userPk = this.codeUser;
+    if (
+      (this.helperService.isValidValue(this.newPost.title) &&
+        this.helperService.isValidValue(this.newPost.content)) ||
+      this.helperService.isValidValue(this.newPost.external_url_new)
+    ) {
+      this.newPost.title = this.helperService.isValidValue(this.newPost.title)
+        ? this.newPost.title
+        : "";
+      this.newPost.content = this.helperService.isValidValue(
+        this.newPost.content
+      )
+        ? this.newPost.content
+        : "";
+      this.newPost.external_url_new = this.helperService.isValidValue(
+        this.newPost.external_url_new
+      )
+        ? this.newPost.external_url_new
+        : "";
 
-    // c// console.log(this.newPost.id_new + 'Este es el valor');
+      const now = new Date();
+      const today = now.toISOString().substring(0, 10);
+      this.newPost.publication_date = today;
+      this.newPost.userPk = this.codeUser;
 
-    const obj = {
-      pk_post: this.idPost,
-      userPk: this.newPost.userPk,
-      title: this.newPost.title,
-      content: this.newPost.content,
-      publication_date: this.newPost.publication_date,
-      image_new:
-        this.newPost.image_new === "undefined" ||
-        this.newPost.image_new === undefined
-          ? -1
-          : this.newPost.image_new,
-      article_id:
-        this.newPost.id_new === "undefined" || this.newPost.id_new === undefined
-          ? -1
-          : this.newPost.id_new,
-      // tslint:disable-next-line: max-line-length
-      external_url_new:
-        this.newPost.external_url_new === "undefined" ||
-        this.newPost.external_url_new === undefined
-          ? -1
-          : this.newPost.external_url_new,
-      // tslint:disable-next-line: max-line-length
-      image_base64:
-        this.newPost.image_base64 === "undefined" ||
-        this.newPost.image_base64 === undefined
-          ? -1
-          : this.newPost.image_base64
-    };
+      // c// console.log(this.newPost.id_new + 'Este es el valor');
 
-    if (!this.changeEditImage) {
-      this.newPost.image_base64 = "-1";
+      const obj = {
+        pk_post: this.idPost,
+        userPk: this.newPost.userPk,
+        title: this.newPost.title,
+        content: this.newPost.content,
+        publication_date: this.newPost.publication_date,
+        image_new:
+          this.newPost.image_new === "undefined" ||
+          this.newPost.image_new === undefined
+            ? -1
+            : this.newPost.image_new,
+        article_id:
+          this.newPost.id_new === "undefined" ||
+          this.newPost.id_new === undefined
+            ? -1
+            : this.newPost.id_new,
+        // tslint:disable-next-line: max-line-length
+        external_url_new:
+          this.newPost.external_url_new === "undefined" ||
+          this.newPost.external_url_new === undefined
+            ? -1
+            : this.newPost.external_url_new,
+        // tslint:disable-next-line: max-line-length
+        image_base64:
+          this.newPost.image_base64 === "undefined" ||
+          this.newPost.image_base64 === undefined
+            ? -1
+            : this.newPost.image_base64
+      };
+
+      if (!this.changeEditImage) {
+        this.newPost.image_base64 = "-1";
+      }
+
+      // console.log('Este es el objeto basico');
+      // console.log(obj);
+
+      this.postService.editPost(obj);
+    } else {
+      this.helperService.showAlert(
+        this.translate.instant("alerta"),
+        this.translate.instant("camposRequeridos")
+      );
     }
-
-    // console.log('Este es el objeto basico');
-    // console.log(obj);
-
-    this.postService.editPost(obj);
   }
 
   takePictureBase64() {
