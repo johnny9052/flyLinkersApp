@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, NgZone } from "@angular/core";
 import {
   ActionSheetController,
   Events,
@@ -15,6 +15,8 @@ import { BlockAccessService } from "../../util/blockAccess";
 import { ValidateFullProfile } from "../../util/validateFullProfile";
 import { DenunciarPostPage } from "../denunciar-post/denunciar-post.page";
 import { ModelDenunciate } from "../../interfaces/denunciate";
+
+
 
 @Component({
   selector: "app-master-page",
@@ -50,8 +52,16 @@ export class MasterPagePage implements OnInit {
     private router: Router,
     private translate: TranslateService,
     public events: Events,
-    private modalCtrl: ModalController
-  ) {}
+    private modalCtrl: ModalController,
+    private zone: NgZone
+  ) {
+    /* Se define un evento para poder renderizar la pagina en cualquier momento */
+    this.events.subscribe("updateScreenMasterPage", () => {
+      this.zone.run(() => {
+        console.log("force update the screen from master page");
+      });
+    });
+  }
 
   ngOnInit() {
     /*Se obtiene el identidicador del usuario que ingreso al sistema, esto
@@ -66,6 +76,11 @@ export class MasterPagePage implements OnInit {
     // Se verifica si hay nuevas notificaciones para mostrar en pantalla
     this.events.publish("post:notifications");
   }
+
+
+  renderizarYa() {
+    this.events.publish("updateScreenMasterPage");
+   }
 
   getProfilePk() {
     // Se obtiene el identificador del usuario que ingreso al sistema
@@ -95,6 +110,10 @@ export class MasterPagePage implements OnInit {
           this.yaSeConsultoNoticias = true;
           this.getMetadataPosts();
           this.totalContactosAMostrarEnListado += 10;
+
+          setTimeout(() => {
+            this.renderizarYa();
+          }, 1000);
         },
         error => {
           console.log("Error cargando info");
@@ -329,6 +348,12 @@ export class MasterPagePage implements OnInit {
           this.getMetadataPosts();
           this.totalContactosAMostrarEnListado += 10;
           this.events.publish("post:notifications");
+
+          
+          setTimeout(() => {
+            this.renderizarYa();
+          }, 1000);
+
         },
         error => {
           event.target.complete();
@@ -383,6 +408,11 @@ export class MasterPagePage implements OnInit {
           this.yaSeConsultoNoticias = true;
           this.getMetadataPosts();
           this.totalContactosAMostrarEnListado += 10;
+
+          
+          setTimeout(() => {
+            this.renderizarYa();
+          }, 1000);
         },
         error => {
           console.log("Error cargando info");
