@@ -78,8 +78,15 @@ export class MasterPagePage implements OnInit {
   }
 
 
-  renderizarYa() {
-    this.events.publish("updateScreenMasterPage");
+  renderizarYa() {   
+    /*Para navegadores genericos, estos no se encargan de renderizar nuevamente cuando les llega las nuevas fotos, 
+    es por esto que se envia 6 senales (1 casa segundo para que renderice) y asi garantizar la visualizacion de los 
+    datos*/
+    for(let x = 0; x <= 5000 ; x = x + 1000){
+      setTimeout(() => {
+        this.events.publish("updateScreenMasterPage");
+      }, x);
+    }
    }
 
   getProfilePk() {
