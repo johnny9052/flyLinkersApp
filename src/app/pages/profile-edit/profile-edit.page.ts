@@ -961,12 +961,14 @@ export class ProfileEditPage implements OnInit {
             this.userData.image_perfil = rutaLocalHost;
           },
           err => {
-            // console.log(err);
+            console.log('Error procesando el base64');
+            console.log(err);
           }
         );
       },
       err => {
-        // Handle error
+        console.log('Error capturando la foto');
+        console.log(err);
       }
     );
   }
