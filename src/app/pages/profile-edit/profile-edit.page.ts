@@ -959,6 +959,11 @@ export class ProfileEditPage implements OnInit {
           (base64File: string) => {
             this.userData.image_perfil_base64 = base64File;
             this.userData.image_perfil = rutaLocalHost;
+
+            console.log('***********************************image_perfil_base64*********************');
+            console.log(this.userData.image_perfil_base64);
+            console.log('***********************************image_perfil*********************');
+            console.log(this.userData.image_perfil);            
           },
           err => {
             console.log('Error procesando el base64');
@@ -985,4 +990,53 @@ export class ProfileEditPage implements OnInit {
 
     this.procesarImagenBase64(options);
   }
+
+
+
+  /*************VERSION 2 CAMARA FOTOGRAFICA*************************/
+
+  takePictureBase64V2() {
+    const options: CameraOptions = {
+      quality: 15,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.CAMERA
+    };
+
+    this.procesarImagenBase64V2(options);
+  }
+
+
+  loadPictureBase64V2() {
+    const options: CameraOptions = {
+      quality: 15,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    };
+
+    this.procesarImagenBase64V2(options);
+  }
+
+
+
+  procesarImagenBase64V2(options: CameraOptions) {
+    this.camera.getPicture(options).then(
+      imageData => {
+        /* this.base64Image == window.Ionic.WebView.convertFileSrc(imageData);*/
+
+        this.userData.image_perfil_base64  = "data:image/jpeg;base64," + imageData;
+        this.userData.image_perfil = "data:image/jpeg;base64," + imageData;
+      },
+      err => {
+        // Handle error
+      }
+    );
+  }
+
+
 }
