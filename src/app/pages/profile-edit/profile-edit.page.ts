@@ -997,7 +997,7 @@ export class ProfileEditPage implements OnInit {
 
   takePictureBase64V2() {
     const options: CameraOptions = {
-      quality: 15,
+      quality: 20,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -1011,7 +1011,7 @@ export class ProfileEditPage implements OnInit {
 
   loadPictureBase64V2() {
     const options: CameraOptions = {
-      quality: 15,
+      quality: 30,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,

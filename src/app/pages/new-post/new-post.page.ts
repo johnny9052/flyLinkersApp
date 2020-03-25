@@ -333,6 +333,60 @@ export class NewPostPage implements OnInit {
     this.procesarImagenBase64(options);
   }
 
+
+
+  
+  /*************VERSION 2 CAMARA FOTOGRAFICA*************************/
+
+  takePictureBase64V2() {
+    const options: CameraOptions = {
+      quality: 20,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.CAMERA
+    };
+
+    this.procesarImagenBase64V2(options);
+  }
+
+
+  loadPictureBase64V2() {
+    const options: CameraOptions = {
+      quality: 30,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    };
+
+    this.procesarImagenBase64V2(options);
+  }
+
+
+
+  procesarImagenBase64V2(options: CameraOptions) {
+
+    this.changeEditImage = true;
+    
+    this.camera.getPicture(options).then(
+      imageData => {
+        /* this.base64Image == window.Ionic.WebView.convertFileSrc(imageData);*/
+
+        this.newPost.image_base64 =  "data:image/jpeg;base64," + imageData;
+        this.newPost.image_new = "data:image/jpeg;base64," + imageData;
+      },
+      err => {
+        // Handle error
+      }
+    );
+  }
+
+
+
+
   borrarFoto() {
     this.newPost.image_new = "";
     this.newPost.image_base64 = undefined;
