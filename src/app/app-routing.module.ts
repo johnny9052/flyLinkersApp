@@ -25,6 +25,8 @@ const routes: Routes = [
   { path: 'view-detail-post', loadChildren: './pages/view-detail-post/view-detail-post.module#ViewDetailPostPageModule' },
   { path: 'profile-detail', loadChildren: './pages/profile-detail/profile-detail.module#ProfileDetailPageModule' },  { path: 'chat', loadChildren: './pages/chat/chat.module#ChatPageModule' },
   { path: 'list-user-likes-post', loadChildren: './pages/list-user-likes-post/list-user-likes-post.module#ListUserLikesPostPageModule' },
+  { path: 'list-user-likes-comment', loadChildren: './pages/list-user-likes-comment/list-user-likes-comment.module#ListUserLikesCommentPageModule' },
+  { path: 'user-posts', loadChildren: './pages/user-posts/user-posts.module#UserPostsPageModule' },
 
   // { path: 'denunciar-post', loadChildren: './pages/denunciar-post/denunciar-post.module#DenunciarPostPageModule' },
   // { path: 'denunciar-usuario', loadChildren: './pages/denunciar-usuario/denunciar-usuario.module#DenunciarUsuarioPageModule' },

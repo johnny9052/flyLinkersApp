@@ -128,6 +128,7 @@
     "inicio": "Home",
     "perfil": "Profile",
     "notificaciones": "Notifications",
+    "misPublicaciones":"My post",
     "intereses": "Interest",
     "eventos": "Events",
     "red": "Network",
@@ -191,6 +192,7 @@
   "comentarioBorrado": "Comment deleted",
   "comentarioEditado": "Edited Comment",
   "escribeComentario":"Write your comment",
+  "comments": "Comments",
   
   "***************NOTIFICACIONES**********************": "",
   

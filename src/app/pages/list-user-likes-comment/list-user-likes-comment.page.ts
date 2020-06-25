@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { ModelContactosLikesComment } from 'src/app/interfaces/interfaces';
 import { BlockAccessService } from 'src/app/util/blockAccess';
 import { ActionSheetController, AlertController, PopoverController, NavController } from '@ionic/angular';
 import { HelperService } from 'src/app/util/HelperService';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ValidateFullProfile } from 'src/app/util/validateFullProfile';
-import { ModelContactosLikesPost } from 'src/app/interfaces/interfaces';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
-  selector: 'app-list-user-likes-post',
-  templateUrl: './list-user-likes-post.page.html',
-  styleUrls: ['./list-user-likes-post.page.scss'],
+  selector: 'app-list-user-likes-comment',
+  templateUrl: './list-user-likes-comment.page.html',
+  styleUrls: ['./list-user-likes-comment.page.scss'],
 })
-export class ListUserLikesPostPage implements OnInit {
+export class ListUserLikesCommentPage implements OnInit {
 
-  contactosLikes: ModelContactosLikesPost[] = [];
+  contactosLikes: ModelContactosLikesComment[] = [];
   totalContactosLikes: string;
 
-  idPost = "";
+  idComment = "";
   codeUser = "";
   urlBack = "";
 
@@ -37,9 +37,9 @@ export class ListUserLikesPostPage implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
-        this.idPost = this.router.getCurrentNavigation().extras.state.idPost;
+        this.idComment = this.router.getCurrentNavigation().extras.state.idComment;
         this.urlBack = this.router.getCurrentNavigation().extras.state.urlBack;
-        this.helperService.saveLocalData("currentPostId", this.idPost);
+        this.helperService.saveLocalData("currentComentId", this.idComment);
       }
     });
   }
@@ -62,15 +62,19 @@ export class ListUserLikesPostPage implements OnInit {
     // Se obtiene el identificador del usuario que ingreso al sistema
     this.helperService.getLocalData("profilePk").then(response => {
       this.codeUser = response;
-      this.getUserLikesPost();
+      this.getUserLikesComments();
     });
   }
 
 
 
-  getUserLikesPost() {
+  getUserLikesComments() {
+
+
+    console.log(this.idComment);
+
     this.helperService.mostrarBarraDeCarga(this.translate.instant("espere"));
-    this.postService.getUserLikesPost(this.idPost, this.codeUser).subscribe(
+    this.postService.getUserLikesComment(this.idComment, this.codeUser).subscribe(
       data => {
         // console.log(data);        
         this.totalContactosLikes = data.likes.length;

@@ -128,6 +128,7 @@
   "inicio": "Inicio",
   "perfil": "Perfil",
   "notificaciones": "Notificaciones",
+  "misPublicaciones":"Mis publicaciones",
   "intereses": "Intereses",
   "eventos": "Eventos",
   "red": "Red",
@@ -188,6 +189,7 @@
   "comentarioEditado": "Comentario editado",
 
   "escribeComentario":"Escribe tu comentario",
+  "comments": "Comentarios",
 
   "***************NOTIFICACIONES**********************": "",
   

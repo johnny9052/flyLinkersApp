@@ -252,6 +252,34 @@ export class ViewDetailPostPage implements OnInit {
     });
   }
 
+
+
+  openDetailLikesPost(idPost) {
+    const data: NavigationExtras = {
+      state: {
+        idPost: idPost,
+        urlBack: 'view-detail-post'
+      }
+    };
+
+    this.router.navigate(["list-user-likes-post"], data);
+  }
+
+
+
+  openDetailLikesComment(idComment) {
+
+    const data: NavigationExtras = {
+      state: {
+        idComment: idComment,
+        urlBack: 'view-detail-post'
+      }
+    };
+
+    this.router.navigate(["list-user-likes-comment"], data);
+  }
+  
+
   saveComment(pkPost) {
     this.comment.pk_profile = this.codeUser;
     this.comment.pk_post = pkPost;

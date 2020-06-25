@@ -1,30 +1,23 @@
-import { Component, OnInit, ViewChild, NgZone } from "@angular/core";
-import {
-  ActionSheetController,
-  Events,
-  ModalController,
-  IonInfiniteScroll
-} from "@ionic/angular";
-import { HelperService } from "../../util/HelperService";
-import { MasterPageService } from "../../services/master-page.service";
-import { ModelPosts } from "../../interfaces/posts";
-import { PostService } from "../../services/post.service";
-import { Router, NavigationExtras } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { BlockAccessService } from "../../util/blockAccess";
-import { ValidateFullProfile } from "../../util/validateFullProfile";
-import { DenunciarPostPage } from "../denunciar-post/denunciar-post.page";
-import { ModelDenunciate } from "../../interfaces/denunciate";
-
-
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { IonInfiniteScroll, ActionSheetController, Events, ModalController } from '@ionic/angular';
+import { ModelPosts } from 'src/app/interfaces/posts';
+import { BlockAccessService } from 'src/app/util/blockAccess';
+import { ValidateFullProfile } from 'src/app/util/validateFullProfile';
+import { MasterPageService } from 'src/app/services/master-page.service';
+import { HelperService } from 'src/app/util/HelperService';
+import { PostService } from 'src/app/services/post.service';
+import { Router, NavigationExtras } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { DenunciarPostPage } from '../denunciar-post/denunciar-post.page';
+import { ModelDenunciate } from 'src/app/interfaces/denunciate';
 
 @Component({
-  selector: "app-master-page",
-  templateUrl: "./master-page.page.html",
-  styleUrls: ["./master-page.page.scss"]
+  selector: 'app-user-posts',
+  templateUrl: './user-posts.page.html',
+  styleUrls: ['./user-posts.page.scss'],
 })
-export class MasterPagePage implements OnInit {
-  /*El viewChild se utiliza cuando se quiere hacer referencia a algun
+export class UserPostsPage implements OnInit {
+/*El viewChild se utiliza cuando se quiere hacer referencia a algun
   componente grafico del HTML*/
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
@@ -310,7 +303,7 @@ export class MasterPagePage implements OnInit {
     const data: NavigationExtras = {
       state: {
         idPost: idPost,
-        urlBack: 'master-page'
+        urlBack: 'user-posts'
       }
     };
 
@@ -353,7 +346,7 @@ export class MasterPagePage implements OnInit {
     this.totalContactosAMostrarEnListado = 0;
 
     this.masterPageService
-      .getMetadataPostsByLimits(
+      .getMetadataPostsByLimitsByUser(
         this.codeUser,
         this.totalContactosAMostrarEnListado,
         this.totalContactosAMostrarEnListado + 10
@@ -411,7 +404,7 @@ export class MasterPagePage implements OnInit {
 
   loadMorePostByLimits(event) {
     this.masterPageService
-      .getMetadataPostsByLimits(
+      .getMetadataPostsByLimitsByUser(
         this.codeUser,
         this.totalContactosAMostrarEnListado,
         this.totalContactosAMostrarEnListado + 10
@@ -456,3 +449,5 @@ export class MasterPagePage implements OnInit {
     });
   }
 }
+
+

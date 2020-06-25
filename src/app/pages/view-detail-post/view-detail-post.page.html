@@ -29,6 +29,7 @@
         </h3>
 
         <p>{{post.author_profession}}</p>
+        <p>{{post.publication_date | date: 'dd/MM/yyyy'}}</p>
       </ion-label>
 
       <ion-icon
@@ -80,62 +81,78 @@
       <p>{{post.metadataDescription}}</p>
     </ion-item>
 
-    <ion-item lines="none">
-      <ion-label slot="start">
-        <h3>
-          <br />
-          {{post.publication_date | date: 'dd/MM/yyyy'}}
-        </h3>
-      </ion-label>
-    </ion-item>
-
     <!--END INFORMACION DE LA PUBLICACION-->
 
-    <ion-row>
-      <!--DAR LIKE A LA PUBLICACION-->
-      <ion-col>
-        <ion-item *ngIf="!post.liked_by_user">
-          <ion-icon
-            name="heart-empty"
-            (click)="generarLikePost(post.id_new)"
-          ></ion-icon>
-          <div *ngIf="post.likes > 0">{{post.likes}}</div>
-        </ion-item>
-        <ion-item *ngIf="post.liked_by_user">
-          <ion-icon
-            name="heart"
-            (click)="generarLikePost(post.id_new)"
-            color="flylinkersRojo"
-          ></ion-icon>
-          <div *ngIf="post.likes > 0">{{post.likes}}</div>
-        </ion-item>
-      </ion-col>
-      <!--END DAR LIKE A LA PUBLICACION-->
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item
+            *ngIf="post.likes > 0"
+            (click)="openDetailLikesPost(post.id_new)"
+          >
+            <ion-icon
+              class="iconLikes"
+              name="heart"
+              color="flylinkersRojo"
+            ></ion-icon>
+            <ion-label class="iconLikesText"
+              >{{ post.likes }} {{ "likes" | translate }}</ion-label
+            >
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-      <!--ICONO DE COMENTARIOS DE LA PUBLICACION-->
-      <ion-col>
-        <ion-item>
-          <ion-icon name="text" (click)="showHideComments()"></ion-icon>
-          <div *ngIf="post.count_comments > 0">{{post.count_comments}}</div>
-        </ion-item>
-      </ion-col>
-      <!--END ICONO DE COMENTARIOS DE LA PUBLICACION-->
+    <ion-grid>
+      <ion-row>
+        <!--DAR LIKE A LA PUBLICACION-->
+        <ion-col>
+          <ion-item *ngIf="!post.liked_by_user" lines="none">
+            <ion-icon
+              name="heart-empty"
+              (click)="generarLikePost(post.id_new)"
+            ></ion-icon>            
+          </ion-item>
+          <ion-item *ngIf="post.liked_by_user" lines="none">
+            <ion-icon
+              name="heart"
+              (click)="generarLikePost(post.id_new)"
+              color="flylinkersRojo"
+            ></ion-icon>            
+          </ion-item>
+        </ion-col>
+        <!--END DAR LIKE A LA PUBLICACION-->
 
-      <!--ICONO DE COMPARTIR LA PUBLICACION-->
-      <ion-col>
-        <ion-item>
-          <ion-icon
-            name="share"
-            (click)="sharedPost(post.content,post.external_url_new,post.image_new,post.title)"
-          ></ion-icon>
-        </ion-item>
-      </ion-col>
-      <!--END ICONO DE COMPARTIR LA PUBLICACION-->
-    </ion-row>
+        <!--ICONO DE COMENTARIOS DE LA PUBLICACION-->
+        <ion-col>
+          <ion-item lines="none">
+            <ion-icon name="text" (click)="showHideComments()"></ion-icon>
+            <div *ngIf="post.count_comments > 0">{{post.count_comments}}</div>
+          </ion-item>
+        </ion-col>
+        <!--END ICONO DE COMENTARIOS DE LA PUBLICACION-->
+
+        <!--ICONO DE COMPARTIR LA PUBLICACION-->
+        <ion-col>
+          <ion-item lines="none">
+            <ion-icon
+              name="share"
+              (click)="sharedPost(post.content,post.external_url_new,post.image_new,post.title)"
+            ></ion-icon>
+          </ion-item>
+        </ion-col>
+        <!--END ICONO DE COMPARTIR LA PUBLICACION-->
+      </ion-row>
+    </ion-grid>
 
     <form #formulario="ngForm" (ngSubmit)="saveComment(post.id_new)">
       <ion-list
-        style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+        style="
+          width: 100%;
+          margin: 0px !important;
+          border-radius: 0px;
+          padding: 0px;
+        "
       >
         <!--ESCRIBIR COMENTARIO PRINCIPAL-->
         <ion-item color="FlyLinkers-Blanco" [hidden]="hiddenComments">
@@ -189,47 +206,64 @@
           </ion-item>
           <!-- END COMENTARIO REALIZADO -->
 
+
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item
+                  *ngIf="comment.likes > 0"
+                  (click)="openDetailLikesComment(comment.id_comment)"
+                >
+                  <ion-icon class="iconLikes" name="heart" color="flylinkersRojo"></ion-icon>
+                  <ion-label class="iconLikesText">{{ comment.likes }} {{ "likes" | translate }}</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      
+
+
           <!--BOTONERA DE OPCIONES DE CADA COMENTARIO REALIZADO-->
           <ion-item slot="start">
-            <ion-row>
-              <!--BOTON DE LIKES DE CADA COMENTARIO REALIZADO-->
-              <ion-col>
-                <!--ICONO DE LIKE CUANDO EL USUARIO NO HA DADO LIKE-->
-                <ion-item lines="none" *ngIf="!comment.like_by_user">
-                  <ion-icon
-                    name="heart-empty"
-                    (click)="generarLikeComment(comment.id_comment)"
-                  ></ion-icon>
-                  <div *ngIf="comment.likes > 0">{{comment.likes}}</div>
-                </ion-item>
-                <!--END ICONO DE LIKE CUANDO EL USUARIO NO HA DADO LIKE-->
+            <ion-grid>
+              <ion-row>
+                <!--BOTON DE LIKES DE CADA COMENTARIO REALIZADO-->
+                <ion-col>
+                  <!--ICONO DE LIKE CUANDO EL USUARIO NO HA DADO LIKE-->
+                  <ion-item lines="none" *ngIf="!comment.like_by_user">
+                    <ion-icon
+                      name="heart-empty"
+                      (click)="generarLikeComment(comment.id_comment)"
+                    ></ion-icon>                    
+                  </ion-item>
+                  <!--END ICONO DE LIKE CUANDO EL USUARIO NO HA DADO LIKE-->
 
-                <!--ICONO DE LIKE CUANDO EL USUARIO HA DADO LIKE-->
-                <ion-item lines="none" *ngIf="comment.like_by_user">
-                  <ion-icon
-                    name="heart"
-                    (click)="generarLikeComment(comment.id_comment)"
-                  ></ion-icon>
-                  <div *ngIf="comment.likes > 0">{{comment.likes}}</div>
-                </ion-item>
-                <!--END ICONO DE LIKE CUANDO EL USUARIO HA DADO LIKE-->
-              </ion-col>
-              <!--END BOTON DE LIKES DE CADA COMENTARIO REALIZADO-->
+                  <!--ICONO DE LIKE CUANDO EL USUARIO HA DADO LIKE-->
+                  <ion-item lines="none" *ngIf="comment.like_by_user">
+                    <ion-icon
+                      name="heart"
+                      (click)="generarLikeComment(comment.id_comment)"
+                    ></ion-icon>                    
+                  </ion-item>
+                  <!--END ICONO DE LIKE CUANDO EL USUARIO HA DADO LIKE-->
+                </ion-col>
+                <!--END BOTON DE LIKES DE CADA COMENTARIO REALIZADO-->
 
-              <!--ICONO PARA HACER UN RECOMENTARIO-->
-              <ion-col>
-                <ion-item lines="none">
-                  <ion-icon
-                    name="text"
-                    (click)="getRecomments(comment.id_comment, post.id_new)"
-                  ></ion-icon>
-                  <div *ngIf="comment.count_recomments > 0">
-                   {{comment.count_recomments}}
-                  </div>
-                </ion-item>
-              </ion-col>
-              <!--END ICONO PARA HACER UN RECOMENTARIO-->
-            </ion-row>
+                <!--ICONO PARA HACER UN RECOMENTARIO-->
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-icon
+                      name="text"
+                      (click)="getRecomments(comment.id_comment, post.id_new)"
+                    ></ion-icon>
+                    <div *ngIf="comment.count_recomments > 0">
+                      {{comment.count_recomments}}
+                    </div>
+                  </ion-item>
+                </ion-col>
+                <!--END ICONO PARA HACER UN RECOMENTARIO-->
+              </ion-row>
+            </ion-grid>
           </ion-item>
           <!--END BOTONERA DE OPCIONES DE CADA COMENTARIO REALIZADO-->
 
@@ -244,7 +278,12 @@
             >
               <ion-list
                 [hidden]="comment.hiddenRecomments"
-                style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+                style="
+                  width: 100%;
+                  margin: 0px !important;
+                  border-radius: 0px;
+                  padding: 0px;
+                "
               >
                 <ion-item color="FlyLinkers-Blanco" class="page-list">
                   <ion-label position="floating"
@@ -257,7 +296,7 @@
                     required="required"
                   ></ion-textarea>
                 </ion-item>
-                <ion-item>
+                <ion-item lines="none">
                   <ion-button
                     color="flylinkers"
                     type="submit"
@@ -265,7 +304,6 @@
                     fill="outline"
                     slot="start"
                     >{{ 'enviar' | translate }}</ion-button
-
                   >
                 </ion-item>
                 <ion-item *ngFor="let recomment of recomments">

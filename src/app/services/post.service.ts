@@ -106,6 +106,12 @@ export class PostService {
                                       postId + '&userPk=' + userPk);
   }
 
+
+  getUserLikesComment(commentId: string, userPk: string) {
+    return this.http.get<any>('https://flylinkers.com/es/content_network/get_comment_likes_app/?comment_id=' +
+                                      commentId + '&userPk=' + userPk);
+  }
+
   getRecomments(commentId: string, postId: string, userPk: string) {
     return this.http.get<ModelRecomments>('https://flylinkers.com/es/content_network/get_recomments_app/?comment_id=' + commentId +
                                     '&post_id=' + postId + '&userPk=' + userPk);

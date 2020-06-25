@@ -35,6 +35,12 @@ export class MasterPageService {
   }
 
 
+  getMetadataPostsByLimitsByUser(urlMetadata: string, minLimit: number, maxLimit: number) {
+    return this.http.get<ModelPosts>('https://flylinkers.com/es/content_network/get_news_app_ok/?userPk=' + urlMetadata + 
+                  '&initialLimit='+ minLimit + '&finalLimit=' + maxLimit);
+  }
+
+
 
   /*Funcion que se encarga de registrar al usuario, recibiendo por parametro
   los datos del usuario*/
