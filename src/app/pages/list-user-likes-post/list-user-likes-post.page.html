@@ -1,0 +1,41 @@
+<app-header titulo="{{ 'likes' | translate }}"></app-header>
+
+<ion-content  style="width: 100%; margin: 0px !important;">
+  <ion-card style="width: 100%; margin: 0px !important; border-radius: 0px;">
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title *ngIf="this.helperService.isValidValue(totalContactosLikes)"
+        >{{ 'likes' | translate }} ({{totalContactosLikes}})</ion-card-title
+      >
+    </ion-card-header>
+
+    <ion-card-content      
+      style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
+    >
+      <ion-item *ngFor="let solicitud of contactosLikes">
+        <ion-avatar slot="start" (click)="viewProfile(solicitud.id_author)">
+          <ion-img
+            src="https://flylinkers.com/media/{{(solicitud.author_image !== '' )? solicitud.author_image : 'avatar_2x.png' }}"
+          ></ion-img>
+        </ion-avatar>
+
+        <ion-label (click)="viewProfile(solicitud.id_author)">
+          <h3>{{solicitud.firstname_author}} {{solicitud.lastname_author}}</h3>
+
+          <p>{{solicitud.profession}}</p>
+        </ion-label>    
+      </ion-item>
+
+      <br />
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+
+<app-tab
+  homeColor="flylinkersBlanco"
+  networkColor="flylinkersBlanco"
+  notificationsColor="flylinkersBlanco"
+  messagesColor="flylinkersBlanco"
+  newPostColor="flylinkersBlanco"
+></app-tab>

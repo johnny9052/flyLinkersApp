@@ -35,7 +35,10 @@
           {{ post.author_fistName }} {{ post.author_lastName }}
         </h3>
         <p>{{ post.author_profession }}</p>
+        <!--FECHA DE LA PUBLICACION-->
+        <p>{{ post.publication_date}}</p>
       </ion-label>
+
       <!--PUNTOS SUSPENSIVOS PARA OPCIONES ADICIONALES, DADO EL CASO DE QUE SEA EL USUARIO QUE PUBLICO EL POST-->
       <ion-icon
         slot="end"
@@ -76,7 +79,7 @@
         post.image_new === '' &&
         post.external_url_new !== ''
       "
-    ><!--  -->
+      ><!--  -->
       <!--       <ion-img [src]="post.metadataImage" style="width: 350px; height: auto;">
       </ion-img> -->
 
@@ -111,9 +114,11 @@
       </p>
     </ion-item>
 
-    <ion-item *ngIf="post.external_url_new !== undefined && post.external_url_new !== 'undefined' && 
+    <ion-item
+      *ngIf="post.external_url_new !== undefined && post.external_url_new !== 'undefined' && 
     post.external_url_new !== null && post.external_url_new !== 'null' && 
-    post.external_url_new !== ''">
+    post.external_url_new !== ''"
+    >
       <a
         target="_blank"
         style="text-decoration: none;"
@@ -146,45 +151,52 @@
       <img src="https://flylinkers.com/media/{{ post.image_new }}" />
     </ion-item>
 
-    <!--FECHA DE LA PUBLICACION-->
-    <ion-item lines="none">
-      <ion-label slot="start">
-        <h3><br />{{ post.publication_date}}</h3>
-      </ion-label>
-    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item
+            *ngIf="post.likes > 0"
+            (click)="openDetailLikesPost(post.id_new)"
+          >
+            <ion-icon class="iconLikes" name="heart-empty"></ion-icon>
+            {{ post.likes }} {{ "likes" | translate }}
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
     <!--TOTAL DE COMENTARIOS, LIKES Y OPCIONES DEL POST-->
-    <ion-row>
-      <ion-col>
-        <!--MUESTRA EL CORAZON DEL LIKE PINTATO O NO SEGUN SI EL USUARIO YA DIO LIKE A LA PUBLICACION-->
-        <ion-item *ngIf="!post.liked_by_user[0]">
-          <ion-icon
-            name="heart-empty"
-            (click)="generarLikePost(post.id_new)"
-          ></ion-icon>
-          <div *ngIf="post.likes > 0">{{ post.likes }}</div>
-        </ion-item>
-        <ion-item *ngIf="post.liked_by_user[0]">
-          <ion-icon
-            name="heart"
-            color="flylinkersRojo"
-            (click)="generarLikePost(post.id_new)"
-          ></ion-icon>
-          <div *ngIf="post.likes > 0">{{ post.likes }}</div>
-        </ion-item>
-      </ion-col>
-      <!--INDICA LA CANTIDAD DE COMENTARIOS DE LA PUBLICACION-->
-      <ion-col (click)="openDetailPost(post.id_new)">
-        <ion-item>
-          <ion-icon name="text"></ion-icon>
-          <div *ngIf="post.count_comments > 0">{{ post.count_comments }}</div>
-        </ion-item>
-      </ion-col>
-      <!--OPCION DE COMPARTIR LA PUBLICACION-->
-      <ion-col>
-        <ion-item>
-          <ion-icon
-            name="md-share"
-            (click)="
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col col-4>
+          <!--MUESTRA EL CORAZON DEL LIKE PINTATO O NO SEGUN SI EL USUARIO YA DIO LIKE A LA PUBLICACION-->
+          <ion-item *ngIf="!post.liked_by_user[0]" lines="none">
+            <ion-icon
+              name="heart-empty"
+              (click)="generarLikePost(post.id_new)"
+            ></ion-icon>
+          </ion-item>
+          <ion-item *ngIf="post.liked_by_user[0]" lines="none">
+            <ion-icon
+              name="heart"
+              color="flylinkersRojo"
+              (click)="generarLikePost(post.id_new)"
+            ></ion-icon>
+          </ion-item>
+        </ion-col>
+        <!--INDICA LA CANTIDAD DE COMENTARIOS DE LA PUBLICACION-->
+        <ion-col col-4 (click)="openDetailPost(post.id_new)">
+          <ion-item lines="none">
+            <ion-icon name="text"></ion-icon>
+            <div *ngIf="post.count_comments > 0">{{ post.count_comments }}</div>
+          </ion-item>
+        </ion-col>
+        <!--OPCION DE COMPARTIR LA PUBLICACION-->
+        <ion-col col-4>
+          <ion-item lines="none">
+            <ion-icon
+              name="md-share"
+              (click)="
               sharedPost(
                 post.content,
                 post.external_url_new,
@@ -192,10 +204,11 @@
                 post.title
               )
             "
-          ></ion-icon>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+            ></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <!--END TOTAL DE COMENTARIOS, LIKES Y OPCIONES DEL POST-->
   </ion-card>
 

@@ -28,6 +28,15 @@ export interface ModelSolicitudesRecibidas {
 }
 
 
+export interface ModelContactosLikesPost {
+  id_author: string;
+  id_comment: string;
+  author_image: string;
+  firstname_author: string;
+  lastname_author: string;
+  profession: string;
+}
+
 export interface ModelSolicitudesEnviadas {
   pk: string;
   fistName: string;

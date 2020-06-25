@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+/*OJOOOOOOO TODO LO COMENTADO ES PARA QUE ESTA PAGINA CARGUE COMO UN MODAL*/
+
 // import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';

@@ -4,6 +4,7 @@ import { HelperService } from '../util/HelperService';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ModelPosts, ModelComments, ModelRecomments } from '../interfaces/posts';
 import { TranslateService } from '@ngx-translate/core';
+import { ModelContactosLikesPost } from '../interfaces/interfaces';
 
 
 @Injectable({
@@ -95,6 +96,13 @@ export class PostService {
 
   getComments(postId: string, userPk: string) {
     return this.http.get<ModelComments>('https://flylinkers.com/es/content_network/get_article_comments_app/?postId=' +
+                                      postId + '&userPk=' + userPk);
+  }
+
+
+
+  getUserLikesPost(postId: string, userPk: string) {
+    return this.http.get<any>('https://flylinkers.com/es/content_network/get_article_likes_app/?postId=' +
                                       postId + '&userPk=' + userPk);
   }
 

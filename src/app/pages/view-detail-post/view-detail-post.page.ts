@@ -71,7 +71,6 @@ export class ViewDetailPostPage implements OnInit {
 
   getCurrentPost() {
     this.helperService.getLocalData("currentPostId").then(response => {
-      console.log("kjhhkjhjk");
       this.idPost = response;
       this.getProfilePk();
     });
@@ -164,13 +163,16 @@ export class ViewDetailPostPage implements OnInit {
           this.getComments(this.idPost);
         },
         error => {
-          // console.log('oops', error);
+          console.log('oops', error);
         }
       );
+    }else{
+      this.getComments(this.idPost);
     }
   }
 
   getComments(postId) {
+    console.log('VAMOS POR LOS COMENTARIOS');
     this.postService.getComments(postId, this.codeUser).subscribe(data => {
       let res: any;
       res = data;
@@ -185,6 +187,9 @@ export class ViewDetailPostPage implements OnInit {
   }
 
   getRecomments(commentId, postId, verRecomentarios?: boolean) {
+
+    
+
     this.helperService.mostrarBarraDeCarga(this.translate.instant("espere"));
     this.postService.getRecomments(commentId, postId, this.codeUser).subscribe(
       data => {

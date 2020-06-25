@@ -143,6 +143,8 @@
     "verMas":"Read more",
     "verFuenteOriginal": "See original source",
 
+    "likes":"Likes",
+
     "***************DENUNCIAR**********************": "",
     "descripcionDenuncia":"Denunce description",
     "tipoDenuncia":"Denunce type",
@@ -154,6 +156,8 @@
 
     "denunciaEnviada": "Denunce sent",
     "denunciaYaExiste":"Denunce already exists",
+
+  
     
   "***************NETWORK**********************": "",
 

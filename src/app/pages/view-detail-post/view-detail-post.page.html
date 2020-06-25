@@ -224,7 +224,7 @@
                     (click)="getRecomments(comment.id_comment, post.id_new)"
                   ></ion-icon>
                   <div *ngIf="comment.count_recomments > 0">
-                    {{comment.count_recomments}}
+                   {{comment.count_recomments}}
                   </div>
                 </ion-item>
               </ion-col>
@@ -265,6 +265,7 @@
                     fill="outline"
                     slot="start"
                     >{{ 'enviar' | translate }}</ion-button
+
                   >
                 </ion-item>
                 <ion-item *ngFor="let recomment of recomments">

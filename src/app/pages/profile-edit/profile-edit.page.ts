@@ -1027,8 +1027,6 @@ export class ProfileEditPage implements OnInit {
   procesarImagenBase64V2(options: CameraOptions) {
     this.camera.getPicture(options).then(
       imageData => {
-        /* this.base64Image == window.Ionic.WebView.convertFileSrc(imageData);*/
-
         this.userData.image_perfil_base64  = "data:image/jpeg;base64," + imageData;
         this.userData.image_perfil = "data:image/jpeg;base64," + imageData;
       },

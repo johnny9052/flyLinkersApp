@@ -304,6 +304,18 @@ export class MasterPagePage implements OnInit {
     this.router.navigate(["view-detail-post"], data);
   }
 
+
+
+  openDetailLikesPost(idPost) {
+    const data: NavigationExtras = {
+      state: {
+        idPost
+      }
+    };
+
+    this.router.navigate(["list-user-likes-post"], data);
+  }
+
   sharedPost(
     content: string,
     externalUrlNew: string,
