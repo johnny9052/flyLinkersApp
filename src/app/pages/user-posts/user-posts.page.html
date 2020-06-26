@@ -64,11 +64,14 @@
     </ion-item>
     <!--CONTENIDO DEL POST O DE LA PUBLICACION-->
     <ion-card-content *ngIf="post.content !== null">
-      <span *ngIf="post.content.length > 301"
-        >{{ post.content | slice: 0:301 }} .....</span
+      <!--Con esto se reconoce los enters del texto-->     
+      <div style="white-space: pre-line" class="ion-text-justify" *ngIf="post.content.length > 301"
+        >{{ post.content | slice: 0:301 }} .....</div
       >
-      <span *ngIf="post.content.length <= 301">{{ post.content }}</span>
+      <!--Con esto se reconoce los enters del texto-->     
+      <div style="white-space: pre-line" class="ion-text-justify" *ngIf="post.content.length <= 301">{{ post.content }}</div>
     </ion-card-content>
+
 
     <!--INFORMACION DE LA URL EXTERNA QUE SE PUBLICO-->
     <ion-item
@@ -106,10 +109,10 @@
       lines="none"
       *ngIf="post.metadataDescription && post.external_url_new !== ''"
     >
-      <p *ngIf="post.metadataDescription.length > 301">
-        {{ post.metadataDescription | slice: 0:301 }} .....
+      <p style="white-space: pre-line" *ngIf="post.metadataDescription.length > 301">        
+          {{ post.metadataDescription | slice: 0:301 }} .....                
       </p>
-      <p *ngIf="post.metadataDescription.length <= 301">
+      <p style="white-space: pre-line" *ngIf="post.metadataDescription.length <= 301">
         {{ post.metadataDescription }}
       </p>
     </ion-item>
@@ -232,7 +235,7 @@
 </ion-content>
 
 <app-tab
-  homeColor="flylinkersGrisOscuro"
+  homeColor="flylinkersBlanco"
   networkColor="flylinkersBlanco"
   notificationsColor="flylinkersBlanco"
   messagesColor="flylinkersBlanco"
