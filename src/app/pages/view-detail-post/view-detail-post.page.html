@@ -46,8 +46,11 @@
       <h5 slot="start">{{ post.title }}</h5>
     </ion-item>
 
-    <ion-card-content *ngIf="post.content !== null"
-      >{{post.content}}</ion-card-content
+    <ion-card-content *ngIf="post.content !== null"  style=" white-space: pre-line;"
+      > 
+        <!--Con esto se reconoce los enters del texto-->     
+        <span style="white-space: pre-line">{{post.content}}</span> 
+      </ion-card-content
     >
 
     <ion-item

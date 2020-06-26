@@ -92,7 +92,7 @@ export class ViewDetailPostPage implements OnInit {
         console.log(data);
         let res: any;
         res = data;
-        this.post = res.post;
+        this.post = res.post;        
         this.post.liked_by_user = res.post.liked_by_user[0];
         this.helperService.ocultarBarraCarga();
         this.getMetadataPosts();
@@ -552,4 +552,5 @@ export class ViewDetailPostPage implements OnInit {
 
     this.router.navigate(["new-post"], data);
   }
+
 }
