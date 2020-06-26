@@ -36,7 +36,7 @@ export class MasterPageService {
 
 
   getMetadataPostsByLimitsByUser(urlMetadata: string, minLimit: number, maxLimit: number) {
-    return this.http.get<ModelPosts>('https://flylinkers.com/es/content_network/get_news_app_ok/?userPk=' + urlMetadata + 
+    return this.http.get<ModelPosts>('https://flylinkers.com/es/content_network/get_news_user_app/?userPk=' + urlMetadata + 
                   '&initialLimit='+ minLimit + '&finalLimit=' + maxLimit);
   }
 

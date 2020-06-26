@@ -94,7 +94,7 @@ export class UserPostsPage implements OnInit {
   getPostsData(pkUser) {
     this.helperService.mostrarBarraDeCarga(this.translate.instant("espere"));
     this.masterPageService
-      .getMetadataPostsByLimits(
+      .getMetadataPostsByLimitsByUser(
         pkUser,
         this.totalContactosAMostrarEnListado,
         this.totalContactosAMostrarEnListado + 10
