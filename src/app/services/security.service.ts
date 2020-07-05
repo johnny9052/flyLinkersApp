@@ -73,6 +73,14 @@ export class SecurityService {
       );
   }
 
+
+  registerNewsLetterSubscription(postData: any){
+    const url = "https://flylinkersnews.com/FlyLinkersNewsBackend/Controller/AssociatedEmail/CtlAssociatedEmail.php?action=save";
+    return this.http.post<any>(url, postData);
+  }
+
+
+
   /*Funcion que se encarga de identificar al usuario, recibiendo por parametro
   sus datos de acceso*/
   logInUser(postData: any) {

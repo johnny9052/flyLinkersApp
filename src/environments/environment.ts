@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  MICROSERVICE_URL: 'https://flylinkersnews.com',
+  DOMAIN_URL: 'https://flylinkersnews.com/'
 };
 
 /*

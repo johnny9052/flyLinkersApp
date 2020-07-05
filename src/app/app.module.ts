@@ -25,6 +25,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PipesModule } from './pipes/pipes.module';
 
+import { DatePipe } from '@angular/common';
 
 
 /*Para instalar cordova en el proyecto
@@ -57,6 +58,7 @@ npm install @ionic-native/http*/
     SplashScreen,
     Camera,
     Base64,
+    DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     /*Como CORDOVA es un complemento externo, toca meterlo no en Imports sino en providers*/
     // HTTP

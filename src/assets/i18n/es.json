@@ -102,7 +102,7 @@
 
   "nuevoUsuarioExito": "Usuario registrado exitosamente",
   "nuevoUsuarioExistente": "El usuario ya se encuentra registrado",
-
+  "recibirBoletin":"Subscribirse al boletin",
 
   "***************VALIDACIONES CAMPO**********************": "",
   "obligatorio":"Obligatorio",

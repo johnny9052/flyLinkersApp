@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-
+import { Md5 } from 'ts-md5/dist/md5';
 import { TranslateService } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,8 @@ export class HelperService {
 
   public activeLang = 'es';
 
+  myDate = new Date();
+
   /*Dependencias del servicio
   alertCtrl: Depedencia para los modales
   loadingCtrl: Dependencia para las barras de carga,
@@ -26,7 +29,8 @@ export class HelperService {
               private loadingCtrl: LoadingController,
               private navCtrl: NavController,
               private storage: Storage,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private datePipe: DatePipe) {
                 // this.translateService.setDefaultLang(this.activeLang);
                 this.cargarIdiomaActual();
                }
@@ -167,7 +171,14 @@ export class HelperService {
 
 
 
-
+  public generarToken() {
+    const fechaActual = this.datePipe.transform(this.myDate, 'dd/MM/yyyy');
+    const palabraClave = 'fLyLiNkErSnEwS';
+    const token = palabraClave + fechaActual;
+    const md5 = new Md5();
+    const tokenApp = md5.appendStr(token).end();
+    return tokenApp;
+  }
 
 
 }

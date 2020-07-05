@@ -103,6 +103,8 @@
     "nuevoUsuarioExito": "User created successfully",
     "nuevoUsuarioExistente": "User already exists",
 
+    "recibirBoletin":"Subscribe to the newsletter",
+
     "***************VALIDACIONES CAMPO**********************": "",
 
     "obligatorio":"Required",
