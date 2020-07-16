@@ -42,12 +42,14 @@ export class NetworkPage implements OnInit {
   contactosConectar: ModelContactosParaConectar[] = [];
   totalContactosConectar: string;
   contactoABuscar: string;
+  contactoABuscarMisConexiones: string;
 
   codeUser = "";
 
   tiempoEspera = 1000;
 
   networkTextSearch = "";
+  networkTextSearchMisConexiones = "";
 
   totalContactosAMostrarEnListado = 10;
 
@@ -296,6 +298,12 @@ export class NetworkPage implements OnInit {
 
   networkSearchFilter(event) {
     this.networkTextSearch = event.detail.value;
+    console.log(event);
+  }
+
+
+  networkSearchFilterMisConexiones(event) {
+    this.networkTextSearchMisConexiones = event.detail.value;
     console.log(event);
   }
 

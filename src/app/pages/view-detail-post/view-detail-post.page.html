@@ -84,6 +84,16 @@
       <p>{{post.metadataDescription}}</p>
     </ion-item>
 
+    <ion-item *ngIf='this.helperService.isValidValue(post.external_url_new)'>
+      <a
+        target="_blank"
+        style="text-decoration: none;"
+        [href]="post.external_url_new"
+      >
+        {{ "verFuenteOriginal" | translate }}
+      </a>
+    </ion-item>
+
     <!--END INFORMACION DE LA PUBLICACION-->
 
     <ion-grid>

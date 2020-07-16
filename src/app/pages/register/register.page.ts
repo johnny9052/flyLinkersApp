@@ -91,6 +91,9 @@ export class RegisterPage implements OnInit {
         this.emails = JSON.parse(correos.data);
         this.emails.forEach((element) => {          
           if (element.mail === postDataObj.get("email")) {
+
+            console.log(JSON.stringify(element));
+
             this.sendEmailService
               .sendEmailsValidate(element)
               .then((re) => {

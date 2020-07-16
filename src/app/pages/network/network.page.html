@@ -110,6 +110,8 @@
 
   <!-- LISTA DE CONEXIONES -->
 
+
+
   <ion-card
     style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
   >
@@ -132,9 +134,29 @@
       [hidden]="hiddenContact"
       style="width: 100%; margin: 0px !important; border-radius: 0px; padding: 0px;"
     >
+
+
+    <ion-item color="flylinkers">
+      <ion-icon color="light" name="people" slot="start"></ion-icon>
+  
+      <ion-label>
+        {{ 'conectaGente' | translate }}
+      </ion-label>
+  
+      <ion-searchbar
+        [(ngModel)]="contactoABuscarMisConexiones"
+        showCancelButton="never"
+        (ionChange)="networkSearchFilterMisConexiones( $event )"
+      ></ion-searchbar>
+    </ion-item>
+
+            <!-- Si el usuario no ha escrito nada en el filtro de busqueda, solo se mostrara los X primeros contactos, esto se 
+        encuentra definido en el template llamado 'algunosContactosAMostrar', si el usuario ha escrito algo, solo se mostraran 
+        los contactos que cumplen con ese criterio de busqueda -->
+
       <ion-grid>
-        <ion-row>
-          <ion-col size="6" *ngFor="let contacto of contactos;">
+        <ion-row *ngIf="this.helperService.isValidValue(contactoABuscarMisConexiones) ;else algunosContactosAMostrarMisConexiones"> 
+          <ion-col size="6" *ngFor="let contacto of contactos | filtro: networkTextSearchMisConexiones;">
             <ion-card
               mode="ios"
               style="width: 100%; margin: 0px !important; border-radius: 10px; padding: 0px !important;"
@@ -289,6 +311,7 @@
         contactos de la lista-->
         <ng-template #algunosContactosAMostrar>
           <ion-row>
+            <!--ES EL MISMO QUE EL ORIGINAL, SOLO QUE NO TIENE EL NGIF Y EL NGFOR CAMBIA, A QUE NO SE LE APLIQUE EL FILTRO DE BUSQUEDA SINO QUE MUESTRE TODO-->
             <ion-col
               size="6"
               *ngFor="let contactos of contactosConectar.slice(0, totalContactosAMostrarEnListado);"
@@ -359,6 +382,74 @@
             ></ion-infinite-scroll-content>
           </ion-infinite-scroll>
         </ng-template>
+
+
+        <ng-template #algunosContactosAMostrarMisConexiones>
+          <ion-row> 
+            <!--ES EL MISMO QUE EL ORIGINAL, SOLO QUE NO TIENE EL NGIF Y EL NGFOR CAMBIA, A QUE NO SE LE APLIQUE EL FILTRO DE BUSQUEDA SINO QUE MUESTRE TODO-->
+            <ion-col size="6" *ngFor="let contacto of contactos;">
+              <ion-card
+                mode="ios"
+                style="width: 100%; margin: 0px !important; border-radius: 10px; padding: 0px !important;"
+                class="ion-text-center"
+              >
+                <ion-card-header color="flylinkers">
+                  <div style="width: 100%; text-align: right;">
+                    <ion-icon
+                      name="close-circle"
+                      slot="end"
+                      (click)="eliminarAmistad(contacto.sender, contacto.receiver)"
+                    ></ion-icon>
+                  </div>
+                </ion-card-header>
+  
+                <ion-card-content>
+                  <ion-avatar
+                    slot="start"
+                    class="image-center top-margin-10"
+                    (click)="viewProfile(contacto.id_contact)"
+                  >
+                    <ion-img
+                      src="https://flylinkers.com/media/{{(contacto.image_perfil !== '' )? contacto.image_perfil : 'avatar_2x.png' }}"
+                    ></ion-img>
+                  </ion-avatar>
+  
+                  <div
+                    style="width: 100%; text-align: center;"
+                    (click)="viewProfile(contacto.id_contact)"
+                  >
+                    <h2>{{contacto.fistName | slice:0:13}}</h2>
+                  </div>
+                  <div
+                    style="width: 100%; text-align: center;"
+                    (click)="viewProfile(contacto.id_contact)"
+                  >
+                    <h2>{{contacto.lastName | slice:0:13}}</h2>
+                  </div>
+  
+                  <div style="width: 100%; text-align: center;">
+                    <p *ngIf=" contacto.profession !== ''">
+                      {{contacto.profession | slice:0:13}}
+                    </p>
+                    <p *ngIf=" contacto.profession == ''">
+                      {{contacto.headline | slice:0:13}}
+                    </p>
+                  </div>
+  
+                  <ion-button
+                    color="flylinkers"
+                    fill="outline"
+                    size="small"
+                    (click)="viewProfile(contacto.id_contact)"
+                    >{{ 'verPerfil' | translate }}</ion-button
+                  >
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+
+        
       </ion-grid>
     </ion-card-content>
   </ion-card>

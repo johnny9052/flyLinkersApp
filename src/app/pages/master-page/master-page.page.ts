@@ -3,7 +3,8 @@ import {
   ActionSheetController,
   Events,
   ModalController,
-  IonInfiniteScroll
+  IonInfiniteScroll,
+  IonContent
 } from "@ionic/angular";
 import { HelperService } from "../../util/HelperService";
 import { MasterPageService } from "../../services/master-page.service";
@@ -15,6 +16,7 @@ import { BlockAccessService } from "../../util/blockAccess";
 import { ValidateFullProfile } from "../../util/validateFullProfile";
 import { DenunciarPostPage } from "../denunciar-post/denunciar-post.page";
 import { ModelDenunciate } from "../../interfaces/denunciate";
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 
 
@@ -42,6 +44,8 @@ export class MasterPagePage implements OnInit {
 
   totalContactosAMostrarEnListado = 0;
 
+  @ViewChild('content', { static: false }) content: IonContent;
+
   constructor(
     private blockAccess: BlockAccessService,
     private validateFullProfileService: ValidateFullProfile,
@@ -66,15 +70,14 @@ export class MasterPagePage implements OnInit {
   ngOnInit() {
     /*Se obtiene el identidicador del usuario que ingreso al sistema, esto
     posteriormente desencadena el listado de los posts */
-    this.getProfilePk();
+    this.getProfilePk();    
   }
 
   ionViewWillEnter() {
     // Se valida si el usuario si ha diligenciado toda su informacion, para redireccionarlo a llenar su perfil
     this.validateFullProfileService.validateDataFullProfile();
-
     // Se verifica si hay nuevas notificaciones para mostrar en pantalla
-    this.events.publish("post:notifications");
+    this.events.publish("post:notifications");    
   }
 
 
@@ -455,4 +458,10 @@ export class MasterPagePage implements OnInit {
       }
     });
   }
+
+
+  scrollToBottom() {
+    this.content.scrollToTop(1500);
+  }
+
 }
