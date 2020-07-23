@@ -19,6 +19,7 @@ import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { BlockAccessService } from "../../util/blockAccess";
 import { TranslateService } from "@ngx-translate/core";
 import { ValidateFullProfile } from "../../util/validateFullProfile";
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: "app-view-detail-post",
@@ -40,6 +41,8 @@ export class ViewDetailPostPage implements OnInit {
   hiddenComments = true;
   hiddenRecomments = false;
 
+  urlBack;
+
   constructor(
     private blockAccess: BlockAccessService,
     private actionSheetCtrl: ActionSheetController,
@@ -50,12 +53,14 @@ export class ViewDetailPostPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
-    private validateFullProfileService: ValidateFullProfile
+    private validateFullProfileService: ValidateFullProfile,
+    private navCtrl: NavController
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.idPost = this.router.getCurrentNavigation().extras.state.idPost;
         this.helperService.saveLocalData("currentPostId", this.idPost);
+        this.urlBack = this.router.getCurrentNavigation().extras.state.urlBack;
       }
     });
   }
@@ -504,7 +509,8 @@ export class ViewDetailPostPage implements OnInit {
   viewProfile(idProfile: string) {
     const data: NavigationExtras = {
       state: {
-        idProfile
+        idProfile,
+        urlBack: 'view-detail-post'
       }
     };
 
@@ -551,6 +557,13 @@ export class ViewDetailPostPage implements OnInit {
     };
 
     this.router.navigate(["new-post"], data);
+  }
+
+
+  backToPrevPage(){
+    setTimeout(() => {
+      this.navCtrl.navigateBack(this.urlBack);
+    }, 1);
   }
 
 }

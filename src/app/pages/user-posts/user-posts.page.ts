@@ -290,7 +290,8 @@ export class UserPostsPage implements OnInit {
   openDetailPost(idPost) {
     const data: NavigationExtras = {
       state: {
-        idPost
+        idPost,
+        urlBack: 'user-posts'
       }
     };
 
@@ -335,7 +336,8 @@ export class UserPostsPage implements OnInit {
   viewProfile(idProfile: string) {
     const data: NavigationExtras = {
       state: {
-        idProfile
+        idProfile,
+        urlBack: 'user-posts'
       }
     };
 

@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { BlockAccessService } from "../../util/blockAccess";
 import { ValidateFullProfile } from "../../util/validateFullProfile";
-import { ActionSheetController, ModalController } from "@ionic/angular";
+import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
 import { DenunciarUsuarioPage } from "../denunciar-usuario/denunciar-usuario.page";
 import { ModelDenunciateUser } from "../../interfaces/denunciate";
 
@@ -43,6 +43,9 @@ export class ProfileDetailPage implements OnInit {
   events: EventsFly[] = [];
   /****************END OBJETOS************************** */
 
+
+  urlBack;
+
   constructor(
     private blockAccess: BlockAccessService,
     public helperService: HelperService,
@@ -52,11 +55,13 @@ export class ProfileDetailPage implements OnInit {
     private translate: TranslateService,
     private validateFullProfileService: ValidateFullProfile,
     private actionSheetCtrl: ActionSheetController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private navCtrl: NavController
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.codeUserOnlyDetail = this.router.getCurrentNavigation().extras.state.idProfile;
+        this.urlBack = this.router.getCurrentNavigation().extras.state.urlBack;
 
         // console.log('Llego dato!!');
         // console.log(this.codeUserOnlyDetail);
@@ -229,4 +234,11 @@ encuentra logueado*/
     }, 100);
   }
 
+
+
+  backToPrevPage(){
+    setTimeout(() => {
+      this.navCtrl.navigateBack(this.urlBack);
+    }, 1);
+  }
 }

@@ -1,6 +1,16 @@
 <app-header titulo="{{ 'perfil' | translate }}"></app-header>
 
 <ion-content padding="padding">
+
+
+    <ion-button *ngIf="this.helperService.isValidValue(this.urlBack)"   color="flylinkers" fill="clear" (click)="backToPrevPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+        {{ 'regresar' | translate }}
+      </ion-button>   
+
+
+
+
     <form #formulario="ngForm">
         <ion-list>
             <ion-item class="bordeado">

@@ -300,7 +300,8 @@ export class MasterPagePage implements OnInit {
   openDetailPost(idPost) {
     const data: NavigationExtras = {
       state: {
-        idPost
+        idPost,
+        urlBack: 'master-page'
       }
     };
 
@@ -345,7 +346,8 @@ export class MasterPagePage implements OnInit {
   viewProfile(idProfile: string) {
     const data: NavigationExtras = {
       state: {
-        idProfile
+        idProfile,
+        urlBack: 'master-page'
       }
     };
 

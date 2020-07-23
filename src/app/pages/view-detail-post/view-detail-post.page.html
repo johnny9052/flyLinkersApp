@@ -1,6 +1,15 @@
 <app-header></app-header>
 
+
 <ion-content style="width: 100%; margin: 0px !important;">
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="this.helperService.isValidValue(this.urlBack)">
+    <ion-fab-button  size="small"  color="flylinkers" (click)="backToPrevPage()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
   <ion-card>
     <!--INFORMACION DEL AUTOR DE LA PUBLICACION-->
     <ion-item>
